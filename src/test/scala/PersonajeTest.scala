@@ -17,7 +17,7 @@ class PersonajeTest extends munit.FunSuite {
     override def beforeEach(context: BeforeEach): Unit = {
         paladin = new Paladin("Diego",100,90,120)
         guerrero = new Guerrero("Lucas",80,100,100)
-        ninja = new Ninja("Santiago",60,75,60)
+        ninja = new Ninja("Santiago",60,70,60)
         magonegro = new MagoNegro("Balbontin",60,50,80,100)
         magoblanco = new MagoBlanco("Duarte",70,60,80,90)
     }
