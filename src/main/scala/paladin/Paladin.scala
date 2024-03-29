@@ -11,6 +11,8 @@ import attributes.Attributes
  * @param defense the defense value of the paladin
  * @param weight the weight of the paladin
  *
+ * @constructor creates a new paladin with a name, and values for hp, defense and weight
+ *
  */
 
 
