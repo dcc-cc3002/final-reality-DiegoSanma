@@ -21,4 +21,18 @@ class PersonajeTest extends munit.FunSuite {
         magonegro = new MagoNegro("Balbontin",60,50,80,100)
         magoblanco = new MagoBlanco("Duarte",70,60,80,90)
     }
+
+    test("equal character"){
+        val expected_paladin = new Paladin("Diego",100,90,120)
+        val expected_guerrero = new Guerrero("Lucas",80,100,100)
+        val expected_ninja = new Ninja("Santiago",60,70,60)
+        val expected_magonegro = new MagoNegro("Balbontin",60,50,80,100)
+        val expected_magoblanco = new MagoBlanco("Duarte",70,60,80,90)
+
+        assertEquals(expected_guerrero,guerrero,"Not the same class and stats")
+        assertEquals(expected_paladin,paladin,"Not the same class and stats")
+        assertEquals(expected_ninja,ninja,"Not the same class and stats")
+        assertEquals(expected_magonegro,magonegro,"Not the same class and stats")
+        assertEquals(expected_magoblanco,magoblanco,"Not the same class and stats")
+    }
 }
