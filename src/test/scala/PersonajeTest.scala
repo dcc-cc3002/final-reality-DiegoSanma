@@ -50,9 +50,9 @@ class PersonajeTest extends munit.FunSuite {
     }
 
     test("character stat comparison"){
-        val paladin_stat_guerrero = new Guerrero("Diego",100,90,120)
-        val mblanco_stat_magonegro = new MagoNegro("Duarte",70,60,80,90)
-        val guerrero_stat_ninja = new Ninja("Lucas",80,100,100)
+        var paladin_stat_guerrero = new Guerrero("Diego",100,90,120)
+        var mblanco_stat_magonegro = new MagoNegro("Duarte",70,60,80,90)
+        var guerrero_stat_ninja = new Ninja("Lucas",80,100,100)
 
         assert(!paladin_stat_guerrero.equals(paladin))
         assertEquals(paladin_stat_guerrero.name(),paladin.name())
