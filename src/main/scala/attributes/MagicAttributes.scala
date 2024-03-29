@@ -1,6 +1,6 @@
 package attributes
 
-/**Trait defines the magic attributes of a mage
+/**Trait defines the magic attributes of a mage (mago)
  *
  * The magic attributes of a mage are defined by their attributes(see Attributes) and mana
  *

@@ -13,6 +13,8 @@ import attributes.Attributes
  *
  * @constructor creates a new ninja with a name, and values for hp, defense and weight
  *
+ * @author Diego San Martin
+ *
  */
 
 class Ninja extends Attributes{

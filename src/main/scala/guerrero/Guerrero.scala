@@ -13,6 +13,8 @@ import attributes.Attributes
  *
  * @constructor creates a new guerrero with a name, and values for hp, defense and weight
  *
+ * @author Diego San Martin
+ *
  */
 class Guerrero extends Attributes{
 
