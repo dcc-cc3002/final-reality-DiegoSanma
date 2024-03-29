@@ -70,4 +70,28 @@ class PersonajeTest extends munit.FunSuite {
         assert(!magoblanco.mana(),equals(magonegro.mana()))
         assert(!paladin.defense().equals(magonegro.hp()))
     }
+
+    test("stat changing"){
+        val first_paladin = new Paladin("Diego",90,100,130)
+        val first_magonegro = new MagoNegro("Santiago",50,60,85,110)
+
+        assert(!first_paladin.hp().equals(paladin.hp()))
+        assert(!first_paladin.defense().equals(paladin.defense()))
+        assert(!first_paladin.weight().equals(paladin.weight()))
+
+        first_paladin.hp() = 100
+        first_paladin.defense() = 90
+        first_paladin.weight() = 120
+        assertEquals(first_paladin,paladin)
+
+        assert(!first_magonegro.hp().equals(magonegro.hp()))
+        assert(!first_magonegro.defense().equals(magonegro.defense()))
+        assert(!first_magonegro.weight().equals(magonegro.weight()))
+
+        first_magonegro.hp() = 60
+        first_magonegro.defense() = 50
+        first_magonegro.weight() = 80
+        first_magonegro.mana() = 100
+        assertEquals(first_magonegro,magonegro)
+    }
 }
