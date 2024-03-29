@@ -6,6 +6,7 @@ package attributes
  *
  * @tparam mana the amount of mana/magic a mage has
  *
+ * @author Diego San Martin
  */
 trait MagicAttributes extends Attributes {
   def mana: Int

@@ -6,7 +6,7 @@ package attributes
  *
  * @tparam name the name of the character
  * @tparam hp the hitpoints/health of a character
- * @tparam defense the defense of a character
+ * @tparam defense the defense value of a character
  * @tparam weight the weight of a character
  *
  * @author Diego San Martin
