@@ -35,4 +35,17 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(expected_magonegro,magonegro,"Not the same class and stats")
         assertEquals(expected_magoblanco,magoblanco,"Not the same class and stats")
     }
+
+    test("simple character comparison"){
+        val statg_paladin = new Paladin("Lucas",80,100,100)
+        val statmn_magoblanco = new MagoBlanco("Balbontin",60,50,80,100)
+
+        assert(!magonegro.equals(magoblanco))
+        assert(!paladin.equals(guerrero))
+        assert(!ninja.equals(paladin))
+        assert(!magoblanco.equals(ninja))
+
+        assert(!guerrero.equals(statg_paladin))
+        assert(!magonegro.equals(statmn_magoblanco))
+    }
 }
