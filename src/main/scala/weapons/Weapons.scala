@@ -17,6 +17,5 @@ trait Weapons {
   var name: String
   var atkpoints: Int
   var weight: Int
-  var owner: Option[Either[Either[Either[Paladin,Guerrero],Ninja],MagoNegro],MagoBlanco]
 
 }

@@ -42,12 +42,4 @@ abstract class Weapon extends Weapons {
    println(s"This weapon has been named ${name}")
  }
 
-  def curowner(): Unit = {
-    if (this.owner == null){
-      println(s"This weapon has no owner" )
-      return null
-    }
-    println(s"This weapon is owned by the ${owner.getClass} who goes by the name ${owner.name}")
-  }
-
 }
