@@ -14,9 +14,9 @@ package weapons
 
 
 trait Weapons {
-  def name: String
-  def atkpoints: Int
-  def weight: Int
-  def owner: Option[Either[Either[Either[Paladin,Guerrero],Ninja],MagoNegro],MagoBlanco]
+  var name: String
+  var atkpoints: Int
+  var weight: Int
+  var owner: Option[Either[Either[Either[Paladin,Guerrero],Ninja],MagoNegro],MagoBlanco]
 
 }

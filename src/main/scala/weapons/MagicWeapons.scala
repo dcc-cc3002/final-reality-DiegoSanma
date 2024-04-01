@@ -10,5 +10,5 @@ package weapons
  */
 
 trait MagicWeapons extends Weapons {
-    def magicatk: Int
+    var magicatk: Int
 }

@@ -12,8 +12,8 @@ package attributes
  * @author Diego San Martin
  */
 trait Attributes {
-  def name: String
-  def hp: Int
-  def defense: Int
-  def weight: Int
+  val name: String
+  var hp: Int
+  var defense: Int
+  var weight: Int
 }
