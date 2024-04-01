@@ -13,15 +13,15 @@ class SwordTest extends munit.FunSuite {
   var ninja: Ninja = null
 
   override def beforeEach(context: BeforeEach): Unit = {
-    sword1 = new Sword("",40,50,null)
-    sword2 = new Sword("The holy",50,70,null)
+    sword1 = new Sword("",40,50)
+    sword2 = new Sword("The holy",50,70)
     paladin = new Paladin("Diego",100,90,120)
     guerrero = new Guerrero("Lucas",80,100,100)
     ninja = new Ninja("Santiago",60,70,60)
   }
 
   test("sword stats"){
-    val sword3 = new Sword("",40,50,null)
+    val sword3 = new Sword("",40,50)
     assertEquals(40,sword1.atkpoints,"the attack points weren´t assigned correctly")
     assertEquals(50,sword1.weight,"the weight wasn´t assigned correctly")
     assertEquals("",sword1.name,"the name wasnt assigned correctly")
@@ -38,5 +38,17 @@ class SwordTest extends munit.FunSuite {
     assertEquals(null,guerrero.weapon,"the guerrero has a weapon assigned")
     assertEquals(null,ninja.weapon,"the ninja has a weapon assigned")
 
+    paladin.obtain(sword1)
+    guerrero.obtain(sword2)
+    assertEquals(sword1,paladin.weapon,"the paladin did not obtain the weapon")
+    assertNotEquals(sword2,paladin.weapon,"the paladin was goven the wrong weapon")
+    assertEquals(sword2,guerrero.weapon,"the guerrero did not obtain the weapon")
+    assertNotEquals(sword1,guerrero.weapon,"the guerrero was goven the wrong weapon")
+  }
+
+  test("naming"){
+    sword1.rename("The Unholy")
+    assertEquals(("The Unholy",sword1.name(),"the sword was not renamed correctly"))
+    assertNotEquals(null,sword1.rename("The Holiest"),"the sword should not be renamed")
   }
 }
