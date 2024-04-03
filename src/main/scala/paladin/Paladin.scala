@@ -1,6 +1,9 @@
 package paladin
 
 import attributes.Attributes
+import weapons.Weapons
+
+import java.security.InvalidParameterException
 
 /** A class representing a paladin
  *
@@ -18,5 +21,27 @@ import attributes.Attributes
  */
 
 
-class Paladin extends Attributes {
+class Paladin(name: String, hp: Int, defense:Int, weight: Int) extends Attributes {
+  /** @param weapon the weapon the paladin is holding */
+  var weapon: Option[Weapons] = None
+
+  /**Gives the weapon to the Paladin
+   *
+   * The variable weapon is changed to the weapon that we wanted to have
+   * If the Paladin is already holding a weapon, this one will be dropped in favour
+   * of the new one
+   *
+   * @param weapon the weapon that the paladin wants to have
+   *
+   * @throws InvalidParameterException if the weapon cannot be equipped by the paladin
+   *
+   * @example
+   * {{{
+   *   var paladin = Paladin("Diego",100,90,70)
+   *   var sword = Sword("Excalibur",40,40)
+   *   paladin.obtain(sword)
+   *   println("The weapon of the paladin $name is ${weapon.name}"
+   * }}}
+   *
+   */
 }
