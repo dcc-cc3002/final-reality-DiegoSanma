@@ -4,7 +4,11 @@
  * Paladin, Guerrero, Ninja, MagoNegro and MagoBlanco
  *
  */
-
+import paladin.Paladin
+import guerrero.Guerrero
+import ninja.Ninja
+import magonegro.MagoNegro
+import magoblanco.MagoBlanco
 
 
 class PersonajeTest extends munit.FunSuite {
@@ -55,43 +59,48 @@ class PersonajeTest extends munit.FunSuite {
         var guerrero_stat_ninja = new Ninja("Lucas",80,100,100)
 
         assert(!paladin_stat_guerrero.equals(paladin))
-        assertEquals(paladin_stat_guerrero.name(),paladin.name())
-        assertEquals(paladin_stat_guerrero.hp(),paladin.hp())
-        assertEquals(paladin_stat_guerrero.defense(),paladin.defense())
-        assertEquals(paladin_stat_guerrero.weight(),paladin.weight())
+        assertEquals(paladin_stat_guerrero.name,paladin.name)
+        assertEquals(paladin_stat_guerrero.hp,paladin.hp)
+        assertEquals(paladin_stat_guerrero.defense,paladin.defense)
+        assertEquals(paladin_stat_guerrero.weight,paladin.weight)
 
         assert(!mblanco_stat_magonegro.equals(magoblanco))
-        assertEquals(mblanco_stat_magonegro.mana(),magonegro.mana())
+        assertEquals(mblanco_stat_magonegro.mana,magonegro.mana)
 
-        assertEquals(ninja.hp(),magonegro.hp())
-        assertEquals(ninja.weight(),magoblanco.defense())
-        assertEquals(paladin.hp(),guerrero.weight())
-        assert(!ninja.hp().equals(paladin.hp()))
-        assert(!magoblanco.mana(),equals(magonegro.mana()))
-        assert(!paladin.defense().equals(magonegro.hp()))
+        assertEquals(ninja.hp,magonegro.hp)
+        assertEquals(ninja.weight,magoblanco.defense)
+        assertEquals(paladin.hp,guerrero.weight)
+        assertNotEquals(ninja.hp,paladin.hp)
+        assertNotEquals(magoblanco.mana,magonegro.mana)
+        assertNotEquals(paladin.defense,magonegro.hp)
     }
 
     test("stat changing"){
         val first_paladin = new Paladin("Diego",90,100,130)
         val first_magonegro = new MagoNegro("Santiago",50,60,85,110)
 
-        assert(!first_paladin.hp().equals(paladin.hp()))
-        assert(!first_paladin.defense().equals(paladin.defense()))
-        assert(!first_paladin.weight().equals(paladin.weight()))
+        assertNotEquals(first_paladin.hp,paladin.hp)
+        assertNotEquals(first_paladin.defense,paladin.defense)
+        assertNotEquals(first_paladin.weight,paladin.weight)
 
-        first_paladin.hp() = 100
-        first_paladin.defense() = 90
-        first_paladin.weight() = 120
+        first_paladin.hp = 100
+        first_paladin.defense = 90
+        first_paladin.weight = 120
         assertEquals(first_paladin,paladin)
 
-        assert(!first_magonegro.hp().equals(magonegro.hp()))
-        assert(!first_magonegro.defense().equals(magonegro.defense()))
-        assert(!first_magonegro.weight().equals(magonegro.weight()))
+        assertNotEquals(first_magonegro.hp,magonegro.hp)
+        assertNotEquals(first_magonegro.defense,magonegro.defense)
+        assertNotEquals(first_magonegro.weight,magonegro.weight)
 
-        first_magonegro.hp() = 60
-        first_magonegro.defense() = 50
-        first_magonegro.weight() = 80
-        first_magonegro.mana() = 100
+        first_magonegro.hp = 60
+        first_magonegro.defense = 50
+        first_magonegro.weight = 80
+        first_magonegro.mana = 100
         assertEquals(first_magonegro,magonegro)
+    }
+    test("weapon"){
+        assertEquals(None,paladin.weapon)
+        assertEquals(None,guerrero.weapon)
+        assertEquals(None,ninja.weapon)
     }
 }
