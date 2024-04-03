@@ -19,7 +19,4 @@ abstract class Character extends Attributes {
   def nameGet(): Unit = {
     this.name
   }
-
-
-
 }
