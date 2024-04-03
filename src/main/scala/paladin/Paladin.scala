@@ -2,6 +2,7 @@ package paladin
 
 import attributes.Attributes
 import weapons.Weapons
+import attributes.Character
 
 import java.security.InvalidParameterException
 
@@ -21,8 +22,8 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(name: String, hp: Int, defense:Int, weight: Int) extends Character {
-  /** @param weapon the weapon the paladin is holding */
+class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Attributes {
+  /** weapon the Paladin is holding*/
 
   var weapon: Option[Weapons] = None
 

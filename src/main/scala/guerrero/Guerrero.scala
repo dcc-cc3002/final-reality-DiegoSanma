@@ -1,6 +1,7 @@
 package guerrero
 
 import attributes.Attributes
+import weapons.Weapons
 
 /** A class representing a warrior(guerrero)
  *
@@ -16,6 +17,8 @@ import attributes.Attributes
  * @author Diego San Martin
  *
  */
-class Guerrero extends Attributes{
+class Guerrero(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Attributes{
+  /** weapon the Guerrero is holding*/
 
+  var weapon: Option[Weapons] = None
 }
