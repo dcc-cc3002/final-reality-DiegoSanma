@@ -1,6 +1,7 @@
 package magonegro
 
 import attributes.MagicAttributes
+import weapons.Weapons
 
 /** A class representing a black mage (mago negro)
  *
@@ -18,6 +19,7 @@ import attributes.MagicAttributes
  *
  */
 
-class MagoNegro extends MagicAttributes {
-
+class MagoNegro(val name: String,var hp: Int, var defense:Int, var weight: Int, var mana: Int) extends MagicAttributes {
+  /**The weapon the black mage is holding*/
+  var weapon: Option[Weapons] = None
 }
