@@ -4,11 +4,11 @@ package weapons
  *
  * A magic weapon is defined by the charactersitics of a normal weapon and the magic attack points (magicattk)
  *
- * @tparam magicatk the magic attack points of a magic weapon
+ * @tparam magicpoints the magic attack points of a magic weapon
  *
  * @author Diego San Martin
  */
 
 trait MagicWeapons extends Weapons {
-    var magicatk: Int
+    var magicpoints: Int
 }

@@ -1,5 +1,7 @@
 package weapons
 
+import attributes.Attributes
+
 /** A trait used to define the characteristics of a weapon
  *
  * The charactersitics of a sword are defined by its name, attack points (atkpts), weight and owner
@@ -8,7 +10,6 @@ package weapons
  * @tparam atkpoints the attack points of the weapon
  * @tparam weight the weight of the weapon (in kilos)
  * @tparam owner the owner of the weapon
- *
  * @author Diego San Martin
  */
 
@@ -17,5 +18,6 @@ trait Weapons {
   var name: String
   var atkpoints: Int
   var weight: Int
+  var owner : Option[Attributes]
 
 }

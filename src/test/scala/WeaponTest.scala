@@ -4,6 +4,12 @@ import magonegro.MagoNegro
 import ninja.Ninja
 import paladin.Paladin
 
+import sword.Espada
+import axe.Hacha
+import bow.Arco
+import wand.VaritaMagica
+import staff.Baston
+
 /**This test is for the weapons the characters hold
  *
  * It includes testing for Espada(Sword), Hacha(Axe), Arco(Bow),
