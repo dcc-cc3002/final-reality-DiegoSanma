@@ -1,4 +1,4 @@
-package wand
+package weapontypes.bow.wand
 
 /** A class representing an wand(varita magica)
  *
@@ -17,8 +17,12 @@ package wand
  *
  */
 
-import attributes.Attributes
+import attributes.{Attributes, Mage}
+import guerrero.Guerrero
+import magonegro.MagoNegro
+import ninja.Ninja
+import paladin.Paladin
 import weapons.MagicWeapons
 
-class VaritaMagica(var name:String, var atkpoints:Int, var weight:Int,var magicpoints: Int,var owner:Option[Attributes]) extends MagicWeapons{
+class VaritaMagica(var name:String, var atkpoints:Int, var weight:Int,var magicpoints: Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends MagicWeapons{
 }

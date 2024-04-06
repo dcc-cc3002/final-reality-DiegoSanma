@@ -1,5 +1,10 @@
 package weapons
 
+import guerrero.Guerrero
+import magonegro.MagoNegro
+import ninja.Ninja
+import paladin.Paladin
+
 /**An abstract class for a weapon that includes the methods used for
  * different types of weapons
  *
@@ -8,7 +13,7 @@ package weapons
  * @author Diego San Martin
  */
 
-abstract class Weapon extends Weapons {
+abstract class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons {
   /**Returns the name of the weapon
    *
    * The name of the weapon corresponds to a string, which could already belong to the

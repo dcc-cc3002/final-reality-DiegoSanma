@@ -1,4 +1,4 @@
-package sword
+package weapontypes.bow.sword
 
 /** A class representing as sword(espada)
  *
@@ -16,8 +16,12 @@ package sword
  *
  */
 
-import attributes.Attributes
+import attributes.{Attributes, Mage}
+import guerrero.Guerrero
+import magonegro.MagoNegro
+import ninja.Ninja
+import paladin.Paladin
 import weapons.Weapons
 
-class Espada(var name:String, var atkpoints:Int, var weight:Int,var owner:Option[Attributes]) extends Weapons{
+class Espada(var name:String, var atkpoints:Int, var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons{
 }

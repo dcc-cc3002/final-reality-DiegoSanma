@@ -22,7 +22,7 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Attributes {
+class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character {
   /** weapon the Paladin is holding*/
 
   var weapon: Option[Weapons] = None
