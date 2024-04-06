@@ -5,15 +5,20 @@ import magonegro.MagoNegro
 import ninja.Ninja
 import paladin.Paladin
 
-/**An abstract class for a weapon that includes the methods used for
- * different types of weapons
+/**An  class for a weapon
  *
- * The abstract class is defined using the characteristics from thr trait Weapons
+ *A weapon is defined by its name, atkpoints, weight and owner
+ *
+ *
+ * @tparam name the name of the weapon
+ * @tparam atkpoints the attack points of the weapon
+ * @tparam weight the weight of the weapon
+ * @tparam owner the owner of the weapon
  *
  * @author Diego San Martin
  */
 
-abstract class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons {
+class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons {
   /**Returns the name of the weapon
    *
    * The name of the weapon corresponds to a string, which could already belong to the
