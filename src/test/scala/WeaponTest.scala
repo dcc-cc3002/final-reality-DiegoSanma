@@ -3,7 +3,7 @@ import magoblanco.MagoBlanco
 import magonegro.MagoNegro
 import ninja.Ninja
 import paladin.Paladin
-import weapons.Weapon
+import weapons.{MagicWeapon, Weapon}
 
 
 /**This test is for the weapons the characters hold
@@ -16,6 +16,8 @@ import weapons.Weapon
 class WeaponTest extends munit.FunSuite {
   var weapon: Weapon = null
   var magicweapon: MagicWeapon = null
+  var notnamew = null
+  var notnamedw = null
   var paladin: Paladin = null
   var guerrero: Guerrero = null
   var ninja: Ninja = null
@@ -30,6 +32,8 @@ class WeaponTest extends munit.FunSuite {
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
     weapon = new Weapon("Excalibur",60,70,paladin)
     magicweapon = new MagicWeapon("Palito",20,40,80,magonegro)
+    var notnamew = new Weapon(None,80,90,guerrero)
+    var notnamedw = new MagicWeapon(None,30,40,50,magoblanco)
   }
 
   test("weapon creation"){
@@ -48,6 +52,30 @@ class WeaponTest extends munit.FunSuite {
 
     assertEquals(paladin,weapon.owner,"Weapon not given owner")
     assertEquals(guerrero,magicweapon.owner,"Magic Weapon not given owner")
+  }
+
+  test("get name"){
+    var namew = weapon.nameGet()
+    var namemw = magicweapon.nameGet()
+    assertEquals("Excalibur",namew,"nameGet didnt get name correctly")
+    assertEquals("Palito",namemw,"nameGet didnt get name correctly")
+    assertEquals(None,notnamew.nameGet(),"nameGet doesnt identify empty name")
+    assertEquals(None,notnamedw.nameGet(),"nameGet doesnt identify empty name")
+  }
+
+  test("rename"){
+    val newnamew = "The Holy"
+    val newnamedw = "The Black Fairy"
+    val nnw = "Hell´s Blade"
+    val nndw = "The Stick of Truth"
+    notnamew.rename(newnamew)
+    notnamedw.rename(newnamedw)
+    assertEquals("The Holy",notnamew.name,"The weapon was not renamed correctly")
+    assertEquals("The Black Fairy",notnamedw.name,"The Magic Weapon was not renamed correctly")
+    notnamew.rename(nnw)
+    notnamedw.rename(nndw)
+    assertEquals("The Holy",notnamew.name,"The weapon should not be renamed")
+    assertEquals("The Black Fairy",notnamedw.name,"The Magic Weapon should not be renamed")
   }
 
 

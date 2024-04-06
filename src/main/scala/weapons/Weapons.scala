@@ -19,7 +19,7 @@ import paladin.Paladin
 
 
 trait Weapons {
-  var name: String
+  var name: Option[String]
   var atkpoints: Int
   var weight: Int
   var owner : Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]
