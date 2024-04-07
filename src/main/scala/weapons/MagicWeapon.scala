@@ -13,21 +13,7 @@ package weapons
  *
  * @author Diego San Martin
  */
-class MagicWeapon(var name:Option[String],var atkpoints:Int, var weight:Int, var magicpts:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]] extends MagicWeapons {
-  /**Returns the name of the weapon
-   *
-   * The name of the weapon corresponds to a string, which could already belong to the
-   * weapon or could have been given by someone
-   *
-   */
-
-  def nameGet(): Unit = {
-    if (this.name == ""){
-      println("This weapon has no name")
-      return null
-    }
-    this.name
-  }
+class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var magicpts:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]] extends MagicWeapons {
 
   /**Renames the weapon to the name(named) of choice
    *
@@ -35,7 +21,7 @@ class MagicWeapon(var name:Option[String],var atkpoints:Int, var weight:Int, var
    *
    */
 
-  def rename(named: Option[String]): Unit ={
+  def rename(named: String): Unit ={
     if (this.name != None){
       println(s"This weapon has already been named ${name}" )
       return null

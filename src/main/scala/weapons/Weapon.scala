@@ -18,23 +18,7 @@ import paladin.Paladin
  * @author Diego San Martin
  */
 
-class Weapon(var name:Option[String],var atkpoints:Int,var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons {
-  /**Returns the name of the weapon
-   *
-   * The name of the weapon corresponds to a string, which could already belong to the
-   * weapon or could have been given by someone
-   *
-   * @throws "This weapon has no name" if the weapon does not have name yet
-   *
-   */
-
-  def nameGet(): Unit = {
-    if (this.name == ""){
-      println("This weapon has no name")
-      return null
-    }
-    this.name
-  }
+class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons {
 
   /**Renames the weapon to the name(named) of choice
    *
@@ -43,7 +27,7 @@ class Weapon(var name:Option[String],var atkpoints:Int,var weight:Int,var owner:
    * @throws This weapon has already been named $name$, if the weapon has already received a name
    */
 
- def rename(named: Option[String]): Unit ={
+ def rename(named: String): Unit ={
    if (this.name != None){
      println(s"This weapon has already been named ${name}" )
      return null
