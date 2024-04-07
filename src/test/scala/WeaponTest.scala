@@ -48,18 +48,29 @@ class WeaponTest extends munit.FunSuite {
     assertEquals(40,magicweapon.weight,"Magic Weapon not given weight")
 
 
-    assertEquals(80,magicweapon.magicpts,"Magic Weapon not given magic points")
+    assertEquals(80,magicweapon.magicpoints,"Magic Weapon not given magic points")
 
-    assertEquals(paladin,weapon.owner,"Weapon not given owner")
-    assertEquals(guerrero,magicweapon.owner,"Magic Weapon not given owner")
+    val supposed_owner = weapon.owner
+    val supposed_mowner = magicweapon.owner
+    assertEquals(paladin.hp,supposed_owner.hp,"Weapon not given owner")
+    assertEquals(magonegro.hp,supposed_mowner.hp,"Magic Weapon not given owner")
+    assertEquals(paladin.defense,supposed_owner.defense,"Weapon not given owner")
+    assertEquals(magonegro.defense,supposed_mowner.defense,"Magic Weapon not given owner")
+    assertEquals(paladin.name,supposed_owner.name,"Weapon not given owner")
+    assertEquals(magonegro.name,supposed_mowner.name,"Magic Weapon not given owner")
+    assertEquals(paladin.weight,supposed_owner.weight,"Weapon not given owner")
+    assertEquals(magonegro.weight,supposed_mowner.weight,"Magic Weapon not given owner")
+    assertEquals(magonegro.mana,supposed_mowner.mana,"Magic Weapon not given owner")
+
+
   }
 
 
   test("rename"){
-    val newnamew = ("The Holy")
-    val newnamedw = ("The Black Fairy")
-    val nnw = ("Hell´s Blade")
-    val nndw = ("The Stick of Truth")
+    val newnamew = "The Holy"
+    val newnamedw = "The Black Fairy"
+    val nnw = "Hell´s Blade"
+    val nndw = "The Stick of Truth"
     notnamew.rename(newnamew)
     notnamedw.rename(newnamedw)
     assertEquals(newnamew,notnamew.name,"The weapon was not renamed correctly")

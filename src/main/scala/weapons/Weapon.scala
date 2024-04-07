@@ -1,5 +1,6 @@
 package weapons
 
+import attributes.{Attributes, MagicAttributes}
 import guerrero.Guerrero
 import magonegro.MagoNegro
 import ninja.Ninja
@@ -18,8 +19,8 @@ import paladin.Paladin
  * @author Diego San Martin
  */
 
-class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons {
-
+class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Attributes) extends Weapons {
+  owner.weapon = Some(this)
   /**Renames the weapon to the name(named) of choice
    *
    * @param named the new name to be assigned to the weapon
@@ -28,7 +29,7 @@ class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Option[E
    */
 
  def rename(named: String): Unit ={
-   if (this.name != None){
+   if (this.name != ""){
      println(s"This weapon has already been named ${name}" )
      return null
    }

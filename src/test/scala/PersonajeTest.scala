@@ -127,10 +127,10 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(first_magonegro.weight, magonegro.weight)
     }
     test("weapon") {
-        assert(paladin.weapon.isEmpty, "No weapon is held")
-        assert(guerrero.weapon.isEmpty, "No weapon is held")
-        assert(ninja.weapon.isEmpty, "No weapon is held")
-        assert(magonegro.weapon.isEmpty, "No weapon is held")
-        assert(magoblanco.weapon.isEmpty, "No weapon is held")
+        assertEquals(paladin.weapon,None, "No weapon should be held")
+        assertEquals(guerrero.weapon,None, "No weapon should held")
+        assertEquals(ninja.weapon,None, "No weapon should be held")
+        assertEquals(magonegro.weapon,None, "No weapon should be held")
+        assertEquals(magoblanco.weapon,None, "No weapon should be held")
     }
 }

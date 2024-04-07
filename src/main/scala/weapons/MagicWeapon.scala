@@ -1,19 +1,19 @@
 package weapons
+
+import attributes.{Attributes, MagicAttributes}
+
 /**An  class for a magic weapon
  *
  *A magic weapon is defined by its name, atkpoints, weight, magic points and owner
  *
- *
  * @tparam name the name of the magic weapon
  * @tparam atkpoints the attack points of the magic weapon
  * @tparam weight the weight of the magic weapon
- * @tparam magicpts the magic points of the magic weapon
+ * @tparam magicpoints the magic points of the magic weapon
  * @tparam owner the owner of the magic weapon
- *
- *
  * @author Diego San Martin
  */
-class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var magicpts:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]] extends MagicWeapons {
+class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var magicpoints:Int,var owner:MagicAttributes) extends MagicWeapons {
 
   /**Renames the weapon to the name(named) of choice
    *
@@ -22,7 +22,7 @@ class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var magicpt
    */
 
   def rename(named: String): Unit ={
-    if (this.name != None){
+    if (this.name != ""){
       println(s"This weapon has already been named ${name}" )
       return null
     }

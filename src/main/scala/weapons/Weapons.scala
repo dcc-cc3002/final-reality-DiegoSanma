@@ -1,6 +1,6 @@
 package weapons
 
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, Mage, MagicAttributes}
 import guerrero.Guerrero
 import magonegro.MagoNegro
 import ninja.Ninja
@@ -22,6 +22,6 @@ trait Weapons {
   var name: String
   var atkpoints: Int
   var weight: Int
-  var owner : Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]
+  var owner : Attributes
 
 }

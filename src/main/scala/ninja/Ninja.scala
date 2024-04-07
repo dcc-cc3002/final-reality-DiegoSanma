@@ -20,6 +20,4 @@ import weapons.Weapons
 
 class Ninja(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character{
   /** weapon the Ninja is holding*/
-
-  var weapon: Option[Weapons] = None
 }

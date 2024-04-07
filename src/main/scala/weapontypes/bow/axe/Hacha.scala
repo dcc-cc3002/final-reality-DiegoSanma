@@ -16,12 +16,12 @@ package weapontypes.bow.axe
  *
  */
 
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, Mage, MagicAttributes}
 import guerrero.Guerrero
 import magonegro.MagoNegro
 import ninja.Ninja
 import paladin.Paladin
 import weapons.Weapons
 
-class Hacha(var name:String, var atkpoints:Int, var weight:Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends Weapons{
+class Hacha(var name:String, var atkpoints:Int, var weight:Int,var owner:Attributes) extends Weapons{
 }

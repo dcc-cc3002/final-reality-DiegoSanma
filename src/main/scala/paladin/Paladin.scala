@@ -25,8 +25,6 @@ import java.security.InvalidParameterException
 class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character {
   /** weapon the Paladin is holding*/
 
-  var weapon: Option[Weapons] = None
-
 
 
   /**Gives the weapon to the Paladin

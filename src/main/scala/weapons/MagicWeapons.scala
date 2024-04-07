@@ -1,5 +1,8 @@
 package weapons
 
+import attributes.MagicAttributes
+
+import java.util.jar.Attributes
 
 
 /**A trait that defines the characteristics of a magic weapon
@@ -10,6 +13,10 @@ package weapons
  * @author Diego San Martin
  */
 
-trait MagicWeapons extends Weapons {
+trait MagicWeapons {
+    var name: String
+    var atkpoints: Int
+    var weight: Int
+    var owner : MagicAttributes
     var magicpoints: Int
 }

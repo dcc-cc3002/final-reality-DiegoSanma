@@ -17,12 +17,12 @@ package weapontypes.bow.staff
  *
  */
 
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, Mage, MagicAttributes}
 import guerrero.Guerrero
 import magonegro.MagoNegro
 import ninja.Ninja
 import paladin.Paladin
 import weapons.MagicWeapons
 
-class Baston(var name:String, var atkpoints:Int, var weight:Int,var magicpoints: Int,var owner:Option[Either[Paladin,Either[Ninja,Either[Guerrero,MagoNegro]]]]) extends MagicWeapons{
+class Baston(var name:String, var atkpoints:Int, var weight:Int,var magicpoints: Int,var owner:MagicAttributes) extends MagicWeapons{
 }

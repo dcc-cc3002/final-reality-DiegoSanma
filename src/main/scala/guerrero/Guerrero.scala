@@ -19,6 +19,4 @@ import weapons.Weapons
  */
 class Guerrero(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character{
   /** weapon the Guerrero is holding*/
-
-  var weapon: Option[Weapons] = None
 }
