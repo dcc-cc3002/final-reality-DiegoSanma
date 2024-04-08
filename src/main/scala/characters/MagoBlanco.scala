@@ -6,6 +6,8 @@ import attributes.{Attributes, Mage}
  *
  * A mago blanco is defined by his name, hp, defense, weight and mana
  *
+ * @constructor creates a new white mage with name, hp, defense, weight and mana
+ *
  * @param name the name of the mago blanco
  * @param hp the hitpoints of the mago blanco
  * @param defense the defense value of the mago blanco

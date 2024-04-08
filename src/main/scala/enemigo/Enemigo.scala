@@ -6,6 +6,7 @@ import attributes.Attributes
  *
  * As an extension of the trait EnemigoAttributes, an enemy is defined by its name, hp, attack, defense and weight
  *
+ * @constructor creates an enemy with name, hp, attack, defense and weight
  *
  * @param name the name of the enemy
  * @param hp the hp of the enemy
