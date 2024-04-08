@@ -1,7 +1,6 @@
-package magoblanco
+package characters
 
-import attributes.{Attributes, Mage, MagicAttributes}
-import weapons.{MagicWeapons, Weapons}
+import attributes.Attributes
 
 /** A class representing a white mage (mago blanco)
  *

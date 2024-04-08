@@ -4,11 +4,8 @@
  * Paladin, Guerrero, Ninja, MagoNegro and MagoBlanco
  *
  */
-import paladin.Paladin
-import guerrero.Guerrero
-import ninja.Ninja
-import magonegro.MagoNegro
-import magoblanco.MagoBlanco
+
+import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 
 
 class PersonajeTest extends munit.FunSuite {

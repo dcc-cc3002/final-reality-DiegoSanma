@@ -1,8 +1,4 @@
-import guerrero.Guerrero
-import magoblanco.MagoBlanco
-import magonegro.MagoNegro
-import ninja.Ninja
-import paladin.Paladin
+import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 import weapons.{MagicWeapon, Weapon}
 
 

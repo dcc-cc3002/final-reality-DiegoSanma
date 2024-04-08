@@ -1,7 +1,6 @@
-package guerrero
+package characters
 
-import attributes.{Attributes, Character, MagicAttributes}
-import weapons.Weapons
+import attributes.Attributes
 
 /** A class representing a warrior(guerrero)
  *

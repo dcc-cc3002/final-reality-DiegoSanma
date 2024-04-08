@@ -18,10 +18,7 @@ package weapontypes.bow.wand
  */
 
 import attributes.{Attributes, Mage, MagicAttributes}
-import guerrero.Guerrero
-import magonegro.MagoNegro
-import ninja.Ninja
-import paladin.Paladin
+import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 import weapons.MagicWeapons
 
 class VaritaMagica(var name:String, var atkpoints:Int, var weight:Int,var initialmpts: Option[Int],var owner:Attributes) extends MagicWeapons

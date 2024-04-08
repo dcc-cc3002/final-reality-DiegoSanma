@@ -1,8 +1,6 @@
-package paladin
+package characters
 
 import attributes.Attributes
-import weapons.Weapons
-import attributes.Character
 
 import java.security.InvalidParameterException
 

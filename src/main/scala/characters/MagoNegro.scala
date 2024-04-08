@@ -1,7 +1,6 @@
-package magonegro
+package characters
 
-import attributes.{Attributes, Mage, MagicAttributes}
-import weapons.{MagicWeapons, Weapons}
+import attributes.Attributes
 
 /** A class representing a black mage (mago negro)
  *

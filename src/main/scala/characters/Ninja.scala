@@ -1,7 +1,6 @@
-package ninja
+package characters
 
-import attributes.{Attributes, Character}
-import weapons.Weapons
+import attributes.Attributes
 
 /** A class representing a ninja
  *

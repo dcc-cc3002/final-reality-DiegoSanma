@@ -1,10 +1,7 @@
 package weapons
 
 import attributes.{Attributes, Mage, MagicAttributes}
-import guerrero.Guerrero
-import magonegro.MagoNegro
-import ninja.Ninja
-import paladin.Paladin
+import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 
 /** A trait used to define the characteristics of a weapon
  *

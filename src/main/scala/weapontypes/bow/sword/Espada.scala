@@ -17,10 +17,7 @@ package weapontypes.bow.sword
  */
 
 import attributes.{Attributes, Mage, MagicAttributes}
-import guerrero.Guerrero
-import magonegro.MagoNegro
-import ninja.Ninja
-import paladin.Paladin
+import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 import weapons.Weapons
 
 class Espada(var name:String, var atkpoints:Int, var weight:Int,var owner:Attributes) extends Weapons{
