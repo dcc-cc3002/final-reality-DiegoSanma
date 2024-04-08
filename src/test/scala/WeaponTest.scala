@@ -28,12 +28,12 @@ class WeaponTest extends munit.FunSuite {
     paladin = new Paladin("Diego", 100, 90, 120)
     guerrero = new Guerrero("Lucas", 80, 100, 100)
     ninja = new Ninja("Santiago", 60, 70, 60)
-    magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
+    magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
+    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
     weapon = new Weapon("Excalibur",60,70,paladin)
-    magicweapon = new MagicWeapon("Palito",20,40,80,magonegro)
+    magicweapon = new MagicWeapon("Palito",20,40,Some(80),magonegro)
     notnamew = new Weapon("",80,90,guerrero)
-    notnamedw = new MagicWeapon("",30,40,50,magoblanco)
+    notnamedw = new MagicWeapon("",30,40,Some(50),magoblanco)
   }
 
   test("weapon creation"){
@@ -48,7 +48,7 @@ class WeaponTest extends munit.FunSuite {
     assertEquals(40,magicweapon.weight,"Magic Weapon not given weight")
 
 
-    assertEquals(80,magicweapon.magicpoints,"Magic Weapon not given magic points")
+    assertEquals(80,magicweapon.magicpoints.getOrElse(0),"Magic Weapon not given magic points")
 
     val supposed_owner = weapon.owner
     val supposed_mowner = magicweapon.owner

@@ -13,8 +13,8 @@ import attributes.{Attributes, MagicAttributes}
  * @tparam owner the owner of the magic weapon
  * @author Diego San Martin
  */
-class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var magicpoints:Int,var owner:MagicAttributes) extends MagicWeapons {
-
+class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var initialmpts:Option[Int],var owner:Attributes) extends Weapons {
+  magicpoints = initialmpts
   /**Renames the weapon to the name(named) of choice
    *
    * @param named the new name to be assigned to the weapon

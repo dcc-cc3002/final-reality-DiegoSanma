@@ -17,5 +17,6 @@ trait Attributes {
   var hp: Int
   var defense: Int
   var weight: Int
+  var mana: Option[Int] = None
   var weapon : Option[Weapons] = None
 }

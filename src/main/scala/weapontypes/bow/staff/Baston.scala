@@ -24,5 +24,5 @@ import ninja.Ninja
 import paladin.Paladin
 import weapons.MagicWeapons
 
-class Baston(var name:String, var atkpoints:Int, var weight:Int,var magicpoints: Int,var owner:MagicAttributes) extends MagicWeapons{
+class Baston(var name:String, var atkpoints:Int, var weight:Int,var initialmpts: Option[Int],var owner:Attributes) extends MagicWeapons{
 }

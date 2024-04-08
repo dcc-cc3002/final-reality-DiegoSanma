@@ -22,6 +22,7 @@ trait Weapons {
   var name: String
   var atkpoints: Int
   var weight: Int
+  var magicpoints: Option[Int] = None
   var owner : Attributes
 
 }

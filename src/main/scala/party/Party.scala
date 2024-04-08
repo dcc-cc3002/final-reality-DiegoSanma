@@ -20,20 +20,17 @@ class Party (var member1:Option[Attributes],var member2:Option[Attributes],var m
 
   /**A function that determines wether a party is defeated or not
    *
-   * Returns 1 if the party is not defeated and 0 if it is
+   * Returns the amount of party members alive
+   * If it return 0,it is because the party has been defeated
    *
    */
   def defeated():Int = {
     val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
     var alive:Int = 5
     for (mem<-memberArray){
-      if (mem.isDefined) {
-        if (mem.hp == 0) {
-          alive -= 1
-        }
-      }
-      else {
-        alive -= 1
+      val status= if (mem.isDefined) mem.get.hp else 0
+      if (status ==0){
+        alive-=1
       }
     }
   return alive

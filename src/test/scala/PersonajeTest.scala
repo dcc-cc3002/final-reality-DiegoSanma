@@ -22,16 +22,16 @@ class PersonajeTest extends munit.FunSuite {
         paladin = new Paladin("Diego", 100, 90, 120)
         guerrero = new Guerrero("Lucas", 80, 100, 100)
         ninja = new Ninja("Santiago", 60, 70, 60)
-        magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-        magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
+        magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
+        magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
     }
 
     test("equal character") {
         val expected_paladin = new Paladin("Diego", 100, 90, 120)
         val expected_guerrero = new Guerrero("Lucas", 80, 100, 100)
         val expected_ninja = new Ninja("Santiago", 60, 70, 60)
-        val expected_magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-        val expected_magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
+        val expected_magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
+        val expected_magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
 
         assertEquals(expected_guerrero.name, guerrero.name, "Not the same name")
         assertEquals(expected_paladin.name, paladin.name, "Not the same name")
@@ -61,12 +61,12 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(60, magonegro.hp, "Not the same hp")
         assertEquals(50, magonegro.defense, "Not the same defense")
         assertEquals(80, magonegro.weight, "Not the same weight")
-        assertEquals(100, magonegro.mana, "Not the same mana")
+        assertEquals(Option(100), (magonegro.mana), "Not the same mana")
     }
 
     test("simple character comparison") {
         val statg_paladin = new Paladin("Lucas", 80, 100, 100)
-        val statmn_magoblanco = new MagoBlanco("Balbontin", 60, 50, 80, 100)
+        val statmn_magoblanco = new MagoBlanco("Balbontin", 60, 50, 80, Some(100))
 
         assert(!magonegro.equals(magoblanco))
         assert(!paladin.equals(guerrero))
@@ -79,7 +79,7 @@ class PersonajeTest extends munit.FunSuite {
 
     test("character stat comparison") {
         var paladin_stat_guerrero = new Guerrero("Diego", 100, 90, 120)
-        var mblanco_stat_magonegro = new MagoNegro("Duarte", 70, 60, 80, 90)
+        var mblanco_stat_magonegro = new MagoNegro("Duarte", 70, 60, 80, Some(90))
         var guerrero_stat_ninja = new Ninja("Lucas", 80, 100, 100)
 
         assert(!paladin_stat_guerrero.equals(paladin))
@@ -101,7 +101,7 @@ class PersonajeTest extends munit.FunSuite {
 
     test("stat changing") {
         val first_paladin = new Paladin("Diego", 90, 100, 130)
-        val first_magonegro = new MagoNegro("Santiago", 50, 60, 85, 110)
+        val first_magonegro = new MagoNegro("Santiago", 50, 60, 85, Some(110))
 
         assertNotEquals(first_paladin.hp, paladin.hp)
         assertNotEquals(first_paladin.defense, paladin.defense)
@@ -121,10 +121,11 @@ class PersonajeTest extends munit.FunSuite {
         first_magonegro.hp = 60
         first_magonegro.defense = 50
         first_magonegro.weight = 80
-        first_magonegro.mana = 100
+        first_magonegro.mana = Some(100)
         assertEquals(first_magonegro.hp, magonegro.hp)
         assertEquals(first_magonegro.defense, magonegro.defense)
         assertEquals(first_magonegro.weight, magonegro.weight)
+        assertEquals(first_magonegro.mana,magonegro.mana)
     }
     test("weapon") {
         assertEquals(paladin.weapon,None, "No weapon should be held")

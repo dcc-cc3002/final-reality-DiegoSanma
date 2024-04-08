@@ -1,6 +1,6 @@
 package ninja
 
-import attributes.Character
+import attributes.{Attributes, Character}
 import weapons.Weapons
 
 /** A class representing a ninja
@@ -18,6 +18,6 @@ import weapons.Weapons
  *
  */
 
-class Ninja(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character{
+class Ninja(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Attributes{
   /** weapon the Ninja is holding*/
 }

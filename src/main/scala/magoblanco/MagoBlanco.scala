@@ -1,6 +1,6 @@
 package magoblanco
 
-import attributes.{Mage, MagicAttributes}
+import attributes.{Attributes, Mage, MagicAttributes}
 import weapons.{MagicWeapons, Weapons}
 
 /** A class representing a white mage (mago blanco)
@@ -20,7 +20,8 @@ import weapons.{MagicWeapons, Weapons}
  */
 
 
-class MagoBlanco(val name: String,var hp: Int, var defense:Int, var weight: Int, var mana: Int) extends MagicAttributes {
+class MagoBlanco(val name: String,var hp: Int, var defense:Int, var weight: Int, var initialmana: Option[Int]) extends Attributes {
   //*The weapon the white mage is holding*/
+  mana= initialmana
 
 }

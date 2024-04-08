@@ -1,6 +1,6 @@
 package guerrero
 
-import attributes.Character
+import attributes.{Attributes, Character, MagicAttributes}
 import weapons.Weapons
 
 /** A class representing a warrior(guerrero)
@@ -17,6 +17,8 @@ import weapons.Weapons
  * @author Diego San Martin
  *
  */
-class Guerrero(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character{
+class Guerrero(val name: String,var hp: Int, var defense:Int, var weight: Int) extends
+  Attributes{
   /** weapon the Guerrero is holding*/
+
 }

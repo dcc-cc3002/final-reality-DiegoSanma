@@ -9,5 +9,5 @@ package attributes
  * @author Diego San Martin
  */
 trait MagicAttributes extends Attributes {
-  var mana: Int
+  var mana: Option[Int]
 }
