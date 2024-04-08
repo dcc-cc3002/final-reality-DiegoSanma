@@ -1,7 +1,9 @@
 package party
 
 import attributes.Attributes
+
 import scala.collection.mutable.ArrayBuffer
+
 
 /**A class that defines a party of characters
  *
@@ -18,7 +20,7 @@ import scala.collection.mutable.ArrayBuffer
 class Party (var member1:Option[Attributes],var member2:Option[Attributes],var member3:Option[Attributes],
              var member4:Option[Attributes],var member5:Option[Attributes]){
 
-  /**A function that determines wether a party is defeated or not
+  /**A function that determines whether a party is defeated or not
    *
    * Returns the amount of party members alive
    * If it return 0,it is because the party has been defeated
@@ -34,5 +36,39 @@ class Party (var member1:Option[Attributes],var member2:Option[Attributes],var m
       }
     }
   return alive
+  }
+
+  /**A function that adds characters to the Party
+   *
+   * It takes as a parameter, the new member we wish to add
+   * This member is added as one of the vacant slots in the party
+   *
+   *
+   * EXCEPTION: if the party is full, the new member is not added, and the party remains the same
+   *
+   * @example
+   * var party = new Party(Some(guerrero),Some(ninja),None,None,None)
+   * party.addMember(Some(magonegro))
+   * println("The third member of the party is ${party.member3.get}"), should be mago negro
+   *
+   */
+  def addMember(memb: Option[Attributes]): Unit = {
+    var memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
+    var added = false
+
+    for (index<-memberArray.indices if !added){
+      if(memberArray(index).isEmpty){
+        memberArray(index) = memb
+        added = true
+      }
+      println(memberArray(index))
+    }
+    member1=memberArray(0)
+    member2=memberArray(1)
+    member3=memberArray(2)
+    member4=memberArray(3)
+    member5=memberArray(4)
+
+
   }
 }
