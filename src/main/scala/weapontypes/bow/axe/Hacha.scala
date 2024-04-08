@@ -16,7 +16,7 @@ package weapontypes.bow.axe
  *
  */
 
-import attributes.{Attributes, Mage, MagicAttributes}
+import attributes.{Attributes, Mage}
 import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 import weapons.Weapons
 

@@ -1,6 +1,7 @@
 package characters
 
 import attributes.Attributes
+import attributes.Character
 
 import java.security.InvalidParameterException
 
@@ -20,7 +21,7 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Attributes {
+class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character {
   /** weapon the Paladin is holding*/
 
 

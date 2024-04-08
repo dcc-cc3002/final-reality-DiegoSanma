@@ -1,6 +1,6 @@
 package weapons
 
-import attributes.{Attributes, MagicAttributes}
+import attributes.Attributes
 
 /**An  class for a magic weapon
  *
@@ -14,6 +14,7 @@ import attributes.{Attributes, MagicAttributes}
  * @author Diego San Martin
  */
 class MagicWeapon(var name:String,var atkpoints:Int, var weight:Int, var initialmpts:Option[Int],var owner:Attributes) extends Weapons {
+  owner.weapon = Some(this)
   magicpoints = initialmpts
   /**Renames the weapon to the name(named) of choice
    *

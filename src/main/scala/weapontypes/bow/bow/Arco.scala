@@ -16,7 +16,7 @@ package weapontypes.bow.bow
  *
  */
 
-import attributes.{Attributes, MagicAttributes}
+import attributes.Attributes
 import weapons.Weapons
 
 class Arco(var name:String, var atkpoints:Int, var weight:Int,var owner:Attributes) extends Weapons{

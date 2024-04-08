@@ -1,6 +1,6 @@
 package weapons
 
-import attributes.{Attributes, MagicAttributes}
+import attributes.Attributes
 import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 
 /**An  class for a weapon

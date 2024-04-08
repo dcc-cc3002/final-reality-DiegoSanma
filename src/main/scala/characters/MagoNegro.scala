@@ -1,6 +1,6 @@
 package characters
 
-import attributes.Attributes
+import attributes.{Attributes, Mage}
 
 /** A class representing a black mage (mago negro)
  *
@@ -18,6 +18,6 @@ import attributes.Attributes
  *
  */
 
-class MagoNegro(val name: String,var hp: Int, var defense:Int, var weight: Int, var initialmana: Option[Int]) extends Attributes {
+class MagoNegro(val name: String,var hp: Int, var defense:Int, var weight: Int, var initialmana: Option[Int]) extends Mage {
   mana = initialmana
 }

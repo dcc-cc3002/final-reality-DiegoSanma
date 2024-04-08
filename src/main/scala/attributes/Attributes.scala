@@ -10,6 +10,8 @@ import weapons.Weapons
  * @tparam hp the hitpoints/health of a character
  * @tparam defense the defense value of a character
  * @tparam weight the weight of a character
+ * @tparam mana the mana of the character(currently, the trait takes mana as None)
+ * @tparam weapon the wepaon the character is holding(is built without a weapon)
  * @author Diego San Martin
  */
 trait Attributes {

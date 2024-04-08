@@ -1,4 +1,4 @@
-package weapontypes.bow.sword
+package enemigo.sword
 
 /** A class representing as sword(espada)
  *
@@ -16,7 +16,7 @@ package weapontypes.bow.sword
  *
  */
 
-import attributes.{Attributes, Mage, MagicAttributes}
+import attributes.{Attributes, Mage}
 import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 import weapons.Weapons
 

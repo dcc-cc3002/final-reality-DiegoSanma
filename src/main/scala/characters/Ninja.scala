@@ -1,6 +1,7 @@
 package characters
 
 import attributes.Attributes
+import attributes.Character
 
 /** A class representing a ninja
  *
@@ -17,6 +18,6 @@ import attributes.Attributes
  *
  */
 
-class Ninja(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Attributes{
+class Ninja(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character{
   /** weapon the Ninja is holding*/
 }

@@ -61,7 +61,6 @@ class Party (var member1:Option[Attributes],var member2:Option[Attributes],var m
         memberArray(index) = memb
         added = true
       }
-      println(memberArray(index))
     }
     member1=memberArray(0)
     member2=memberArray(1)
