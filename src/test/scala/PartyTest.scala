@@ -43,7 +43,15 @@ class PartyTest extends munit.FunSuite{
   assertEquals(p2_member.isDefined,true,"Member1 is None")
   assertEquals(p2_member.get.isInstanceOf[MagoBlanco],true,"Member 1 is not a Mago Blanco")
   assertEquals(p2_member.get,magoblanco,"Member1 is not the Mago Blanco we gave it")
+  }
 
+  test("party status"){
+    assertEquals(2,party1.defeated())
+    assertEquals(1,party2.defeated())
+    party2.member1.get.hp = 0
+    assertEquals(0,party2.defeated())
+    party2.member1.get.hp = 60
+    assertEquals(1,party2.defeated())
   }
 
 }
