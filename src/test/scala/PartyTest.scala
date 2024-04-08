@@ -10,17 +10,21 @@ class PartyTest extends munit.FunSuite{
   var party1: Party = null
   var party2: Party = null
   var paladin: Paladin = null
+  var anotherpaladin: Paladin = null
   var guerrero: Guerrero = null
   var ninja: Ninja = null
   var magonegro: MagoNegro = null
   var magoblanco: MagoBlanco = null
+  var anothermagoblanco: MagoBlanco = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
+    anotherpaladin = new Paladin("Saka",120,80,80)
     guerrero = new Guerrero("Lucas", 80, 100, 100)
     ninja = new Ninja("Santiago", 60, 70, 60)
     magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
+    anothermagoblanco = new MagoBlanco("Leo",60,50,40,Some(100))
 
     party1 = new Party(Some(paladin),Some(guerrero),None,None,None)
     party2 = new Party(Some(magoblanco),None,None,None,None)
@@ -54,4 +58,39 @@ class PartyTest extends munit.FunSuite{
     assertEquals(1,party2.defeated())
   }
 
+  test("adding members"){
+    party1.addMember(ninja)
+    var actual_member1 = party1.member1
+    var actual_member2 = party1.member2
+    var actual_member3 = party1.member3
+    var actual_member4 = party1.member4
+    var actual_member5 = party1.member5
+    assertEquals(actual_member3.isDefined,true,"Member 3 was not added")
+    assertEquals(actual_member3.get.isInstanceOf[Ninja],true,"Member 3 was not added as a Ninja")
+    assertEquals(actual_member3.get,ninja,"Member 3 was not added as the Ninja we wanted")
+    assertEquals(actual_member1.get,paladin,"Member 1 was changed from the original Paladin")
+    assertEquals(actual_member2.get,guerrero,"Member 2 was changed from the orginial Guerrero")
+    assertEquals(actual_member4.isDefined,false,"Someone was added as Member 4")
+    assertEquals(actual_member5.isDefined,false,"Someone was added as Member 5")
+    party1.addMember(magonegro)
+    assertEquals(actual_member4.get,magonegro,"Member 4 is not the Mago Negro we wanted")
+    assertEquals(actual_member3.get,ninja,"Member 3 was not added as the Ninja we wanted")
+    assertEquals(actual_member1.get,paladin,"Member 1 was changed from the original Paladin")
+    assertEquals(actual_member2.get,guerrero,"Member 2 was changed from the orginial Guerrero")
+    assertEquals(actual_member5.isDefined,false,"Someone was added as Member 5")
+    party1.addMember(anothermagoblanco)
+    assertEquals(actual_member4.get,magonegro,"Member 4 is not the Mago Negro we wanted")
+    assertEquals(actual_member3.get,ninja,"Member 3 was not added as the Ninja we wanted")
+    assertEquals(actual_member1.get,paladin,"Member 1 was changed from the original Paladin")
+    assertEquals(actual_member2.get,guerrero,"Member 2 was changed from the orginial Guerrero")
+    assertEquals(actual_member5.get,anothermagoblanco,"Member 5 is not the Mago Blanco we wanted")
+    party1.addMember(anotherpaladin)
+    assertEquals(actual_member4.get,magonegro,"Member 4 is not the Mago Negro we wanted")
+    assertEquals(actual_member3.get,ninja,"Member 3 was not added as the Ninja we wanted")
+    assertEquals(actual_member1.get,paladin,"Member 1 was changed from the original Paladin")
+    assertEquals(actual_member2.get,guerrero,"Member 2 was changed from the orginial Guerrero")
+    assertEquals(actual_member5.get,anotherpaladin,"Member 5 is not the Mago Blanco we wanted")
+
+
+  }
 }
