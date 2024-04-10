@@ -27,6 +27,14 @@ class Party (var member1:Option[Attributes],var member2:Option[Attributes],var m
    * Returns the amount of party members alive
    * If it return 0,it is because the party has been defeated
    *
+   * EXCEPTION: if there is no one in the party, it will return 0, assuming the party was defeated
+   *
+   * @example
+   * var party = new Party(Some(guerrero),Some(ninja),None,None,None)
+   * var alive: Int = party.defeated()
+   * println("The amount of people alive in the party is ${alive}"), should return 2
+   *
+   * @author Diego San Martin
    */
   def defeated():Int = {
     val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
@@ -69,7 +77,5 @@ class Party (var member1:Option[Attributes],var member2:Option[Attributes],var m
     member3=memberArray(2)
     member4=memberArray(3)
     member5=memberArray(4)
-
-
   }
 }

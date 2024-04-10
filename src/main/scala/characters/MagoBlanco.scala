@@ -22,7 +22,5 @@ import attributes.{Attributes, Mage}
 
 
 class MagoBlanco(val name: String,var hp: Int, var defense:Int, var weight: Int, var initialmana: Option[Int]) extends Mage {
-  //*The weapon the white mage is holding*/
   mana= initialmana
-
 }

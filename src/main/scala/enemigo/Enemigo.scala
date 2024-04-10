@@ -13,7 +13,14 @@ import attributes.Attributes
  * @param attack the attack of the enemy
  * @param defense the defense of the enemy
  * @param weight the weight of the enemy
+ *
+ * @example
+ * var enemy = new Enemigo("Fat",20,30,100,150)
+ * println(s"The name of the enemy is ${enemy.name}"), should be "Fat"
+ *
+ * @author Diego San Martin
  */
+
 class Enemigo(val name: String,var hp: Int,var attack: Int,var defense: Int,var weight: Int)extends EnemigoAttributes {
 
 }

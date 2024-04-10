@@ -1,9 +1,9 @@
 package attributes
 
-/**An abstract class for a weapon that includes the methods used for
- * different types of weapons
+/**An abstract class for a character that includes the methods used for
+ * different types of characters
  *
- * The abstract class is defined using the characteristics from thr trait Weapons
+ * The abstract class is defined using the characteristics from the trait Attributes
  *
  * @author Diego San Martin
  */

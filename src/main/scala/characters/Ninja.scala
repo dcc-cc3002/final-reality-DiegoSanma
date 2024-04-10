@@ -19,5 +19,5 @@ import attributes.Character
  */
 
 class Ninja(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character{
-  /** weapon the Ninja is holding*/
+
 }

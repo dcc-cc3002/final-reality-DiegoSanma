@@ -3,15 +3,20 @@ package weapons
 import attributes.Attributes
 import characters.{Guerrero, MagoNegro, Ninja, Paladin}
 
-/**An  class for a weapon
+/**A  class for a weapon
  *
  *A weapon is defined by its name, atkpoints, weight and owner
  *
+ * TO CONSIDER: as the weapon inherits the trait Weapons, it also has mana defined for it,
+ * nevertheless, this attribute is defined as None, so it may not be considered for normal
+ * weapons
  *
  * @tparam name the name of the weapon
  * @tparam atkpoints the attack points of the weapon
  * @tparam weight the weight of the weapon
  * @tparam owner the owner of the weapon
+ *
+ * @constructor creates a new weapon with a name(could be ""), attack points, weight and an owner
  *
  * @author Diego San Martin
  */

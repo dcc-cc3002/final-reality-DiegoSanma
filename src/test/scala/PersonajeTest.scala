@@ -139,6 +139,5 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(magoblanco.weapon.get.isInstanceOf[MagicWeapon],true,"Weapon given is not a Weapon")
         assertEquals(ninja.weapon.get,bow,"Weapon given to ninja is not the bow")
         assertEquals(magoblanco.weapon.get,staff,"Magic Weapon given to white mage is not a staff")
-
     }
 }
