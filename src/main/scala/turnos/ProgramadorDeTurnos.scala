@@ -1,6 +1,6 @@
 package turnos
 
-import attributes.Attributes
+import attributes.{Attributes, Mage}
 import enemigo.Enemigo
 
 import scala.collection.mutable.ArrayBuffer
@@ -18,6 +18,6 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-class ProgramadorDeTurnos (var players: ArrayBuffer[Attributes],var enemies: ArrayBuffer[Enemigo]){
+class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: ArrayBuffer[Enemigo]){
 
 }
