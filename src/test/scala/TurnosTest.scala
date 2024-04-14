@@ -43,4 +43,20 @@ class TurnosTest extends munit.FunSuite{
     turnos = new ProgramadorDeTurnos(jugadores,enemigos)
   }
 
+  test("turnos creation"){
+    assert(turnos.players.isEmpty,"Incorrect players array")
+    assert(turnos.enemies.isEmpty,"Incorrect enemy array")
+  }
+
+  test("adding and removing characters"){
+    turnos.agregar(ninja)
+    assertNotEquals(turnos.players.isEmpty,false,"Player array still is empty")
+    assert(turnos.players(0).isInstanceOf[Ninja],"Player added to the array is not a Ninja")
+    assertEquals(turnos.players(0).asInstanceOf[Ninja],ninja,"The first player is not the expected ninja")
+    turnos.agregar(magonegro)
+    assertEquals(turnos.players(0).asInstanceOf[Ninja],ninja,"The first player is not the expected ninja")
+    assert(turnos.players(0).isInstanceOf[MagoNegro],"Player added to the array is not a Mago Negro")
+    assertEquals(turnos.players(0).asInstanceOf[MagoNegro],magonegro,"The first player is not the expected black mage")
+  }
+
 }
