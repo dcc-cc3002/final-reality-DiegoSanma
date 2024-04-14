@@ -68,6 +68,21 @@ class TurnosTest extends munit.FunSuite{
     turnos.agregar(enemigo1)
     assertEquals(turnos.enemies(0).asInstanceOf[Enemigo],enemigo1,"The first enemy is not the expected enemy")
     assert(turnos.enemies.lift(1).isEmpty)
+
+    turnos.remover(ninja)
+    assert(!(turnos.players.contains(ninja)),"The ninja was not removed")
+    assertEquals(turnos.players(0).asInstanceOf[MagoNegro],magonegro,"The mage wasnt moved to the front")
+    turnos.remover(guerrero)
+    assert(!(turnos.players.contains(guerrero)),"The guerrero should not be added")
+    assertEquals(turnos.players(0).asInstanceOf[MagoNegro],magonegro,"The mage was removed")
+    turnos.agregar(enemigo2)
+    assertEquals(turnos.enemies(1).asInstanceOf[Enemigo],enemigo2,"The second enemy is not the expected enemy")
+    turnos.remover(enemigo1)
+    assert(!(turnos.enemies.contains(enemigo1)),"The enemigo1 was not removed")
+    assertEquals(turnos.enemies(0).asInstanceOf[Enemigo],enemigo2,"The second enemy wasnt moved to the front")
+    turnos.remover(enemigo1)
+    assert(!(turnos.enemies.contains(enemigo1)),"The enemigo1 should not be added")
+    assertEquals(turnos.enemies(0).asInstanceOf[Enemigo],enemigo2,"The second enemy was removed")
   }
 
 }

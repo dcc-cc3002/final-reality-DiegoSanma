@@ -40,5 +40,15 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
         enemies.addOne(added.asInstanceOf[Enemigo])
       }
     }
-  }
+
+    /** A method for removing either players or enemies to the the turn calculator
+     *
+     * The function remover receives a player or enemy and removes it from their corresponding array
+     * It removes him from the array
+     * If that character in not inside the array, the array stays the same
+     */
+
+    def remover(removed: Any): Unit = {
+
+    }
 }
