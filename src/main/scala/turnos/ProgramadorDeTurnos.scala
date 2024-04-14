@@ -106,7 +106,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
     var registro: ArrayBuffer[Int] = ArrayBuffer.fill(players.length + enemies.length)(0)
 
     /** A method that adds a constant value to each character currently in combat*
-     * The function takes a paramater th Integer k, that is added to each action bar
+     * The function takes a parameter th Integer k, that is added to each action bar
      *
      */
      def continuar(k:Int): Unit = {
@@ -115,4 +115,30 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
        }
      }
 
+    /** A parameter that holds the turns in which the combat shall be played out */
+    var turnos: ArrayBuffer[Any] = ArrayBuffer()
+
+    /** A method that checks whether someone has completed their action bar,
+     * signals that the character has done by adding him/her/it to the turn array
+     * and finally restarts their action bar
+     *
+     * If no action bar was completed, then nothing happens
+     */
+
+    def revisionTurno():Unit ={
+      var desempate: ArrayBuffer[(Any,Double)] = ArrayBuffer()
+      var barraMax: ArrayBuffer[(Any,Double)] = Barra()
+      for(i<-0 until registro.length){
+        val dif: Double = registro(i)-barraMax(i)._2
+        if (dif>=0){
+          registro(i)= 0
+          desempate.addOne((barraMax(i)._1,dif))
+        }
+      }
+      for(i<-0 until desempate.length){
+        val veloz: (Any,Double) = desempate.maxBy(_._2)
+        turnos.addOne(veloz._1)
+        desempate.remove(desempate.indexOf(veloz))
+      }
+    }
 }
