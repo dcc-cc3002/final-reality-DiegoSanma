@@ -85,4 +85,35 @@ class TurnosTest extends munit.FunSuite{
     assertEquals(turnos.enemies(0).asInstanceOf[Enemigo],enemigo2,"The second enemy was removed")
   }
 
+  test("cálculo barra de acción") {
+    val barraInicial = turnos.maxBarra()
+    assert(barraInicial.isEmpty)
+    turnos.agregar(ninja)
+    turnos.agregar(paladin)
+    turnos.agregar(magoblanco)
+    turnos.agregar(enemigo1)
+    turnos.agregar(enemigo2)
+
+    val barraAccion = turnos.maxBarra()
+    var barra_ninja: Double = 60
+    var barra_paladin: Double = 120
+    barra_paladin = barra_paladin + 0.5*70
+    var barra_magoblanco : Double = 80
+    barra_magoblanco = barra_magoblanco + 0.5*40
+    var barra_en1: Double = 30
+    var barra_en2: Double = 110
+
+    assertEquals(barraAccion(0),(ninja,barra_ninja))
+    assertEquals(barraAccion(1),(paladin,barra_paladin))
+    assertEquals(barraAccion(2),(magoblanco,barra_magoblanco))
+    assertEquals(barraAccion(3),(enemigo1,barra_en1))
+    assertEquals(barraAccion(4),(enemigo2,barra_en2))
+
+
+
+
+
+
+  }
+
 }

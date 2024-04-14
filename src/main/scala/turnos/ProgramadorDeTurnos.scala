@@ -19,14 +19,14 @@ import scala.collection.mutable.ArrayBuffer
  */
 
 class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: ArrayBuffer[Enemigo]) {
-  /** A method for adding either players or enemies to the the turn calculator
+   /** A method for adding either players or enemies to the the turn calculator
    *
    * The function agregar receives a player or enemy and adds it to its corresponding array
    * It adds the corresponding player to the end of their array
    * If that character is already inside the array, no one is added adn the array stays the same
    */
 
-  def agregar(added: Any): Unit = {
+    def agregar(added: Any): Unit = {
     if (!(added.isInstanceOf[Attributes]) || !(added.isInstanceOf[Enemigo])) {
       return
     }
@@ -65,5 +65,36 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
           enemies.remove(index)
         }
       }
+    }
+
+
+    /** A method that calculates the action bar for each character in combat
+     *
+     * The function returns a buffer array with the tuple of the character and their action bar
+     *
+     * The action bar is calculated differently for enemies and players
+     * For players it is equal to their weight added with half their weapon´s weight
+     * For enemies, it is equal to their weight
+     *
+     */
+
+
+    def maxBarra():ArrayBuffer[(Any,Double)] ={
+        var barraMaxima: ArrayBuffer[(Any,Double)] = ArrayBuffer()
+        for(i <- 0 until players.length){
+          if(players(i).weapon.isDefined) {
+            var barra: Double = players(i).weight + players(i).weapon.get.weight
+            barraMaxima += ((players(i), barra): (Any, Double))
+          }
+          else{
+            var barra: Double = players(i).weight
+            barraMaxima += ((players(i), barra): (Any, Double))
+          }
+        }
+        for(i <- 0 until enemies.length)  {
+          var barra: Double = enemies(i).weight
+          barraMaxima += ((enemies(i), barra): (Any, Double))
+      }
+      return barraMaxima
     }
 }
