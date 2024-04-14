@@ -18,7 +18,7 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: ArrayBuffer[Enemigo]){
+class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: ArrayBuffer[Enemigo]) {
   /** A method for adding either players or enemies to the the turn calculator
    *
    * The function agregar receives a player or enemy and adds it to its corresponding array
@@ -27,10 +27,10 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
    */
 
   def agregar(added: Any): Unit = {
-    if(!(added.isInstanceOf[Attributes]) || !(added.isInstanceOf[Enemigo])){
+    if (!(added.isInstanceOf[Attributes]) || !(added.isInstanceOf[Enemigo])) {
       return
     }
-    if(added.isInstanceOf[Attributes]) {
+    if (added.isInstanceOf[Attributes]) {
       if (!(players.contains(added))) {
         players.addOne(added.asInstanceOf[Attributes])
       }
@@ -40,6 +40,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
         enemies.addOne(added.asInstanceOf[Enemigo])
       }
     }
+  }
 
     /** A method for removing either players or enemies to the the turn calculator
      *
@@ -48,7 +49,21 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      * If that character in not inside the array, the array stays the same
      */
 
-    def remover(removed: Any): Unit = {
-
+    def sacar(removed: Any): Unit = {
+      if (!(removed.isInstanceOf[Attributes]) || !(removed.isInstanceOf[Enemigo])) {
+        return
+      }
+      if (removed.isInstanceOf[Attributes]) {
+        if ((players.contains(removed))) {
+          val index = players.indexOf(removed)
+          players.remove(index)
+        }
+      }
+      else {
+        if (!(enemies.contains(removed))) {
+          val index = enemies.indexOf(removed)
+          enemies.remove(index)
+        }
+      }
     }
 }
