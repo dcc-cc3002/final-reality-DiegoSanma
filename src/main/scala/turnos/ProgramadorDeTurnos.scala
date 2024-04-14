@@ -74,8 +74,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
 
     /** A method that calculates the action bar for each character in combat
      *
-     * The function returns a buffer array with the tuple of the character, their max action bar
-     * and their action bar at the beginning (everyone starts at 0)
+     * The function returns a buffer array with the tuple of the character and their max action bar
      *
      * The action bar is calculated differently for enemies and players
      * For players it is equal to their weight added with half their weapon´s weight
@@ -84,30 +83,25 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      */
 
 
-    def Barra():ArrayBuffer[(Any,Double,Int)] ={
-        var barraMaxima: ArrayBuffer[(Any,Double,Int)] = ArrayBuffer()
+    def Barra():ArrayBuffer[(Any,Double)] ={
+        var barraMaxima: ArrayBuffer[(Any,Double)] = ArrayBuffer()
         for(i <- 0 until players.length){
           if(players(i).weapon.isDefined) {
             var barra: Double = players(i).weight + players(i).weapon.get.weight
-            barraMaxima += ((players(i), barra,0): (Any, Double,Int))
+            barraMaxima += ((players(i), barra): (Any, Double))
           }
           else{
             var barra: Double = players(i).weight
-            barraMaxima += ((players(i), barra,0): (Any, Double,Int))
+            barraMaxima += ((players(i), barra): (Any, Double))
           }
         }
         for(i <- 0 until enemies.length)  {
           var barra: Double = enemies(i).weight
-          barraMaxima += ((enemies(i), barra,0): (Any, Double,Int))
+          barraMaxima += ((enemies(i), barra): (Any, Double))
       }
       return barraMaxima
     }
 
-    /** A paramter that holds the values of the action bars during combat*/
-    var registro = ArrayBuffer.fill(players.length + enemies.length)(0)
-
-    /** A method that begins the combat sequence
-     *
-     */
-
+    /** A paramter that holds the values for everyone´s action bar during combat */
+    var registro: ArrayBuffer[Int] = ArrayBuffer.fill(players.length + enemies.length)(0)
 }

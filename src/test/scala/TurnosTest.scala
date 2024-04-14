@@ -113,11 +113,6 @@ class TurnosTest extends munit.FunSuite{
     assertEquals(barraAccion(2)._2,barra_magoblanco)
     assertEquals(barraAccion(3)._2,barra_en1)
     assertEquals(barraAccion(4)._2,barra_en2)
-    assertEquals(barraAccion(0)._3,0)
-    assertEquals(barraAccion(1)._3,0)
-    assertEquals(barraAccion(2)._3,0)
-    assertEquals(barraAccion(3)._3,0)
-    assertEquals(barraAccion(4)._3,0)
 
 
 
