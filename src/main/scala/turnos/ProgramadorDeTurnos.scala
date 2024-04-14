@@ -102,6 +102,17 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
       return barraMaxima
     }
 
-    /** A paramter that holds the values for everyone´s action bar during combat */
+    /** A paramater that holds the values for everyone´s action bar during combat */
     var registro: ArrayBuffer[Int] = ArrayBuffer.fill(players.length + enemies.length)(0)
+
+    /** A method that adds a constant value to each character currently in combat*
+     * The function takes a paramater th Integer k, that is added to each action bar
+     *
+     */
+     def continuar(k:Int): Unit = {
+       for(i<-0 until registro.length){
+          registro(i) = registro(i) + k
+       }
+     }
+
 }

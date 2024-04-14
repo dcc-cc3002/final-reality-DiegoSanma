@@ -113,13 +113,23 @@ class TurnosTest extends munit.FunSuite{
     assertEquals(barraAccion(2)._2,barra_magoblanco)
     assertEquals(barraAccion(3)._2,barra_en1)
     assertEquals(barraAccion(4)._2,barra_en2)
+  }
 
-
-
-
-
-
-
+  test("registro y suma de k"){
+    assertEquals(0,turnos.registro.length,"Registro was not initialized correctly")
+    turnos.agregar(ninja)
+    turnos.agregar(guerrero)
+    turnos.agregar(magoblanco)
+    turnos.agregar(enemigo1)
+    turnos.agregar(enemigo2)
+    assertEquals(5,turnos.registro.length,"Registro is not as long as the amount of characters in combat")
+    for(i<-0 until turnos.registro.length) {
+      assertEquals(0, turnos.registro(i), "The i action bar was not initialized correctly")
+    }
+    turnos.continuar(10)
+    for(i<-0 until turnos.registro.length){
+      assertEquals(10,turnos.registro(i),"The i action bar was not added k correctly")
+    }
   }
 
 }
