@@ -33,11 +33,13 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
     if (added.isInstanceOf[Attributes]) {
       if (!(players.contains(added))) {
         players.addOne(added.asInstanceOf[Attributes])
+        registro.addOne(0)
       }
     }
     else {
       if (!(enemies.contains(added))) {
         enemies.addOne(added.asInstanceOf[Enemigo])
+        registro.addOne(0)
       }
     }
   }
@@ -57,12 +59,14 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
         if ((players.contains(removed))) {
           val index = players.indexOf(removed)
           players.remove(index)
+          registro.remove(index)
         }
       }
       else {
         if (!(enemies.contains(removed))) {
           val index = enemies.indexOf(removed)
           enemies.remove(index)
+          registro.remove(index)
         }
       }
     }
@@ -70,7 +74,8 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
 
     /** A method that calculates the action bar for each character in combat
      *
-     * The function returns a buffer array with the tuple of the character and their action bar
+     * The function returns a buffer array with the tuple of the character, their max action bar
+     * and their action bar at the beginning (everyone starts at 0)
      *
      * The action bar is calculated differently for enemies and players
      * For players it is equal to their weight added with half their weapon´s weight
@@ -79,22 +84,30 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      */
 
 
-    def maxBarra():ArrayBuffer[(Any,Double)] ={
-        var barraMaxima: ArrayBuffer[(Any,Double)] = ArrayBuffer()
+    def Barra():ArrayBuffer[(Any,Double,Int)] ={
+        var barraMaxima: ArrayBuffer[(Any,Double,Int)] = ArrayBuffer()
         for(i <- 0 until players.length){
           if(players(i).weapon.isDefined) {
             var barra: Double = players(i).weight + players(i).weapon.get.weight
-            barraMaxima += ((players(i), barra): (Any, Double))
+            barraMaxima += ((players(i), barra,0): (Any, Double,Int))
           }
           else{
             var barra: Double = players(i).weight
-            barraMaxima += ((players(i), barra): (Any, Double))
+            barraMaxima += ((players(i), barra,0): (Any, Double,Int))
           }
         }
         for(i <- 0 until enemies.length)  {
           var barra: Double = enemies(i).weight
-          barraMaxima += ((enemies(i), barra): (Any, Double))
+          barraMaxima += ((enemies(i), barra,0): (Any, Double,Int))
       }
       return barraMaxima
     }
+
+    /** A paramter that holds the values of the action bars during combat*/
+    var registro = ArrayBuffer.fill(players.length + enemies.length)(0)
+
+    /** A method that begins the combat sequence
+     *
+     */
+
 }

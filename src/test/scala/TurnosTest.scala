@@ -86,7 +86,7 @@ class TurnosTest extends munit.FunSuite{
   }
 
   test("cálculo barra de acción") {
-    val barraInicial = turnos.maxBarra()
+    val barraInicial = turnos.Barra()
     assert(barraInicial.isEmpty)
     turnos.agregar(ninja)
     turnos.agregar(paladin)
@@ -94,7 +94,7 @@ class TurnosTest extends munit.FunSuite{
     turnos.agregar(enemigo1)
     turnos.agregar(enemigo2)
 
-    val barraAccion = turnos.maxBarra()
+    val barraAccion = turnos.Barra()
     var barra_ninja: Double = 60
     var barra_paladin: Double = 120
     barra_paladin = barra_paladin + 0.5*70
@@ -103,11 +103,22 @@ class TurnosTest extends munit.FunSuite{
     var barra_en1: Double = 30
     var barra_en2: Double = 110
 
-    assertEquals(barraAccion(0),(ninja,barra_ninja))
-    assertEquals(barraAccion(1),(paladin,barra_paladin))
-    assertEquals(barraAccion(2),(magoblanco,barra_magoblanco))
-    assertEquals(barraAccion(3),(enemigo1,barra_en1))
-    assertEquals(barraAccion(4),(enemigo2,barra_en2))
+    assertEquals(barraAccion(0)._1,ninja)
+    assertEquals(barraAccion(1)._1,paladin)
+    assertEquals(barraAccion(2)._1,magoblanco)
+    assertEquals(barraAccion(3)._1,enemigo1)
+    assertEquals(barraAccion(4)._1,enemigo2)
+    assertEquals(barraAccion(0)._2,barra_ninja)
+    assertEquals(barraAccion(1)._2,barra_paladin)
+    assertEquals(barraAccion(2)._2,barra_magoblanco)
+    assertEquals(barraAccion(3)._2,barra_en1)
+    assertEquals(barraAccion(4)._2,barra_en2)
+    assertEquals(barraAccion(0)._3,0)
+    assertEquals(barraAccion(1)._3,0)
+    assertEquals(barraAccion(2)._3,0)
+    assertEquals(barraAccion(3)._3,0)
+    assertEquals(barraAccion(4)._3,0)
+
 
 
 
