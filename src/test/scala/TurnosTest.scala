@@ -50,7 +50,7 @@ class TurnosTest extends munit.FunSuite{
 
   test("adding and removing characters"){
     turnos.agregar(ninja)
-    assertNotEquals(turnos.players.isEmpty,false,"Player array still is empty")
+    assertEquals(turnos.players.isEmpty,false,"Player array still is empty")
     assert(turnos.players(0).isInstanceOf[Ninja],"Player added to the array is not a Ninja")
     assertEquals(turnos.players(0).asInstanceOf[Ninja],ninja,"The first player is not the expected ninja")
     turnos.agregar(magonegro)
@@ -58,7 +58,7 @@ class TurnosTest extends munit.FunSuite{
     assert(turnos.players(1).isInstanceOf[MagoNegro],"Player added to the array is not a Mago Negro")
     assertEquals(turnos.players(1).asInstanceOf[MagoNegro],magonegro,"The second player is not the expected black mage")
     turnos.agregar(enemigo1)
-    assertNotEquals(turnos.enemies.isEmpty,false,"Enemy array still is empty")
+    assertEquals(turnos.enemies.isEmpty,false,"Enemy array still is empty")
     assert(turnos.enemies(0).isInstanceOf[Enemigo],"Enemy added to the array is not a Enemigo")
     assertEquals(turnos.enemies(0).asInstanceOf[Enemigo],enemigo1,"The first enemy is not the expected enemy")
     turnos.agregar(ninja)

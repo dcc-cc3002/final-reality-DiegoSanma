@@ -55,7 +55,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      */
 
     def sacar(removed: Any): Unit = {
-      if (!(removed.isInstanceOf[Attributes]) || !(removed.isInstanceOf[Enemigo])) {
+      if (!(removed.isInstanceOf[Attributes]) && !(removed.isInstanceOf[Enemigo])) {
         return
       }
       if (removed.isInstanceOf[Attributes]) {
@@ -66,7 +66,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
         }
       }
       else {
-        if (!(enemies.contains(removed))) {
+        if ((enemies.contains(removed))) {
           val index = enemies.indexOf(removed)
           enemies.remove(index)
           this.registro.remove(index)
