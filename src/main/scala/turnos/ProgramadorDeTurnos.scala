@@ -19,7 +19,10 @@ import scala.collection.mutable.ArrayBuffer
  */
 
 class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: ArrayBuffer[Enemigo]) {
-   /** A method for adding either players or enemies to the the turn calculator
+  /** A paramater that holds the values for everyone´s action bar during combat */
+  var registro: ArrayBuffer[Int] = ArrayBuffer()
+
+  /** A method for adding either players or enemies to the the turn calculator
    *
    * The function agregar receives a player or enemy and adds it to its corresponding array
    * It adds the corresponding player to the end of their array
@@ -27,19 +30,19 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
    */
 
     def agregar(added: Any): Unit = {
-    if (!(added.isInstanceOf[Attributes]) || !(added.isInstanceOf[Enemigo])) {
+    if (!(added.isInstanceOf[Attributes]) && !(added.isInstanceOf[Enemigo])) {
       return
     }
     if (added.isInstanceOf[Attributes]) {
-      if (!(players.contains(added))) {
+      if (!(players.contains (added))) {
         players.addOne(added.asInstanceOf[Attributes])
-        registro.addOne(0)
+        this.registro += 1
       }
     }
     else {
       if (!(enemies.contains(added))) {
         enemies.addOne(added.asInstanceOf[Enemigo])
-        registro.addOne(0)
+        this.registro += 1
       }
     }
   }
@@ -59,14 +62,14 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
         if ((players.contains(removed))) {
           val index = players.indexOf(removed)
           players.remove(index)
-          registro.remove(index)
+          this.registro.remove(index)
         }
       }
       else {
         if (!(enemies.contains(removed))) {
           val index = enemies.indexOf(removed)
           enemies.remove(index)
-          registro.remove(index)
+          this.registro.remove(index)
         }
       }
     }
@@ -102,16 +105,13 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
       return barraMaxima
     }
 
-    /** A paramater that holds the values for everyone´s action bar during combat */
-    var registro: ArrayBuffer[Int] = ArrayBuffer.fill(players.length + enemies.length)(0)
-
     /** A method that adds a constant value to each character currently in combat*
      * The function takes a parameter th Integer k, that is added to each action bar
      *
      */
      def continuar(k:Int): Unit = {
        for(i<-0 until registro.length){
-          registro(i) = registro(i) + k
+          this.registro(i) = this.registro(i) + k
        }
      }
 
@@ -128,16 +128,16 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
     def revisionTurno():Unit ={
       var desempate: ArrayBuffer[(Any,Double)] = ArrayBuffer()
       var barraMax: ArrayBuffer[(Any,Double)] = Barra()
-      for(i<-0 until registro.length){
-        val dif: Double = registro(i)-barraMax(i)._2
+      for(i<-0 until this.registro.length){
+        val dif: Double = this.registro(i)-barraMax(i)._2
         if (dif>=0){
-          registro(i)= 0
+          this.registro(i)= 0
           desempate.addOne((barraMax(i)._1,dif))
         }
       }
       for(i<-0 until desempate.length){
         val orden: (Any,Double) = desempate.maxBy(_._2)
-        turnos.addOne(orden._1)
+        this.turnos.addOne(orden._1)
         desempate.remove(desempate.indexOf(orden))
       }
     }
