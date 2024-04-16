@@ -126,19 +126,18 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      */
 
     def revisionTurno():Unit ={
-      var desempate: ArrayBuffer[(Any,Double)] = ArrayBuffer()
+      var pasados: ArrayBuffer[(Any,Double)] = ArrayBuffer()
       var barraMax: ArrayBuffer[(Any,Double)] = Barra()
-      for(i<-0 until this.registro.length-1){
+      for(i<-0 until this.registro.length){
         val dif: Double = this.registro(i)-barraMax(i)._2
         if (dif>=0){
           this.registro(i)= 0
-          desempate.addOne((barraMax(i)._1,dif))
+          pasados.addOne((barraMax(i)._1,dif))
         }
       }
-      for(i<-0 until desempate.length-1){
-        val orden: (Any,Double) = desempate.maxBy(_._2)
-        this.turnos.addOne(orden._1)
-        desempate.remove(desempate.indexOf(orden))
+      var desempate: ArrayBuffer[(Any,Double)] = pasados.sortBy(_._2).reverse
+      for((element,dif)<-desempate){
+        turnos.addOne(element)
       }
     }
 }

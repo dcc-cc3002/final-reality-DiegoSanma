@@ -153,14 +153,17 @@ class TurnosTest extends munit.FunSuite{
 
     assert(turnos.turnos.isEmpty)
     turnos.continuar(25)
+    turnos.revisionTurno()
     assert(turnos.turnos.isEmpty)
 
     turnos.continuar(25)
+    turnos.revisionTurno()
     assert(turnos.turnos.nonEmpty)
     assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
     assertEquals(turnos.registro(3),0)
 
     turnos.continuar(30)
+    turnos.revisionTurno()
     assert(turnos.turnos(0).isInstanceOf[Enemigo])
     assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
     assert(turnos.turnos(1).isInstanceOf[Ninja])
@@ -170,13 +173,14 @@ class TurnosTest extends munit.FunSuite{
     assertEquals(turnos.registro(3),0)
 
     turnos.continuar(50)
+    turnos.revisionTurno()
     assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
     assertEquals(turnos.turnos(1).asInstanceOf[Ninja],ninja)
     assertEquals(turnos.turnos(2).asInstanceOf[Enemigo],enemigo1)
     assertEquals(turnos.turnos(3).asInstanceOf[MagoNegro],magonegro)
     assertEquals(turnos.registro(2),0)
-    assertEquals(turnos.turnos(4).asInstanceOf[Enemigo],enemigo1)
-    assertEquals(turnos.turnos(5).asInstanceOf[Enemigo],enemigo2)
+    assertEquals(turnos.turnos(4).asInstanceOf[Enemigo],enemigo2)
+    assertEquals(turnos.turnos(5).asInstanceOf[Enemigo],enemigo1)
 
 
 
