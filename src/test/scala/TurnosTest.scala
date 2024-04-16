@@ -130,6 +130,11 @@ class TurnosTest extends munit.FunSuite{
     for(i<-0 until turnos.registro.length){
       assertEquals(10,turnos.registro(i),"The i action bar was not added k correctly")
     }
+    turnos.continuar(120)
+    for(i<-0 until turnos.registro.length){
+      assertEquals(130,turnos.registro(i),"The i action bar was not added k correctly")
+    }
+
   }
 
   test("revision de turnos"){
@@ -138,6 +143,41 @@ class TurnosTest extends munit.FunSuite{
     turnos.agregar(magonegro)
     turnos.agregar(enemigo1)
     turnos.agregar(enemigo2)
+
+    var barra_ninja: Double = 60
+    var barra_paladin: Double = 155
+    var barra_magonegro: Double = 100
+    var barra_en1: Double = 30
+    var barra_en2: Double = 110
+
+    assert(turnos.turnos.isEmpty)
+    turnos.continuar(25)
+    assert(turnos.turnos.isEmpty)
+
+    turnos.continuar(25)
+    assert(turnos.turnos.nonEmpty)
+    assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.registro(3),0)
+
+    turnos.continuar(30)
+    assert(turnos.turnos(0).isInstanceOf[Enemigo])
+    assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
+    assert(turnos.turnos(1).isInstanceOf[Ninja])
+    assertEquals(turnos.turnos(1).asInstanceOf[Ninja],ninja)
+    assertEquals(turnos.registro(0),0)
+    assertEquals(turnos.turnos(2).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.registro(3),0)
+
+    turnos.continuar(50)
+    assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.turnos(1).asInstanceOf[Ninja],ninja)
+    assertEquals(turnos.turnos(2).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.turnos(3).asInstanceOf[MagoNegro],magonegro)
+    assertEquals(turnos.registro(2),0)
+    assertEquals(turnos.turnos(4).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.turnos(5).asInstanceOf[Enemigo],enemigo2)
+
+
 
   }
 
