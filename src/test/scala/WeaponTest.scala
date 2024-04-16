@@ -58,6 +58,9 @@ class WeaponTest extends munit.FunSuite {
     assertEquals(magonegro.weight,supposed_mowner.weight,"Magic Weapon not given owner")
     assertEquals(magonegro.mana,supposed_mowner.mana,"Magic Weapon not given owner")
 
+    assertEquals(paladin.weapon.get,weapon,"Paladin does not have expected weapon")
+    assertEquals(magonegro.weapon.get,magicweapon,"Black Mage not given expected weapon")
+
 
   }
 

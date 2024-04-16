@@ -136,9 +136,9 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
         }
       }
       for(i<-0 until desempate.length){
-        val veloz: (Any,Double) = desempate.maxBy(_._2)
-        turnos.addOne(veloz._1)
-        desempate.remove(desempate.indexOf(veloz))
+        val orden: (Any,Double) = desempate.maxBy(_._2)
+        turnos.addOne(orden._1)
+        desempate.remove(desempate.indexOf(orden))
       }
     }
 }

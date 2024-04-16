@@ -133,6 +133,11 @@ class TurnosTest extends munit.FunSuite{
   }
 
   test("revision de turnos"){
+    turnos.agregar(ninja)
+    turnos.agregar(paladin)
+    turnos.agregar(magonegro)
+    turnos.agregar(enemigo1)
+    turnos.agregar(enemigo2)
 
   }
 
