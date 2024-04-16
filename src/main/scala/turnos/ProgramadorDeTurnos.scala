@@ -36,13 +36,13 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
     if (added.isInstanceOf[Attributes]) {
       if (!(players.contains (added))) {
         players.addOne(added.asInstanceOf[Attributes])
-        this.registro += 1
+        this.registro.addOne(0)
       }
     }
     else {
       if (!(enemies.contains(added))) {
         enemies.addOne(added.asInstanceOf[Enemigo])
-        this.registro += 1
+        this.registro.addOne(0)
       }
     }
   }
@@ -128,14 +128,14 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
     def revisionTurno():Unit ={
       var desempate: ArrayBuffer[(Any,Double)] = ArrayBuffer()
       var barraMax: ArrayBuffer[(Any,Double)] = Barra()
-      for(i<-0 until this.registro.length){
+      for(i<-0 until this.registro.length-1){
         val dif: Double = this.registro(i)-barraMax(i)._2
         if (dif>=0){
           this.registro(i)= 0
           desempate.addOne((barraMax(i)._1,dif))
         }
       }
-      for(i<-0 until desempate.length){
+      for(i<-0 until desempate.length-1){
         val orden: (Any,Double) = desempate.maxBy(_._2)
         this.turnos.addOne(orden._1)
         desempate.remove(desempate.indexOf(orden))

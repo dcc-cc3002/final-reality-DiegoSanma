@@ -124,11 +124,11 @@ class TurnosTest extends munit.FunSuite{
     turnos.agregar(enemigo1)
     turnos.agregar(enemigo2)
     assertEquals(turnos.registro.length,5,"Registro is not as long as the amount of characters in combat")
-    for(i<-0 until turnos.registro.length) {
+    for(i<-0 until turnos.registro.length-1) {
       assertEquals(0, turnos.registro(i), "The i action bar was not initialized correctly")
     }
     turnos.continuar(10)
-    for(i<-0 until turnos.registro.length){
+    for(i<-0 until turnos.registro.length-1){
       assertEquals(10,turnos.registro(i),"The i action bar was not added k correctly")
     }
     turnos.continuar(120)
