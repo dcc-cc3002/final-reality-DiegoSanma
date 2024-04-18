@@ -117,7 +117,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      }
 
     /** A parameter that holds the turns in which the combat shall be played out */
-    var turnos: ArrayBuffer[Any] = ArrayBuffer()
+    var turnos: ArrayBuffer[Entidad] = ArrayBuffer()
 
     /** A method that checks whether someone has completed their action bar,
      * signals that the character has done by adding him/her/it to the turn array
@@ -139,6 +139,25 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
       var desempate: ArrayBuffer[(Entidad,Double)] = pasados.sortBy(_._2).reverse
       for((element,dif)<-desempate){
         turnos.addOne(element)
+      }
+    }
+
+    /**A method that returns whose turn it is during a combat sequence
+     * Also removes entity from the turn array, so next time this function is called,
+     * will return next entity in line
+     *
+     * If no one has completed their action bar and the turnos array is empty, the function returns None
+     *
+     */
+
+    def next_turn():Option[Entidad]={
+      if(this.turnos.isEmpty){
+        return None
+      }
+      else{
+        var my_turn: Entidad = turnos(0)
+        this.turnos.remove(0)
+        return(Some(my_turn))
       }
     }
 }

@@ -181,9 +181,41 @@ class TurnosTest extends munit.FunSuite{
     assertEquals(turnos.registro(2),0)
     assertEquals(turnos.turnos(4).asInstanceOf[Enemigo],enemigo2)
     assertEquals(turnos.turnos(5).asInstanceOf[Enemigo],enemigo1)
+  }
 
+  test("next in line"){
+    turnos.agregar(ninja)
+    turnos.agregar(paladin)
+    turnos.agregar(magonegro)
+    turnos.agregar(enemigo1)
+    turnos.agregar(enemigo2)
+    turnos.continuar(120)
+    turnos.revisionTurno()
+    assertEquals(turnos.turnos(0),enemigo1,"Turnos array doesnt have en1 first")
+    assertEquals(turnos.turnos(1),ninja,"Turnos array doesnt have ninja second")
+    assertEquals(turnos.turnos(2),magonegro,"Turnos array doesnt have black mage third")
+    assertEquals(turnos.turnos(3),enemigo2,"Turnos array doesnt have  en2 fourth")
 
+    val first = turnos.next_turn()
+    assert(first.isDefined)
+    assert(first.get.isInstanceOf[Enemigo])
+    assertEquals(first.get,enemigo1)
 
+    val first2 = turnos.next_turn()
+    assert(first2.isDefined)
+    assert(first2.get.isInstanceOf[Attributes])
+    assertEquals(first2.get,ninja)
+
+    val first3 = turnos.next_turn()
+    assert(first3.isDefined)
+    assert(first3.get.isInstanceOf[Attributes])
+    assertEquals(first3.get,magonegro)
+
+    val first4 = turnos.next_turn()
+    assert(first4.isDefined)
+    assert(first4.get.isInstanceOf[Enemigo])
+    assertEquals(first4.get,enemigo2)
+    assert(turnos.turnos.isEmpty)
   }
 
 }
