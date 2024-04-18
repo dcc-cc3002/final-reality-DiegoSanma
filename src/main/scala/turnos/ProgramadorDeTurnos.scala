@@ -2,6 +2,7 @@ package turnos
 
 import attributes.{Attributes, Mage}
 import enemigo.Enemigo
+import entity.Entidad
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -29,7 +30,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
    * If that character is already inside the array, no one is added adn the array stays the same
    */
 
-    def agregar(added: Any): Unit = {
+    def agregar(added: Entidad): Unit = {
     if (!(added.isInstanceOf[Attributes]) && !(added.isInstanceOf[Enemigo])) {
       return
     }
@@ -54,7 +55,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      * If that character in not inside the array, the array stays the same
      */
 
-    def sacar(removed: Any): Unit = {
+    def sacar(removed: Entidad): Unit = {
       if (!(removed.isInstanceOf[Attributes]) && !(removed.isInstanceOf[Enemigo])) {
         return
       }
@@ -86,21 +87,21 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      */
 
 
-    def Barra():ArrayBuffer[(Any,Double)] ={
-        var barraMaxima: ArrayBuffer[(Any,Double)] = ArrayBuffer()
+    def Barra():ArrayBuffer[(Entidad,Double)] ={
+        var barraMaxima: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
         for(i <- 0 until players.length){
           if(players(i).weapon.isDefined) {
             var barra: Double = players(i).weight + 0.5*players(i).weapon.get.weight
-            barraMaxima += ((players(i), barra): (Any, Double))
+            barraMaxima += ((players(i), barra): (Entidad, Double))
           }
           else{
             var barra: Double = players(i).weight
-            barraMaxima += ((players(i), barra): (Any, Double))
+            barraMaxima += ((players(i), barra): (Entidad, Double))
           }
         }
         for(i <- 0 until enemies.length)  {
           var barra: Double = enemies(i).weight
-          barraMaxima += ((enemies(i), barra): (Any, Double))
+          barraMaxima += ((enemies(i), barra): (Entidad, Double))
       }
       return barraMaxima
     }
@@ -126,8 +127,8 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      */
 
     def revisionTurno():Unit ={
-      var pasados: ArrayBuffer[(Any,Double)] = ArrayBuffer()
-      var barraMax: ArrayBuffer[(Any,Double)] = Barra()
+      var pasados: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
+      var barraMax: ArrayBuffer[(Entidad,Double)] = Barra()
       for(i<-0 until this.registro.length){
         val dif: Double = this.registro(i)-barraMax(i)._2
         if (dif>=0){
@@ -135,7 +136,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
           pasados.addOne((barraMax(i)._1,dif))
         }
       }
-      var desempate: ArrayBuffer[(Any,Double)] = pasados.sortBy(_._2).reverse
+      var desempate: ArrayBuffer[(Entidad,Double)] = pasados.sortBy(_._2).reverse
       for((element,dif)<-desempate){
         turnos.addOne(element)
       }
