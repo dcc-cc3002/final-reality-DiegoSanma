@@ -2,6 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
+import weapons.Weapons
 
 /** A class representing a warrior(guerrero)
  *
@@ -11,14 +12,15 @@ import attributes.Character
  * @param hp the hitpoints of the guerrero
  * @param defense the defense value of the guerrero
  * @param weight the weight of the guerrero
+ * @param weapon the weapon the guerrero is holding
  *
  * @constructor creates a new guerrero with a name, and values for hp, defense and weight
  *
  * @author Diego San Martin
  *
  */
-class Guerrero(val name: String,var hp: Int, var defense:Int, var weight: Int) extends
-  Character{
+class Guerrero(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[Weapons]) extends
+  Character(name,hp,defense,weight,weapon){
   /** weapon the Guerrero is holding*/
 
 }

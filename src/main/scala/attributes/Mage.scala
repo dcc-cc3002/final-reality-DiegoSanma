@@ -11,9 +11,6 @@ import weapons.Weapons
  */
 
 abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var weapon:Option[Weapons]=None) extends Attributes {
-  def this(name:String,hp:Int,defense:Int,weight:Int,mana:Int,weapon:Option[Weapons]){
-    this(name,hp,defense,weight,mana,weapon)
-  }
   override def getMana(): Option[Int] = {
     Some(this.mana)
   }

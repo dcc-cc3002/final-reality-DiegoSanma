@@ -14,9 +14,6 @@ import weapons.Weapons
 abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private var weapon:Option[Weapons]=None)
   extends AEntidad(name,hp,defense,weight) with Attributes {
 
-  def this(name:String,hp:Int,defense:Int,weight:Int,weapon:Option[Weapons]){
-    this(name,hp,defense,weight,weapon)
-  }
   override def getMana(): Option[Int] = {
     None
   }

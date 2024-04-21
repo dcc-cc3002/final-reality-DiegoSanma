@@ -2,6 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
+import weapons.Weapons
 
 import java.security.InvalidParameterException
 
@@ -13,6 +14,7 @@ import java.security.InvalidParameterException
  * @param hp the hitpoints of the paladin
  * @param defense the defense value of the paladin
  * @param weight the weight of the paladin
+ * @param weapon the wepaon the paladin is holding
  *
  * @constructor creates a new paladin with a name, and values for hp, defense and weight
  *
@@ -21,6 +23,6 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(val name: String,var hp: Int, var defense:Int, var weight: Int) extends Character {
+class Paladin(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[Weapons]) extends Character(name,hp,defense,weight,weapon) {
 
 }
