@@ -19,5 +19,9 @@ import attributes.Attributes
 abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, owner:Option[Attributes], private var magicpoints:Int)
   extends AWeapon(name,atkpoints,weight,owner) {
 
+  def getMagicpts(): Unit ={
+    this.magicpoints
+  }
+
 
 }

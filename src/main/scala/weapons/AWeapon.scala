@@ -22,9 +22,25 @@ import characters.{Guerrero, MagoNegro, Ninja, Paladin}
  */
 
 abstract class AWeapon(private var name:String, private var atkpoints:Int, private var weight:Int, private var owner:Option[Attributes]=None) extends TWeapons {
-  /**Method that gives the weapon to the owner when it was created, and drops the other
+  /** Method that gives the weapon to the owner when it was created, and drops the other
    * If the player that wants to receive the weapon already has one, said weapon is dropped in favour of this one
    */
+
+  override def getWeaponName(): String = {
+    this.name
+  }
+
+  override def getAtkPts(): Int = {
+    this.atkpoints
+  }
+
+  override def getWeaponWeight(): Int = {
+    this.weight
+  }
+
+  override def getOwner(): Attributes = {
+    this.owner.get
+  }
   override def changeOwner(receiver:Option[Attributes]= None): Unit = {
     if(!(receiver.isDefined)){
       if (owner.isDefined) {
