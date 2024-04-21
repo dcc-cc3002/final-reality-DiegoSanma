@@ -11,7 +11,7 @@ import weapons.Weapons
  * @author Diego San Martin
  */
 
-abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private var weapon:Option[Weapons])
+abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private var weapon:Option[Weapons]=None)
   extends AEntidad(name,hp,defense,weight) with Attributes {
 
   def this(name:String,hp:Int,defense:Int,weight:Int,weapon:Option[Weapons]){
