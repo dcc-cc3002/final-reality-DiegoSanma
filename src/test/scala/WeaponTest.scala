@@ -1,5 +1,5 @@
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
+import weapons.{AMagicWeapon, AWeapon, MagicWeapon, TWeapons, Weapon}
 
 
 /**This test is for the weapons the characters hold
@@ -29,7 +29,7 @@ class WeaponTest extends munit.FunSuite {
     weapon = new Weapon("Excalibur",60,70,Some(paladin))
     magicweapon = new MagicWeapon("Palito",20,40,80,Some(magonegro))
     notnamew = new Weapon("",80,90,Some(guerrero))
-    notnamedw = new MagicWeapon("",30,40,50,Some(magoblanco))
+    notnamedw = new MagicWeapon("",30,40,50)
   }
 
   test("weapon creation"){
@@ -56,7 +56,37 @@ class WeaponTest extends munit.FunSuite {
 
     assertEquals(paladin.getWeapon().get,weapon,"Paladin does not have expected weapon")
     assertEquals(magonegro.getWeapon().get,magicweapon,"Black Mage not given expected weapon")
+  }
 
+  test("giving to"){
+    var sword: Weapon = new Weapon("Blade of Truth",60,70)
+    var wood: MagicWeapon = new MagicWeapon("Pinocchio",70,50,50)
+    assert(ninja.getWeapon().isEmpty,"Ninja should not have a weapon")
+    assert(sword.getOwner().isEmpty)
+    sword.giveToOwner(ninja)
+    assert(ninja.getWeapon().isDefined,"Ninja still has no weapon")
+    assertEquals(ninja.getWeapon().get,sword,"Ninja was not given the sword")
+    assert(sword.getOwner().isDefined)
+    assertEquals(sword.getOwner().get,ninja,"Sword does not have ninja as its owner")
+
+    assert(wood.getOwner().isEmpty)
+    wood.giveToOwner(magonegro)
+    assert(magonegro.getWeapon().isDefined,"Mago negro currently has no weapon")
+    assertEquals(magonegro.getWeapon().get,wood,"Black Mage not given wood as weapon")
+    assert(wood.getOwner().isDefined)
+    assertEquals(wood.getOwner().get,magonegro,"Wood does not have Black Mage as its owner")
+  }
+
+  test ("leaving weapon"){
+    assertEquals(paladin.getWeapon().get,weapon,"Paladin currently should have a weapon")
+    weapon.leaveOwner()
+    assert(weapon.getOwner().isEmpty,"Weapon should not have an owner")
+    assert(paladin.getWeapon().isEmpty,"Paladin should not have an owner")
+
+    assertEquals(magonegro.getWeapon().get,magicweapon,"Black Mage should currently have a weapon")
+    magicweapon.leaveOwner()
+    assert(magicweapon.getOwner().isEmpty,"Magic weapon should not have an owner")
+    assert(magonegro.getWeapon().isEmpty,"Black Mage shouldnt have a weapon")
   }
 
 
