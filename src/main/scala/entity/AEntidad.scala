@@ -4,22 +4,7 @@ package entity
  *
  *
  */
-abstract class AEntidad extends Entidad {
-    private var name: String = ""
-    private var hp: Int = 0
-    private var defense: Int = 0
-    private var weight: Int = 0
-
-  /**This constructor of the abstract class, takes all before defined private values
-   */
-    def this(name:String,hp:Int,defense:Int,weight:Int) {
-      this()
-      this.name = name
-      this.hp = hp
-      this.defense = defense
-      this.weight = weight
-    }
-
+abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int) extends Entidad {
     override def getName(): String ={
       this.name
     }
