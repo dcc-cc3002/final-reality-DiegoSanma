@@ -1,6 +1,7 @@
 package enemigo
 
 import attributes.Attributes
+import entity.AEntidad
 
 /**A class that defines an enemy(Enemigo)
  *
@@ -21,6 +22,6 @@ import attributes.Attributes
  * @author Diego San Martin
  */
 
-class Enemigo(val name: String,var hp: Int,var attack: Int,var defense: Int,var weight: Int)extends EnemigoAttributes {
+class Enemigo(val name: String,var hp: Int,var defense: Int,var weight: Int,var attack: Int)extends AEnemigo(name,hp,defense,weight, attack) {
 
 }
