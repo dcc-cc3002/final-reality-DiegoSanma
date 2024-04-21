@@ -2,7 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
-import weapons.Weapons
+import weapons.TWeapons
 
 import java.security.InvalidParameterException
 
@@ -23,6 +23,6 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[Weapons]) extends Character(name,hp,defense,weight,weapon) {
+class Paladin(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]) extends Character(name,hp,defense,weight,weapon) {
 
 }

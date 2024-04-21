@@ -1,6 +1,6 @@
 package attributes
 
-import weapons.Weapons
+import weapons.TWeapons
 
 /**An abstract class for a mage that includes the methods used for both
  * types of mages
@@ -10,16 +10,16 @@ import weapons.Weapons
  * @author Diego San Martin
  */
 
-abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var weapon:Option[Weapons]=None) extends Attributes {
+abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var weapon:Option[TWeapons]=None) extends Attributes {
   override def getMana(): Option[Int] = {
     Some(this.mana)
   }
 
-  override def getWeapon(): Option[Weapons] = {
+  override def getWeapon(): Option[TWeapons] = {
     this.weapon
   }
 
-  override def receiveWeapon(weapon:Weapons): Unit = {
+  override def receiveWeapon(weapon:TWeapons): Unit = {
     this.weapon = Some(weapon)
   }
 

@@ -1,7 +1,7 @@
 package characters
 
 import attributes.{Attributes, Mage}
-import weapons.Weapons
+import weapons.TWeapons
 
 /** A class representing a black mage (mago negro)
  *
@@ -21,5 +21,5 @@ import weapons.Weapons
  *
  */
 
-class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana: Int,weapon:Option[Weapons]) extends Mage(name,hp,defense,weight,mana,weapon){
+class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana: Int,weapon:Option[TWeapons]) extends Mage(name,hp,defense,weight,mana,weapon){
 }

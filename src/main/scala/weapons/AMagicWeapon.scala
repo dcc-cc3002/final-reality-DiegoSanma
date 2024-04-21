@@ -16,8 +16,8 @@ import attributes.Attributes
  *
  * @author Diego San Martin
  */
-abstract class MagicWeapon(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes],private var magicpoints:Int)
-  extends Weapon(name,atkpoints,weight,owner) {
+abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, owner:Option[Attributes], private var magicpoints:Int)
+  extends AWeapon(name,atkpoints,weight,owner) {
 
 
 }

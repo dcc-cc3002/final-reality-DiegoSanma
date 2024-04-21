@@ -2,7 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
-import weapons.Weapons
+import weapons.TWeapons
 
 /** A class representing a warrior(guerrero)
  *
@@ -19,7 +19,7 @@ import weapons.Weapons
  * @author Diego San Martin
  *
  */
-class Guerrero(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[Weapons]) extends
+class Guerrero(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]) extends
   Character(name,hp,defense,weight,weapon){
   /** weapon the Guerrero is holding*/
 

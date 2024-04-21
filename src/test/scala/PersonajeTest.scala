@@ -6,7 +6,7 @@
  */
 
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import weapons.{MagicWeapon, Weapon}
+import weapons.{AMagicWeapon, AWeapon}
 
 
 class PersonajeTest extends munit.FunSuite {
@@ -131,12 +131,12 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(ninja.weapon,None, "No weapon should be held")
         assertEquals(magonegro.weapon,None, "No weapon should be held")
         assertEquals(magoblanco.weapon,None, "No weapon should be held")
-        var bow: Weapon = new Weapon("Legolas",50,30,ninja)
-        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,Some(70),magoblanco)
+        var bow: AWeapon = new AWeapon("Legolas",50,30,ninja)
+        var staff: AMagicWeapon = new AMagicWeapon("Stick of Truth",45,60,Some(70),magoblanco)
         assertEquals(ninja.weapon.isDefined,true,"Weapon was not given")
         assertEquals(magoblanco.weapon.isDefined,true,"Weapon was not given")
-        assertEquals(ninja.weapon.get.isInstanceOf[Weapon],true,"Weapon given is not a Weapon")
-        assertEquals(magoblanco.weapon.get.isInstanceOf[MagicWeapon],true,"Weapon given is not a Weapon")
+        assertEquals(ninja.weapon.get.isInstanceOf[AWeapon],true,"Weapon given is not a Weapon")
+        assertEquals(magoblanco.weapon.get.isInstanceOf[AMagicWeapon],true,"Weapon given is not a Weapon")
         assertEquals(ninja.weapon.get,bow,"Weapon given to ninja is not the bow")
         assertEquals(magoblanco.weapon.get,staff,"Magic Weapon given to white mage is not a staff")
     }

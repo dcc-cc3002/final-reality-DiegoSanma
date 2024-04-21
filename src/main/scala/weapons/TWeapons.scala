@@ -8,7 +8,7 @@ import characters.{Guerrero, MagoNegro, Ninja, Paladin}
  */
 
 
-trait Weapons {
+trait TWeapons {
   def getWeaponName(): String
   def getAtkPts(): Int
   def getWeaponWeight(): Int
