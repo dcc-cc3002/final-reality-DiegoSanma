@@ -19,4 +19,11 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
     this.weapon
   }
 
+  override def receiveWeapon(weapon:Weapons): Unit = {
+    this.weapon = Some(weapon)
+  }
+
+  override def dropWeapon(): Unit = {
+    this.weapon = None
+  }
 }

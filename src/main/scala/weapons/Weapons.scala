@@ -17,5 +17,5 @@ trait Weapons {
 
   def rename(named:String): Unit
 
-  def giveTo(): Unit
+  def changeOwner(receiver:Option[Attributes]=None): Unit
 }

@@ -25,11 +25,21 @@ abstract class Weapon(private var name:String,private var atkpoints:Int,private 
   /**Method that gives the weapon to the owner when it was created, and drops the other
    * If the player that wants to receive the weapon already has one, said weapon is dropped in favour of this one
    */
-  override def giveTo(receiver:Attributes = this.owner.get): Unit = {
-    owner.dropWeapon()
-    owner.receiveWeapon(this)
+  override def changeOwner(receiver:Option[Attributes]= None): Unit = {
+    if(!(receiver.isDefined)){
+      if (owner.isDefined) {
+        this.owner.get.dropWeapon()
+        this.owner = None
+      }
+    }
+    else {
+      if(this.owner!=receiver) {
+        this.owner = receiver
+        this.owner.get.receiveWeapon(this)
+      }
+    }
   }
-  giveTo()
+  changeOwner(this.owner)
   /**Renames the weapon to the name(named) of choice
    *
    * @throws This weapon has already been named $name$, if the weapon has already received a name

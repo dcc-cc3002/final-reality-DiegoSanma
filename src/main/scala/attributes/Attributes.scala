@@ -13,7 +13,7 @@ trait Attributes extends AEntidad{
   def getMana(): Option[Int]
   def getWeapon(): Option[Weapons]
 
-  def receiveWeapon(weap:Weapon): Unit
+  def receiveWeapon(weapon:Weapons): Unit
 
   def dropWeapon(): Unit
 

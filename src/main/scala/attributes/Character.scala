@@ -22,8 +22,24 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private va
     this.weapon
   }
 
-  override def receiveWeapon(): Unit = {
+  override def receiveWeapon(weapon:Weapons): Unit = {
+    if(this.weapon.isDefined) {
+      if (this.weapon.get != weapon) {
+        this.weapon = Some(weapon)
+        weapon.changeOwner(Some(this))
+      }
+    }
+    else{
+      this.weapon = Some(weapon)
+      weapon.changeOwner(Some(this))
+    }
+  }
 
+  override def dropWeapon(): Unit = {
+    if(this.weapon.isDefined){
+      this.weapon.get.changeOwner()
+      this.weapon = None
+    }
   }
 
 
