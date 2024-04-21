@@ -23,6 +23,6 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]) extends Character(name,hp,defense,weight,weapon) {
+class Paladin(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]=None) extends Character(name,hp,defense,weight,weapon) {
 
 }

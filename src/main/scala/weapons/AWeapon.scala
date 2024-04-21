@@ -41,21 +41,24 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
   override def getOwner(): Attributes = {
     this.owner.get
   }
-  override def changeOwner(receiver:Option[Attributes]= None): Unit = {
-    if(!(receiver.isDefined)){
-      if (owner.isDefined) {
-        this.owner.get.dropWeapon()
-        this.owner = None
-      }
+
+  override def giveToOwner(receiver:Attributes): Unit = {
+    this.owner = Some(receiver)
+    receiver.receiveWeapon(this)
+  }
+
+  override def leaveOwner(): Unit = {
+    if(this.owner.isEmpty){
+      return
     }
-    else {
-      if(this.owner!=receiver) {
-        this.owner = receiver
-        this.owner.get.receiveWeapon(this)
-      }
+    else{
+      this.owner.get.dropWeapon()
+      this.owner = None
     }
   }
-  changeOwner(this.owner)
+  if(this.owner.isDefined) {
+    this.giveToOwner(this.owner.get)
+  }
   /**Renames the weapon to the name(named) of choice
    *
    * @throws This weapon has already been named $name$, if the weapon has already received a name

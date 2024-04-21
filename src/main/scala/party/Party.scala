@@ -40,7 +40,7 @@ class Party (var member1:Option[Attributes],var member2:Option[Attributes],var m
     val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
     var alive:Int = 5
     for (mem<-memberArray){
-      val status= if (mem.isDefined) mem.get.hp else 0
+      val status= if (mem.isDefined) mem.get.getHp() else 0
       if (status ==0){
         alive-=1
       }

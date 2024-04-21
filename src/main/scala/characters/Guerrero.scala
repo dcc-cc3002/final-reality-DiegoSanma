@@ -19,7 +19,7 @@ import weapons.TWeapons
  * @author Diego San Martin
  *
  */
-class Guerrero(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]) extends
+class Guerrero(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]=None) extends
   Character(name,hp,defense,weight,weapon){
   /** weapon the Guerrero is holding*/
 

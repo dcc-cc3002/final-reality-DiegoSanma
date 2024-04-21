@@ -1,5 +1,6 @@
 package attributes
 
+import entity.AEntidad
 import weapons.TWeapons
 
 /**An abstract class for a mage that includes the methods used for both
@@ -10,9 +11,9 @@ import weapons.TWeapons
  * @author Diego San Martin
  */
 
-abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var weapon:Option[TWeapons]=None) extends Attributes {
-  override def getMana(): Option[Int] = {
-    Some(this.mana)
+abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var weapon:Option[TWeapons]=None) extends AEntidad(name,hp,defense,weight) with Attributes {
+  def getMana(): Int = {
+    this.mana
   }
 
   override def getWeapon(): Option[TWeapons] = {

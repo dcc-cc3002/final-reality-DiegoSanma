@@ -10,7 +10,7 @@ import weapons.{AWeapon, TWeapons}
  */
 
 trait Attributes extends AEntidad{
-  def getMana(): Option[Int]
+
   def getWeapon(): Option[TWeapons]
 
   def receiveWeapon(weapon:TWeapons): Unit

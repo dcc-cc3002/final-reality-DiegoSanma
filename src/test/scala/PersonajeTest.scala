@@ -6,7 +6,7 @@
  */
 
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import weapons.{AMagicWeapon, AWeapon}
+import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
 
 
 class PersonajeTest extends munit.FunSuite {
@@ -20,124 +20,99 @@ class PersonajeTest extends munit.FunSuite {
         paladin = new Paladin("Diego", 100, 90, 120)
         guerrero = new Guerrero("Lucas", 80, 100, 100)
         ninja = new Ninja("Santiago", 60, 70, 60)
-        magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
-        magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
+        magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
+        magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
     }
 
     test("equal character") {
-        val expected_paladin = new Paladin("Diego", 100, 90, 120)
-        val expected_guerrero = new Guerrero("Lucas", 80, 100, 100)
-        val expected_ninja = new Ninja("Santiago", 60, 70, 60)
-        val expected_magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
-        val expected_magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
+        var pal_name: String = "Diego"
+        var guerrero_name : String = "Lucas"
+        var ninja_name : String = "Santiago"
+        var magonegro_name: String = "Balbontin"
+        var magoblanco_name: String = "Duarte"
+        assertEquals(pal_name,paladin.getName(),"Name not given correctly")
+        assertEquals(guerrero_name,guerrero.getName(),"Name not given correctly")
+        assertEquals(ninja_name,ninja.getName(),"Name not given correctly")
+        assertEquals(magonegro_name,magonegro.getName(),"Name not given correctly")
+        assertEquals(magoblanco_name,magoblanco.getName(),"Name not given correctly")
 
-        assertEquals(expected_guerrero.name, guerrero.name, "Not the same name")
-        assertEquals(expected_paladin.name, paladin.name, "Not the same name")
-        assertEquals(expected_ninja.name, ninja.name, "Not the same name")
-        assertEquals(expected_magonegro.name, magonegro.name, "Not the same name")
-        assertEquals(expected_magoblanco.name, magoblanco.name, "Not the same name")
+        var pal_hp: Int = 100
+        var guerrero_hp : Int =80
+        var ninja_hp : Int = 60
+        var magonegro_hp: Int = 60
+        var magoblanco_hp: Int = 70
+        assertEquals(pal_hp,paladin.getHp(),"HP not given correctly")
+        assertEquals(guerrero_hp,guerrero.getHp(),"HP not given correctly")
+        assertEquals(ninja_hp,ninja.getHp(),"HP not given correctly")
+        assertEquals(magonegro_hp,magonegro.getHp(),"HP not given correctly")
+        assertEquals(magoblanco_hp,magoblanco.getHp(),"HP not given correctly")
 
-        assertEquals("Lucas", guerrero.name, "Not the same name")
-        assertEquals("Diego", paladin.name, "Not the same name")
-        assertEquals("Santiago".name, ninja.name, "Not the same name")
-        assertEquals("Balbontin".name, magonegro.name, "Not the same name")
-        assertEquals("Duarte".name, magoblanco.name, "Not the same name")
+        var pal_defense: Int = 90
+        var guerrero_defense : Int = 100
+        var ninja_defense : Int = 70
+        var magonegro_defense: Int = 50
+        var magoblanco_defense: Int = 60
+        assertEquals(pal_defense,paladin.getDefense(),"Defense not given correctly")
+        assertEquals(guerrero_defense,guerrero.getDefense(),"Defense not given correctly")
+        assertEquals(ninja_defense,ninja.getDefense(),"Defense not given correctly")
+        assertEquals(magonegro_defense,magonegro.getDefense(),"Defense not given correctly")
+        assertEquals(magoblanco_defense,magoblanco.getDefense(),"Defense not given correctly")
 
-        assertEquals(expected_guerrero.hp, guerrero.hp, "Not the same hp")
-        assertEquals(expected_guerrero.weight, guerrero.weight, "Not the same weight")
-        assertEquals(expected_guerrero.defense, guerrero.defense, "Not the same defense")
+        var pal_weight: Int = 120
+        var guerrero_weight : Int = 100
+        var ninja_weight : Int = 60
+        var magonegro_weight: Int = 80
+        var magoblanco_weight: Int = 80
 
-        assertEquals(80, guerrero.hp, "Not the same hp")
-        assertEquals(100, guerrero.weight, "Not the same weight")
-        assertEquals(100, guerrero.defense, "Not the same defense")
+        assertEquals(pal_weight,paladin.getWeight(),"Weight not given correctly")
+        assertEquals(guerrero_weight,guerrero.getWeight(),"Weight not given correctly")
+        assertEquals(ninja_weight,ninja.getWeight(),"Weight not given correctly")
+        assertEquals(magonegro_weight,magonegro.getWeight(),"Weight not given correctly")
+        assertEquals(magoblanco_weight,magoblanco.getWeight(),"Weight not given correctly")
 
-        assertEquals(expected_magonegro.hp, magonegro.hp, "Not the same hp")
-        assertEquals(expected_magonegro.defense, magonegro.defense, "Not the same defense")
-        assertEquals(expected_magonegro.weight, magonegro.weight, "Not the same weight")
-        assertEquals(expected_magonegro.mana, magonegro.mana, "Not the same mana")
-
-        assertEquals(60, magonegro.hp, "Not the same hp")
-        assertEquals(50, magonegro.defense, "Not the same defense")
-        assertEquals(80, magonegro.weight, "Not the same weight")
-        assertEquals(Option(100), (magonegro.mana), "Not the same mana")
+        var magonegro_mana: Int = 100
+        var magoblanco_mana: Int = 90
+        assertEquals(magonegro_mana,magonegro.getMana(),"Mana not given correctly")
+        assertEquals(magoblanco_mana,magoblanco.getMana(),"Mana not given correctly")
     }
 
-    test("simple character comparison") {
-        val statg_paladin = new Paladin("Lucas", 80, 100, 100)
-        val statmn_magoblanco = new MagoBlanco("Balbontin", 60, 50, 80, Some(100))
-
-        assert(!magonegro.equals(magoblanco))
-        assert(!paladin.equals(guerrero))
-        assert(!ninja.equals(paladin))
-        assert(!magoblanco.equals(ninja))
-
-        assert(!guerrero.equals(statg_paladin))
-        assert(!magonegro.equals(statmn_magoblanco))
-    }
-
-    test("character stat comparison") {
-        var paladin_stat_guerrero = new Guerrero("Diego", 100, 90, 120)
-        var mblanco_stat_magonegro = new MagoNegro("Duarte", 70, 60, 80, Some(90))
-        var guerrero_stat_ninja = new Ninja("Lucas", 80, 100, 100)
-
-        assert(!paladin_stat_guerrero.equals(paladin))
-        assertEquals(paladin_stat_guerrero.name, paladin.name)
-        assertEquals(paladin_stat_guerrero.hp, paladin.hp)
-        assertEquals(paladin_stat_guerrero.defense, paladin.defense)
-        assertEquals(paladin_stat_guerrero.weight, paladin.weight)
-
-        assert(!mblanco_stat_magonegro.equals(magoblanco))
-        assertEquals(mblanco_stat_magonegro.mana, magoblanco.mana)
-
-        assertEquals(ninja.hp, magonegro.hp)
-        assertEquals(ninja.weight, magoblanco.defense)
-        assertEquals(paladin.hp, guerrero.weight)
-        assertNotEquals(ninja.hp, paladin.hp)
-        assertNotEquals(magoblanco.mana, magonegro.mana)
-        assertNotEquals(paladin.defense, magonegro.hp)
-    }
-
-    test("stat changing") {
-        val first_paladin = new Paladin("Diego", 90, 100, 130)
-        val first_magonegro = new MagoNegro("Santiago", 50, 60, 85, Some(110))
-
-        assertNotEquals(first_paladin.hp, paladin.hp)
-        assertNotEquals(first_paladin.defense, paladin.defense)
-        assertNotEquals(first_paladin.weight, paladin.weight)
-
-        first_paladin.hp = 100
-        first_paladin.defense = 90
-        first_paladin.weight = 120
-        assertEquals(first_paladin.hp, paladin.hp)
-        assertEquals(first_paladin.defense, paladin.defense)
-        assertEquals(first_paladin.weight, paladin.weight)
-
-        assertNotEquals(first_magonegro.hp, magonegro.hp)
-        assertNotEquals(first_magonegro.defense, magonegro.defense)
-        assertNotEquals(first_magonegro.weight, magonegro.weight)
-
-        first_magonegro.hp = 60
-        first_magonegro.defense = 50
-        first_magonegro.weight = 80
-        first_magonegro.mana = Some(100)
-        assertEquals(first_magonegro.hp, magonegro.hp)
-        assertEquals(first_magonegro.defense, magonegro.defense)
-        assertEquals(first_magonegro.weight, magonegro.weight)
-        assertEquals(first_magonegro.mana,magonegro.mana)
-    }
     test("weapon") {
-        assertEquals(paladin.weapon,None, "No weapon should be held")
-        assertEquals(guerrero.weapon,None, "No weapon should held")
-        assertEquals(ninja.weapon,None, "No weapon should be held")
-        assertEquals(magonegro.weapon,None, "No weapon should be held")
-        assertEquals(magoblanco.weapon,None, "No weapon should be held")
-        var bow: AWeapon = new AWeapon("Legolas",50,30,ninja)
-        var staff: AMagicWeapon = new AMagicWeapon("Stick of Truth",45,60,Some(70),magoblanco)
-        assertEquals(ninja.weapon.isDefined,true,"Weapon was not given")
-        assertEquals(magoblanco.weapon.isDefined,true,"Weapon was not given")
-        assertEquals(ninja.weapon.get.isInstanceOf[AWeapon],true,"Weapon given is not a Weapon")
-        assertEquals(magoblanco.weapon.get.isInstanceOf[AMagicWeapon],true,"Weapon given is not a Weapon")
-        assertEquals(ninja.weapon.get,bow,"Weapon given to ninja is not the bow")
-        assertEquals(magoblanco.weapon.get,staff,"Magic Weapon given to white mage is not a staff")
+        assertEquals(paladin.getWeapon(),None, "No weapon should be held")
+        assertEquals(guerrero.getWeapon(),None, "No weapon should held")
+        assertEquals(ninja.getWeapon(),None, "No weapon should be held")
+        assertEquals(magonegro.getWeapon(),None, "No weapon should be held")
+        assertEquals(magoblanco.getWeapon(),None, "No weapon should be held")
+
+        var bow: Weapon = new Weapon("Legolas",50,30,Some(ninja))
+        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70,Some(magoblanco))
+        var actual_ninjaW = ninja.getWeapon()
+        println(actual_ninjaW)
+        var actual_magoblancoW = magoblanco.getWeapon()
+        assertEquals(actual_ninjaW.isDefined,true,"Weapon was not given")
+        assertEquals(actual_magoblancoW.isDefined,true,"Weapon was not given")
+        assertEquals(actual_ninjaW.get.isInstanceOf[Weapon],true,"Weapon given is not a Weapon")
+        assertEquals(actual_magoblancoW.get.isInstanceOf[MagicWeapon],true,"Weapon given is not a Weapon")
+        assertEquals(actual_ninjaW.get,bow,"Weapon given to ninja is not the bow")
+        assertEquals(actual_magoblancoW.get,staff,"Magic Weapon given to white mage is not a staff")
+
+        var knife:Weapon = new Weapon("Slick",60,70)
+        ninja.receiveWeapon(knife)
+        var ninja_newW = ninja.getWeapon()
+        print(ninja_newW)
+        assertEquals(ninja_newW.get,knife,"Ninja did not receive his new weapon")
+
+        var wand: MagicWeapon = new MagicWeapon("Giggidy",60,70,90)
+        magoblanco.receiveWeapon(wand)
+        var magoblanco_newW = magoblanco.getWeapon()
+        assertEquals(magoblanco_newW.get,wand,"White Mage did not receive his new weapon")
+
+        ninja.dropWeapon()
+        var ninja_last = ninja.getWeapon()
+        assert(ninja_last.isEmpty,"Ninja did not drop his weapon")
+
+        magoblanco.dropWeapon()
+        var magoblanco_last = magoblanco.getWeapon()
+        assert(magoblanco_last.isEmpty,"White Mage did not drop his weapon")
+
     }
 }

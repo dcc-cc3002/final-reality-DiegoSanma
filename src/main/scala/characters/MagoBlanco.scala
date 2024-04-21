@@ -22,5 +22,5 @@ import weapons.TWeapons
  */
 
 
-class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana: Int,weapon:Option[TWeapons]) extends Mage(name,hp,defense,weight,mana,weapon) {
+class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana: Int,weapon:Option[TWeapons]=None) extends Mage(name,hp,defense,weight,mana,weapon) {
 }

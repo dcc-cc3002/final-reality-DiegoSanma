@@ -5,6 +5,7 @@ import party.Party
 class PartyTest extends munit.FunSuite{
   var party1: Party = null
   var party2: Party = null
+  var party3: Party = null
   var paladin: Paladin = null
   var anotherpaladin: Paladin = null
   var guerrero: Guerrero = null
@@ -12,18 +13,23 @@ class PartyTest extends munit.FunSuite{
   var magonegro: MagoNegro = null
   var magoblanco: MagoBlanco = null
   var anothermagoblanco: MagoBlanco = null
+  var deadpaladin: Paladin = null
+  var deadninja: Ninja = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
     anotherpaladin = new Paladin("Saka",120,80,80)
     guerrero = new Guerrero("Lucas", 80, 100, 100)
     ninja = new Ninja("Santiago", 60, 70, 60)
-    magonegro = new MagoNegro("Balbontin", 60, 50, 80, Some(100))
-    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, Some(90))
-    anothermagoblanco = new MagoBlanco("Leo",60,50,40,Some(100))
+    magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
+    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
+    anothermagoblanco = new MagoBlanco("Leo",60,50,40,100)
+    deadpaladin = new Paladin("Duke",0,40,20)
+    deadninja = new Ninja("Kai",0,50,70)
 
     party1 = new Party(Some(paladin),Some(guerrero),None,None,None)
     party2 = new Party(Some(magoblanco),None,None,None,None)
+    party3 = new Party(Some(deadpaladin),Some(deadninja),None,None,None)
   }
   test("party creation"){
     var actual_member1 = party1.member1
@@ -48,10 +54,7 @@ class PartyTest extends munit.FunSuite{
   test("party status"){
     assertEquals(2,party1.defeated())
     assertEquals(1,party2.defeated())
-    party2.member1.get.hp = 0
-    assertEquals(0,party2.defeated())
-    party2.member1.get.hp = 60
-    assertEquals(1,party2.defeated())
+    assertEquals(0,party3.defeated())
   }
 
   test("adding members"){

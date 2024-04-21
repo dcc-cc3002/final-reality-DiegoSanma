@@ -16,10 +16,10 @@ import attributes.Attributes
  *
  * @author Diego San Martin
  */
-abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, owner:Option[Attributes], private var magicpoints:Int)
+abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, private var magicpoints:Int,owner:Option[Attributes])
   extends AWeapon(name,atkpoints,weight,owner) {
 
-  def getMagicpts(): Unit ={
+  def getMagicpts(): Int ={
     this.magicpoints
   }
 
