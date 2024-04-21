@@ -11,9 +11,9 @@ import entity.AEntidad
  *
  * @param name the name of the enemy
  * @param hp the hp of the enemy
- * @param attack the attack of the enemy
  * @param defense the defense of the enemy
  * @param weight the weight of the enemy
+ * @param attack the attack of the enemy
  *
  * @example
  * var enemy = new Enemigo("Fat",20,30,100,150)

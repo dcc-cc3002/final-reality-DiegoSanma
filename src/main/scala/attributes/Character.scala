@@ -22,5 +22,9 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private va
     this.weapon
   }
 
+  override def receiveWeapon(): Unit = {
+
+  }
+
 
 }

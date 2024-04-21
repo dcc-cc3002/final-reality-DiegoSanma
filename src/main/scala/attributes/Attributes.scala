@@ -1,7 +1,7 @@
 package attributes
 
-import entity.{AEntidad}
-import weapons.Weapons
+import entity.AEntidad
+import weapons.{Weapon, Weapons}
 
 /** A trait representing the attributes of a character
  *
@@ -12,5 +12,9 @@ import weapons.Weapons
 trait Attributes extends AEntidad{
   def getMana(): Option[Int]
   def getWeapon(): Option[Weapons]
+
+  def receiveWeapon(weap:Weapon): Unit
+
+  def dropWeapon(): Unit
 
 }

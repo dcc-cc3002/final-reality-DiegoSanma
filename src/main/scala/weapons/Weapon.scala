@@ -21,16 +21,21 @@ import characters.{Guerrero, MagoNegro, Ninja, Paladin}
  * @author Diego San Martin
  */
 
-class Weapon(var name:String,var atkpoints:Int,var weight:Int,var owner:Attributes) extends Weapons {
-  owner.weapon = Some(this)
+abstract class Weapon(private var name:String,private var atkpoints:Int,private var weight:Int,private var owner:Option[Attributes]=None) extends Weapons {
+  /**Method that gives the weapon to the owner when it was created, and drops the other
+   * If the player that wants to receive the weapon already has one, said weapon is dropped in favour of this one
+   */
+  override def giveTo(receiver:Attributes = this.owner.get): Unit = {
+    owner.dropWeapon()
+    owner.receiveWeapon(this)
+  }
+  giveTo()
   /**Renames the weapon to the name(named) of choice
-   *
-   * @param named the new name to be assigned to the weapon
    *
    * @throws This weapon has already been named $name$, if the weapon has already received a name
    */
 
- def rename(named: String): Unit ={
+ override def rename(named: String): Unit ={
    if (this.name != ""){
      println(s"This weapon has already been named ${name}" )
      return null
