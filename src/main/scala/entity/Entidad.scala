@@ -1,12 +1,10 @@
 package entity
 
-/**A trait that includes the attributes that define all entities
- * The arritbutes of an entity are their name, hitpoints, defense and weight
- *
+/**A trait that includes the methods that will be included in any Entidad
  */
 trait Entidad{
-  val name: String
-  var hp: Int
-  var defense: Int
-  var weight: Int
+  def getName(): String
+  def getHp(): Int
+  def getDefense():Int
+  def getWeight():Int
 }

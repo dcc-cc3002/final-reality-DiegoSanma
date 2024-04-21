@@ -1,5 +1,7 @@
 package attributes
 
+import weapons.Weapons
+
 /**An abstract class for a character that includes the methods used for
  * different types of characters
  *
@@ -9,5 +11,7 @@ package attributes
  */
 
 abstract class Character extends Attributes {
+  private var mana: Option[Int] = None
+  var weapon : Option[Weapons] = None
 
 }
