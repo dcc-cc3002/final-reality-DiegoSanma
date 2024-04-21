@@ -86,7 +86,6 @@ class PersonajeTest extends munit.FunSuite {
         var bow: Weapon = new Weapon("Legolas",50,30,Some(ninja))
         var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70,Some(magoblanco))
         var actual_ninjaW = ninja.getWeapon()
-        println(actual_ninjaW)
         var actual_magoblancoW = magoblanco.getWeapon()
         assertEquals(actual_ninjaW.isDefined,true,"Weapon was not given")
         assertEquals(actual_magoblancoW.isDefined,true,"Weapon was not given")
@@ -98,13 +97,14 @@ class PersonajeTest extends munit.FunSuite {
         var knife:Weapon = new Weapon("Slick",60,70)
         ninja.receiveWeapon(knife)
         var ninja_newW = ninja.getWeapon()
-        print(ninja_newW)
         assertEquals(ninja_newW.get,knife,"Ninja did not receive his new weapon")
+        assertEquals(knife.getOwner().get,ninja,"Knife doesnt have correct owner")
 
         var wand: MagicWeapon = new MagicWeapon("Giggidy",60,70,90)
         magoblanco.receiveWeapon(wand)
         var magoblanco_newW = magoblanco.getWeapon()
         assertEquals(magoblanco_newW.get,wand,"White Mage did not receive his new weapon")
+        assertEquals(wand.getOwner().get,magoblanco,"Wand doesnt have correct owner")
 
         ninja.dropWeapon()
         var ninja_last = ninja.getWeapon()
@@ -113,6 +113,5 @@ class PersonajeTest extends munit.FunSuite {
         magoblanco.dropWeapon()
         var magoblanco_last = magoblanco.getWeapon()
         assert(magoblanco_last.isEmpty,"White Mage did not drop his weapon")
-
     }
 }

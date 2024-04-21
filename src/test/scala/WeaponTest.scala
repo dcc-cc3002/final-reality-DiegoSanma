@@ -48,8 +48,10 @@ class WeaponTest extends munit.FunSuite {
 
     val supposed_owner = weapon.getOwner()
     val supposed_mowner = magicweapon.getOwner()
-    assertEquals(paladin,supposed_owner.asInstanceOf[Paladin],"Weapon not given owner")
-    assertEquals(magonegro,supposed_mowner.asInstanceOf[MagoNegro],"Magic Weapon not given owner")
+    assert(supposed_owner.isDefined,"Weapon has no owner")
+    assert(supposed_mowner.isDefined,"Magic Weapon has no owner")
+    assertEquals(paladin,supposed_owner.get.asInstanceOf[Paladin],"Weapon not given owner")
+    assertEquals(magonegro,supposed_mowner.get.asInstanceOf[MagoNegro],"Magic Weapon not given owner")
 
 
     assertEquals(paladin.getWeapon().get,weapon,"Paladin does not have expected weapon")

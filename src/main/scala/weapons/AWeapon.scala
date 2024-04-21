@@ -38,8 +38,8 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
     this.weight
   }
 
-  override def getOwner(): Attributes = {
-    this.owner.get
+  override def getOwner(): Option[Attributes] = {
+    this.owner
   }
 
   override def giveToOwner(receiver:Attributes): Unit = {

@@ -15,16 +15,25 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
   def getMana(): Int = {
     this.mana
   }
-
   override def getWeapon(): Option[TWeapons] = {
     this.weapon
   }
 
   override def receiveWeapon(weapon:TWeapons): Unit = {
+    if (this.weapon.isDefined) {
+      if (this.weapon.get == weapon) {
+        return
+      }
+    }
     this.weapon = Some(weapon)
+    weapon.giveToOwner(this)
+  }
+  override def dropWeapon(): Unit = {
+    if(this.weapon.isDefined){
+      var aux_weapon: TWeapons = this.weapon.get
+      this.weapon = None
+      aux_weapon.leaveOwner()
+    }
   }
 
-  override def dropWeapon(): Unit = {
-    this.weapon = None
-  }
 }

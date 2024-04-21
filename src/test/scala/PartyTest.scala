@@ -2,6 +2,8 @@ import attributes.Attributes
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 import party.Party
 
+import scala.collection.mutable.ArrayBuffer
+
 class PartyTest extends munit.FunSuite{
   var party1: Party = null
   var party2: Party = null
@@ -37,18 +39,23 @@ class PartyTest extends munit.FunSuite{
     assertEquals(actual_member1.get.isInstanceOf[Paladin],true,"Member 1 is not a Paladin")
     assertEquals(actual_member1.get,paladin, "Member1 is not the Paladin we gave it")
 
-  var actual_member2 = party1.getMembers()(1)
-  assertEquals(actual_member2.isDefined,true,"Member2 is None")
-  assertEquals(actual_member2.get.isInstanceOf[Guerrero],true,"Member 2 is not a Guerrero")
-  assertEquals(actual_member2.get,guerrero,"Member2 is not the Guerrero we gave it")
+    var actual_member2 = party1.getMembers()(1)
+    assertEquals(actual_member2.isDefined,true,"Member2 is None")
+    assertEquals(actual_member2.get.isInstanceOf[Guerrero],true,"Member 2 is not a Guerrero")
+    assertEquals(actual_member2.get,guerrero,"Member2 is not the Guerrero we gave it")
 
-  var actual_member3 = party1.getMembers()(2)
-  assertEquals(actual_member3.isDefined,false,"There is a Member3")
+    var actual_member3 = party1.getMembers()(2)
+    assertEquals(actual_member3.isDefined,false,"There is a Member3")
 
-  var p2_member = party2.getMembers()(0)
-  assertEquals(p2_member.isDefined,true,"Member1 is None")
-  assertEquals(p2_member.get.isInstanceOf[MagoBlanco],true,"Member 1 is not a Mago Blanco")
-  assertEquals(p2_member.get,magoblanco,"Member1 is not the Mago Blanco we gave it")
+    var actual_members = party1.getMembers()
+    assertEquals(actual_members,ArrayBuffer(actual_member1,actual_member2,actual_member3,None,None))
+
+    var p2_member = party2.getMembers()(0)
+    assertEquals(p2_member.isDefined,true,"Member1 is None")
+    assertEquals(p2_member.get.isInstanceOf[MagoBlanco],true,"Member 1 is not a Mago Blanco")
+    assertEquals(p2_member.get,magoblanco,"Member1 is not the Mago Blanco we gave it")
+    var actual_members2 = party2.getMembers()
+    assertEquals(actual_members2,ArrayBuffer(p2_member,None,None,None,None))
   }
 
   test("party status"){

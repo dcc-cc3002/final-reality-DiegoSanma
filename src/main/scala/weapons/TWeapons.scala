@@ -13,7 +13,7 @@ trait TWeapons {
   def getAtkPts(): Int
   def getWeaponWeight(): Int
 
-  def getOwner(): Attributes
+  def getOwner(): Option[Attributes]
 
   def rename(named:String): Unit
 
