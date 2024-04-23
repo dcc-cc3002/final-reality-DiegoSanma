@@ -7,4 +7,8 @@ trait Entidad{
   def getHp(): Int
   def getDefense():Int
   def getWeight():Int
+
+  def takedamage(agresor:Entidad): Unit
+
+  def attack(victim:Entidad): Unit
 }

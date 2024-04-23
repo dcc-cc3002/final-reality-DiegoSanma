@@ -16,6 +16,7 @@ import scala.collection.mutable.ArrayBuffer
  * @tparam member3 the third member of the party
  * @tparam member4 the fourth member of the party
  * @tparam member5 the fifth member of the party
+ *
  * @author Diego San Martin
  *
  */

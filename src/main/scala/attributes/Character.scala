@@ -1,6 +1,7 @@
 package attributes
 
-import entity.AEntidad
+import enemigo.Enemigo
+import entity.{AEntidad, Entidad}
 import weapons.{TWeapons, Weapon}
 
 /**An abstract class for a character that includes the methods used for
