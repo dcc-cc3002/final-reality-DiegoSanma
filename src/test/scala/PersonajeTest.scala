@@ -6,6 +6,7 @@
  */
 
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import enemigo.Enemigo
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
 
 
@@ -114,4 +115,5 @@ class PersonajeTest extends munit.FunSuite {
         var magoblanco_last = magoblanco.getWeapon()
         assert(magoblanco_last.isEmpty,"White Mage did not drop his weapon")
     }
+
 }
