@@ -38,5 +38,25 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private va
     }
   }
 
+  override def attack(victim: Entidad): Unit = {
+    if(this.weapon.isEmpty){
+      println(s"You currently have no weapon! The attack has failed :(")
+      return
+    }
+    else{
+      victim.takedamage(this)
+    }
+  }
+
+  override def takedamage(agresor: Entidad): Unit = {
+    if(agresor.isInstanceOf[Enemigo]){
+      this.hp -= agresor.asInstanceOf[Enemigo].getAttack()-this.getDefense()
+    }
+    else {
+      println(s"Be careful, you´ve just attacked your friend!")
+      this.hp -= agresor.asInstanceOf[Attributes].getWeapon().get.getAtkPts()-this.getDefense()
+    }
+  }
+
 
 }

@@ -1,6 +1,7 @@
 package attributes
 
-import entity.AEntidad
+import enemigo.Enemigo
+import entity.{AEntidad, Entidad}
 import weapons.TWeapons
 
 /**An abstract class for a mage that includes the methods used for both
@@ -33,6 +34,26 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
       var aux_weapon: TWeapons = this.weapon.get
       this.weapon = None
       aux_weapon.leaveOwner()
+    }
+  }
+
+  override def attack(victim: Entidad): Unit = {
+    if(this.weapon.isEmpty){
+      println(s"You currently have no weapon! The attack has failed :(")
+      return
+    }
+    else{
+      victim.takedamage(this)
+    }
+  }
+
+  override def takedamage(agresor: Entidad): Unit = {
+    if(agresor.isInstanceOf[Enemigo]){
+      this.hp -= agresor.asInstanceOf[Enemigo].getAttack()-this.getDefense()
+    }
+    else {
+      println(s"Be careful, you´ve just attacked your friend!")
+      this.hp -= agresor.asInstanceOf[Attributes].getWeapon().get.getAtkPts()-this.getDefense()
     }
   }
 
