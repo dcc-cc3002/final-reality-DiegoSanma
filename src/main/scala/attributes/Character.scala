@@ -43,11 +43,13 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * @param weapon the weapon the character wants to receive
    */
   override def receiveWeapon(weapon:TWeapons): Unit = {
-    if (this.inventory.length >=5) {
+    if (this.inventory.length >=3 || weapon.getOwner().isDefined) {
       return
     }
+    else if(!(this.inventory.contains(weapon))) {
       this.inventory += weapon
       weapon.giveToOwner(this)
+    }
   }
 
   /**Method for dropping a weapon, if there is one equipped currently
@@ -59,6 +61,9 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     if(position!= -1){
       this.inventory.remove(position)
       weapon.leaveOwner()
+      if(this.getActiveWeapon().get == weapon){
+        this.activeWeapon = None
+      }
     }
   }
 

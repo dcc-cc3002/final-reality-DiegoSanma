@@ -5,6 +5,7 @@ import attributes.Character
 import weapons.TWeapons
 
 import java.security.InvalidParameterException
+import scala.collection.mutable.ArrayBuffer
 
 /** A class representing a paladin
  *
@@ -23,6 +24,8 @@ import java.security.InvalidParameterException
  */
 
 
-class Paladin(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]=None) extends Character(name,hp,defense,weight,weapon) {
+class Paladin(name: String,hp: Int,defense:Int,weight: Int,
+              inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None)
+  extends Character(name,hp,defense,weight,inventory, activeWeapon) {
 
 }

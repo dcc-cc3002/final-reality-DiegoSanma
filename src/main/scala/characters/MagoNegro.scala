@@ -3,6 +3,8 @@ package characters
 import attributes.{Attributes, Mage}
 import weapons.TWeapons
 
+import scala.collection.mutable.ArrayBuffer
+
 /** A class representing a black mage (mago negro)
  *
  * A mago negro is defined by his name, hp, defense, weight and mana
@@ -21,5 +23,7 @@ import weapons.TWeapons
  *
  */
 
-class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana: Int,weapon:Option[TWeapons]=None) extends Mage(name,hp,defense,weight,mana,weapon){
+class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
+                inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None)
+  extends Mage(name,hp,defense,weight,mana,inventory, activeWeapon) {
 }

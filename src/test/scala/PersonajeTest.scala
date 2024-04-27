@@ -77,43 +77,90 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(magoblanco_mana,magoblanco.getMana(),"Mana not given correctly")
     }
 
-    test("weapon") {
-        assertEquals(paladin.getWeapon(),None, "No weapon should be held")
-        assertEquals(guerrero.getWeapon(),None, "No weapon should held")
-        assertEquals(ninja.getWeapon(),None, "No weapon should be held")
-        assertEquals(magonegro.getWeapon(),None, "No weapon should be held")
-        assertEquals(magoblanco.getWeapon(),None, "No weapon should be held")
+    test("inventory and active weapon"){
+        assert(paladin.getWeapons().isEmpty,"Inventory should be empty")
+        assert(guerrero.getWeapons().isEmpty,"Inventory should be empty")
+        assert(ninja.getWeapons().isEmpty,"Inventory should be empty")
+        assert(magoblanco.getWeapons().isEmpty,"Inventory should be empty")
+        assert(magonegro.getWeapons().isEmpty,"Inventory should be empty")
 
-        var bow: Weapon = new Weapon("Legolas",50,30,Some(ninja))
-        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70,Some(magoblanco))
-        var actual_ninjaW = ninja.getWeapon()
-        var actual_magoblancoW = magoblanco.getWeapon()
-        assertEquals(actual_ninjaW.isDefined,true,"Weapon was not given")
-        assertEquals(actual_magoblancoW.isDefined,true,"Weapon was not given")
-        assertEquals(actual_ninjaW.get.isInstanceOf[Weapon],true,"Weapon given is not a Weapon")
-        assertEquals(actual_magoblancoW.get.isInstanceOf[MagicWeapon],true,"Weapon given is not a Weapon")
-        assertEquals(actual_ninjaW.get,bow,"Weapon given to ninja is not the bow")
-        assertEquals(actual_magoblancoW.get,staff,"Magic Weapon given to white mage is not a staff")
+        assertEquals(paladin.getActiveWeapon(),None, "No weapon should be held")
+        assertEquals(guerrero.getActiveWeapon(),None, "No weapon should held")
+        assertEquals(ninja.getActiveWeapon(),None, "No weapon should be held")
+        assertEquals(magonegro.getActiveWeapon(),None, "No weapon should be held")
+        assertEquals(magoblanco.getActiveWeapon(),None, "No weapon should be held")
 
-        var knife:Weapon = new Weapon("Slick",60,70)
-        ninja.receiveWeapon(knife)
-        var ninja_newW = ninja.getWeapon()
-        assertEquals(ninja_newW.get,knife,"Ninja did not receive his new weapon")
-        assertEquals(knife.getOwner().get,ninja,"Knife doesnt have correct owner")
-
+        var bow: Weapon = new Weapon("Legolas",50,30)
+        var knife: Weapon = new Weapon("Slick",60,70)
         var wand: MagicWeapon = new MagicWeapon("Giggidy",60,70,90)
-        magoblanco.receiveWeapon(wand)
-        var magoblanco_newW = magoblanco.getWeapon()
-        assertEquals(magoblanco_newW.get,wand,"White Mage did not receive his new weapon")
-        assertEquals(wand.getOwner().get,magoblanco,"Wand doesnt have correct owner")
+        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70)
 
-        ninja.dropWeapon()
-        var ninja_last = ninja.getWeapon()
-        assert(ninja_last.isEmpty,"Ninja did not drop his weapon")
+        ninja.receiveWeapon(bow)
+        assert(ninja.getWeapons().nonEmpty,"Weapon should´ve been added to the inventory")
+        assertEquals(ninja.getWeapons()(0),bow,"Bow not added to inventory")
+        assertEquals(ninja.getActiveWeapon(),None, "No weapon should be held")
+        ninja.changeWeapon(0)
+        assertEquals(ninja.getActiveWeapon().get,bow, "Bow should be equipped")
 
-        magoblanco.dropWeapon()
-        var magoblanco_last = magoblanco.getWeapon()
-        assert(magoblanco_last.isEmpty,"White Mage did not drop his weapon")
+        guerrero.receiveWeapon(bow)
+        assert(ninja.getWeapons().nonEmpty,"The bow should not have been removed from ninja´s inventory")
+        assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
+
+        ninja.receiveWeapon(knife)
+        assertEquals(ninja.getWeapons()(1),bow,"Knife not added to inventory")
+        assertEquals(ninja.getActiveWeapon().get,bow, "Bow should be equipped")
+        ninja.changeWeapon(1)
+        assertEquals(ninja.getActiveWeapon().get,knife, "Knife should be equipped")
+
+        ninja.receiveWeapon(wand)
+        assertEquals(ninja.getWeapons()(2),bow,"Wand not added to inventory")
+
+        ninja.receiveWeapon(staff)
+        assertEquals(ninja.getWeapons().length,3,"No more weapon should be added to the inventory")
+
+        ninja.dropWeapon(staff)
+        assertEquals(ninja.getWeapons().length,3,"No weapon should be removed to the inventory")
+
+        ninja.dropWeapon(knife)
+        assertEquals(ninja.getWeapons().length,2,"A weapon should´ve be removed to the inventory")
+        assert(ninja.getActiveWeapon().isEmpty,"There should be no active weapon held")
+        assert(!(ninja.getWeapons().contains(knife)),"Knife should no longer be in the inventory")
     }
+    test("mage inventory and weapon"){
+        var bow: Weapon = new Weapon("Legolas",50,30)
+        var knife: Weapon = new Weapon("Slick",60,70)
+        var wand: MagicWeapon = new MagicWeapon("Giggidy",60,70,90)
+        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70)
 
+        magoblanco.receiveWeapon(bow)
+        assert(magoblanco.getWeapons().nonEmpty,"Weapon should´ve been added to the inventory")
+        assertEquals(magoblanco.getWeapons()(0),bow,"Bow not added to inventory")
+        assertEquals(magoblanco.getActiveWeapon(),None, "No weapon should be held")
+        magoblanco.changeWeapon(0)
+        assertEquals(magoblanco.getActiveWeapon().get,bow, "Bow should be equipped")
+
+        guerrero.receiveWeapon(bow)
+        assert(magoblanco.getWeapons().nonEmpty,"The bow should not have been removed from magoblanco´s inventory")
+        assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
+
+        magoblanco.receiveWeapon(knife)
+        assertEquals(magoblanco.getWeapons()(1),bow,"Knife not added to inventory")
+        assertEquals(magoblanco.getActiveWeapon().get,bow, "Bow should be equipped")
+        magoblanco.changeWeapon(1)
+        assertEquals(magoblanco.getActiveWeapon().get,knife, "Knife should be equipped")
+
+        magoblanco.receiveWeapon(wand)
+        assertEquals(magoblanco.getWeapons()(2),bow,"Wand not added to inventory")
+
+        magoblanco.receiveWeapon(staff)
+        assertEquals(magoblanco.getWeapons().length,3,"No more weapon should be added to the inventory")
+
+        magoblanco.dropWeapon(staff)
+        assertEquals(magoblanco.getWeapons().length,3,"No weapon should be removed to the inventory")
+
+        magoblanco.dropWeapon(knife)
+        assertEquals(magoblanco.getWeapons().length,2,"A weapon should´ve be removed to the inventory")
+        assert(magoblanco.getActiveWeapon().isEmpty,"There should be no active weapon held")
+        assert(!(magoblanco.getWeapons().contains(knife)),"Knife should no longer be in the inventory")
+    }
 }

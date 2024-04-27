@@ -4,6 +4,8 @@ import attributes.Attributes
 import attributes.Character
 import weapons.TWeapons
 
+import scala.collection.mutable.ArrayBuffer
+
 /** A class representing a warrior(guerrero)
  *
  * A guerrero is defined by his name, hp, defense and weight
@@ -19,8 +21,9 @@ import weapons.TWeapons
  * @author Diego San Martin
  *
  */
-class Guerrero(name: String,hp: Int,defense:Int,weight: Int,weapon:Option[TWeapons]=None) extends
-  Character(name,hp,defense,weight,weapon){
+class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
+               inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None) extends
+  Character(name,hp,defense,weight,inventory,activeWeapon){
   /** weapon the Guerrero is holding*/
 
 }

@@ -3,6 +3,8 @@ package characters
 import attributes.{Attributes, Mage}
 import weapons.TWeapons
 
+import scala.collection.mutable.ArrayBuffer
+
 /** A class representing a white mage (mago blanco)
  *
  * A mago blanco is defined by his name, hp, defense, weight and mana
@@ -22,5 +24,7 @@ import weapons.TWeapons
  */
 
 
-class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana: Int,weapon:Option[TWeapons]=None) extends Mage(name,hp,defense,weight,mana,weapon) {
+class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
+                 inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None)
+  extends Mage(name,hp,defense,weight,mana,inventory, activeWeapon) {
 }

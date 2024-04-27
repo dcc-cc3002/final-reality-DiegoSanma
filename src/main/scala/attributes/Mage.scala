@@ -46,23 +46,28 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int
    */
 
   override def receiveWeapon(weapon:TWeapons): Unit = {
-    if (this.inventory.length >=5) {
-      return
+      if (this.inventory.length >=3) {
+        return
+      }
+      else if(!(this.inventory.contains(weapon))) {
+        this.inventory += weapon
+        weapon.giveToOwner(this)
+      }
     }
-    this.inventory += weapon
-    weapon.giveToOwner(this)
-  }
 
   /**Method for dropping a weapon, if there is one equipped currently
    * Also calls the weapon.leaveOwner, so that the weapon doesn´t keep the
    * character as the owner despite dropping said weapon
    */
   override def dropWeapon(weapon:TWeapons): Unit = {
-    var position = this.inventory.indexOf(weapon)
-    if(position!= -1){
-      this.inventory.remove(position)
-      weapon.leaveOwner()
-    }
+      var position = this.inventory.indexOf(weapon)
+      if(position!= -1){
+        this.inventory.remove(position)
+        weapon.leaveOwner()
+        if(this.getActiveWeapon().get == weapon){
+          this.activeWeapon = None
+        }
+      }
   }
 
   /**Method for changing the weapon that is currently equipped by the mage
