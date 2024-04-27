@@ -45,20 +45,10 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
 
   override def giveToOwner(receiver:Attributes): Unit = {
     this.owner = Some(receiver)
-    receiver.receiveWeapon(this)
   }
 
   override def leaveOwner(): Unit = {
-    if(this.owner.isEmpty){
-      return
-    }
-    else{
-      this.owner.get.dropWeapon()
       this.owner = None
-    }
-  }
-  if(this.owner.isDefined) {
-    this.giveToOwner(this.owner.get)
   }
   /**Renames the weapon to the name(named) of choice
    *

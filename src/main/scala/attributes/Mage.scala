@@ -4,6 +4,8 @@ import enemigo.Enemigo
 import entity.{AEntidad, Entidad}
 import weapons.TWeapons
 
+import scala.collection.mutable.ArrayBuffer
+
 /**An abstract class for a mage that includes the methods used for both
  * types of mages
  *
@@ -12,7 +14,9 @@ import weapons.TWeapons
  * @author Diego San Martin
  */
 
-abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var weapon:Option[TWeapons]=None) extends AEntidad(name,hp,defense,weight) with Attributes {
+abstract class Mage(name:String,hp:Int,defense: Int, weight: Int
+                    ,private var mana:Int, private var inventory: ArrayBuffer[TWeapons]= ArrayBuffer(),private var activeWeapon: Option[TWeapons] = None)
+  extends AEntidad(name,hp,defense,weight) with Attributes {
   def getMana(): Int = {
     this.mana
   }
@@ -21,35 +25,43 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
    *
    * @return this.weapon
    */
-  override def getWeapon(): Option[TWeapons] = {
-    this.weapon
+  override def getWeapons(): ArrayBuffer[TWeapons] = {
+    this.inventory
   }
 
+  /** Getter for the weapon that is currently equipped
+   * Bare in mind that the mage may not have a weapon currently equipped
+   *
+   * @return this.activeWeapon
+   */
+
+  override def getActiveWeapon(): Option[TWeapons] = {
+    this.activeWeapon
+  }
   /** Method for making handing/equipping a weapon as a character
    * If i want to equip a wepaon that i already have equipped, the method does nothing
    * Also calls the giveToOwner, so the wepaon now has the correct owner associated
    *
    * @param weapon the weapon the character wants to receive
    */
+
   override def receiveWeapon(weapon:TWeapons): Unit = {
-    if (this.weapon.isDefined) {
-      if (this.weapon.get == weapon) {
-        return
-      }
+    if (this.inventory.length >=5) {
+      return
     }
-    this.weapon = Some(weapon)
+    this.inventory += weapon
     weapon.giveToOwner(this)
   }
 
   /**Method for dropping a weapon, if there is one equipped currently
    * Also calls the weapon.leaveOwner, so that the weapon doesn´t keep the
-   * character as the owner depsite dropping said weapon
+   * character as the owner despite dropping said weapon
    */
-  override def dropWeapon(): Unit = {
-    if(this.weapon.isDefined){
-      var aux_weapon: TWeapons = this.weapon.get
-      this.weapon = None
-      aux_weapon.leaveOwner()
+  override def dropWeapon(weapon:TWeapons): Unit = {
+    var position = this.inventory.indexOf(weapon)
+    if(position!= -1){
+      this.inventory.remove(position)
+      weapon.leaveOwner()
     }
   }
 
@@ -60,7 +72,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
    * @param victim the entity to whom damage will be dealt
    */
   override def attack(victim: Entidad): Unit = {
-    if(this.weapon.isEmpty){
+    if(getActiveWeapon().isEmpty){
       println(s"You currently have no weapon! The attack has failed :(")
     }
     else{

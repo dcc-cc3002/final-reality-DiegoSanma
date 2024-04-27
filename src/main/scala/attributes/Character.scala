@@ -4,6 +4,8 @@ import enemigo.Enemigo
 import entity.{AEntidad, Entidad}
 import weapons.{TWeapons, Weapon}
 
+import scala.collection.mutable.ArrayBuffer
+
 /**An abstract class for a character that includes the methods used for
  * different types of characters
  *
@@ -12,16 +14,26 @@ import weapons.{TWeapons, Weapon}
  * @author Diego San Martin
  */
 
-abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private var weapon:Option[TWeapons]=None)
+abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
+                         private var inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),private var activeWeapon: Option[TWeapons] = None)
   extends AEntidad(name,hp,defense,weight) with Attributes {
-
-  /**Getter for weapon parameter
-   * Can get a None or a Some(TWeapons) type
+  /**Getter for inventory parameter
+   * Will return all the weapons currently in the characters inventory
    *
-   * @return this.weapon
+   * @return this.inventory
    */
-  override def getWeapon(): Option[TWeapons] = {
-    this.weapon
+  override def getWeapons(): ArrayBuffer[TWeapons] = {
+    this.inventory
+  }
+
+  /** Getter for the weapon that is currently equipped
+   * Bare in mind that the character may not have a weapon currently equipped
+   *
+   * @return this.activeWeapon
+   */
+
+  override def getActiveWeapon(): Option[TWeapons] = {
+    this.activeWeapon
   }
 
   /** Method for making handing/equipping a weapon as a character
@@ -31,12 +43,10 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private va
    * @param weapon the weapon the character wants to receive
    */
   override def receiveWeapon(weapon:TWeapons): Unit = {
-    if (this.weapon.isDefined) {
-      if (this.weapon.get == weapon) {
-        return
-      }
+    if (this.inventory.length >=5) {
+      return
     }
-      this.weapon = Some(weapon)
+      this.inventory += weapon
       weapon.giveToOwner(this)
   }
 
@@ -44,11 +54,11 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private va
    * Also calls the weapon.leaveOwner, so that the weapon doesn´t keep the
    * character as the owner depsite dropping said weapon
    */
-  override def dropWeapon(): Unit = {
-    if(this.weapon.isDefined){
-      var aux_weapon: TWeapons = this.weapon.get
-      this.weapon = None
-      aux_weapon.leaveOwner()
+  override def dropWeapon(weapon:TWeapons): Unit = {
+    var position = this.inventory.indexOf(weapon)
+    if(position!= -1){
+      this.inventory.remove(position)
+      weapon.leaveOwner()
     }
   }
 
@@ -59,7 +69,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,private va
    * @param victim the entity to whom damage will be dealt
    */
   override def attack(victim: Entidad): Unit = {
-    if(this.weapon.isEmpty){
+    if(getActiveWeapon().isEmpty){
       println(s"You currently have no weapon! The attack has failed :(")
     }
     else{
