@@ -107,13 +107,13 @@ class PersonajeTest extends munit.FunSuite {
         assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
 
         ninja.receiveWeapon(knife)
-        assertEquals(ninja.getWeapons()(1),bow,"Knife not added to inventory")
+        assertEquals(ninja.getWeapons()(1),knife,"Knife not added to inventory")
         assertEquals(ninja.getActiveWeapon().get,bow, "Bow should be equipped")
         ninja.changeWeapon(1)
         assertEquals(ninja.getActiveWeapon().get,knife, "Knife should be equipped")
 
         ninja.receiveWeapon(wand)
-        assertEquals(ninja.getWeapons()(2),bow,"Wand not added to inventory")
+        assertEquals(ninja.getWeapons()(2),wand,"Wand not added to inventory")
 
         ninja.receiveWeapon(staff)
         assertEquals(ninja.getWeapons().length,3,"No more weapon should be added to the inventory")
@@ -144,13 +144,13 @@ class PersonajeTest extends munit.FunSuite {
         assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
 
         magoblanco.receiveWeapon(knife)
-        assertEquals(magoblanco.getWeapons()(1),bow,"Knife not added to inventory")
+        assertEquals(magoblanco.getWeapons()(1),knife,"Knife not added to inventory")
         assertEquals(magoblanco.getActiveWeapon().get,bow, "Bow should be equipped")
         magoblanco.changeWeapon(1)
         assertEquals(magoblanco.getActiveWeapon().get,knife, "Knife should be equipped")
 
         magoblanco.receiveWeapon(wand)
-        assertEquals(magoblanco.getWeapons()(2),bow,"Wand not added to inventory")
+        assertEquals(magoblanco.getWeapons()(2),wand,"Wand not added to inventory")
 
         magoblanco.receiveWeapon(staff)
         assertEquals(magoblanco.getWeapons().length,3,"No more weapon should be added to the inventory")

@@ -90,8 +90,8 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
     def Barra():ArrayBuffer[(Entidad,Double)] ={
         var barraMaxima: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
         for(i <- 0 until players.length){
-          if(players(i).getWeapon().isDefined) {
-            var barra: Double = players(i).getWeight() + 0.5*players(i).getWeapon().get.getWeaponWeight()
+          if(players(i).getActiveWeapon().isDefined) {
+            var barra: Double = players(i).getWeight() + 0.5*players(i).getActiveWeapon().get.getWeaponWeight()
             barraMaxima += ((players(i), barra): (Entidad, Double))
           }
           else{

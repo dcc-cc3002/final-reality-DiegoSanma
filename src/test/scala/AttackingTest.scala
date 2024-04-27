@@ -27,8 +27,8 @@ class AttackingTest extends munit.FunSuite{
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
     enemigo1 = new Enemigo("Goblin",40,30,20,30)
     enemigo2 = new Enemigo("Golem",120,50,80,45)
-    weapon = new Weapon("Excalibur",60,70,Some(paladin))
-    magicweapon = new MagicWeapon("Palito",20,40,80,Some(magonegro))
+    weapon = new Weapon("Excalibur",60,70)
+    magicweapon = new MagicWeapon("Palito",20,40,80)
     biggerWeapon = new Weapon("Big Sword",80,120)
     biggerMagicWeapon = new MagicWeapon("Boom",90,20,40)
   }
@@ -36,6 +36,8 @@ class AttackingTest extends munit.FunSuite{
     assertEquals(paladin.getHp(),100,"Paladin does not start with full health")
     assertEquals(enemigo1.getHp(),40,"First Enemies does not start with full health")
 
+    paladin.receiveWeapon(weapon)
+    paladin.changeWeapon(0)
     paladin.attack(enemigo1)
     var expected_damage_taken: Int = 30
     assertEquals(paladin.getHp(),100,"Paladin took damage despite being the one who attacks")
@@ -67,6 +69,7 @@ class AttackingTest extends munit.FunSuite{
     assertEquals(enemigo2.getHp(),120,"Mago blanco does not have a weapon, so he should not deal damage")
 
     magoblanco.receiveWeapon(biggerMagicWeapon)
+    magoblanco.changeWeapon(0)
     magoblanco.attack(enemigo2)
     expected_damage_taken = 40
     assertEquals(enemigo2.getHp(),120-expected_damage_taken,"Second enemy does not take the expected damage")
@@ -75,6 +78,7 @@ class AttackingTest extends munit.FunSuite{
     assertEquals(enemigo2.getHp(),120-expected_damage_taken,"Second enemy should not take damage form ninja, as he has no weapon")
 
     ninja.receiveWeapon(biggerWeapon)
+    ninja.changeWeapon(0)
     ninja.attack(enemigo2)
     expected_damage_taken = 30
     assertEquals(enemigo2.getHp(),80-expected_damage_taken,"Second enemy does not take the correct amount of damage")

@@ -26,9 +26,9 @@ class WeaponTest extends munit.FunSuite {
     ninja = new Ninja("Santiago", 60, 70, 60)
     magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
-    weapon = new Weapon("Excalibur",60,70,Some(paladin))
-    magicweapon = new MagicWeapon("Palito",20,40,80,Some(magonegro))
-    notnamew = new Weapon("",80,90,Some(guerrero))
+    weapon = new Weapon("Excalibur",60,70)
+    magicweapon = new MagicWeapon("Palito",20,40,80)
+    notnamew = new Weapon("",80,90)
     notnamedw = new MagicWeapon("",30,40,50)
   }
 
@@ -46,47 +46,36 @@ class WeaponTest extends munit.FunSuite {
 
     assertEquals(80,magicweapon.getMagicpts(),"Magic Weapon not given magic points")
 
-    val supposed_owner = weapon.getOwner()
-    val supposed_mowner = magicweapon.getOwner()
-    assert(supposed_owner.isDefined,"Weapon has no owner")
-    assert(supposed_mowner.isDefined,"Magic Weapon has no owner")
-    assertEquals(paladin,supposed_owner.get.asInstanceOf[Paladin],"Weapon not given owner")
-    assertEquals(magonegro,supposed_mowner.get.asInstanceOf[MagoNegro],"Magic Weapon not given owner")
-
-
-    assertEquals(paladin.getWeapon().get,weapon,"Paladin does not have expected weapon")
-    assertEquals(magonegro.getWeapon().get,magicweapon,"Black Mage not given expected weapon")
+    assert(weapon.getOwner().isEmpty,"Should have no owner")
+    assert(magicweapon.getOwner().isEmpty,"Should have no owner")
   }
 
-  test("giving to"){
+  test("having and leaving owner"){
     var sword: Weapon = new Weapon("Blade of Truth",60,70)
     var wood: MagicWeapon = new MagicWeapon("Pinocchio",70,50,50)
-    assert(ninja.getWeapon().isEmpty,"Ninja should not have a weapon")
-    assert(sword.getOwner().isEmpty)
-    sword.giveToOwner(ninja)
-    assert(ninja.getWeapon().isDefined,"Ninja still has no weapon")
-    assertEquals(ninja.getWeapon().get,sword,"Ninja was not given the sword")
-    assert(sword.getOwner().isDefined)
+
+    assert(ninja.getActiveWeapon().isEmpty,"Ninja should not have a weapon")
+    assert(sword.getOwner().isEmpty,"Sword should have no owner")
+    ninja.receiveWeapon(sword)
+    assert(ninja.getWeapons().nonEmpty,"Ninja still has no weapon")
+    assertEquals(ninja.getWeapons()(0),sword,"Ninja was not given the sword")
+    assert(sword.getOwner().isDefined,"Sword should have an owner")
     assertEquals(sword.getOwner().get,ninja,"Sword does not have ninja as its owner")
 
+    ninja.dropWeapon(sword)
+    assert(ninja.getActiveWeapon().isEmpty,"Ninja should not have a weapon")
+    assert(sword.getOwner().isEmpty,"Sword should have no owner")
+
+
     assert(wood.getOwner().isEmpty)
-    wood.giveToOwner(magonegro)
-    assert(magonegro.getWeapon().isDefined,"Mago negro currently has no weapon")
-    assertEquals(magonegro.getWeapon().get,wood,"Black Mage not given wood as weapon")
-    assert(wood.getOwner().isDefined)
+    magonegro.receiveWeapon(wood)
+    assert(magonegro.getWeapons().nonEmpty,"Mago negro currently has no weapon")
+    assertEquals(magonegro.getWeapons()(0),wood,"Black Mage not given wood as weapon")
+    assert(wood.getOwner().isDefined,"Wood should have an owner")
     assertEquals(wood.getOwner().get,magonegro,"Wood does not have Black Mage as its owner")
-  }
-
-  test ("leaving weapon"){
-    assertEquals(paladin.getWeapon().get,weapon,"Paladin currently should have a weapon")
-    weapon.leaveOwner()
-    assert(weapon.getOwner().isEmpty,"Weapon should not have an owner")
-    assert(paladin.getWeapon().isEmpty,"Paladin should not have an owner")
-
-    assertEquals(magonegro.getWeapon().get,magicweapon,"Black Mage should currently have a weapon")
-    magicweapon.leaveOwner()
-    assert(magicweapon.getOwner().isEmpty,"Magic weapon should not have an owner")
-    assert(magonegro.getWeapon().isEmpty,"Black Mage shouldnt have a weapon")
+    magonegro.dropWeapon(wood)
+    assert(magonegro.getActiveWeapon().isEmpty,"Black Mage should not have a weapon")
+    assert(wood.getOwner().isEmpty,"Wood should have no owner")
   }
 
 

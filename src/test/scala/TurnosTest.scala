@@ -32,15 +32,23 @@ class TurnosTest extends munit.FunSuite{
     ninja = new Ninja("Santiago", 60, 70, 60)
     magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
-    weapon = new Weapon("Excalibur",60,70,Some(paladin))
-    magicweapon = new MagicWeapon("Palito",20,40,80,Some(magonegro))
-    notnamew = new Weapon("",80,90,Some(guerrero))
-    notnamedw = new MagicWeapon("",30,40,50,Some(magoblanco))
+    weapon = new Weapon("Excalibur",60,70)
+    magicweapon = new MagicWeapon("Palito",20,40,80)
+    notnamew = new Weapon("",80,90)
+    notnamedw = new MagicWeapon("",30,40,50)
     enemigo1 = new Enemigo("Goblin",40,30,30,20)
     enemigo2 = new Enemigo("Golem",120,60,110,80)
     jugadores = ArrayBuffer.empty
     enemigos = ArrayBuffer.empty
     turnos = new ProgramadorDeTurnos(jugadores,enemigos)
+    paladin.receiveWeapon(weapon)
+    paladin.changeWeapon(0)
+    magonegro.receiveWeapon(magicweapon)
+    magonegro.changeWeapon(0)
+    guerrero.receiveWeapon(notnamew)
+    guerrero.changeWeapon(0)
+    magoblanco.receiveWeapon(notnamedw)
+    magoblanco.changeWeapon(0)
   }
 
   test("turnos creation"){
