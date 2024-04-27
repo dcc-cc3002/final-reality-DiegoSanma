@@ -77,6 +77,14 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     }
   }
 
+  /**Method for changing the weapon that is currently equipped by the character
+   * Position must be in between the values according to the inventory´s space
+   *
+   * @param position the position of the weapon in the inventory you wish to equip
+   */
+  override def changeWeapon(position: Int): Unit = {
+    this.activeWeapon = Some(this.inventory(position))
+  }
 
 
 }

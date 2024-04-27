@@ -65,6 +65,15 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int
     }
   }
 
+  /**Method for changing the weapon that is currently equipped by the mage
+   * Position must be in between the values according to the inventory´s space
+   *
+   * @param position the position of the weapon in the inventory you wish to equip
+   */
+  override def changeWeapon(position: Int): Unit = {
+    this.activeWeapon = Some(this.inventory(position))
+  }
+
   /**Method for inflicting damage through an attack
    * If no weapon is equipped, then no attack/damage is made
    * Bare in mind that one can also attack their own friends, not just enemies
