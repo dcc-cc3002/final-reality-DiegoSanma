@@ -2,6 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
+import exceptions.Require
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -24,6 +25,15 @@ import scala.collection.mutable.ArrayBuffer
 class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
                inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None) extends
   Character(name,hp,defense,weight,inventory,activeWeapon){
-  /** weapon the Guerrero is holding*/
+
+  /**Checks whether the values used to create the guerrero are valid  */
+
+  Require.Stat(hp,"Hp not valid") in (0 to 200)
+  Require.Stat(defense,"Defense not valid") in (0 to 300)
+  Require.Stat(weight,"Weight not valid") in (0 to 200)
+  if(inventory.nonEmpty){
+    throw new
+  }
+
 
 }
