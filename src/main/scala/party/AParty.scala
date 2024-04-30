@@ -4,7 +4,7 @@ import attributes.Attributes
 
 import scala.collection.mutable.ArrayBuffer
 
-/** Abstract class that defines the methods and paramters of a Party
+/** Abstract class that defines the methods and parameters of a Party
  *
  * @param member1 first member of the party
  * @param member2 second member of the party

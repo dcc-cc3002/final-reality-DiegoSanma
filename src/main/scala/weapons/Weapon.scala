@@ -20,6 +20,7 @@ import exceptions.{InvalidOwnerException, Require}
 class Weapon(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None)
   extends AWeapon(name,atkpoints,weight,owner) {
 
+  /** Checks whether a magic weapon was initialized with the correct parameters */
   Require.Stat(atkpoints,"Attack points not valid") in (0 to 350)
   Require.Stat(weight,"Weight not valid") in (0 to 150)
   if(owner.isDefined){

@@ -20,6 +20,7 @@ import exceptions.{InvalidOwnerException, Require}
 class MagicWeapon (name:String,atkpoints:Int,weight:Int,magicpoints:Int,owner:Option[Attributes]=None)
   extends AMagicWeapon(name,atkpoints,weight, magicpoints, owner) {
 
+  /** Checks whether a magic weapon was initialized with the correct parameters */
   Require.Stat(atkpoints,"Attack points not valid") in (0 to 150)
   Require.Stat(weight,"Weight not valid") in (0 to 150)
   Require.Stat(magicpoints,"Magic points not valid") in (0 to 350)

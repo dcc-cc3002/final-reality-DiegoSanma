@@ -3,8 +3,9 @@ package enemigo
 import attributes.Attributes
 import entity.{AEntidad, Entidad}
 
-/**An abstract class that extends form Enemigo Attributes
+/**An abstract class that extends from EnemigoAttributes
  * Includes the attack parameter for enemies
+ *
  */
 
 abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var attack:Int)

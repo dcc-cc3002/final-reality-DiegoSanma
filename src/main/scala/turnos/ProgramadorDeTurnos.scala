@@ -19,8 +19,9 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: ArrayBuffer[Enemigo]) {
-  /** A paramater that holds the values for everyone´s action bar during combat */
+class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
+                           val enemies: ArrayBuffer[Enemigo]=ArrayBuffer()) {
+  /** A parameter that holds the values for everyone´s action bar during combat */
   var registro: ArrayBuffer[Int] = ArrayBuffer()
 
   /** A method for adding either players or enemies to the the turn calculator
@@ -28,6 +29,12 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
    * The function agregar receives a player or enemy and adds it to its corresponding array
    * It adds the corresponding player to the end of their array
    * If that character is already inside the array, no one is added adn the array stays the same
+   *
+   * @example
+   * var turnos = new ProgramadorDeTurnos()
+   * val paladin = new Paladin("Diego",90,80,70)
+   * turnos.agregar(paladin)
+   * println(s"The only character in the turn scheduler is ${turnos.players(0).getName()}$") --> should print Diego
    */
 
     def agregar(added: Entidad): Unit = {
@@ -53,6 +60,12 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
      * The function remover receives a player or enemy and removes it from their corresponding array
      * It removes him from the array
      * If that character in not inside the array, the array stays the same
+     *
+     * @example
+     * val paladin = new Paladin("Diego",90,80,70)
+     * var turnos = new ProgramadorDeTurnos(ArrayBuffer(paladin))
+     * turnos.sacar(paladin)
+     * println(s"The players in the turn scheduler are ${turnos.players}") ---> Should print an empty Array Buffer
      */
 
     def sacar(removed: Entidad): Unit = {
@@ -106,8 +119,8 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes], val enemies: Ar
       return barraMaxima
     }
 
-    /** A method that adds a constant value to each character currently in combat*
-     * The function takes a parameter th Integer k, that is added to each action bar
+    /** A method that adds a constant value to each character currently in combat
+     * The function takes an Integer k as a parameter, that is added to each action bar
      *
      */
      def continuar(k:Int): Unit = {
