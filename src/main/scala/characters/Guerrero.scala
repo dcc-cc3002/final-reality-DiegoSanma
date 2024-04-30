@@ -2,7 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
-import exceptions.Require
+import exceptions.{InvalidInventoryException, InvalidWeaponException, Require}
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -15,7 +15,8 @@ import scala.collection.mutable.ArrayBuffer
  * @param hp the hitpoints of the guerrero
  * @param defense the defense value of the guerrero
  * @param weight the weight of the guerrero
- * @param weapon the weapon the guerrero is holding
+ * @param inventory the inventory where the guerrero holds his weapons
+ * @param activeWeapon the weapon the guerrero is currently holding
  *
  * @constructor creates a new guerrero with a name, and values for hp, defense and weight
  *
@@ -32,7 +33,10 @@ class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
   Require.Stat(defense,"Defense not valid") in (0 to 300)
   Require.Stat(weight,"Weight not valid") in (0 to 200)
   if(inventory.nonEmpty){
-    throw new
+    throw new InvalidInventoryException("Inventory should begin empty")
+  }
+  if(activeWeapon.isEmpty){
+    throw new InvalidWeaponException("Active Weapon should begin empty")
   }
 
 
