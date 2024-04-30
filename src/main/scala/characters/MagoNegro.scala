@@ -36,7 +36,7 @@ class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
   if(inventory.nonEmpty){
     throw new InvalidInventoryException("Inventory should begin empty")
   }
-  if(activeWeapon.isEmpty){
+  if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
 }
