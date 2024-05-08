@@ -12,7 +12,9 @@ import scala.collection.mutable.ArrayBuffer
  * @param member4 fourth member of the party
  * @param member5 fifth member of the party
  */
-abstract class AParty(private var member1: Option[Attributes]=None,private var member2: Option[Attributes]=None,private var member3: Option[Attributes]=None,private var member4: Option[Attributes]=None,private var member5: Option[Attributes]=None) extends TParty {
+abstract class AParty(private var member1: Option[Attributes],private var member2: Option[Attributes]
+                      ,private var member3: Option[Attributes],private var member4: Option[Attributes]
+                      ,private var member5: Option[Attributes]) extends TParty {
 
   /**A method that returns an array buffer with all the members currently in the party
    * If the member is a None, it is included as a None in the array buffer
@@ -33,7 +35,7 @@ abstract class AParty(private var member1: Option[Attributes]=None,private var m
    * Returns the amount of party members alive
    * If it return 0,it is because the party has been defeated
    *
-   * EXCEPTION: if there is no one in the party, it will return 0, assuming the party was defeated
+   * If there is no one in the party, it will return 0, assuming the party was defeated
    *
    * @example
    * var party = new Party(Some(guerrero),Some(ninja),None,None,None)
@@ -71,7 +73,6 @@ abstract class AParty(private var member1: Option[Attributes]=None,private var m
   override def addMember(memb: Attributes): Unit = {
     val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
     var added = false
-
     for (index<-memberArray.indices if !added){
       if(memberArray(index).isEmpty){
         memberArray(index) = Some(memb)

@@ -26,7 +26,6 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
   override def takedamage(agresor: Entidad): Unit = {
     if(agresor.isInstanceOf[Enemigo]){
       if(agresor.asInstanceOf[Enemigo].getAttack()<this.getDefense()){
-        return
       }
       else {
         this.hp -= agresor.asInstanceOf[Enemigo].getAttack() - this.getDefense()
@@ -34,7 +33,6 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
     }
     else {
       if(agresor.asInstanceOf[Attributes].getActiveWeapon().get.getAtkPts()<this.getDefense()) {
-        return
       }
       else {
         this.hp -= agresor.asInstanceOf[Attributes].getActiveWeapon().get.getAtkPts() - this.getDefense()

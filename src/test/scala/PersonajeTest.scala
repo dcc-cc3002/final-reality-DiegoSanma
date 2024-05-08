@@ -9,6 +9,8 @@ import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 import enemigo.Enemigo
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
 
+import scala.collection.mutable.ArrayBuffer
+
 
 class PersonajeTest extends munit.FunSuite {
     var paladin: Paladin = null

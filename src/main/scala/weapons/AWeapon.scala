@@ -21,7 +21,7 @@ import characters.{Guerrero, MagoNegro, Ninja, Paladin}
  * @author Diego San Martin
  */
 
-abstract class AWeapon(private var name:String, private var atkpoints:Int, private var weight:Int, private var owner:Option[Attributes]=None) extends TWeapons {
+abstract class AWeapon(private var name:String, private var atkpoints:Int, private var weight:Int, private var owner:Option[Attributes]) extends TWeapons {
 
   /**A getter for the weapon´s name
    *

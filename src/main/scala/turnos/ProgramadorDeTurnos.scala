@@ -19,8 +19,8 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
-                           val enemies: ArrayBuffer[Enemigo]=ArrayBuffer()) extends IProgramadorDeTurnos {
+class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes],
+                           val enemies: ArrayBuffer[Enemigo]) extends IProgramadorDeTurnos {
   /** A parameter that holds the values for everyone´s action bar during combat */
   var registro: ArrayBuffer[Int] = ArrayBuffer()
 

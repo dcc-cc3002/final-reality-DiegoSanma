@@ -14,7 +14,7 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var inventory: ArrayBuffer[TWeapons]= ArrayBuffer(),private var activeWeapon: Option[TWeapons] = None)
+abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var mana:Int, private var inventory: ArrayBuffer[TWeapons],private var activeWeapon: Option[TWeapons])
   extends AEntidad(name,hp,defense,weight) with Attributes {
   def getMana(): Int = {
     this.mana
@@ -45,8 +45,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
    */
 
   override def receiveWeapon(weapon:TWeapons): Unit = {
-      if (this.inventory.length >=3) {
-        return
+      if (this.inventory.length >=3 || weapon.getOwner().isDefined) {
       }
       else if(!(this.inventory.contains(weapon))) {
         this.inventory += weapon
