@@ -14,8 +14,7 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
-                         private var inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),private var activeWeapon: Option[TWeapons] = None)
+abstract class Character(name:String,hp:Int,defense: Int, weight: Int, private var inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),private var activeWeapon: Option[TWeapons] = None)
   extends AEntidad(name,hp,defense,weight) with Attributes {
   /**Getter for inventory parameter
    * Will return all the weapons currently in the characters inventory

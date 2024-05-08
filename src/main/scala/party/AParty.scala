@@ -12,8 +12,7 @@ import scala.collection.mutable.ArrayBuffer
  * @param member4 fourth member of the party
  * @param member5 fifth member of the party
  */
-abstract class AParty(private var member1: Option[Attributes]=None,private var member2: Option[Attributes]=None,private var member3: Option[Attributes]=None,
-                      private var member4: Option[Attributes]=None,private var member5: Option[Attributes]=None) extends TParty {
+abstract class AParty(private var member1: Option[Attributes]=None,private var member2: Option[Attributes]=None,private var member3: Option[Attributes]=None,private var member4: Option[Attributes]=None,private var member5: Option[Attributes]=None) extends TParty {
 
   /**A method that returns an array buffer with all the members currently in the party
    * If the member is a None, it is included as a None in the array buffer
