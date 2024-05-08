@@ -20,7 +20,7 @@ import scala.collection.mutable.ArrayBuffer
  */
 
 class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
-                           val enemies: ArrayBuffer[Enemigo]=ArrayBuffer()) {
+                           val enemies: ArrayBuffer[Enemigo]=ArrayBuffer()) extends IProgramadorDeTurnos {
   /** A parameter that holds the values for everyone´s action bar during combat */
   var registro: ArrayBuffer[Int] = ArrayBuffer()
 
@@ -37,7 +37,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
    * println(s"The only character in the turn scheduler is ${turnos.players(0).getName()}$") --> should print Diego
    */
 
-    def agregar(added: Entidad): Unit = {
+    override def agregar(added: Entidad): Unit = {
     if (!(added.isInstanceOf[Attributes]) && !(added.isInstanceOf[Enemigo])) {
       return
     }
@@ -68,7 +68,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
      * println(s"The players in the turn scheduler are ${turnos.players}") ---> Should print an empty Array Buffer
      */
 
-    def sacar(removed: Entidad): Unit = {
+    override def sacar(removed: Entidad): Unit = {
       if (!(removed.isInstanceOf[Attributes]) && !(removed.isInstanceOf[Enemigo])) {
         return
       }
@@ -100,7 +100,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
      */
 
 
-    def Barra():ArrayBuffer[(Entidad,Double)] ={
+    override def Barra():ArrayBuffer[(Entidad,Double)] ={
         var barraMaxima: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
         for(i <- 0 until players.length){
           if(players(i).getActiveWeapon().isDefined) {
@@ -123,7 +123,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
      * The function takes an Integer k as a parameter, that is added to each action bar
      *
      */
-     def continuar(k:Int): Unit = {
+     override def continuar(k:Int): Unit = {
        for(i<-0 until registro.length){
           this.registro(i) = this.registro(i) + k
        }
@@ -139,7 +139,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
      * If no action bar was completed, then nothing happens
      */
 
-    def revisionTurno():Unit ={
+    override def revisionTurno():Unit ={
       var pasados: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
       var barraMax: ArrayBuffer[(Entidad,Double)] = Barra()
       for(i<-0 until this.registro.length){
@@ -163,7 +163,7 @@ class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes]=ArrayBuffer(),
      *
      */
 
-    def next_turn():Option[Entidad]={
+    override def next_turn():Option[Entidad]={
       if(this.turnos.isEmpty){
         return None
       }
