@@ -17,23 +17,55 @@ class InventoryTest extends munit.FunSuite {
   var weaponNin : Weapon = null
   var magicWeaponBM: MagicWeapon = null
 
-  override def beforeEach(context: BeforeEach): Unit = {
-    weaponPal = new Weapon("Excalibur",60,70)
-    weaponGue = new Weapon("Excalibur",60,70)
-    weaponNin = new Weapon("Excalibur",60,70)
-    magicWeaponBM = new MagicWeapon("Palito",20,40,80)
-    magicweaponWM = new MagicWeapon("Palito",20,40,80)
-
-    paladin = new Paladin("Diego", 100, 90, 120, ArrayBuffer(weaponPal))
-    guerrero = new Guerrero("Lucas", 80, 100, 100, ArrayBuffer(weaponGue))
-    ninja = new Ninja("Santiago", 60, 70, 60, ArrayBuffer(weaponNin))
-    magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100, ArrayBuffer(magicWeaponBM))
-    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90, ArrayBuffer(magicweaponWM))
+  test("Inventory Exception"){
+    var foundPal: Int = 0
+    try{
+      weaponPal = new Weapon("",70,80)
+      paladin = new Paladin("Diego", 100, 90, 120,ArrayBuffer(weaponPal))
+    }
+    catch{
+      case e: InvalidInventoryException => foundPal += 1
+    }
+    assertEquals(foundPal,1,"The inventory exception was not found")
+  var foundGue: Int = 0
+  try{
+    weaponGue = new Weapon("",70,80)
+    guerrero = new Guerrero("Diego", 100, 90, 120,ArrayBuffer(weaponGue))
   }
-  /**test("Inventory Exception"){
-    interceptMessage[InvalidInventoryException](
-      s"Invalid Inventory was found"
-    )
-  }*/
+  catch{
+    case e: InvalidInventoryException => foundGue += 1
+  }
+  assertEquals(foundGue,1,"The inventory exception was not found")
+
+  var foundNin: Int = 0
+  try{
+    weaponNin = new Weapon("",70,80)
+    ninja = new Ninja("Diego", 100, 90, 80,ArrayBuffer(weaponNin))
+  }
+  catch{
+    case e: InvalidInventoryException => foundNin += 1
+  }
+  assertEquals(foundGue,1,"The inventory exception was not found")
+
+  var foundWM: Int = 0
+    try{
+      magicweaponWM = new MagicWeapon("",70,80,90)
+      magoblanco = new MagoBlanco("Diego", 100, 90, 120,70,ArrayBuffer(magicweaponWM))
+    }
+    catch{
+      case e: InvalidInventoryException => foundWM += 1
+    }
+    assertEquals(foundWM,1,"The inventory exception was not found")
+
+    var foundBM: Int = 0
+    try{
+      magicWeaponBM = new MagicWeapon("",70,80,90)
+      magonegro = new MagoNegro("Diego", 100, 90, 120,70,ArrayBuffer(magicWeaponBM))
+    }
+    catch{
+      case e: InvalidInventoryException => foundBM += 1
+    }
+    assertEquals(foundBM,1,"The inventory exception was not found")
+}
 
 }
