@@ -1,7 +1,7 @@
 package turnos
 
 import attributes.{Attributes, Mage}
-import enemigo.Enemigo
+import enemigo.{Enemigo, EnemigoAttributes}
 import entity.Entidad
 
 import scala.collection.mutable.ArrayBuffer
@@ -19,8 +19,18 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-class ProgramadorDeTurnos (val players: ArrayBuffer[Attributes],
-                           val enemies: ArrayBuffer[Enemigo]) extends IProgramadorDeTurnos {
+class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
+                           private val enemies: ArrayBuffer[Enemigo]) extends IProgramadorDeTurnos {
+
+  /** Getter for player parameter */
+  override def getPlayers(): ArrayBuffer[Attributes] = {
+    this.players
+  }
+
+  /** Getter for enemies parameter */
+  override def getEnemies(): ArrayBuffer[Enemigo] = {
+    this.enemies
+  }
   /** A parameter that holds the values for everyone´s action bar during combat */
   var registro: ArrayBuffer[Int] = ArrayBuffer()
 

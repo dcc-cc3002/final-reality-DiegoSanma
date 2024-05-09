@@ -1,5 +1,7 @@
 package turnos
 
+import attributes.Attributes
+import enemigo.Enemigo
 import entity.Entidad
 
 import scala.collection.mutable.ArrayBuffer
@@ -21,4 +23,8 @@ trait IProgramadorDeTurnos {
   def revisionTurno(): Unit
 
   def next_turn(): Option[Entidad]
+
+  def getPlayers(): ArrayBuffer[Attributes]
+
+  def getEnemies(): ArrayBuffer[Enemigo]
 }
