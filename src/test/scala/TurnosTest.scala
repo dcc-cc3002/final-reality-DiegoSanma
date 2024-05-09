@@ -224,6 +224,10 @@ class TurnosTest extends munit.FunSuite{
     assert(first4.get.isInstanceOf[Enemigo])
     assertEquals(first4.get,enemigo2)
     assert(turnos.turnos.isEmpty)
+
+    val first5 = turnos.next_turn()
+    assert(first5.isEmpty)
+    assert(turnos.turnos.isEmpty)
   }
 
 }
