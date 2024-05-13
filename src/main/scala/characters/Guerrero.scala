@@ -3,7 +3,11 @@ package characters
 import attributes.Attributes
 import attributes.Character
 import axe.Axe
-import exceptions.{InvalidInventoryException, InvalidWeaponException, Require}
+import bow.Bow
+import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import staff.Staff
+import sword.Sword
+import wand.Wand
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -40,4 +44,26 @@ class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
 
+  override def receiveSword(weapon: Sword): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+
+  override def receiveAxe(weapon: Axe): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+
+  override def receiveBow(weapon: Bow): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+
+  override def receiveWand(weapon: Wand): Unit = {
+    throw new InvalidWeaponTypeException("Guerrero cannot hold a wand")
+  }
+
+  override def receiveStaff(weapon: Staff): Unit = {
+    throw new InvalidWeaponTypeException("Guerrero cannot hold a staff")
+  }
 }

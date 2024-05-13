@@ -18,4 +18,7 @@ import weapons.MagicWeapon
 class Staff (name:String,atkpoints:Int,weight:Int,magicpoints:Int,owner:Option[Attributes]=None)
   extends MagicWeapon(name,atkpoints,weight,magicpoints,owner){
 
+  override def giveToOwner(receiver: Attributes): Unit = {
+    receiver.receiveStaff(this)
+  }
 }

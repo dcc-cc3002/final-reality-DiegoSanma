@@ -5,6 +5,7 @@ import attributes.Character
 import axe.Axe
 import bow.Bow
 import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import staff.Staff
 import sword.Sword
 import wand.Wand
 import weapons.TWeapons
@@ -43,17 +44,20 @@ class Ninja(name: String,hp: Int,defense:Int,weight: Int,
 
   override def receiveBow(weapon: Bow): Unit = {
     this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
   }
 
   override def receiveSword(weapon: Sword): Unit = {
     this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
   }
 
   override def receiveWand(weapon: Wand): Unit = {
     this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
   }
 
-  override def receiveStaff(weapon: Wand): Unit = {
+  override def receiveStaff(weapon: Staff): Unit = {
     throw new InvalidWeaponTypeException("Staff cannot be held by ninja")
   }
 

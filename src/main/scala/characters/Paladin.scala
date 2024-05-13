@@ -2,7 +2,12 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
-import exceptions.{InvalidInventoryException, InvalidWeaponException, Require}
+import axe.Axe
+import bow.Bow
+import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import staff.Staff
+import sword.Sword
+import wand.Wand
 import weapons.TWeapons
 
 import java.security.InvalidParameterException
@@ -38,5 +43,25 @@ class Paladin(name: String,hp: Int,defense:Int,weight: Int,
   }
   if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
+  }
+
+  override def receiveSword(weapon: Sword): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+
+  override def receiveAxe(weapon: Axe): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+
+  override def receiveBow(weapon: Bow): Unit = {
+    throw new InvalidWeaponTypeException("Paladin cannot hold a Bow")
+  }
+  override def receiveWand(weapon: Wand): Unit = {
+    throw new InvalidWeaponTypeException("Paladin cannot hold a Wand")
+  }
+  override def receiveStaff(weapon: Staff): Unit = {
+    throw new InvalidWeaponTypeException("Paladin cannot hold a Staff")
   }
 }

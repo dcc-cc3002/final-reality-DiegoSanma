@@ -1,7 +1,12 @@
 package characters
 
 import attributes.{Attributes, Mage}
-import exceptions.{InvalidInventoryException, InvalidWeaponException, Require}
+import axe.Axe
+import bow.Bow
+import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import staff.Staff
+import sword.Sword
+import wand.Wand
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -40,5 +45,26 @@ class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
   }
   if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
+  }
+
+  override def receiveSword(weapon: Sword): Unit = {
+    throw new InvalidWeaponTypeException("White Mage cannot hold a sword")
+  }
+
+  override def receiveAxe(weapon: Axe): Unit = {
+    throw new InvalidWeaponTypeException("White Mage cannot hold a axe")
+  }
+
+  override def receiveBow(weapon: Bow): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+  override def receiveWand(weapon: Wand): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
+  }
+  override def receiveStaff(weapon: Staff): Unit = {
+    this.inventory.addOne(weapon)
+    weapon.changeOwner(this)
   }
 }

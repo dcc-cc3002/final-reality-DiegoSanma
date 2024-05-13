@@ -72,7 +72,7 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
     this.owner = Some(receiver)
   }
 
-  /**Method for leaving an owner
+  /** Method for leaving an owner
    *
    * Does not take into account if there is an owner or not, leaves it as a None in both cases
    *
@@ -87,12 +87,22 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    * println(s"Current owner is ${weapon.getOwner()}"= --> should print None
    *
    */
+
+  /**Method for changing the owner of a weapon
+   *
+   * Will only be called upon, when the weapon´s type matches those that the player can hold
+   *
+   * @param receiver the new owner of the weapon
+   */
+  override def changeOwner(receiver: Attributes): Unit = {
+    this.owner = Some(receiver)
+  }
   override def leaveOwner(): Unit = {
       this.owner = None
   }
   /**Renames the weapon to the name(named) of choice
    *
-   * If the weapon asready has a name assigned to it, that one is permanent, and cannot be changed
+   * If the weapon already has a name assigned to it, that one is permanent, and cannot be changed
    *
    * @example
    * val weapon = new Weapon("",70,70)

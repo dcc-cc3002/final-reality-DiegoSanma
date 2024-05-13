@@ -19,14 +19,7 @@ trait TWeapons {
 
   def giveToOwner(receiver:Attributes): Unit
 
-  def giveToPaladin(paladin:Paladin): Unit
+  def changeOwner(receiver:Attributes): Unit
 
-  def giveToGuerrero(guerrero: Guerrero): Unit
-
-  def giveToNinja(ninja: Ninja): Unit
-
-  def giveToWhiteMage(magoBlanco: MagoBlanco): Unit
-
-  def giveToBlackMage(magoNegro: MagoNegro): Unit
   def leaveOwner(): Unit
 }

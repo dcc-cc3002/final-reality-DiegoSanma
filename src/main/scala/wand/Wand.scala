@@ -16,6 +16,9 @@ import weapons.MagicWeapon
  */
 
 class Wand (name:String,atkpoints:Int,weight:Int,magicpoints:Int,owner:Option[Attributes]=None)
-  extends MagicWeapon(name,atkpoints,weight,magicpoints,owner){
+  extends MagicWeapon(name,atkpoints,weight,magicpoints,owner) {
 
+  override def giveToOwner(receiver: Attributes): Unit = {
+    receiver.receiveWand(this)
+  }
 }

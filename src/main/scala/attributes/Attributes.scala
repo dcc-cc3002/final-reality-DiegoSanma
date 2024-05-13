@@ -32,7 +32,7 @@ trait Attributes extends AEntidad{
 
   def receiveWand(weapon:Wand): Unit
 
-  def receiveStaff(weapon:Wand): Unit
+  def receiveStaff(weapon:Staff): Unit
   def dropWeapon(weapon:TWeapons): Unit
 
   def changeWeapon(position:Int): Unit
