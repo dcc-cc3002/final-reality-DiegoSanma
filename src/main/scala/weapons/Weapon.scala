@@ -17,7 +17,7 @@ import exceptions.{InvalidOwnerException, Require}
  * @author Diego San Martín
  */
 
-class Weapon(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None)
+abstract class Weapon(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None)
   extends AWeapon(name,atkpoints,weight,owner) {
 
   /** Checks whether a magic weapon was initialized with the correct parameters */

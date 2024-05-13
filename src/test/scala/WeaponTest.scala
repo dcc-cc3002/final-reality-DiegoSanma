@@ -4,7 +4,7 @@ import weapons.{AMagicWeapon, AWeapon, MagicWeapon, TWeapons, Weapon}
 
 /**This test is for the weapons the characters hold
  *
- * It includes testing for Espada(Sword), Hacha(Axe), Arco(Bow),
+ * It includes testing for Espada(Sword), Hacha(Axe), Arco(bow.Bow),
  * VaritaMagica(Wand) and Baston(Staff)
  *
  */
