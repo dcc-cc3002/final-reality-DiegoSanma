@@ -46,7 +46,6 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     if (this.inventory.length >=3 || weapon.getOwner().isDefined) {
     }
     else if(!(this.inventory.contains(weapon))) {
-      this.inventory += weapon
       weapon.giveToOwner(this)
     }
   }

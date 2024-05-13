@@ -48,7 +48,6 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
       if (this.inventory.length >=3 || weapon.getOwner().isDefined) {
       }
       else if(!(this.inventory.contains(weapon))) {
-        this.inventory += weapon
         weapon.giveToOwner(this)
       }
     }

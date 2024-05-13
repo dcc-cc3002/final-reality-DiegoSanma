@@ -1,4 +1,6 @@
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import sword.Sword
+import wand.Wand
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, TWeapons, Weapon}
 
 
@@ -10,10 +12,10 @@ import weapons.{AMagicWeapon, AWeapon, MagicWeapon, TWeapons, Weapon}
  */
 
 class WeaponTest extends munit.FunSuite {
-  var weapon: Weapon = null
-  var magicweapon: MagicWeapon = null
-  var notnamew: Weapon = null
-  var notnamedw: MagicWeapon = null
+  var weapon: Sword = null
+  var magicweapon: Wand = null
+  var notnamew: Sword = null
+  var notnamedw: Wand = null
   var paladin: Paladin = null
   var guerrero: Guerrero = null
   var ninja: Ninja = null
@@ -26,10 +28,10 @@ class WeaponTest extends munit.FunSuite {
     ninja = new Ninja("Santiago", 60, 70, 60)
     magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
-    weapon = new Weapon("Excalibur",60,70)
-    magicweapon = new MagicWeapon("Palito",20,40,80)
-    notnamew = new Weapon("",80,90)
-    notnamedw = new MagicWeapon("",30,40,50)
+    weapon = new Sword("Excalibur",60,70)
+    magicweapon = new Wand("Palito",20,40,80)
+    notnamew = new Sword("",80,90)
+    notnamedw = new Wand("",30,40,50)
   }
 
   test("weapon creation"){
@@ -51,8 +53,8 @@ class WeaponTest extends munit.FunSuite {
   }
 
   test("having and leaving owner"){
-    var sword: Weapon = new Weapon("Blade of Truth",60,70)
-    var wood: MagicWeapon = new MagicWeapon("Pinocchio",70,50,50)
+    var sword: Weapon = new Sword("Blade of Truth",60,70)
+    var wood: MagicWeapon = new Wand("Pinocchio",70,50,50)
 
     assert(ninja.getActiveWeapon().isEmpty,"Ninja should not have a weapon")
     assert(sword.getOwner().isEmpty,"Sword should have no owner")

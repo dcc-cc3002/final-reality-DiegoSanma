@@ -1,6 +1,8 @@
 package exceptions
 
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import sword.Sword
+import wand.Wand
 import weapons.{MagicWeapon, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -11,16 +13,16 @@ class InventoryTest extends munit.FunSuite {
   var ninja: Ninja = null
   var magonegro: MagoNegro = null
   var magoblanco: MagoBlanco = null
-  var weaponPal: Weapon = null
-  var magicweaponWM: MagicWeapon = null
-  var weaponGue : Weapon = null
-  var weaponNin : Weapon = null
-  var magicWeaponBM: MagicWeapon = null
+  var weaponPal: Sword = null
+  var magicweaponWM: Wand = null
+  var weaponGue : Sword = null
+  var weaponNin : Sword = null
+  var magicWeaponBM: Wand = null
 
   test("Inventory Exception"){
     var foundPal: Int = 0
     try{
-      weaponPal = new Weapon("",70,80)
+      weaponPal = new Sword("",70,80)
       paladin = new Paladin("Diego", 100, 90, 120,ArrayBuffer(weaponPal))
     }
     catch{
@@ -29,7 +31,7 @@ class InventoryTest extends munit.FunSuite {
     assertEquals(foundPal,1,"The inventory exception was not found")
   var foundGue: Int = 0
   try{
-    weaponGue = new Weapon("",70,80)
+    weaponGue = new Sword("",70,80)
     guerrero = new Guerrero("Diego", 100, 90, 120,ArrayBuffer(weaponGue))
   }
   catch{
@@ -39,7 +41,7 @@ class InventoryTest extends munit.FunSuite {
 
   var foundNin: Int = 0
   try{
-    weaponNin = new Weapon("",70,80)
+    weaponNin = new Sword("",70,80)
     ninja = new Ninja("Diego", 100, 90, 80,ArrayBuffer(weaponNin))
   }
   catch{
@@ -49,7 +51,7 @@ class InventoryTest extends munit.FunSuite {
 
   var foundWM: Int = 0
     try{
-      magicweaponWM = new MagicWeapon("",70,80,90)
+      magicweaponWM = new Wand("",70,80,90)
       magoblanco = new MagoBlanco("Diego", 100, 90, 120,70,ArrayBuffer(magicweaponWM))
     }
     catch{
@@ -59,7 +61,7 @@ class InventoryTest extends munit.FunSuite {
 
     var foundBM: Int = 0
     try{
-      magicWeaponBM = new MagicWeapon("",70,80,90)
+      magicWeaponBM = new Wand("",70,80,90)
       magonegro = new MagoNegro("Diego", 100, 90, 120,70,ArrayBuffer(magicWeaponBM))
     }
     catch{

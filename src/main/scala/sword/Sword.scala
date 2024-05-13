@@ -14,8 +14,9 @@ import weapons.Weapon
  *
  */
 
-class Sword (name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends Weapon(name,atkpoints,weight, owner){
+class Sword (name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends Weapon(name,atkpoints,weight, owner) {
 
   override def giveToOwner(receiver: Attributes): Unit = {
     receiver.receiveSword(this)
+  }
 }

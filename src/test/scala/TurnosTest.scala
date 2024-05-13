@@ -1,7 +1,11 @@
 import attributes.Attributes
+import axe.Axe
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 import enemigo.Enemigo
+import staff.Staff
+import sword.Sword
 import turnos.ProgramadorDeTurnos
+import wand.Wand
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -18,10 +22,10 @@ class TurnosTest extends munit.FunSuite{
   var magoblanco: MagoBlanco = null
   var enemigo1: Enemigo = null
   var enemigo2: Enemigo = null
-  var weapon: AWeapon = null
-  var magicweapon: AMagicWeapon = null
-  var notnamew: AWeapon = null
-  var notnamedw: AMagicWeapon = null
+  var weapon: Sword = null
+  var magicweapon: Wand = null
+  var notnamew: Axe = null
+  var notnamedw: Staff = null
   var turnos: ProgramadorDeTurnos = null
   var jugadores : ArrayBuffer[Attributes] = null
   var enemigos: ArrayBuffer[Enemigo] = null
@@ -32,10 +36,10 @@ class TurnosTest extends munit.FunSuite{
     ninja = new Ninja("Santiago", 60, 70, 60)
     magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
-    weapon = new Weapon("Excalibur",60,70)
-    magicweapon = new MagicWeapon("Palito",20,40,80)
-    notnamew = new Weapon("",80,90)
-    notnamedw = new MagicWeapon("",30,40,50)
+    weapon = new Sword("Excalibur",60,70)
+    magicweapon = new Wand("Palito",20,40,80)
+    notnamew = new Axe("",80,90)
+    notnamedw = new Staff("",30,40,50)
     enemigo1 = new Enemigo("Goblin",40,30,30,20)
     enemigo2 = new Enemigo("Golem",120,60,110,80)
     jugadores = ArrayBuffer.empty

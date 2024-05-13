@@ -1,5 +1,7 @@
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 import enemigo.Enemigo
+import staff.Staff
+import sword.Sword
 import weapons.{MagicWeapon, Weapon}
 
 /**Testing for when either enemies or characters/mages attack
@@ -7,10 +9,10 @@ import weapons.{MagicWeapon, Weapon}
  */
 
 class AttackingTest extends munit.FunSuite{
-  var weapon: Weapon = null
-  var biggerWeapon:Weapon = null
-  var magicweapon: MagicWeapon = null
-  var biggerMagicWeapon:MagicWeapon = null
+  var weapon: Sword = null
+  var biggerWeapon:Sword = null
+  var magicweapon: Staff = null
+  var biggerMagicWeapon:Staff = null
   var paladin: Paladin = null
   var guerrero: Guerrero = null
   var ninja: Ninja = null
@@ -27,10 +29,10 @@ class AttackingTest extends munit.FunSuite{
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
     enemigo1 = new Enemigo("Goblin",40,30,20,30)
     enemigo2 = new Enemigo("Golem",120,50,80,45)
-    weapon = new Weapon("Excalibur",60,70)
-    magicweapon = new MagicWeapon("Palito",20,40,80)
-    biggerWeapon = new Weapon("Big Sword",80,120)
-    biggerMagicWeapon = new MagicWeapon("Boom",90,20,40)
+    weapon = new Sword("Excalibur",60,70)
+    magicweapon = new Staff("Palito",20,40,80)
+    biggerWeapon = new Sword("Big Sword",80,120)
+    biggerMagicWeapon = new Staff("Boom",90,20,40)
   }
   test("attacking and taking damage"){
     assertEquals(paladin.getHp(),100,"Paladin does not start with full health")

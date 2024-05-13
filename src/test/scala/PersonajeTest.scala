@@ -5,8 +5,11 @@
  *
  */
 
+import bow.Bow
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 import enemigo.Enemigo
+import sword.Sword
+import wand.Wand
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -92,10 +95,10 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(magonegro.getActiveWeapon(),None, "No weapon should be held")
         assertEquals(magoblanco.getActiveWeapon(),None, "No weapon should be held")
 
-        var bow: Weapon = new Weapon("Legolas",50,30)
-        var knife: Weapon = new Weapon("Slick",60,70)
-        var wand: MagicWeapon = new MagicWeapon("Giggidy",60,70,90)
-        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70)
+        var bow: Weapon = new Bow("Legolas",50,30)
+        var knife: Weapon = new Sword("Slick",60,70)
+        var wand: MagicWeapon = new Wand("Giggidy",60,70,90)
+        var wand2: MagicWeapon = new Wand("Stick of Truth",45,60,70)
 
         ninja.receiveWeapon(bow)
         assert(ninja.getWeapons().nonEmpty,"Weapon should´ve been added to the inventory")
@@ -117,10 +120,10 @@ class PersonajeTest extends munit.FunSuite {
         ninja.receiveWeapon(wand)
         assertEquals(ninja.getWeapons()(2),wand,"Wand not added to inventory")
 
-        ninja.receiveWeapon(staff)
+        ninja.receiveWeapon(wand2)
         assertEquals(ninja.getWeapons().length,3,"No more weapon should be added to the inventory")
 
-        ninja.dropWeapon(staff)
+        ninja.dropWeapon(wand2)
         assertEquals(ninja.getWeapons().length,3,"No weapon should be removed to the inventory")
 
         ninja.dropWeapon(knife)
@@ -129,10 +132,10 @@ class PersonajeTest extends munit.FunSuite {
         assert(!(ninja.getWeapons().contains(knife)),"Knife should no longer be in the inventory")
     }
     test("mage inventory and weapon"){
-        var bow: Weapon = new Weapon("Legolas",50,30)
-        var knife: Weapon = new Weapon("Slick",60,70)
-        var wand: MagicWeapon = new MagicWeapon("Giggidy",60,70,90)
-        var staff: MagicWeapon = new MagicWeapon("Stick of Truth",45,60,70)
+        var bow: Weapon = new Bow("Legolas",50,30)
+        var slingshot: Weapon = new Bow("Slick",60,70)
+        var wand: MagicWeapon = new Wand("Giggidy",60,70,90)
+        var staff: MagicWeapon = new Wand("Stick of Truth",45,60,70)
 
         magoblanco.receiveWeapon(bow)
         assert(magoblanco.getWeapons().nonEmpty,"Weapon should´ve been added to the inventory")
@@ -145,12 +148,11 @@ class PersonajeTest extends munit.FunSuite {
         assert(magoblanco.getWeapons().nonEmpty,"The bow should not have been removed from magoblanco´s inventory")
         assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
 
-        magoblanco.receiveWeapon(knife)
-        assertEquals(magoblanco.getWeapons()(1),knife,"Knife not added to inventory")
+        magoblanco.receiveWeapon(slingshot)
+        assertEquals(magoblanco.getWeapons()(1),slingshot,"Slingshot not added to inventory")
         assertEquals(magoblanco.getActiveWeapon().get,bow, "bow.Bow should be equipped")
         magoblanco.changeWeapon(1)
-        assertEquals(magoblanco.getActiveWeapon().get,knife, "Knife should be equipped")
-
+        assertEquals(magoblanco.getActiveWeapon().get,slingshot, "Knife should be equipped")
         magoblanco.receiveWeapon(wand)
         assertEquals(magoblanco.getWeapons()(2),wand,"Wand not added to inventory")
 
@@ -160,9 +162,9 @@ class PersonajeTest extends munit.FunSuite {
         magoblanco.dropWeapon(staff)
         assertEquals(magoblanco.getWeapons().length,3,"No weapon should be removed to the inventory")
 
-        magoblanco.dropWeapon(knife)
+        magoblanco.dropWeapon(slingshot)
         assertEquals(magoblanco.getWeapons().length,2,"A weapon should´ve be removed to the inventory")
         assert(magoblanco.getActiveWeapon().isEmpty,"There should be no active weapon held")
-        assert(!(magoblanco.getWeapons().contains(knife)),"Knife should no longer be in the inventory")
+        assert(!(magoblanco.getWeapons().contains(slingshot)),"Knife should no longer be in the inventory")
     }
 }

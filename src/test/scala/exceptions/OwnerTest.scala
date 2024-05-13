@@ -1,19 +1,21 @@
 package exceptions
 
 import characters.{MagoBlanco, Paladin}
+import staff.Staff
+import sword.Sword
 import weapons.{MagicWeapon, Weapon}
 
 class OwnerTest extends munit.FunSuite {
   var paladin: Paladin = null
-  var weaponPal: Weapon = null
+  var weaponPal: Sword = null
   var magoblanco: MagoBlanco = null
-  var magicweaponWM: MagicWeapon = null
+  var magicweaponWM: Staff = null
 
   test("Owner Exceptions"){
     var weaponFound: Int = 0
     try{
       paladin = new Paladin("Diego",100,100,100)
-      weaponPal = new Weapon("",80,70,Some(paladin))
+      weaponPal = new Sword("",80,70,Some(paladin))
     }
     catch{
       case e: InvalidOwnerException => weaponFound += 1
@@ -23,7 +25,7 @@ class OwnerTest extends munit.FunSuite {
     var magicweaponFound: Int = 0
     try{
       magoblanco = new MagoBlanco("Diego",100,100,100,150)
-      magicweaponWM = new MagicWeapon("",80,70,70,Some(magoblanco))
+      magicweaponWM = new Staff("",80,70,70,Some(magoblanco))
     }
     catch{
       case e: InvalidOwnerException => magicweaponFound += 1
