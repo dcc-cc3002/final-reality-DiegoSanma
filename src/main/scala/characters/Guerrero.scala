@@ -2,6 +2,7 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
+import axe.Axe
 import exceptions.{InvalidInventoryException, InvalidWeaponException, Require}
 import weapons.TWeapons
 
@@ -38,6 +39,5 @@ class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
   if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
-
 
 }

@@ -2,7 +2,11 @@ package characters
 
 import attributes.Attributes
 import attributes.Character
-import exceptions.{InvalidInventoryException, InvalidWeaponException, Require}
+import axe.Axe
+import bow.Bow
+import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import sword.Sword
+import wand.Wand
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -35,5 +39,25 @@ class Ninja(name: String,hp: Int,defense:Int,weight: Int,
   }
   if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
+  }
+
+  override def receiveBow(weapon: Bow): Unit = {
+    this.inventory.addOne(weapon)
+  }
+
+  override def receiveSword(weapon: Sword): Unit = {
+    this.inventory.addOne(weapon)
+  }
+
+  override def receiveWand(weapon: Wand): Unit = {
+    this.inventory.addOne(weapon)
+  }
+
+  override def receiveStaff(weapon: Wand): Unit = {
+    throw new InvalidWeaponTypeException("Staff cannot be held by ninja")
+  }
+
+  override def receiveAxe(weapon: Axe): Unit = {
+    throw new InvalidWeaponTypeException("Axe cannot be held by ninja")
   }
 }

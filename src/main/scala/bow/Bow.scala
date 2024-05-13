@@ -15,4 +15,7 @@ import weapons.Weapon
 
 class Bow(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends Weapon(name,atkpoints,weight, owner)
 {
+  override def giveToOwner(receiver: Attributes): Unit = {
+    receiver.receiveBow(this)
+  }
 }

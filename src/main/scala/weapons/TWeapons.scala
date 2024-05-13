@@ -1,7 +1,7 @@
 package weapons
 
 import attributes.{Attributes, Mage}
-import characters.{Guerrero, MagoNegro, Ninja, Paladin}
+import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
 
 /** A trait used to define the methods that will be implemented by a weapon
  *
@@ -19,5 +19,14 @@ trait TWeapons {
 
   def giveToOwner(receiver:Attributes): Unit
 
+  def giveToPaladin(paladin:Paladin): Unit
+
+  def giveToGuerrero(guerrero: Guerrero): Unit
+
+  def giveToNinja(ninja: Ninja): Unit
+
+  def giveToWhiteMage(magoBlanco: MagoBlanco): Unit
+
+  def giveToBlackMage(magoNegro: MagoNegro): Unit
   def leaveOwner(): Unit
 }
