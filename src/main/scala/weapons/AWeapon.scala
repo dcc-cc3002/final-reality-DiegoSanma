@@ -68,9 +68,7 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    * paladin.receiveWeapon(weapon) --> calls this method from Character class
    * println(s"Current owner is ${weapon.getOwner()}"= --> should print paladin
    */
-  override def giveToOwner(receiver:Attributes): Unit = {
-    this.owner = Some(receiver)
-  }
+
 
   /** Method for leaving an owner
    *
