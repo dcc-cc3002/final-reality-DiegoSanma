@@ -18,6 +18,12 @@ import weapons.MagicWeapon
 class Wand (name:String,atkpoints:Int,weight:Int,magicpoints:Int,owner:Option[Attributes]=None)
   extends MagicWeapon(name,atkpoints,weight,magicpoints,owner) {
 
+  /**Method for telling owner what type of weapon they are receiving
+   *
+   * As this weapon is of the class Wand, it calls receiveWand for the receiver
+   *
+   * @param receiver expected new owner of the Wand
+   */
   override def giveToOwner(receiver: Attributes): Unit = {
     receiver.receiveWand(this)
   }

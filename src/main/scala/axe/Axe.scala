@@ -16,6 +16,12 @@ import weapons.Weapon
 
 class Axe (name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends Weapon(name,atkpoints,weight, owner){
 
+  /**Method for telling owner what type of weapon they are receiving
+   *
+   * As this weapon is of the class Axe, it calls receiveAxe for the receiver
+   *
+   * @param receiver expected new owner of the Axe
+   */
   override def giveToOwner(receiver: Attributes): Unit = {
     receiver.receiveAxe(this)
   }

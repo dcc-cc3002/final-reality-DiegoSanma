@@ -56,18 +56,6 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
     this.owner
   }
 
-  /** A method for assigning an owner to the weapon
-   *
-   * Does not take into account if there already as an owner or not, changes it in both cases
-   *
-   * This method is not to be called directly, but instead from the character that will receive this weapon
-   *
-   * @example
-   * val weapon = new Weapon("Sword",70,70)
-   * println(s"Current owner is ${weapon.getOwner()}"= --> should print None
-   * paladin.receiveWeapon(weapon) --> calls this method from Character class
-   * println(s"Current owner is ${weapon.getOwner()}"= --> should print paladin
-   */
 
 
   /** Method for leaving an owner
