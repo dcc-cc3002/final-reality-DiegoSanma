@@ -70,6 +70,17 @@ owned.
 Weapons are divided into two, magic and non-magic weapons. The only thing that currently makes them different, is
 the fact that magic weapons also have magic points, while non-magic weapons don´t. 
 
+## II.I Weapon Types
+Weapons are divided into 5 types, sword,axe and bow for non-magic weapons and wand and staff for magic weapons. Each
+of these weapons have certain classes of players that can have them, for example a paladin can hold a sword, but can´t
+hold a wand.
+
+To ensure this, the double dispatch method was used, where each character class has 5 methods, one for receiving each
+type of weapon (receiveSword(sword),receiveAxe(Axe)...). These functions are called when said players wants to receive
+that type of weapon, where receiveWeapon calls giveToOwner in that weapon´s class, that later calls their respective
+method for their weapon type. This way, the code ensures the least amount of use of isInstanceOf and ifs when giving a 
+player a weapon.
+
 ## III. Party
 Parties are a group of 5 players (was defined initially as 3, but for this version, parties will be allowed 
 to be bigger), that will later fight in combat as a team. Currently, a party is allowed to add and remove players,
