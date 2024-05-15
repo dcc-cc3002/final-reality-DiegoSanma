@@ -44,23 +44,57 @@ class Paladin(name: String,hp: Int,defense:Int,weight: Int,
   if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
-
+  /**Method for receiving a sword
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon sword being received
+   */
   override def receiveSword(weapon: Sword): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
-
+  /**Method for receiving an axe
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon axe being received
+   */
   override def receiveAxe(weapon: Axe): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
 
+  /**Method for receiving a bow
+   *
+   * As a paladin can´t hold one, this method throws an exception
+   *
+   * @param weapon bow being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveBow(weapon: Bow): Unit = {
     throw new InvalidWeaponTypeException("Paladin cannot hold a Bow")
   }
+
+  /**Method for receiving a wand
+   *
+   * As a paladin can´t hold one, this method throws an exception
+   *
+   * @param weapon wand being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveWand(weapon: Wand): Unit = {
     throw new InvalidWeaponTypeException("Paladin cannot hold a Wand")
   }
+
+  /**Method for receiving a staff
+   *
+   * As a paladin can´t hold one, this method throws an exception
+   *
+   * @param weapon staff being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveStaff(weapon: Staff): Unit = {
     throw new InvalidWeaponTypeException("Paladin cannot hold a Staff")
   }

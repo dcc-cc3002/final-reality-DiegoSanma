@@ -42,25 +42,56 @@ class Ninja(name: String,hp: Int,defense:Int,weight: Int,
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
 
+  /**Method for receiving a bow
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon bow being received
+   */
   override def receiveBow(weapon: Bow): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
 
+  /**Method for receiving a sword
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon sword being received
+   */
   override def receiveSword(weapon: Sword): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
 
+  /**Method for receiving a wand
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon wand being received
+   */
   override def receiveWand(weapon: Wand): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
+  /**Method for receiving a staff
+   *
+   * As a ninja can´t hold one, this method throws an exception
+   *
+   * @param weapon staff being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
 
   override def receiveStaff(weapon: Staff): Unit = {
     throw new InvalidWeaponTypeException("Staff cannot be held by ninja")
   }
 
+  /**Method for receiving a axe
+   *
+   * As a ninja can´t hold one, this method throws an exception
+   *
+   * @param weapon axe being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveAxe(weapon: Axe): Unit = {
     throw new InvalidWeaponTypeException("Axe cannot be held by ninja")
   }

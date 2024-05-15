@@ -44,25 +44,52 @@ class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
   if(activeWeapon.nonEmpty){
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
-
+  /**Method for receiving a sword
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon sword being received
+   */
   override def receiveSword(weapon: Sword): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
-
+  /**Method for receiving an axe
+   *
+   * As a black mage can´t hold one, this method throws an exception
+   *
+   * @param weaponn axe being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveAxe(weapon: Axe): Unit = {
     throw new InvalidWeaponTypeException("Black Mage cannot hold an Axe")
   }
-
+  /**Method for receiving a bow
+   *
+   * As a black mage can´t hold one, this method throws an exception
+   *
+   * @param weapon bow being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveBow(weapon: Bow): Unit = {
     throw new InvalidWeaponTypeException("Black Mage cannot hold a Bow")
   }
-
+  /**Method for receiving a wand
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon wand being received
+   */
   override def receiveWand(weapon: Wand): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
 
+  /**Method for receiving a staff
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon staff being received
+   */
   override def receiveStaff(weapon: Staff): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)

@@ -44,24 +44,55 @@ class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
     throw new InvalidWeaponException("Active Weapon should begin empty")
   }
 
+  /**Method for receiving a sword
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon sword being received
+   */
   override def receiveSword(weapon: Sword): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
-
+  /**Method for receiving a axe
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon axe being received
+   */
   override def receiveAxe(weapon: Axe): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
+  /**Method for receiving a bow
+   * Adds it to slot in inventory, and calls to change the weapon´s owner to whom is receiving it
+   *
+   * @param weapon bow being received
+   */
 
   override def receiveBow(weapon: Bow): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
 
+  /**Method for receiving a wand
+   *
+   * As a guerrero can´t hold one, this method throws an exception
+   *
+   * @param weapon wand being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
   override def receiveWand(weapon: Wand): Unit = {
     throw new InvalidWeaponTypeException("Guerrero cannot hold a wand")
   }
+
+  /**Method for receiving a staff
+   *
+   * As a guerrero can´t hold one, this method throws an exception
+   *
+   * @param weapon staff being received
+   *
+   * @throws InvalidWeaponTypeException
+   */
 
   override def receiveStaff(weapon: Staff): Unit = {
     throw new InvalidWeaponTypeException("Guerrero cannot hold a staff")
