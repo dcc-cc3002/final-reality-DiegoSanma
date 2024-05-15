@@ -56,6 +56,17 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
     this.owner
   }
 
+  /**Method for changing the owner of the weapon
+   *
+   * Is called when all previous checks are made for whether they can be the owner of the weapon
+   * These checks include, space in the player´s inventory, no current owner of the weapon and
+   * that the weapon type matches those that said player´s class can hold
+   *
+   * @param receiver the new owner of the weapon
+   */
+
+  override def changeOwner(receiver: Attributes): Unit = {
+    this.owner = Some(receiver)
 
 
   /** Method for leaving an owner
