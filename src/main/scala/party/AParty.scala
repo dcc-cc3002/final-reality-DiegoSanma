@@ -13,6 +13,9 @@ import scala.collection.mutable.ArrayBuffer
 abstract class AParty(private var member1: Option[Attributes],private var member2: Option[Attributes]
                       ,private var member3: Option[Attributes]) extends TParty {
 
+  /** Parameter that serves as an array with all party members */
+  val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3)
+
   /**A method that returns an array buffer with all the members currently in the party
    * If the member is a None, it is included as a None in the array buffer
    *
@@ -24,8 +27,7 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    * @return ArrayBuffer(member1,member2,member3)
    */
   override def getMembers(): ArrayBuffer[Option[Attributes]] = {
-    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3)
-    return memberArray
+    return this.memberArray
   }
   /**A function that determines whether a party is defeated or not
    *
@@ -42,9 +44,8 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    * @author Diego San Martin
    */
   override def defeated():Int = {
-    val memberArray: ArrayBuffer[Option[Attributes]] = this.getMembers()
     var alive:Int = 3
-    for (mem<-memberArray){
+    for (mem<-this.memberArray){
       val status= if (mem.isDefined) mem.get.getHp() else 0
       if (status ==0){
         alive-=1
@@ -68,16 +69,11 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    *
    */
   override def addMember(memb: Attributes): Unit = {
-    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3)
-    var added = false
-    for (index<-memberArray.indices if !added){
-      if(memberArray(index).isEmpty){
-        memberArray(index) = Some(memb)
-        added = true
-      }
+    var length = memberArray.length
+    if(length>3){
+      throw new FullPartyException
     }
-    this.member1=memberArray(0)
-    this.member2=memberArray(1)
-    this.member3=memberArray(2)
+
+
   }
 }
