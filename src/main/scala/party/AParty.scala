@@ -9,12 +9,9 @@ import scala.collection.mutable.ArrayBuffer
  * @param member1 first member of the party
  * @param member2 second member of the party
  * @param member3 third member of the party
- * @param member4 fourth member of the party
- * @param member5 fifth member of the party
  */
 abstract class AParty(private var member1: Option[Attributes],private var member2: Option[Attributes]
-                      ,private var member3: Option[Attributes],private var member4: Option[Attributes]
-                      ,private var member5: Option[Attributes]) extends TParty {
+                      ,private var member3: Option[Attributes]) extends TParty {
 
   /**A method that returns an array buffer with all the members currently in the party
    * If the member is a None, it is included as a None in the array buffer
@@ -24,10 +21,10 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    * val members = party.getMembers()
    * println(${members}), gives ArrayBuffer(Some(ninja),Some(guerrero),Some(magoblanco))
    *
-   * @return ArrayBuffer(member1,member2,member3,member4,member5)
+   * @return ArrayBuffer(member1,member2,member3)
    */
   override def getMembers(): ArrayBuffer[Option[Attributes]] = {
-    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
+    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3)
     return memberArray
   }
   /**A function that determines whether a party is defeated or not
@@ -45,8 +42,8 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    * @author Diego San Martin
    */
   override def defeated():Int = {
-    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
-    var alive:Int = 5
+    val memberArray: ArrayBuffer[Option[Attributes]] = this.getMembers()
+    var alive:Int = 3
     for (mem<-memberArray){
       val status= if (mem.isDefined) mem.get.getHp() else 0
       if (status ==0){
@@ -71,7 +68,7 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    *
    */
   override def addMember(memb: Attributes): Unit = {
-    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3,member4,member5)
+    val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3)
     var added = false
     for (index<-memberArray.indices if !added){
       if(memberArray(index).isEmpty){
@@ -82,7 +79,5 @@ abstract class AParty(private var member1: Option[Attributes],private var member
     this.member1=memberArray(0)
     this.member2=memberArray(1)
     this.member3=memberArray(2)
-    this.member4=memberArray(3)
-    this.member5=memberArray(4)
   }
 }
