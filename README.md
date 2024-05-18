@@ -82,10 +82,10 @@ method for their weapon type. This way, the code ensures the least amount of use
 player a weapon.
 
 ## III. Party
-Parties are a group of 5 players (was defined initially as 3, but for this version, parties will be allowed 
-to be bigger), that will later fight in combat as a team. Currently, a party is allowed to add and remove players,
-as well as checking if the party has been defeated. A party is defeated if it is either empty, or all the players
-in the party have their hitpoints at 0.
+Parties are a group of 3 members, currently all characters, that will later fight in combat as a team. Currently, a 
+party is allowed to add and remove players, as well as checking if the party has been defeated. A party is defeated if 
+it is either empty, or all the players in the party have their hitpoints at 0. To add a member to a party, first, it is
+important that the party is not currently full, or else the new member will not be added.
 
 ## IV. Turn Scheduling
 A very important aspect of Final Reality is the ability to fight between players and enemies. This turn scheduler
