@@ -67,6 +67,7 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
 
   override def changeOwner(receiver: Attributes): Unit = {
     this.owner = Some(receiver)
+  }
 
 
   /** Method for leaving an owner
@@ -91,9 +92,7 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    *
    * @param receiver the new owner of the weapon
    */
-  override def changeOwner(receiver: Attributes): Unit = {
-    this.owner = Some(receiver)
-  }
+
   override def leaveOwner(): Unit = {
       this.owner = None
   }

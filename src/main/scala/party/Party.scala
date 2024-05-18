@@ -20,7 +20,6 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  *
  */
-class Party (member1:Option[Attributes]=None,member2:Option[Attributes]=None,member3:Option[Attributes]=None,
-             member4:Option[Attributes]=None,member5:Option[Attributes]=None)
-             extends AParty(member1,member2,member3, member4, member5) {
+class Party (memberArray: ArrayBuffer[Option[Attributes]])
+             extends AParty(memberArray) {
 }
