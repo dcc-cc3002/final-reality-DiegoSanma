@@ -1,20 +1,19 @@
 package party
 
 import attributes.Attributes
+import exceptions.FullPartyException
 
 import scala.collection.mutable.ArrayBuffer
 
 /** Abstract class that defines the methods and parameters of a Party
  *
- * @param member1 first member of the party
- * @param member2 second member of the party
- * @param member3 third member of the party
+ * @param memberArray array with all current party members
  */
-abstract class AParty(private var member1: Option[Attributes],private var member2: Option[Attributes]
-                      ,private var member3: Option[Attributes]) extends TParty {
-
-  /** Parameter that serves as an array with all party members */
-  val memberArray: ArrayBuffer[Option[Attributes]] = ArrayBuffer(member1,member2,member3)
+abstract class AParty(private var memberArray:ArrayBuffer[Option[Attributes]]) extends TParty {
+  /** When a party is created, we must check if it begins with more than the allowed members */
+  if(memberArray.length>3){
+    throw new FullPartyException("Party cant begin with more than 3 members")
+  }
 
   /**A method that returns an array buffer with all the members currently in the party
    * If the member is a None, it is included as a None in the array buffer
@@ -67,11 +66,16 @@ abstract class AParty(private var member1: Option[Attributes],private var member
    * party.addMember(Some(magonegro))
    * println("The third member of the party is ${party.member3.get}"), should be mago negro
    *
+   * @throws FullPartyException if party is full and another members want to be added
+   *
    */
   override def addMember(memb: Attributes): Unit = {
     var length = memberArray.length
     if(length>3){
-      throw new FullPartyException
+      throw new FullPartyException("Party already has 3 members")
+    }
+    else{
+      memberArray.addOne(Some(memb))
     }
 
 
