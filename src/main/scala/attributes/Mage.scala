@@ -2,6 +2,7 @@ package attributes
 
 import enemigo.Enemigo
 import entity.{AEntidad, Entidad}
+import exceptions.{AlreadyOwnedException, FullInventoryException}
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -45,11 +46,15 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
    */
 
   override def receiveWeapon(weapon:TWeapons): Unit = {
-      if (this.inventory.length >=3 || weapon.getOwner().isDefined) {
-      }
-      else if(!(this.inventory.contains(weapon))) {
-        weapon.giveToOwner(this)
-      }
+    if (this.inventory.length >=3) {
+      throw new FullInventoryException("Inventory already has 3 weapons")
+    }
+    if (weapon.getOwner().isDefined){
+      throw new AlreadyOwnedException("Weapon already has a current owner")
+    }
+    else if(!(this.inventory.contains(weapon))) {
+      weapon.giveToOwner(this)
+    }
     }
 
   /**Method for dropping a weapon, if there is one equipped currently

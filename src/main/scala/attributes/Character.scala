@@ -2,7 +2,7 @@ package attributes
 
 import enemigo.Enemigo
 import entity.{AEntidad, Entidad}
-import exceptions.{FullInventoryException, FullPartyException}
+import exceptions.{AlreadyOwnedException, FullInventoryException, FullPartyException}
 import weapons.{TWeapons, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -48,7 +48,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
       throw new FullInventoryException("Inventory already has 3 weapons")
     }
     if (weapon.getOwner().isDefined){
-      throw new FullPartyException("")
+      throw new AlreadyOwnedException("Weapon already has a current owner")
     }
     else if(!(this.inventory.contains(weapon))) {
       weapon.giveToOwner(this)
