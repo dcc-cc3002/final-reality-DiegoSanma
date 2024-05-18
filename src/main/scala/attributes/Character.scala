@@ -2,6 +2,7 @@ package attributes
 
 import enemigo.Enemigo
 import entity.{AEntidad, Entidad}
+import exceptions.{FullInventoryException, FullPartyException}
 import weapons.{TWeapons, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -37,13 +38,17 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
   }
 
   /** Method for making handing/equipping a weapon as a character
-   * If i want to equip a wepaon that i already have equipped, the method does nothing
+   * If i want to equip a weapon that i already have equipped, the method does nothing
    * Also calls the giveToOwner, so the wepaon now has the correct owner associated
    *
    * @param weapon the weapon the character wants to receive
    */
   override def receiveWeapon(weapon:TWeapons): Unit = {
-    if (this.inventory.length >=3 || weapon.getOwner().isDefined) {
+    if (this.inventory.length >=3) {
+      throw new FullInventoryException("Inventory already has 3 weapons")
+    }
+    if (weapon.getOwner().isDefined){
+      throw new FullPartyException("")
     }
     else if(!(this.inventory.contains(weapon))) {
       weapon.giveToOwner(this)
