@@ -71,7 +71,7 @@ abstract class AParty(private var memberArray:ArrayBuffer[Option[Attributes]]) e
    */
   override def addMember(memb: Attributes): Unit = {
     var length = memberArray.length
-    if(length>3){
+    if(length>2){
       throw new FullPartyException("Party already has 3 members")
     }
     else{
