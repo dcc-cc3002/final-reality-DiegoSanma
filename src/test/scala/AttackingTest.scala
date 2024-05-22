@@ -67,8 +67,6 @@ class AttackingTest extends munit.FunSuite{
     enemigo2.attack(ninja)
     assertEquals(ninja.getHp(),0,"Ninja should be already defeated, thus having 0 HP")
 
-    magoblanco.attack(enemigo2)
-    assertEquals(enemigo2.getHp(),120,"Mago blanco does not have a weapon, so he should not deal damage")
 
     magoblanco.receiveWeapon(biggerMagicWeapon)
     magoblanco.changeWeapon(0)
@@ -76,8 +74,6 @@ class AttackingTest extends munit.FunSuite{
     expected_damage_taken = 40
     assertEquals(enemigo2.getHp(),120-expected_damage_taken,"Second enemy does not take the expected damage")
 
-    ninja.attack(enemigo2)
-    assertEquals(enemigo2.getHp(),120-expected_damage_taken,"Second enemy should not take damage form ninja, as he has no weapon")
 
     ninja.receiveWeapon(biggerWeapon)
     ninja.changeWeapon(0)

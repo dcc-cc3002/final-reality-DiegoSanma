@@ -24,4 +24,11 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
       this.weight
     }
 
+  override def takedamage(damage: Int): Unit = {
+    this.hp -= damage
+    if(this.hp<0){
+      this.hp = 0
+    }
+  }
+
 }

@@ -15,5 +15,7 @@ trait Entidad{
 
   def takedamageEnemy(agresor:EnemigoAttributes): Unit
 
+  def takedamage(damage:Int)
+
   def attack(victim:Entidad): Unit
 }
