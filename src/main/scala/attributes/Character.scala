@@ -106,10 +106,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
 
   override def takedamageEnemy(agresor: EnemigoAttributes): Unit = {
     var damage = agresor.getAttack() - this.getDefense()
-    if(damage<0){
-      return
-    }
-    else{
+    if(damage>0) {
       this.takedamage(damage)
     }
   }

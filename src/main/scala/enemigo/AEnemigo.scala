@@ -51,14 +51,8 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
    */
   override def takedamagePlayer(agresor: Attributes): Unit = {
     var damage = agresor.getActiveWeapon().get.getAtkPts() - this.getDefense()
-    if(damage<0){
-      return
-    }
-    else{
-      this.hp -= damage
-      if(this.hp<0){
-        this.hp = 0
-      }
+    if(damage>0) {
+      this.takedamage(damage)
     }
   }
 

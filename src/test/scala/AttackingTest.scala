@@ -20,6 +20,7 @@ class AttackingTest extends munit.FunSuite{
   var magoblanco: MagoBlanco = null
   var enemigo1: Enemigo = null
   var enemigo2: Enemigo = null
+  var enemigo3: Enemigo = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
@@ -29,6 +30,7 @@ class AttackingTest extends munit.FunSuite{
     magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
     enemigo1 = new Enemigo("Goblin",40,30,20,30)
     enemigo2 = new Enemigo("Golem",120,50,80,45)
+    enemigo3 = new Enemigo("Boss",70,100,90,100)
     weapon = new Sword("Excalibur",60,70)
     magicweapon = new Staff("Palito",20,40,80)
     biggerWeapon = new Sword("Big Sword",80,120)
@@ -39,6 +41,8 @@ class AttackingTest extends munit.FunSuite{
     assertEquals(enemigo1.getHp(),40,"First Enemies does not start with full health")
 
     paladin.receiveWeapon(weapon)
+    paladin.attack(enemigo1)
+    assertEquals(enemigo1.getHp(),40,"As paladin has no weapon, enemigo1 should not take damage")
     paladin.changeWeapon(0)
     paladin.attack(enemigo1)
     var expected_damage_taken: Int = 30
@@ -85,6 +89,14 @@ class AttackingTest extends munit.FunSuite{
     assertEquals(enemigo2.getHp(),0,"Second enemy should be defeated")
     magonegro.attack(enemigo2)
     assertEquals(enemigo2.getHp(),0,"Second enemy should already be defeated")
+
+    enemigo3.attack(magonegro)
+    assertEquals(magonegro.getHp(),10,"Black Mage did not take the correct amount of damage")
+    enemigo1.attack(magonegro)
+    assertEquals(magonegro.getHp(),10,"Black Mage should not take damage, as his defense is higher")
+    enemigo3.attack(magonegro)
+    assertEquals(magonegro.getHp(),0,"Black Mage should have been defeated")
+
 
   }
 }

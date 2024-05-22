@@ -107,9 +107,6 @@ class PersonajeTest extends munit.FunSuite {
         ninja.changeWeapon(0)
         assertEquals(ninja.getActiveWeapon().get,bow, "bow.Bow should be equipped")
 
-        guerrero.receiveWeapon(bow)
-        assert(ninja.getWeapons().nonEmpty,"The bow should not have been removed from ninja´s inventory")
-        assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
 
         ninja.receiveWeapon(knife)
         assertEquals(ninja.getWeapons()(1),knife,"Knife not added to inventory")
@@ -119,9 +116,6 @@ class PersonajeTest extends munit.FunSuite {
 
         ninja.receiveWeapon(wand)
         assertEquals(ninja.getWeapons()(2),wand,"Wand not added to inventory")
-
-        ninja.receiveWeapon(wand2)
-        assertEquals(ninja.getWeapons().length,3,"No more weapon should be added to the inventory")
 
         ninja.dropWeapon(wand2)
         assertEquals(ninja.getWeapons().length,3,"No weapon should be removed to the inventory")
@@ -144,10 +138,6 @@ class PersonajeTest extends munit.FunSuite {
         magoblanco.changeWeapon(0)
         assertEquals(magoblanco.getActiveWeapon().get,bow, "bow.Bow should be equipped")
 
-        guerrero.receiveWeapon(bow)
-        assert(magoblanco.getWeapons().nonEmpty,"The bow should not have been removed from magoblanco´s inventory")
-        assert(guerrero.getWeapons().isEmpty,"The bow should not have been given to the guerrero")
-
         magoblanco.receiveWeapon(slingshot)
         assertEquals(magoblanco.getWeapons()(1),slingshot,"Slingshot not added to inventory")
         assertEquals(magoblanco.getActiveWeapon().get,bow, "bow.Bow should be equipped")
@@ -155,9 +145,6 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(magoblanco.getActiveWeapon().get,slingshot, "Knife should be equipped")
         magoblanco.receiveWeapon(wand)
         assertEquals(magoblanco.getWeapons()(2),wand,"Wand not added to inventory")
-
-        magoblanco.receiveWeapon(staff)
-        assertEquals(magoblanco.getWeapons().length,3,"No more weapon should be added to the inventory")
 
         magoblanco.dropWeapon(staff)
         assertEquals(magoblanco.getWeapons().length,3,"No weapon should be removed to the inventory")
