@@ -122,11 +122,8 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
       return
     }
     else{
-      this.hp -= damage
-      if(this.hp<0){
-        this.hp = 0
+      this.takedamage(damage)
       }
-    }
   }
 
 }
