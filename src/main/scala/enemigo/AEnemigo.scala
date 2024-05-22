@@ -26,7 +26,11 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
    */
 
   override def attack(victim: Entidad): Unit = {
-    victim.takedamage(this)
+    victim.takedamageEnemy(this)
+  }
+
+  override def takedamageEnemy(agresor: EnemigoAttributes): Unit = {
+    throw new SameClassAttackException
   }
 
 }

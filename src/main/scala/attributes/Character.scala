@@ -82,7 +82,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
       println(s"You currently have no weapon! The attack has failed :(")
     }
     else{
-      victim.takedamage(this)
+      victim.takedamagePlayer(this)
     }
   }
 

@@ -1,5 +1,8 @@
 package entity
 
+import attributes.Attributes
+import enemigo.EnemigoAttributes
+
 /**A trait that includes the methods that will be included in any Entidad
  */
 trait Entidad{
@@ -8,7 +11,9 @@ trait Entidad{
   def getDefense():Int
   def getWeight():Int
 
-  def takedamage(agresor:Entidad): Unit
+  def takedamagePlayer(agresor:Attributes): Unit
+
+  def takedamageEnemy(agresor:EnemigoAttributes): Unit
 
   def attack(victim:Entidad): Unit
 }

@@ -93,7 +93,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
       println(s"You currently have no weapon! The attack has failed :(")
     }
     else{
-      victim.takedamage(this)
+      victim.takedamagePlayer(this)
     }
   }
 
