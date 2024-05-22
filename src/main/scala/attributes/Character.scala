@@ -1,8 +1,8 @@
 package attributes
 
-import enemigo.Enemigo
+import enemigo.{Enemigo, EnemigoAttributes}
 import entity.{AEntidad, Entidad}
-import exceptions.{AlreadyOwnedException, FullInventoryException, FullPartyException}
+import exceptions.{AlreadyOwnedException, FullInventoryException, FullPartyException, SameClassAttackException}
 import weapons.{TWeapons, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -83,6 +83,37 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     }
     else{
       victim.takedamagePlayer(this)
+    }
+  }
+  /** Method for when an player is being attacked by another player
+   *
+   * @param agresor the player that is attacking
+   *
+   * @throws SameClassAttackException
+   */
+  override def takedamagePlayer(agresor: Attributes): Unit = {
+    throw new SameClassAttackException("Player cant attack another Player")
+  }
+
+  /**Method for when an enemy is attacking an player
+   *
+   *  If the player´s defense is greater than the attack, no damage is done
+   *  If the player´s health drops below 0, it is fixated to 0 and therefore has been defeated
+   *
+   * @param agresor the enemy attacking the player
+   *
+   */
+
+  override def takedamageEnemy(agresor: EnemigoAttributes): Unit = {
+    var damage = agresor.getAttack() - this.getDefense()
+    if(damage<0){
+      return
+    }
+    else{
+      this.hp -= damage
+      if(this.hp<0){
+        this.hp = 0
+      }
     }
   }
 
