@@ -18,6 +18,18 @@ import scala.collection.mutable.ArrayBuffer
 abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
                          private var inventory:ArrayBuffer[TWeapons],private var activeWeapon: Option[TWeapons])
   extends AEntidad(name,hp,defense,weight) with Attributes {
+  /** Constant parameter that holds the max health of a character */
+
+  private val maxHealth: Int = hp
+
+  /** Getter for max Health if a Character
+   *
+   * @return this.maxHealth
+   */
+
+  override def getMaxHealth(): Int = {
+    this.maxHealth
+  }
   /**Getter for inventory parameter
    * Will return all the weapons currently in the characters inventory
    *
@@ -120,5 +132,16 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     this.activeWeapon = Some(this.inventory(position))
   }
 
+  /** Method for healing a character by a certain percentage
+   *
+   * This percentage is according to their max health, not the health they currently have
+   *
+   */
+  override def heal(amountPercentage:Double): Unit = {
+    this.hp += (amountPercentage * this.getMaxHealth())
+    if(this.hp>getMaxHealth()){
+      this.maxHeal(getMaxHealth())
+    }
+  }
 
 }

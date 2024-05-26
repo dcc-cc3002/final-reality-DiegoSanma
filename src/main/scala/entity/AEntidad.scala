@@ -31,4 +31,8 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
     }
   }
 
+  override def maxHeal(maxHealth: Int): Unit = {
+    this.hp = maxHealth
+  }
+
 }

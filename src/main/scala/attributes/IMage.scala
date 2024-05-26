@@ -11,4 +11,6 @@ trait IMage{
   def throwDarkSpell(spell:HechizoOscuro,victim:Entidad)
 
   def throwLightSpell(spell:HechizoLuz,victim:Entidad)
+
+  def useMana(use:Int): Unit
 }

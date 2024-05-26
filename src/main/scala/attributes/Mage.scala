@@ -31,5 +31,13 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
     spell.inflict(this,victim)
   }
 
+  /**Method for when a Mage uses a spell and spends a certain amount of mana
+   *
+   * @param use amount of mana the mage is using
+   */
+  override def useMana(use: Int) = {
+    this.mana -= use
+  }
+
 
 }
