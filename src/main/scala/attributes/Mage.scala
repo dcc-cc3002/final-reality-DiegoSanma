@@ -121,6 +121,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,private var man
     if(damage>0){
       this.takedamage(damage)
     }
+
   }
 
 }
