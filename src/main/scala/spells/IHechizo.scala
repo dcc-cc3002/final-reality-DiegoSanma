@@ -10,6 +10,8 @@ trait IHechizo {
 
   def inflict(user:Mage,victim:Entidad)
 
+  def friendlyFire(user:Mage,victim:Entidad)
 
+  def finalInflict(user:Mage,victim:Entidad)
 
 }

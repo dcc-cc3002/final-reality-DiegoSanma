@@ -108,6 +108,6 @@ class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
   }
 
   override def throwLightSpell(spell: HechizoLuz, victim: Entidad): Unit = {
-
+    spell.finalInflict(this,victim)
   }
 }

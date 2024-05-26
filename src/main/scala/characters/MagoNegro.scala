@@ -97,6 +97,7 @@ class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
     weapon.changeOwner(this)
   }
   override def throwDarkSpell(spell: HechizoOscuro, victim: Entidad): Unit = {
+    spell.finalInflict(this,victim)
   }
 
   override def throwLightSpell(spell: HechizoLuz, victim: Entidad): Unit = {
