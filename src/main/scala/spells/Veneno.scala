@@ -3,10 +3,29 @@ import attributes.{Attributes, Mage}
 import entity.Entidad
 import exceptions.FriendlyFireException
 
+/**Class for a poison spell
+ *
+ * Used for poisoning an enemy, has 100% acurracy rate
+ *
+ */
 class Veneno extends HechizoLuz {
-  override def finalInflict(user: Mage, victim: Entidad): Unit = {
 
+  /**Method for poisoning an enemy
+   *
+   * @param user mage using the spell
+   * @param victim victim being poisioned
+   */
+  override def finalInflict(user: Mage, victim: Entidad): Unit = {
+    user.useMana(30)
   }
+
+  /**Method for checking whether the mage is trying to poison an ally or enemy
+   *
+   * @param user the mage trying to use the spell
+   * @param victim the entity the mage want to poison
+   *
+   * @throws FriendlyFireException if the victim is not an ally
+   */
 
   override def friendlyFire(user: Mage, victim: Entidad): Unit = {
     if(victim.isInstanceOf[Attributes]){
