@@ -13,4 +13,6 @@ trait IMage{
   def throwLightSpell(spell:HechizoLuz,victim:Entidad)
 
   def useMana(use:Int): Unit
+
+  def checkMana(amount:Int): Unit
 }

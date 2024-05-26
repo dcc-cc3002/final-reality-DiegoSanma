@@ -5,17 +5,19 @@ import exceptions.FriendlyFireException
 
 /**Class for a poison spell
  *
- * Used for poisoning an enemy, has 100% acurracy rate
+ * Used for poisoning an enemy, has 100% accuracy rate
  *
  */
 class Veneno extends HechizoLuz {
 
   /**Method for poisoning an enemy
+   * Also checks whether the mage has enough mana to use the spell
    *
    * @param user mage using the spell
-   * @param victim victim being poisioned
+   * @param victim victim being poisoned
    */
   override def finalInflict(user: Mage, victim: Entidad): Unit = {
+    user.checkMana(30)
     user.useMana(30)
   }
 

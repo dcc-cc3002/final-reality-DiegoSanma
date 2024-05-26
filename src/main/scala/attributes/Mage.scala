@@ -2,7 +2,7 @@ package attributes
 
 import enemigo.{Enemigo, EnemigoAttributes}
 import entity.{AEntidad, Entidad}
-import exceptions.{AlreadyOwnedException, FullInventoryException, SameClassAttackException}
+import exceptions.{AlreadyOwnedException, FullInventoryException, NotEnoughManaException, SameClassAttackException}
 import spells.IHechizo
 import weapons.TWeapons
 
@@ -37,6 +37,12 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
    */
   override def useMana(use: Int) = {
     this.mana -= use
+  }
+
+  override def checkMana(amount: Int): Unit = {
+    if(amount>this.mana){
+      throw new NotEnoughManaException("Mage does not have enough mana to use that spell")
+    }
   }
 
 

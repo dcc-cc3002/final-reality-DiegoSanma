@@ -11,11 +11,13 @@ class Trueno extends HechizoOscuro {
 
   /** Method for using thunder spell on an enemy
    * The amount of damage done is defined by the weapon the mage is currently holding
+   * Also checks whether the mage has enough mana to use the spell
    *
    * @param user the mage using the spell
    * @param victim the victim being attacked
    */
   override def finalInflict(user: Mage, victim: Entidad): Unit = {
+    user.useMana(20)
     victim.takedamagePlayer(user)
     user.useMana(20)
   }
