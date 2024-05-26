@@ -1,12 +1,12 @@
 package attributes
 
 import entity.Entidad
-import spells.IHechizo
+import spells.{HechizoLuz, HechizoOscuro, IHechizo}
 
-trait IMage extends Character{
-  def getMana(): Unit
+trait IMage{
+  def getMana(): Int
 
-  def throwSpell(spell:IHechizo)
+  def throwSpell(spell:IHechizo,victim:Entidad)
 
   def throwDarkSpell(spell:HechizoOscuro,victim:Entidad)
 

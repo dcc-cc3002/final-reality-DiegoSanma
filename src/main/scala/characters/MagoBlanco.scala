@@ -3,7 +3,9 @@ package characters
 import attributes.{Attributes, Mage}
 import axe.Axe
 import bow.Bow
-import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import entity.Entidad
+import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require, WrongMageException}
+import spells.{HechizoLuz, HechizoOscuro}
 import staff.Staff
 import sword.Sword
 import wand.Wand
@@ -99,5 +101,13 @@ class MagoBlanco(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
   override def receiveStaff(weapon: Staff): Unit = {
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
+  }
+
+  override def throwDarkSpell(spell: HechizoOscuro, victim: Entidad): Unit = {
+    throw new WrongMageException("White Mage cant use a dark spell")
+  }
+
+  override def throwLightSpell(spell: HechizoLuz, victim: Entidad): Unit = {
+
   }
 }

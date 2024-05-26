@@ -10,4 +10,5 @@ trait IHechizo {
   def inflict(victim:Entidad)
 
 
+
 }
