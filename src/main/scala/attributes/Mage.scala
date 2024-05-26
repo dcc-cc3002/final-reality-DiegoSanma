@@ -24,7 +24,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
   }
 
   override def throwSpell(spell: IHechizo, victim: Entidad): Unit = {
-    spell.inflict(victim)
+    spell.inflict(this,victim)
   }
 
 

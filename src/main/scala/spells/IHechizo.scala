@@ -1,5 +1,6 @@
 package spells
 
+import attributes.Mage
 import entity.Entidad
 
 /**Trait for spells, includes methods that will be used by all types of spells(healing, damaging, or effect spells)
@@ -7,7 +8,7 @@ import entity.Entidad
  */
 trait IHechizo {
 
-  def inflict(victim:Entidad)
+  def inflict(user:Mage,victim:Entidad)
 
 
 

@@ -1,5 +1,9 @@
 package spells
+import attributes.Mage
+import entity.Entidad
 
-class HechizoOscuro extends {
-
+abstract class HechizoOscuro extends IHechizo {
+  override def inflict(user: Mage, victim: Entidad): Unit = {
+    user.throwDarkSpell(this,victim)
+  }
 }
