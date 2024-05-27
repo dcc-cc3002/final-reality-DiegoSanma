@@ -19,9 +19,15 @@ import attributes.Attributes
 abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, private var magicpoints:Int,owner:Option[Attributes])
   extends AWeapon(name,atkpoints,weight,owner) {
 
+  /**Getter for magic points of a magic Weapon
+   *
+   * @return this.magicpoints
+   */
   def getMagicpts(): Int ={
     this.magicpoints
   }
 
+  override def checkifMagic(): Unit = {
+  }
 
 }

@@ -1,5 +1,6 @@
 package enemigo
 
+import attributes.Mage
 import entity.{AEntidad, Entidad}
 
 /**A trait that defines the attributes that an enemy has
@@ -12,4 +13,6 @@ import entity.{AEntidad, Entidad}
 
 trait EnemigoAttributes extends AEntidad{
     def getAttack(): Int
+
+    def takeSpellDamage(mage:Mage)
 }

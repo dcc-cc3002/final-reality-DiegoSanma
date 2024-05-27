@@ -2,6 +2,7 @@ package weapons
 
 import attributes.Attributes
 import characters.{Guerrero, MagoNegro, Ninja, Paladin}
+import exceptions.NotMagicWeaponException
 
 /**A  class for a weapon
  *
@@ -114,5 +115,9 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    this.name = named
    println(s"This weapon has been named ${name}")
  }
+
+  override def checkifMagic(): Unit = {
+    throw new NotMagicWeaponException("Cant cast a spell with a non magic weapon equipped")
+  }
 
 }

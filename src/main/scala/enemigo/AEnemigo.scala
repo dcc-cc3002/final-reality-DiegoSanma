@@ -1,6 +1,6 @@
 package enemigo
 
-import attributes.Attributes
+import attributes.{Attributes, Mage}
 import entity.{AEntidad, Entidad}
 import exceptions.SameClassAttackException
 
@@ -54,6 +54,10 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
     if(damage>0) {
       this.takedamage(damage)
     }
+  }
+
+  override def takeSpellDamage(mage: Mage): Unit = {
+    this.hp -= mage.getActiveWeapon().get.getAtkPts()
   }
 
 }

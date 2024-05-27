@@ -22,4 +22,6 @@ trait TWeapons {
   def changeOwner(receiver:Attributes): Unit
 
   def leaveOwner(): Unit
+
+  def checkifMagic(): Unit
 }

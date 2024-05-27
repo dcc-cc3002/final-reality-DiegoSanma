@@ -19,15 +19,28 @@ import scala.collection.mutable.ArrayBuffer
 abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
                     private var mana:Int, inventory: ArrayBuffer[TWeapons],activeWeapon: Option[TWeapons])
   extends Character(name,hp,defense,weight,inventory, activeWeapon) with IMage {
+
+  /**Getter for mana
+   *
+   * @return this.mana
+   */
   override def getMana(): Int = {
     this.mana
   }
 
+  /**Method for when a mage wants to use a spell
+   * Does to main checks here, checks if the spell is being used on the right type of entity and
+   * if a mage has a magic weapon equipped
+   *
+   * @param spell the spell the mage is trying to use
+   * @param victim the victim of the spell
+   */
   override def throwSpell(spell: IHechizo, victim: Entidad): Unit = {
     spell.friendlyFire(this,victim)
     if(activeWeapon.isEmpty) {
       return
     }
+    activeWeapon.get.checkifMagic()
     spell.inflict(this,victim)
   }
 
