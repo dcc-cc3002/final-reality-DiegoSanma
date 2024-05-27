@@ -3,6 +3,7 @@ package enemigo
 import attributes.{Attributes, Mage}
 import entity.{AEntidad, Entidad}
 import exceptions.SameClassAttackException
+import weapons.MagicWeapon
 
 /**An abstract class that extends from EnemigoAttributes
  * Includes the attack parameter for enemies
@@ -50,14 +51,17 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
    *
    */
   override def takedamagePlayer(agresor: Attributes): Unit = {
-    var damage = agresor.getActiveWeapon().get.getAtkPts() - this.getDefense()
-    if(damage>0) {
-      this.takedamage(damage)
+    var damage:Int = agresor.getActiveWeapon().get.getAtkPts() - this.getDefense()
+    this.checkHealth(damage)
     }
-  }
 
+  /** Method for when taking damage from a spell
+   *
+   * @param mage mage using the spell
+   */
   override def takeSpellDamage(mage: Mage): Unit = {
-    this.hp -= mage.getActiveWeapon().get.getAtkPts()
+    var damage:Int = mage.getActiveWeapon().get.asInstanceOf[MagicWeapon].getMagicpts()
+    this.checkHealth(damage)
   }
 
 }

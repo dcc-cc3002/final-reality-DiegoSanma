@@ -24,15 +24,18 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
       this.weight
     }
 
-  override def takedamage(damage: Int): Unit = {
+  override protected def checkHealth(damage:Int): Unit = {
     this.hp -= damage
     if(this.hp<0){
       this.hp = 0
     }
   }
 
-  override def maxHeal(maxHealth: Int): Unit = {
-    this.hp = maxHealth
+  override protected def maxHeal(healing:Int,maxHealth: Int): Unit = {
+    this.hp += healing
+    if(this.hp>maxHealth){
+      this.hp = maxHealth
+    }
   }
 
 }

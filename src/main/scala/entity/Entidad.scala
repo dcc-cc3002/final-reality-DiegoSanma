@@ -15,9 +15,9 @@ trait Entidad{
 
   def takedamageEnemy(agresor:EnemigoAttributes): Unit
 
-  def takedamage(damage:Int)
 
-  def maxHeal(maxHealth:Int): Unit
+  protected def maxHeal(healing:Int,maxHealth:Int): Unit
 
   def attack(victim:Entidad): Unit
+  protected def checkHealth(damage:Int): Unit
 }

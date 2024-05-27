@@ -119,7 +119,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
   override def takedamageEnemy(agresor: EnemigoAttributes): Unit = {
     var damage = agresor.getAttack() - this.getDefense()
     if(damage>0) {
-      this.takedamage(damage)
+      this.checkHealth(damage)
     }
   }
 
@@ -138,10 +138,8 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    *
    */
   override def heal(amountPercentage:Double): Unit = {
-    this.hp += (amountPercentage * this.getMaxHealth())
-    if(this.hp>getMaxHealth()){
-      this.maxHeal(getMaxHealth())
-    }
+    val healing: Int = (amountPercentage*this.getMaxHealth()).toInt
+    this.maxHeal(healing,getMaxHealth())
   }
 
 }

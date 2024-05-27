@@ -1,5 +1,6 @@
 package spells
 import attributes.{Attributes, Mage}
+import enemigo.EnemigoAttributes
 import entity.Entidad
 
 /**Class for a thunder spell
@@ -18,7 +19,7 @@ class Trueno extends HechizoOscuro {
    */
   override def finalInflict(user: Mage, victim: Entidad): Unit = {
     user.useMana(20)
-    victim.takedamagePlayer(user)
+    victim.asInstanceOf[EnemigoAttributes].takeSpellDamage(user)
     user.useMana(20)
   }
 }
