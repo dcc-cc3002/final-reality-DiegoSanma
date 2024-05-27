@@ -20,4 +20,6 @@ trait Entidad{
 
   def attack(victim:Entidad): Unit
   protected def checkHealth(damage:Int): Unit
+
+  protected def isAlive(): Int
 }

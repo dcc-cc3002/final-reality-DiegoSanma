@@ -2,7 +2,7 @@ package attributes
 
 import enemigo.{Enemigo, EnemigoAttributes}
 import entity.{AEntidad, Entidad}
-import exceptions.{AlreadyOwnedException, FullInventoryException, NotEnoughManaException, SameClassAttackException}
+import exceptions.{AlreadyOwnedException, FullInventoryException, NotEnoughManaException, SameClassAttackException, UnaliveDamagedException}
 import spells.IHechizo
 import weapons.TWeapons
 
@@ -41,6 +41,9 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
       return
     }
     activeWeapon.get.checkifMagic()
+    if(victim.isAlive() == 0){
+      throw new UnaliveDamagedException("Cant cast a spell on a dead entity")
+    }
     spell.inflict(this,victim)
   }
 
