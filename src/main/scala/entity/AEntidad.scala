@@ -51,8 +51,14 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
     }
   }
 
-  override protected def isAlive(): Int = {
-    if(this.hp<0){
+  /**Method for checking if an entity is alive or not
+   *
+   * @return 1 if they are alive
+   *         0 if not
+   */
+
+  override def isAlive(): Int = {
+    if(this.hp==0){
       return 0
     }
     return 1

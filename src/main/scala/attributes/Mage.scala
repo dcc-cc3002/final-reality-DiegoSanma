@@ -37,10 +37,10 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
    */
   override def throwSpell(spell: IHechizo, victim: Entidad): Unit = {
     spell.friendlyFire(this,victim)
-    if(activeWeapon.isEmpty) {
+    if(getActiveWeapon().isEmpty) {
       return
     }
-    activeWeapon.get.checkifMagic()
+    getActiveWeapon().get.checkifMagic()
     if(victim.isAlive() == 0){
       throw new UnaliveDamagedException("Cant cast a spell on a dead entity")
     }
@@ -48,10 +48,11 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
   }
 
   /**Method for when a Mage uses a spell and spends a certain amount of mana
+   * If
    *
    * @param use amount of mana the mage is using
    */
-  override def useMana(use: Int) = {
+  override def useMana(use: Int): Unit = {
     this.mana -= use
   }
 

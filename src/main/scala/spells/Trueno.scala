@@ -18,7 +18,7 @@ class Trueno extends HechizoOscuro {
    * @param victim the victim being attacked
    */
   override def finalInflict(user: Mage, victim: Entidad): Unit = {
-    user.useMana(20)
+    user.checkMana(20)
     victim.asInstanceOf[EnemigoAttributes].takeSpellDamage(user)
     user.useMana(20)
   }
