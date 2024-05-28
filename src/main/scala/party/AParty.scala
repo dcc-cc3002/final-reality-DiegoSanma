@@ -45,7 +45,7 @@ abstract class AParty(private var memberArray:ArrayBuffer[Option[Attributes]]) e
   override def defeated():Int = {
     var alive:Int = 0
     for (mem<-this.memberArray){
-      val status= if (mem.isDefined) mem.get.getHp() else 0
+      val status= if (mem.isDefined) mem.get.isAlive() else 0
       if (status !=0){
         alive+=1
       }
