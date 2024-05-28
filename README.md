@@ -36,6 +36,8 @@ use of mana and magic/ an aspect of the game that will be implemented later on.
 For mages, the main difference between them is that white mages have a higher maximum mana, while black mages
 have higher attack and defense.
 
+Mages, in comparison to other characters, can cast spells. The use of these will be explained down below.
+
 ## I.II Enemies
 Enemies add to entities the attack parameter, but nothing else.
 
@@ -112,8 +114,48 @@ combat, the position in the first array for each entity could change, meaning th
 before a character left, would no longer be of the same length as the active bar array. As that operation should not be
 so long, repeating is not very costly for the program.
 
+
 Once an entity is shown to have surpassed their maximum bar, their active bar is set to 0, and added to the turn array.
 This turn array is later checked by another method that simply has to remove the first entity from the array to see 
 whose turn it is next.
+
+### V. Spells
+Before talking about how spells work, it is important to understand the conditions that have to be met to use a spell 
+during combat. These conditions include, the user must be a mage, they must be holding a magic weapon, the entity whom
+the spell is being cast upon must not be dead, this same entity must be an enemy if the mage wants to harm them, or
+a character if they want to heal them and finally the mage must have enough mana to cast the spell.
+
+The last two conditions, are evaluated inside the spell classes, while the other 3 are checked by different methods 
+defined inside the entity class hierarchy. This is done so the spell class does not have to be checking other classes 
+other than itself everytime a spell is thrown. Instead, this is done directly inside the entity class hierarchy once a 
+mage decided to use a spell, by calling each method that has been defined for said purpose.
+
+For spells, they can be divided into two categories, light and dark spells, where each one can be used by a white and
+black, respectively. For their implementation, both derive from the Spell interface that includes 3 main methods.
+
+First, we have inflict, that will serve as our way to use double dispatch to tell the user if a mage is using a light or
+dark spell.
+
+Secondly, we have friendlyFire, that will tell the user if the spell is being used correctly. In other words if
+the mage is trying to attack an ally or heal an enemy, this function will throw an exception.
+
+Finally, we have finalInflict, where this function does 3 main things. First, it makes sure the mage has enough mana to 
+cast said spell (if he does not, an exception is thrown). Then it casts said spell onto the entity, applying the damage,
+healing or effect(at the moment, the effects are not implemented, just the cost of mana). To end of, the mage is taken 
+the amount of mana that the spell costs.
+
+### V.I Dark Spells
+The dark spells are divided into 2, fire and thunder. These two differ in two things, firstly the amount of mana used,
+and secondly in possible effect it has on the enemy, either burning or paralyzing it.
+
+It is important to notice that for both spells, they are meant to be used on enemies, so the friendlyFire function is
+defined in the abstract class for dark spells, not in each of the spells.
+
+### V.II Light Spells
+The light spells are used contrary to dark spells, as they do not inflict damage directly. Two of the spells, poison and
+paralyze spells, are used to induce a status condition onto the enemy, with 100% accuracy. The other spell, healing, is
+used to heal an ally. The healing corresponds to a 30% of their max health, and if the mage wants to heal them more than
+what their max health is, the hp does not rise and further, and remains at that point.
+
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
