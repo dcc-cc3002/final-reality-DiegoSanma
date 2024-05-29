@@ -27,6 +27,12 @@ abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, private var 
     this.magicpoints
   }
 
+  /**Method for checking if the weapon is magical
+   *
+   * As this class is specifically for magic weapons(despite extending from weapons, think of it
+   * as an "evolution" of the normal weapons", this function throws no exception, it passes the check
+   *
+   */
   override def checkifMagic(): Unit = {
   }
 

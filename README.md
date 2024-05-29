@@ -9,37 +9,51 @@ different ways and methods to implement actions and situations
 ## I. Entities
 An entity in Final Reality are whom will take part primarily in the game. This class will be used mainly to 
 group the two main counterparts of the game, playable characters and enemies. In this case, all entities are 
-defined by their name, hitpoints, defense and weight. Not including attack as a parameter is later explained 
-when weapons are taken into consideration. Also implements main getters for the parameters mentioned before.
+defined by their **name**, **hitpoints**, **defense** and **weight**. Not including attack as a parameter is 
+later explained when weapons are taken into consideration. Also implements main getters for the parameters mentioned
+before.
 
 ## I.I Playable Characters
 A player will be allowed to choose from a variety of different classes, that can be separated into two 
-categories, Mages and Characters. Each one of them will be restricted to maximum values to their stats,
+categories, *Mages* and *Characters*. Each one of them will be restricted to maximum values to their stats,
 different for each class, to ensure that different players with different classes specialize in different 
 aspects during combat.
 
-These players will also have an inventory, that begins empty as well as an active weapon, also empty. The
+These players will also have an **inventory**, that begins empty as well as an **active weapon**, also empty. The
 inventory of a playable character serves the purpose of holding weapons, a maximum of three. The fact that a
 weapon is currently in a player´s inventory does not necessarily mean the player´s using said weapon.
 
 The choice of implementing an inventory helps simplify how weapons are implemented when associated to a player,
 allowing a player to choose what weapon to use and makes it easier to add and remove weapon, as now instead of
 changing a parameter in the player's class, we now simply add it to the array that represents the inventory.
+
 ### I.I.I Characters
-This category of player can be separated will be separated into three classes, paladins, guerreros(warriors)
-and ninjas. In particular, guerreros will be heavy hitters with higher defense, at the cost of weighing more 
+This category of player can be separated will be separated into three classes, **paladins**, **guerreros**(warriors)
+and **ninjas**. In particular, guerreros will be heavy hitters with higher defense, at the cost of weighing more 
 than the rest, while ninjas will be lighter, but with less attack and defense. Paladins will be considered an
 option for an all round good character.
+
+All these difference in parameters are checked when implementing *REQUIRE* and *StatException* inside each class. For
+example, everytime a new character is intialized, the class checks if they are within range of their set values. 
 ### I.I.II Mages
-This category divides into two, white and black mages. What makes them different from other characters, is the
+This category divides into two, **white** and **black mages**. What makes them different from other characters, is the
 use of mana and magic/ an aspect of the game that will be implemented later on. 
+
 For mages, the main difference between them is that white mages have a higher maximum mana, while black mages
-have higher attack and defense.
+have higher attack and defense. This difference is implemented in the same way as it was for characters.
+
+It is important to take notice of the fact that mages are an "extension" of normal characters, therefore implementing 
+this class this way does not break Liskov. A mage can do everything that a normal character can, but more, just as if
+for example, if a bird extended from animals, it could do everything that an animal can, but also can fly (in this 
+example I do not take into consideration the existence of penguins :) )  
 
 Mages, in comparison to other characters, can cast spells. The use of these will be explained down below.
 
 ## I.II Enemies
-Enemies add to entities the attack parameter, but nothing else.
+Enemies add to entities the attack parameter, but nothing else. This is done, as enemies don´t actually hold weapons
+
+As well as playable characters, their values for their stats are also checked when being initialized by the same
+mechanism used before.
 
 ## I.III Attacking
 Every entity will have the capability of attacking another entity, no matter if they are both enemies, both 
@@ -47,15 +61,17 @@ playable characters or different. When attacking, the amount of damage done to a
 <p align="center">damage = attack - defense</p> 
 For enemies, this attack parameter is already known, so that is the one that is used in this case. Nevertheless,
 for players, their attack will be given by the current weapon they are holding (explained later). If a player is 
-not holding a weapon, once they attack, no damage will be done and they will lose their turn, so be careful when
+not holding a weapon, once they attack, no damage will be done AND they will lose their turn, so be careful when
 attacking!
 
 Important to mention, as an entity´s hp cannot go lower than 0, if the damage they took is greater than their
-current health, that value will be left at 0.
+current health, that value will be left at 0. This case is always checked by a function named **checkHealth**, that 
+takes as a parameter the amount of damage that is being inflicted (whether that be from an attack, spell or later 
+effects) and applies the damage being inflicted, making sure their health does not drop below 0.
 
 ## II. Weapons
 Weapons can only be held by playable characters, not enemies. Weapons can only be named once, and that name
-remains permanent forever. A weapon has a weight and attack points, which will serve as the parameter to be used
+remains permanent forever. A weapon has a **weight** and **attack points**, which will serve as the parameter to be used
 when a player inflicts damage in combat. 
 
 A weapon may also have an owner, which means it is in that person´s inventory. When a weapon is dropped or added
@@ -64,13 +80,14 @@ words, a weapon can´t be assigned an owner directly, only characters and mages 
 owner. 
 
 This is done for two reasons, firstly to give realism to this version of Final-reality,as it is expected that
-a weapon cannot assign itself an owner, instead a player is whom chooses whether or not to have a weapon in 
+a weapon cannot assign itself an owner, instead a player is the person who chooses whether or not to have a weapon in 
 their inventory. Secondly, by doing this, assigning an owner to a weapon and a weapon to an owner is more direct,
 as if weapons also could do this, the instructions would go back and forth assigning themselves as owner and weapon
-owned.
+owned, generating an infinite loop (had this problem multiple times).
 
-Weapons are divided into two, magic and non-magic weapons. The only thing that currently makes them different, is
-the fact that magic weapons also have magic points, while non-magic weapons don´t. 
+Weapons are divided into two, magic and non-magic weapons. The only two things that currently makes them different, is
+the fact that magic weapons also have magic points, while non-magic weapons don´t and that to use a magic spell, the 
+player must have currently equipped a magic weapon, not a non-magic one.
 
 ## II.I Weapon Types
 Weapons are divided into 5 types, sword,axe and bow for non-magic weapons and wand and staff for magic weapons. Each
@@ -86,8 +103,9 @@ player a weapon.
 ## III. Party
 Parties are a group of 3 members, currently all characters, that will later fight in combat as a team. Currently, a 
 party is allowed to add and remove players, as well as checking if the party has been defeated. A party is defeated if 
-it is either empty, or all the players in the party have their hitpoints at 0. To add a member to a party, first, it is
-important that the party is not currently full, or else the new member will not be added.
+it is either empty, or all the players in the party have their hitpoints at 0. this last condition, is checked by a 
+function name **isAlive()**, that returns 0 if the character is dead, or 1 if not. To add a member to a party, first, it
+is important that the party is not currently full, or else the new member will not be added.
 
 ## IV. Turn Scheduling
 A very important aspect of Final Reality is the ability to fight between players and enemies. This turn scheduler

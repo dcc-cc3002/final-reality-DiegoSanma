@@ -8,18 +8,34 @@ import enemigo.Enemigo
  *
  */
 abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int) extends Entidad {
-    override def getName(): String ={
+  /**Getter for name
+   *
+   * @return this.name
+   */
+  override def getName(): String ={
       this.name
     }
 
+  /**Getter for Hp
+   *
+   * @return this.hp
+   */
     override def getHp(): Int = {
       this.hp
     }
 
+  /**Getter for defense
+   *
+   * @return this.defense
+   */
     override def getDefense(): Int = {
       this.defense
     }
 
+  /**Getter for weight
+   *
+   * @return this.weight
+   */
     override def getWeight(): Int = {
       this.weight
     }
