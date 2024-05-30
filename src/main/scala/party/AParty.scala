@@ -1,7 +1,7 @@
 package party
 
 import attributes.Attributes
-import exceptions.FullPartyException
+import exceptions.party.FullPartyException
 
 import scala.collection.mutable.ArrayBuffer
 

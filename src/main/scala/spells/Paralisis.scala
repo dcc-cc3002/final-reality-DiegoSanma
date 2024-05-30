@@ -1,7 +1,7 @@
 package spells
 import attributes.{Attributes, Mage}
 import entity.Entidad
-import exceptions.FriendlyFireException
+import exceptions.damage.FriendlyFireException
 
 /**Class for paralyzing spell
  *

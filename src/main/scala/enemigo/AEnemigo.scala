@@ -2,7 +2,7 @@ package enemigo
 
 import attributes.{Attributes, Mage}
 import entity.{AEntidad, Entidad}
-import exceptions.SameClassAttackException
+import exceptions.damage.SameClassAttackException
 import weapons.MagicWeapon
 
 /**An abstract class that extends from EnemigoAttributes

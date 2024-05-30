@@ -2,7 +2,7 @@ package weapons
 
 import attributes.Attributes
 import characters.{Guerrero, MagoNegro, Ninja, Paladin}
-import exceptions.NotMagicWeaponException
+import exceptions.weaponexceptions.NotMagicWeaponException
 
 /**A  class for a weapon
  *
@@ -16,9 +16,7 @@ import exceptions.NotMagicWeaponException
  * @tparam atkpoints the attack points of the weapon
  * @tparam weight the weight of the weapon
  * @tparam owner the owner of the weapon
- *
  * @constructor creates a new weapon with a name(could be ""), attack points, weight and an owner
- *
  * @author Diego San Martin
  */
 

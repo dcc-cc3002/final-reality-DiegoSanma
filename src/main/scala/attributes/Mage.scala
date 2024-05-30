@@ -2,7 +2,8 @@ package attributes
 
 import enemigo.{Enemigo, EnemigoAttributes}
 import entity.{AEntidad, Entidad}
-import exceptions.{AlreadyOwnedException, FullInventoryException, NotEnoughManaException, SameClassAttackException, UnaliveDamagedException}
+import exceptions.damage.{NotEnoughManaException, SameClassAttackException, UnaliveDamagedException}
+import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
 import spells.IHechizo
 import weapons.TWeapons
 

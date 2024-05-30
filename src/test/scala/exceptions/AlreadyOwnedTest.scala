@@ -1,6 +1,7 @@
 package exceptions
 
 import characters.{MagoNegro, Paladin}
+import exceptions.weaponexceptions.AlreadyOwnedException
 import sword.Sword
 
 class AlreadyOwnedTest extends munit.FunSuite {

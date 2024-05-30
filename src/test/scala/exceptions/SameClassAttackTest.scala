@@ -2,6 +2,7 @@ package exceptions
 
 import characters.{MagoBlanco, Paladin}
 import enemigo.Enemigo
+import exceptions.damage.SameClassAttackException
 import staff.Staff
 import sword.Sword
 

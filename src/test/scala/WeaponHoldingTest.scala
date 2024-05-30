@@ -1,7 +1,7 @@
 import axe.Axe
 import bow.Bow
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import exceptions.InvalidWeaponTypeException
+import exceptions.weaponexceptions.InvalidWeaponTypeException
 import staff.Staff
 import sword.Sword
 import wand.Wand

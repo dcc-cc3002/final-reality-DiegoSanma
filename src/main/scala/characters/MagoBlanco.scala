@@ -4,7 +4,9 @@ import attributes.{Attributes, Mage}
 import axe.Axe
 import bow.Bow
 import entity.Entidad
-import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require, WrongMageException}
+import exceptions.initializing.{InvalidInventoryException, Require}
+import exceptions.mage.WrongMageException
+import exceptions.weaponexceptions.{InvalidWeaponException, InvalidWeaponTypeException}
 import spells.{HechizoLuz, HechizoOscuro}
 import staff.Staff
 import sword.Sword

@@ -1,7 +1,7 @@
 package weapons
 
 import attributes.Attributes
-import exceptions.{InvalidOwnerException, Require}
+import exceptions.initializing.{InvalidOwnerException, Require}
 /**Class for a magic weapon
  * A magic weapon is defined by its name, attack points, weight, magic points and current owner
  *
@@ -13,7 +13,6 @@ import exceptions.{InvalidOwnerException, Require}
  * @param weight the weight of the weapon
  * @param magicpoints the magic points of the weapon
  * @param owner the current owner of the weapon
- *
  * @author Diego San Martín
  */
 

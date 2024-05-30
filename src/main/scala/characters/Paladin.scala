@@ -4,7 +4,8 @@ import attributes.Attributes
 import attributes.Character
 import axe.Axe
 import bow.Bow
-import exceptions.{InvalidInventoryException, InvalidWeaponException, InvalidWeaponTypeException, Require}
+import exceptions.weaponexceptions.{InvalidWeaponException, InvalidWeaponTypeException}
+import exceptions.initializing.{InvalidInventoryException, Require}
 import staff.Staff
 import sword.Sword
 import wand.Wand

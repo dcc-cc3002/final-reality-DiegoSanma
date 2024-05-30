@@ -2,6 +2,7 @@ package exceptions
 
 import bow.Bow
 import characters.{MagoNegro, Ninja}
+import exceptions.weaponexceptions.FullInventoryException
 import staff.Staff
 import sword.Sword
 import wand.Wand

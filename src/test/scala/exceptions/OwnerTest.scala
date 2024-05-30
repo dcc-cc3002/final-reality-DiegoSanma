@@ -1,6 +1,7 @@
 package exceptions
 
 import characters.{MagoBlanco, Paladin}
+import exceptions.initializing.InvalidOwnerException
 import staff.Staff
 import sword.Sword
 import weapons.{MagicWeapon, Weapon}

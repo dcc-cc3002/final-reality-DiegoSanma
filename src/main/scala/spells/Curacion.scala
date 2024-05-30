@@ -2,7 +2,7 @@ package spells
 import attributes.{Attributes, Mage}
 import enemigo.EnemigoAttributes
 import entity.Entidad
-import exceptions.FriendlyFireException
+import exceptions.damage.FriendlyFireException
 
 /**Class for a healing spell
  *

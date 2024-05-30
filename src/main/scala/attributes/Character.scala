@@ -2,7 +2,9 @@ package attributes
 
 import enemigo.{Enemigo, EnemigoAttributes}
 import entity.{AEntidad, Entidad}
-import exceptions.{AlreadyOwnedException, FullInventoryException, FullPartyException, SameClassAttackException}
+import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
+import exceptions.damage.SameClassAttackException
+import exceptions.party.FullPartyException
 import weapons.{TWeapons, Weapon}
 
 import scala.collection.mutable.ArrayBuffer

@@ -1,6 +1,7 @@
 package exceptions
 
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import exceptions.weaponexceptions.InvalidWeaponException
 import sword.Sword
 import wand.Wand
 import weapons.{MagicWeapon, Weapon}

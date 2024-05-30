@@ -3,6 +3,9 @@ package exceptions
 import bow.Bow
 import characters.{MagoBlanco, MagoNegro}
 import enemigo.Enemigo
+import exceptions.damage.{FriendlyFireException, NotEnoughManaException, UnaliveDamagedException}
+import exceptions.mage.WrongMageException
+import exceptions.weaponexceptions.NotMagicWeaponException
 import spells.{Curacion, Fuego, Paralisis, Trueno, Veneno}
 import staff.Staff
 import wand.Wand
