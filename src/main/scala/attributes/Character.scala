@@ -24,6 +24,11 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
 
   private val maxHealth: Int = hp
 
+  /** Parameters for holding onto the values of current action bar, and action bar maximum */
+  private var actionBar: Int = 0
+  /** Max action bar starts as weight, as a character cannot begin with a weapon held */
+  private var maxActionBar = this.weight
+
   /** Getter for max Health if a Character
    *
    * @return this.maxHealth
@@ -47,10 +52,38 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * @return this.activeWeapon
    */
 
+  /**Getter for action bar
+   *
+   * @return this.actionBar
+   */
+  override def getActionBar(): Int = {
+    this.actionBar
+  }
+
+  /**Getter for Max action bar
+   *
+   * @return this.maxActionBar
+   */
+  override def getMaxActionBar: Int = {
+    this.maxActionBar
+  }
   override def getActiveWeapon(): Option[TWeapons] = {
     this.activeWeapon
   }
 
+  /**Method for updating the action bar whenever a weapon is switched/dropped, that is why it is protected
+   *
+   * If no weapon is held, it just is the character´s weight, if else
+   * it adds uo half of the held weapon´s weight
+   */
+  override def updateMaxActionBar(): Unit = {
+    if(getActiveWeapon().isEmpty){
+      this.maxActionBar = this.getWeight()
+    }
+    else{
+      this.maxActionBar = this.getWeight() + (0.5 * getActiveWeapon().get.getWeaponWeight()).toInt
+    }
+  }
   /** Method for making handing/equipping a weapon as a character
    * If i want to equip a weapon that i already have equipped, the method does nothing
    * Also calls the giveToOwner, so the wepaon now has the correct owner associated
@@ -79,8 +112,10 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
        this.inventory.remove(position)
        weapon.leaveOwner()
        if(this.getActiveWeapon().isDefined) {
-         if (this.getActiveWeapon().get == weapon)
+         if (this.getActiveWeapon().get == weapon) {
            this.activeWeapon = None
+           updateMaxActionBar()
+         }
        }
     }
   }
@@ -132,6 +167,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    */
   override def changeWeapon(position: Int): Unit = {
     this.activeWeapon = Some(this.inventory(position))
+    updateMaxActionBar()
   }
 
   /** Method for healing a character by a certain percentage

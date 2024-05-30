@@ -22,7 +22,12 @@ trait Attributes extends AEntidad{
 
   def getMaxHealth(): Int
 
+  def getActionBar(): Int
+
+  def getMaxActionBar: Int
   def getActiveWeapon(): Option[TWeapons]
+
+  def updateMaxActionBar(): Unit
 
   def receiveWeapon(weapon:TWeapons): Unit
 
@@ -40,7 +45,5 @@ trait Attributes extends AEntidad{
   def changeWeapon(position:Int): Unit
 
   def heal(amountPercentage:Double): Unit
-
-
 
 }
