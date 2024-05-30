@@ -184,6 +184,14 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * This percentage is according to their max health, not the health they currently have
    *
    */
+
+  /**Method for removing a character from the turn scheduler
+   *
+   * @param scheduler the turn scheduler he is being removed from
+   */
+  override def removeFromTurns(scheduler: ProgramadorDeTurnos): Unit = {
+    scheduler.removeCharacter(this)
+  }
   override def heal(amountPercentage:Double): Unit = {
     val healing: Int = (amountPercentage*this.getMaxHealth()).toInt
     this.maxHeal(healing,getMaxHealth())

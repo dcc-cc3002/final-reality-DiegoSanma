@@ -73,4 +73,12 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
     scheduler.addEnemy(this)
   }
 
+  /**Method for removing an enemy from the turn scheduler
+   *
+   * @param scheduler the turn scheduler they are being removed from
+   */
+  override def removeFromTurns(scheduler: ProgramadorDeTurnos): Unit = {
+    scheduler.removeEnemy(this)
+  }
+
 }

@@ -26,4 +26,6 @@ trait Entidad{
   def isAlive(): Int
 
   def addToTurns(scheduler: ProgramadorDeTurnos): Unit
+
+  def removeFromTurns(scheduler: ProgramadorDeTurnos) : Unit
 }

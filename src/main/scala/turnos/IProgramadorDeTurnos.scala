@@ -18,7 +18,11 @@ trait IProgramadorDeTurnos {
 
   def addEnemy(added:EnemigoAttributes): Unit
 
-  def sacar(removed:Entidad): Unit
+  def removeEntity(removed:Entidad): Unit
+
+  def removeCharacter(removed:Attributes)
+
+  def removeEnemy(removed:EnemigoAttributes)
 
   def Barra(): ArrayBuffer[(Entidad,Double)]
 

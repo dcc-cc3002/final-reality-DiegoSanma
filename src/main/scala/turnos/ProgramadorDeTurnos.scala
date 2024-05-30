@@ -3,7 +3,7 @@ package turnos
 import attributes.{Attributes, Mage}
 import enemigo.{Enemigo, EnemigoAttributes}
 import entity.Entidad
-import exceptions.turns.AlreadyInSchedulerException
+import exceptions.turns.{AlreadyInSchedulerException, NotInSchedulerException}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -48,6 +48,8 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
   /**Method for adding a character into the turn scheduler
    *
    * @param added the character being added
+   *
+   * @throws AlreadyInSchedulerException if Character is already in the turn scheduler
    */
   override def addCharacter(added: Attributes): Unit = {
     if(players.contains(added)){
@@ -55,6 +57,13 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
     }
     players.addOne(added)
   }
+
+  /**Method for adding an enemy to the turn scheduler
+   *
+   * @param added enemy being added to the turn scheduler
+   *
+   * @throws AlreadyInSchedulerException if the enemy is already in the turns scheduler
+   */
 
   override def addEnemy(added: EnemigoAttributes): Unit = {
     if(enemies.contains(added)){
@@ -64,40 +73,43 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
   }
 
     /** A method for removing either players or enemies to the the turn calculator
-     *
-     * The function remover receives a player or enemy and removes it from their corresponding array
-     * It removes him from the array
-     * If that character in not inside the array, the array stays the same
-     *
-     * @example
-     * val paladin = new Paladin("Diego",90,80,70)
-     * var turnos = new ProgramadorDeTurnos(ArrayBuffer(paladin))
-     * turnos.sacar(paladin)
-     * println(s"The players in the turn scheduler are ${turnos.players}") ---> Should print an empty Array Buffer
+     * Calls function for entity, where it tells the turn scheduler what type of entity is being removed
      */
 
-    override def sacar(removed: Entidad): Unit = {
-      if (!(removed.isInstanceOf[Attributes]) && !(removed.isInstanceOf[Enemigo])) {
-        return
-      }
-      if (removed.isInstanceOf[Attributes]) {
-        if ((players.contains(removed))) {
-          val index = players.indexOf(removed)
-          players.remove(index)
-          this.registro.remove(index)
-        }
-      }
-      else {
-        if ((enemies.contains(removed))) {
-          val index = enemies.indexOf(removed)
-          enemies.remove(index)
-          this.registro.remove(index)
-        }
-      }
+    override def removeEntity(removed: Entidad): Unit = {
+      removed.removeFromTurns(this)
     }
 
+  /**Method for removing a character from the turn scheduler
+   *
+   * @param removed the character being removed
+   *
+   * @throws NotInSchedulerException if character is not currently in the turn scheduler
+   */
+  override def removeCharacter(removed: Attributes): Unit = {
+    if(!(players.contains(removed))){
+      throw new NotInSchedulerException("Character")
+    }
+    var position:Int = players.indexOf(removed)
+    players.remove(position)
+  }
 
-    /** A method that calculates the action bar for each character in combat
+  /**Method for removing an enemy from the turn scheduler
+   *
+   * @param removed enemy being removed from the turn scheduler
+   *
+   * @throws NotInSchedulerException if the enemy is not currently in the turn scheduler
+   */
+  override def removeEnemy(removed: EnemigoAttributes): Unit = {
+    if(!(enemies.contains(removed))){
+      throw new NotInSchedulerException("Enemy")
+    }
+    var position:Int = enemies.indexOf(removed)
+    enemies.remove(position)
+  }
+
+
+  /** A method that calculates the action bar for each character in combat
      *
      * The function returns a buffer array with the tuple of the character and their max action bar
      *
