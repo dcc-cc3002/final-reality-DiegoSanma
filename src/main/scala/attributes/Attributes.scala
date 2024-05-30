@@ -22,7 +22,7 @@ trait Attributes extends AEntidad{
 
   def getMaxHealth(): Int
 
-  def getMaxActionBar: Int
+  def getMaxActionBar(): Int
   def getActiveWeapon(): Option[TWeapons]
 
   protected def updateMaxActionBar(): Unit

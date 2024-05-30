@@ -12,6 +12,8 @@ import scala.collection.mutable.ArrayBuffer
  *
  */
 trait IProgramadorDeTurnos {
+
+  def getTurnsLine(): ArrayBuffer[Entidad]
   def addTo(added:Entidad): Unit
 
   def addCharacter(added:Attributes): Unit
@@ -23,8 +25,6 @@ trait IProgramadorDeTurnos {
   def removeCharacter(removed:Attributes)
 
   def removeEnemy(removed:EnemigoAttributes)
-
-  def Barra(): ArrayBuffer[(Entidad,Double)]
 
   def continue(k:Int): Unit
 

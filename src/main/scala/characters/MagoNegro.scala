@@ -34,7 +34,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  */
 
-class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int ,
+class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int,
                 inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None)
   extends Mage(name,hp,defense,weight,mana,inventory, activeWeapon) {
 

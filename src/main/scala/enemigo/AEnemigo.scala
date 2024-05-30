@@ -11,8 +11,8 @@ import weapons.MagicWeapon
  *
  */
 
-abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var attack:Int,actionBar:Int)
-  extends AEntidad(name,hp,defense,weight,actionBar) with EnemigoAttributes {
+abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var attack:Int)
+  extends AEntidad(name,hp,defense,weight) with EnemigoAttributes {
 
 
   /**Getter for attack parameter of an enemy

@@ -34,7 +34,7 @@ import scala.collection.mutable.ArrayBuffer
 
 class Paladin(name: String,hp: Int,defense:Int,weight: Int,
               inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None)
-  extends Character(name,hp,defense,weight,inventory, activeWeapon) {
+  extends Character(name,hp,defense,weight,inventory,activeWeapon) {
 
   Require.Stat(hp,"Hp not valid") in (0 to 150)
   Require.Stat(defense,"Defense not valid") in (0 to 175)

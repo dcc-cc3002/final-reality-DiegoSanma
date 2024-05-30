@@ -7,10 +7,9 @@ import enemigo.Enemigo
  *
  *
  */
-abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int,
-                       private var actionBar:Int) extends Entidad {
+abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int) extends Entidad {
  /** Bar starts at 0 for all entities*/
-  this.actionBar = 0
+  var actionBar: Int = 0
 
   /**Getter for name
    *

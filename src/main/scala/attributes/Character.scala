@@ -4,7 +4,7 @@ import enemigo.{Enemigo, EnemigoAttributes}
 import entity.{AEntidad, Entidad}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
 import exceptions.damage.SameClassAttackException
-import exceptions.party.FullPartyException
+import exceptions.partyexc.FullPartyException
 import turnos.ProgramadorDeTurnos
 import weapons.{TWeapons, Weapon}
 
@@ -18,9 +18,9 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-abstract class Character(name:String,hp:Int,defense: Int, weight: Int,actionBar: Int,
+abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
                          private var inventory:ArrayBuffer[TWeapons],private var activeWeapon: Option[TWeapons])
-  extends AEntidad(name,hp,defense,weight,actionBar) with Attributes {
+  extends AEntidad(name,hp,defense,weight) with Attributes {
   /** Constant parameter that holds the max health of a character */
 
   private val maxHealth: Int = hp
@@ -32,7 +32,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,actionBar:
    *
    * @return this.maxActionBar
    */
-  override def getMaxActionBar: Int = {
+  override def getMaxActionBar(): Int = {
     this.maxActionBar
   }
 

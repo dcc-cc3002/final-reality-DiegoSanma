@@ -1,7 +1,8 @@
 package exceptions
 
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja}
-import party.{FullPartyException, Party}
+import partyexc.{FullPartyException}
+import party.Party
 
 import scala.collection.mutable.ArrayBuffer
 

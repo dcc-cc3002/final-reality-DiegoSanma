@@ -134,6 +134,14 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
     /** A parameter that holds the turns in which the combat shall be played out */
     var turns: ArrayBuffer[Entidad] = ArrayBuffer()
 
+  /**Getter for turns array, that holds the "waiting line" for each of the entities turn
+   *
+   * @return this.turns
+   */
+  override def getTurnsLine(): ArrayBuffer[Entidad] = {
+    this.turns
+  }
+
     /** A method that checks whether someone has completed their action bar,
      * signals that the character has done by adding him/her/it to the turn array
      * and finally restarts their action bar
@@ -145,14 +153,16 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
       var past: ArrayBuffer[(Entidad,Int)] = ArrayBuffer()
       for(element<-players){
         var dif: Int = element.getActionBar()-element.getMaxActionBar
-        if(dif>0){
+        if(dif>=0){
           past.addOne(element,dif)
+          element.addToActionBar(-element.getActionBar())
         }
       }
       for(enemy<-enemies){
         var dif: Int = enemy.getActionBar()-enemy.getMaxActionBar
-        if(dif>0){
+        if(dif>=0){
           past.addOne(enemy,dif)
+          enemy.addToActionBar(-enemy.getActionBar())
         }
       }
       var desempate: ArrayBuffer[(Entidad,Int)] = past.sortBy(_._2).reverse

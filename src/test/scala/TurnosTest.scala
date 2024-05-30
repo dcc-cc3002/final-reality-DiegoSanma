@@ -1,7 +1,8 @@
 import attributes.Attributes
 import axe.Axe
 import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import enemigo.Enemigo
+import enemigo.{Enemigo, EnemigoAttributes}
+import exceptions.turns.{AlreadyInSchedulerException, NotInSchedulerException}
 import staff.Staff
 import sword.Sword
 import turnos.ProgramadorDeTurnos
@@ -28,7 +29,7 @@ class TurnosTest extends munit.FunSuite{
   var notnamedw: Staff = null
   var turnos: ProgramadorDeTurnos = null
   var jugadores : ArrayBuffer[Attributes] = null
-  var enemigos: ArrayBuffer[Enemigo] = null
+  var enemigos: ArrayBuffer[EnemigoAttributes] = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
@@ -61,101 +62,128 @@ class TurnosTest extends munit.FunSuite{
   }
 
   test("adding and removing characters"){
-    turnos.agregar(ninja)
+    turnos.addTo(ninja)
     assertEquals(turnos.getPlayers().isEmpty,false,"Player array still is empty")
     assert(turnos.getPlayers()(0).isInstanceOf[Ninja],"Player added to the array is not a Ninja")
     assertEquals(turnos.getPlayers()(0).asInstanceOf[Ninja],ninja,"The first player is not the expected ninja")
-    turnos.agregar(magonegro)
+
+    turnos.addTo(magonegro)
     assertEquals(turnos.getPlayers()(0).asInstanceOf[Ninja],ninja,"The first player is not the expected ninja")
     assert(turnos.getPlayers()(1).isInstanceOf[MagoNegro],"Player added to the array is not a Mago Negro")
     assertEquals(turnos.getPlayers()(1).asInstanceOf[MagoNegro],magonegro,"The second player is not the expected black mage")
-    turnos.agregar(enemigo1)
+
+    turnos.addTo(enemigo1)
     assertEquals(turnos.getEnemies().isEmpty,false,"Enemy array still is empty")
     assert(turnos.getEnemies()(0).isInstanceOf[Enemigo],"Enemy added to the array is not a Enemigo")
     assertEquals(turnos.getEnemies()(0).asInstanceOf[Enemigo],enemigo1,"The first enemy is not the expected enemy")
-    turnos.agregar(ninja)
+
+    var found: Int = 0
+    try{
+      turnos.addTo(ninja)
+    }
+    catch {
+      case e: AlreadyInSchedulerException => found += 1
+    }
+    assertEquals(found,1,"Exception not thrown")
     assertEquals(turnos.getPlayers()(0).asInstanceOf[Ninja],ninja,"The first player is not the expected ninja")
     assertEquals(turnos.getPlayers()(1).asInstanceOf[MagoNegro],magonegro,"The second player is not the expected black mage")
     assert(turnos.getPlayers().lift(2).isEmpty)
-    turnos.agregar(enemigo1)
-    assertEquals(turnos.getEnemies()(0).asInstanceOf[Enemigo],enemigo1,"The first enemy is not the expected enemy")
-    assert(turnos.getEnemies().lift(1).isEmpty)
 
-    turnos.sacar(ninja)
+    turnos.removeEntity(ninja)
     assert(!(turnos.getPlayers().contains(ninja)),"The ninja was not removed")
     assertEquals(turnos.getPlayers()(0).asInstanceOf[MagoNegro],magonegro,"The mage wasnt moved to the front")
-    turnos.sacar(guerrero)
+
+    try{
+      turnos.removeEntity(guerrero)
+    }
+    catch {
+      case e: NotInSchedulerException => found += 1
+    }
+    assertEquals(found,2,"Exception not thrown")
     assert(!(turnos.getPlayers().contains(guerrero)),"The guerrero should not be added")
     assertEquals(turnos.getPlayers()(0).asInstanceOf[MagoNegro],magonegro,"The mage was removed")
-    turnos.agregar(enemigo2)
+
+    turnos.addTo(enemigo2)
     assertEquals(turnos.getEnemies()(1).asInstanceOf[Enemigo],enemigo2,"The second enemy is not the expected enemy")
-    turnos.sacar(enemigo1)
+
+    turnos.removeEntity(enemigo1)
     assert(!(turnos.getEnemies().contains(enemigo1)),"The enemigo1 was not removed")
     assertEquals(turnos.getEnemies()(0).asInstanceOf[Enemigo],enemigo2,"The second enemy wasnt moved to the front")
-    turnos.sacar(enemigo1)
+
+    try{
+      turnos.removeEntity(enemigo1)
+    }
+    catch {
+      case e: NotInSchedulerException => found += 1
+    }
+    assertEquals(found,3,"Exception not thrown")
     assert(!(turnos.getEnemies().contains(enemigo1)),"The enemigo1 should not be added")
     assertEquals(turnos.getEnemies()(0).asInstanceOf[Enemigo],enemigo2,"The second enemy was removed")
+
+    try{
+      turnos.addTo(enemigo2)
+    }
+    catch {
+      case e: AlreadyInSchedulerException => found +=1
+    }
+    assertEquals(found,4,"Exception not thrown")
+    assertEquals(turnos.getEnemies().length,1,"No enemies should´ve been added to the array")
   }
 
   test("cálculo barra de acción") {
-    val barraInicial = turnos.Barra()
-    assert(barraInicial.isEmpty)
-    turnos.agregar(ninja)
-    turnos.agregar(paladin)
-    turnos.agregar(magoblanco)
-    turnos.agregar(enemigo1)
-    turnos.agregar(enemigo2)
+    turnos.addTo(ninja)
+    turnos.addTo(paladin)
+    turnos.addTo(magoblanco)
+    turnos.addTo(enemigo1)
+    turnos.addTo(enemigo2)
 
-    val barraAccion = turnos.Barra()
-    var barra_ninja: Double = 60
-    var barra_paladin: Double = 120
-    barra_paladin = barra_paladin + 0.5*70
-    var barra_magoblanco : Double = 80
-    barra_magoblanco = barra_magoblanco + 0.5*40
-    var barra_en1: Double = 30
-    var barra_en2: Double = 110
+    var barra_ninja: Int = 60
+    var barra_paladin: Int = 120
+    barra_paladin = (barra_paladin + 0.5*70).toInt
+    var barra_magoblanco : Int = 80
+    barra_magoblanco = (barra_magoblanco + 0.5*40).toInt
+    var barra_en1: Int = 30
+    var barra_en2: Int = 110
 
-    assertEquals(barraAccion(0)._1,ninja)
-    assertEquals(barraAccion(1)._1,paladin)
-    assertEquals(barraAccion(2)._1,magoblanco)
-    assertEquals(barraAccion(3)._1,enemigo1)
-    assertEquals(barraAccion(4)._1,enemigo2)
-    assertEquals(barraAccion(0)._2,barra_ninja)
-    assertEquals(barraAccion(1)._2,barra_paladin)
-    assertEquals(barraAccion(2)._2,barra_magoblanco)
-    assertEquals(barraAccion(3)._2,barra_en1)
-    assertEquals(barraAccion(4)._2,barra_en2)
+    assertEquals(barra_ninja,ninja.getMaxActionBar(),"MaxActionBar not correctly calcualted")
+    assertEquals(barra_paladin,paladin.getMaxActionBar(),"MaxActionBar not correctly calcualted")
+    assertEquals(barra_magoblanco,magoblanco.getMaxActionBar(),"MaxActionBar not correctly calcualted")
   }
 
   test("registro y suma de k"){
-    assertEquals(0,turnos.registro.length,"Registro was not initialized correctly")
-    turnos.agregar(ninja)
-    assertEquals(1,turnos.registro.length,"Registro nos as long as wanted")
-    turnos.agregar(guerrero)
-    turnos.agregar(magoblanco)
-    turnos.agregar(enemigo1)
-    turnos.agregar(enemigo2)
-    assertEquals(turnos.registro.length,5,"Registro is not as long as the amount of characters in combat")
-    for(i<-0 until turnos.registro.length-1) {
-      assertEquals(0, turnos.registro(i), "The i action bar was not initialized correctly")
+    turnos.addTo(ninja)
+    turnos.addTo(guerrero)
+    turnos.addTo(magoblanco)
+    turnos.addTo(enemigo1)
+    turnos.addTo(enemigo2)
+    for(i <- turnos.getPlayers()) {
+      assertEquals(i.getActionBar(),0,"All player action bars should be empty")
     }
-    turnos.continuar(10)
-    for(i<-0 until turnos.registro.length-1){
-      assertEquals(10,turnos.registro(i),"The i action bar was not added k correctly")
+    for(i <- turnos.getEnemies()) {
+      assertEquals(i.getActionBar(),0,"All enemy action bars should be empty")
     }
-    turnos.continuar(120)
-    for(i<-0 until turnos.registro.length){
-      assertEquals(130,turnos.registro(i),"The i action bar was not added k correctly")
+    turnos.continue(10)
+    for(i <- turnos.getPlayers()) {
+      assertEquals(i.getActionBar(),10,"All player action bars should be 10")
     }
-
+    for(i <- turnos.getEnemies()) {
+      assertEquals(i.getActionBar(), 10, "All enemy action bars should be 10")
+    }
+    turnos.continue(120)
+    for(i <- turnos.getPlayers()) {
+      assertEquals(i.getActionBar(),130,"All player action bars should be 130")
+    }
+    for(i <- turnos.getEnemies()) {
+      assertEquals(i.getActionBar(), 130, "All enemy action bars should be 130")
+    }
   }
 
   test("revision de turnos"){
-    turnos.agregar(ninja)
-    turnos.agregar(paladin)
-    turnos.agregar(magonegro)
-    turnos.agregar(enemigo1)
-    turnos.agregar(enemigo2)
+    turnos.addTo(ninja)
+    turnos.addTo(paladin)
+    turnos.addTo(magonegro)
+    turnos.addTo(enemigo1)
+    turnos.addTo(enemigo2)
 
     var barra_ninja: Double = 60
     var barra_paladin: Double = 155
@@ -163,75 +191,69 @@ class TurnosTest extends munit.FunSuite{
     var barra_en1: Double = 30
     var barra_en2: Double = 110
 
-    assert(turnos.turnos.isEmpty)
-    turnos.continuar(25)
-    turnos.revisionTurno()
-    assert(turnos.turnos.isEmpty)
+    assert(turnos.getTurnsLine().isEmpty,"Nobody should have already completed their action bar meter")
+    turnos.continue(25)
+    turnos.checkTurn()
+    assert(turnos.getTurnsLine().isEmpty,"Nobody should have already completed their action bar meter")
 
-    turnos.continuar(25)
-    turnos.revisionTurno()
-    assert(turnos.turnos.nonEmpty)
-    assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
-    assertEquals(turnos.registro(3),0)
+    turnos.continue(25)
+    turnos.checkTurn()
+    assert(turnos.getTurnsLine().nonEmpty,"Someone should have already surpassed their action abr")
+    assertEquals(turnos.getTurnsLine()(0).asInstanceOf[Enemigo],enemigo1,"Enemigo1 should be the first in the waiting line")
 
-    turnos.continuar(30)
-    turnos.revisionTurno()
-    assert(turnos.turnos(0).isInstanceOf[Enemigo])
-    assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
-    assert(turnos.turnos(1).isInstanceOf[Ninja])
-    assertEquals(turnos.turnos(1).asInstanceOf[Ninja],ninja)
-    assertEquals(turnos.registro(0),0)
-    assertEquals(turnos.turnos(2).asInstanceOf[Enemigo],enemigo1)
-    assertEquals(turnos.registro(3),0)
+    turnos.continue(30)
+    turnos.checkTurn()
+    assertEquals(turnos.getTurnsLine()(0).asInstanceOf[Enemigo],enemigo1,"Enemigo1 should still be first in line")
+    assertEquals(turnos.getTurnsLine()(1).asInstanceOf[Ninja],ninja,"Ninja should be second in line")
+    assertEquals(turnos.getTurnsLine()(2).asInstanceOf[Enemigo],enemigo1,"Enemigo1 should be third in line")
 
-    turnos.continuar(50)
-    turnos.revisionTurno()
-    assertEquals(turnos.turnos(0).asInstanceOf[Enemigo],enemigo1)
-    assertEquals(turnos.turnos(1).asInstanceOf[Ninja],ninja)
-    assertEquals(turnos.turnos(2).asInstanceOf[Enemigo],enemigo1)
-    assertEquals(turnos.turnos(3).asInstanceOf[MagoNegro],magonegro)
-    assertEquals(turnos.registro(2),0)
-    assertEquals(turnos.turnos(4).asInstanceOf[Enemigo],enemigo2)
-    assertEquals(turnos.turnos(5).asInstanceOf[Enemigo],enemigo1)
+    turnos.continue(50)
+    turnos.checkTurn()
+    assertEquals(turnos.getTurnsLine()(0).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.getTurnsLine()(1).asInstanceOf[Ninja],ninja)
+    assertEquals(turnos.getTurnsLine()(2).asInstanceOf[Enemigo],enemigo1)
+    assertEquals(turnos.getTurnsLine()(3).asInstanceOf[MagoNegro],magonegro,"Now Magonegro should be fourth in line")
+    assertEquals(turnos.getTurnsLine()(4).asInstanceOf[Enemigo],enemigo2,"Enemigo2 should be fifth")
+    assertEquals(turnos.getTurnsLine()(5).asInstanceOf[Enemigo],enemigo1,"Enemigo1 should be sixth")
   }
 
   test("next in line"){
-    turnos.agregar(ninja)
-    turnos.agregar(paladin)
-    turnos.agregar(magonegro)
-    turnos.agregar(enemigo1)
-    turnos.agregar(enemigo2)
-    turnos.continuar(120)
-    turnos.revisionTurno()
-    assertEquals(turnos.turnos(0),enemigo1,"Turnos array doesnt have en1 first")
-    assertEquals(turnos.turnos(1),ninja,"Turnos array doesnt have ninja second")
-    assertEquals(turnos.turnos(2),magonegro,"Turnos array doesnt have black mage third")
-    assertEquals(turnos.turnos(3),enemigo2,"Turnos array doesnt have  en2 fourth")
+    turnos.addTo(ninja)
+    turnos.addTo(paladin)
+    turnos.addTo(magonegro)
+    turnos.addTo(enemigo1)
+    turnos.addTo(enemigo2)
+    turnos.continue(120)
+    turnos.checkTurn()
+    assertEquals(turnos.getTurnsLine()(0),enemigo1,"Turnos array doesnt have en1 first")
+    assertEquals(turnos.getTurnsLine()(1),ninja,"Turnos array doesnt have ninja second")
+    assertEquals(turnos.getTurnsLine()(2),magonegro,"Turnos array doesnt have black mage third")
+    assertEquals(turnos.getTurnsLine()(3),enemigo2,"Turnos array doesnt have  en2 fourth")
 
-    val first = turnos.next_turn()
+    val first = turnos.nextTurn()
     assert(first.isDefined)
     assert(first.get.isInstanceOf[Enemigo])
     assertEquals(first.get,enemigo1)
 
-    val first2 = turnos.next_turn()
+    val first2 = turnos.nextTurn()
     assert(first2.isDefined)
     assert(first2.get.isInstanceOf[Attributes])
     assertEquals(first2.get,ninja)
 
-    val first3 = turnos.next_turn()
+    val first3 = turnos.nextTurn()
     assert(first3.isDefined)
     assert(first3.get.isInstanceOf[Attributes])
     assertEquals(first3.get,magonegro)
 
-    val first4 = turnos.next_turn()
+    val first4 = turnos.nextTurn()
     assert(first4.isDefined)
     assert(first4.get.isInstanceOf[Enemigo])
     assertEquals(first4.get,enemigo2)
-    assert(turnos.turnos.isEmpty)
+    assert(turnos.getTurnsLine().isEmpty)
 
-    val first5 = turnos.next_turn()
+    val first5 = turnos.nextTurn()
     assert(first5.isEmpty)
-    assert(turnos.turnos.isEmpty)
+    assert(turnos.getTurnsLine().isEmpty)
   }
 
 }
