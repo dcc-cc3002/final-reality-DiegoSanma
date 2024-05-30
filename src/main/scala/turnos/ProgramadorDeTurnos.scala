@@ -32,8 +32,6 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
   override def getEnemies(): ArrayBuffer[EnemigoAttributes] = {
     this.enemies
   }
-  /** A parameter that holds the values for everyone´s action bar during combat */
-  var registro: ArrayBuffer[Int] = ArrayBuffer()
 
   /** A method for adding either players or enemies to the the turn calculator
    *
@@ -120,37 +118,21 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      */
 
 
-    override def Barra():ArrayBuffer[(Entidad,Double)] ={
-        var barraMaxima: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
-        for(i <- 0 until players.length){
-          if(players(i).getActiveWeapon().isDefined) {
-            var barra: Double = players(i).getWeight() + 0.5*players(i).getActiveWeapon().get.getWeaponWeight()
-            barraMaxima += ((players(i), barra): (Entidad, Double))
-          }
-          else{
-            var barra: Double = players(i).getWeight()
-            barraMaxima += ((players(i), barra): (Entidad, Double))
-          }
-        }
-        for(i <- 0 until enemies.length)  {
-          var barra: Double = enemies(i).getWeight()
-          barraMaxima += ((enemies(i), barra): (Entidad, Double))
-      }
-      return barraMaxima
-    }
-
     /** A method that adds a constant value to each character currently in combat
      * The function takes an Integer k as a parameter, that is added to each action bar
      *
      */
-     override def continuar(k:Int): Unit = {
-       for(i<-0 until registro.length){
-          this.registro(i) = this.registro(i) + k
+     override def continue(k:Int): Unit = {
+       for(i <- this.players){
+          i.addToActionBar(k)
+       }
+       for(i <- this.enemies){
+         i.addToActionBar(k)
        }
      }
 
     /** A parameter that holds the turns in which the combat shall be played out */
-    var turnos: ArrayBuffer[Entidad] = ArrayBuffer()
+    var turns: ArrayBuffer[Entidad] = ArrayBuffer()
 
     /** A method that checks whether someone has completed their action bar,
      * signals that the character has done by adding him/her/it to the turn array
@@ -159,19 +141,23 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      * If no action bar was completed, then nothing happens
      */
 
-    override def revisionTurno():Unit ={
-      var pasados: ArrayBuffer[(Entidad,Double)] = ArrayBuffer()
-      var barraMax: ArrayBuffer[(Entidad,Double)] = Barra()
-      for(i<-0 until this.registro.length){
-        val dif: Double = this.registro(i)-barraMax(i)._2
-        if (dif>=0){
-          this.registro(i)= 0
-          pasados.addOne((barraMax(i)._1,dif))
+    override def checkTurn():Unit ={
+      var past: ArrayBuffer[(Entidad,Int)] = ArrayBuffer()
+      for(element<-players){
+        var dif: Int = element.getActionBar()-element.getMaxActionBar
+        if(dif>0){
+          past.addOne(element,dif)
         }
       }
-      var desempate: ArrayBuffer[(Entidad,Double)] = pasados.sortBy(_._2).reverse
+      for(enemy<-enemies){
+        var dif: Int = enemy.getActionBar()-enemy.getMaxActionBar
+        if(dif>0){
+          past.addOne(enemy,dif)
+        }
+      }
+      var desempate: ArrayBuffer[(Entidad,Int)] = past.sortBy(_._2).reverse
       for((element,dif)<-desempate){
-        turnos.addOne(element)
+        turns.addOne(element)
       }
     }
 
@@ -179,17 +165,17 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      * Also removes entity from the turn array, so next time this function is called,
      * will return next entity in line
      *
-     * If no one has completed their action bar and the turnos array is empty, the function returns None
+     * If no one has completed their action bar and the turns array is empty, the function returns None
      *
      */
 
-    override def next_turn():Option[Entidad]={
-      if(this.turnos.isEmpty){
+    override def nextTurn():Option[Entidad]={
+      if(this.turns.isEmpty){
         return None
       }
       else{
-        var my_turn: Entidad = turnos(0)
-        this.turnos.remove(0)
+        var my_turn: Entidad = turns(0)
+        this.turns.remove(0)
         return(Some(my_turn))
       }
     }

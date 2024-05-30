@@ -28,4 +28,8 @@ trait Entidad{
   def addToTurns(scheduler: ProgramadorDeTurnos): Unit
 
   def removeFromTurns(scheduler: ProgramadorDeTurnos) : Unit
+
+  def getActionBar(): Int
+
+  def addToActionBar(k:Int): Unit
 }

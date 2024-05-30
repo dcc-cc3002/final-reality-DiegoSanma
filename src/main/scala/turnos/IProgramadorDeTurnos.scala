@@ -26,11 +26,11 @@ trait IProgramadorDeTurnos {
 
   def Barra(): ArrayBuffer[(Entidad,Double)]
 
-  def continuar(k:Int): Unit
+  def continue(k:Int): Unit
 
-  def revisionTurno(): Unit
+  def checkTurn(): Unit
 
-  def next_turn(): Option[Entidad]
+  def nextTurn(): Option[Entidad]
 
   def getPlayers(): ArrayBuffer[Attributes]
 

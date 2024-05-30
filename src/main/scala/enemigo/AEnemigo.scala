@@ -11,8 +11,9 @@ import weapons.MagicWeapon
  *
  */
 
-abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var attack:Int)
-  extends AEntidad(name,hp,defense,weight) with EnemigoAttributes {
+abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var attack:Int,actionBar:Int)
+  extends AEntidad(name,hp,defense,weight,actionBar) with EnemigoAttributes {
+
 
   /**Getter for attack parameter of an enemy
    *
@@ -22,12 +23,20 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
     this.attack
   }
 
-  /**Method for attacking another entity
+  /** Method for attacking another entity
    * Bare in mind, that an enemy can also inflict damage to another enemy
    *
    * @param victim the entity to whom damage will be dealt
    */
 
+  /**Getter for max action bar
+   * In the case for enemies, as they dont hold weapons, their max Action Bar will ALWAYS be their weight
+   *
+   * @return this.weight
+   */
+  override def getMaxActionBar(): Int = {
+    this.getWeight()
+  }
   override def attack(victim: Entidad): Unit = {
     victim.takedamageEnemy(this)
   }

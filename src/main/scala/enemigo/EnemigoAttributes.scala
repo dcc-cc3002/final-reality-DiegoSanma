@@ -14,5 +14,8 @@ import entity.{AEntidad, Entidad}
 trait EnemigoAttributes extends AEntidad{
     def getAttack(): Int
 
+    def getMaxActionBar(): Int
+
     def takeSpellDamage(mage:Mage)
+
 }

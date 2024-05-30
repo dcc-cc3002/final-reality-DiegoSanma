@@ -7,7 +7,11 @@ import enemigo.Enemigo
  *
  *
  */
-abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int) extends Entidad {
+abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int,
+                       private var actionBar:Int) extends Entidad {
+ /** Bar starts at 0 for all entities*/
+  this.actionBar = 0
+
   /**Getter for name
    *
    * @return this.name
@@ -40,10 +44,31 @@ abstract class AEntidad(private var name:String,private var hp:Int,private var d
       this.weight
     }
 
+  /**Getter for action bar
+   *
+   * @return this.actionBar
+   */
+  override def getActionBar(): Int = {
+    this.actionBar
+  }
+
+  /**Getter for Max action bar
+   *
+   * @return this.maxActionBar
+   */
+
+  /**Method for adding a constant value into the action bar meter
+   *
+   * @param k the amount being added
+   */
+  override def addToActionBar(k: Int): Unit = {
+    this.actionBar += k
+  }
+
   /**Method for inflicting damage on an entity
    *
    * Damage is the amount that their active hp will be decreased
-   * If their healñth goes below 0, it is fixated to that value
+   * If their health goes below 0, it is fixated to that value
    *
    * @param damage the amount of damage being done
    */

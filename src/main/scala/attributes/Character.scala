@@ -18,22 +18,29 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
+abstract class Character(name:String,hp:Int,defense: Int, weight: Int,actionBar: Int,
                          private var inventory:ArrayBuffer[TWeapons],private var activeWeapon: Option[TWeapons])
-  extends AEntidad(name,hp,defense,weight) with Attributes {
+  extends AEntidad(name,hp,defense,weight,actionBar) with Attributes {
   /** Constant parameter that holds the max health of a character */
 
   private val maxHealth: Int = hp
 
-  /** Parameters for holding onto the values of current action bar, and action bar maximum */
-  private var actionBar: Int = 0
-  /** Max action bar starts as weight, as a character cannot begin with a weapon held */
-  private var maxActionBar = this.weight
+  /** Parameters for holding onto the values of current action bar maximum, starts of as just the characters weight*/
+    private var maxActionBar = this.weight
+
+  /**Getter for maxActionBar
+   *
+   * @return this.maxActionBar
+   */
+  override def getMaxActionBar: Int = {
+    this.maxActionBar
+  }
 
   /** Getter for max Health if a Character
    *
    * @return this.maxHealth
    */
+
 
   override def getMaxHealth(): Int = {
     this.maxHealth
@@ -53,21 +60,6 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * @return this.activeWeapon
    */
 
-  /**Getter for action bar
-   *
-   * @return this.actionBar
-   */
-  override def getActionBar(): Int = {
-    this.actionBar
-  }
-
-  /**Getter for Max action bar
-   *
-   * @return this.maxActionBar
-   */
-  override def getMaxActionBar: Int = {
-    this.maxActionBar
-  }
   override def getActiveWeapon(): Option[TWeapons] = {
     this.activeWeapon
   }
@@ -85,6 +77,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
       this.maxActionBar = this.getWeight() + (0.5 * getActiveWeapon().get.getWeaponWeight()).toInt
     }
   }
+
   /** Method for making handing/equipping a weapon as a character
    * If i want to equip a weapon that i already have equipped, the method does nothing
    * Also calls the giveToOwner, so the wepaon now has the correct owner associated
