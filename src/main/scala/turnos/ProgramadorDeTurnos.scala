@@ -3,6 +3,7 @@ package turnos
 import attributes.{Attributes, Mage}
 import enemigo.{Enemigo, EnemigoAttributes}
 import entity.Entidad
+import exceptions.turns.AlreadyInSchedulerException
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,7 +21,7 @@ import scala.collection.mutable.ArrayBuffer
  */
 
 class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
-                           private val enemies: ArrayBuffer[Enemigo]) extends IProgramadorDeTurnos {
+                           private val enemies: ArrayBuffer[EnemigoAttributes]) extends IProgramadorDeTurnos {
 
   /** Getter for player parameter */
   override def getPlayers(): ArrayBuffer[Attributes] = {
@@ -28,7 +29,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
   }
 
   /** Getter for enemies parameter */
-  override def getEnemies(): ArrayBuffer[Enemigo] = {
+  override def getEnemies(): ArrayBuffer[EnemigoAttributes] = {
     this.enemies
   }
   /** A parameter that holds the values for everyone´s action bar during combat */
@@ -36,33 +37,30 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
 
   /** A method for adding either players or enemies to the the turn calculator
    *
-   * The function agregar receives a player or enemy and adds it to its corresponding array
-   * It adds the corresponding player to the end of their array
-   * If that character is already inside the array, no one is added adn the array stays the same
-   *
-   * @example
-   * var turnos = new ProgramadorDeTurnos()
-   * val paladin = new Paladin("Diego",90,80,70)
-   * turnos.agregar(paladin)
-   * println(s"The only character in the turn scheduler is ${turnos.players(0).getName()}$") --> should print Diego
+   * Will cal method in the entity that is being added, that will later tell the turn scheduler what
+   * type of entity it is adding (enemies or characters)
    */
 
-    override def agregar(added: Entidad): Unit = {
-    if (!(added.isInstanceOf[Attributes]) && !(added.isInstanceOf[Enemigo])) {
-      return
+    override def addTo(added: Entidad): Unit = {
+      added.addToTurns(this)
     }
-    if (added.isInstanceOf[Attributes]) {
-      if (!(players.contains (added))) {
-        players.addOne(added.asInstanceOf[Attributes])
-        this.registro.addOne(0)
-      }
+
+  /**Method for adding a character into the turn scheduler
+   *
+   * @param added the character being added
+   */
+  override def addCharacter(added: Attributes): Unit = {
+    if(players.contains(added)){
+      throw new AlreadyInSchedulerException("Character")
     }
-    else {
-      if (!(enemies.contains(added))) {
-        enemies.addOne(added.asInstanceOf[Enemigo])
-        this.registro.addOne(0)
-      }
+    players.addOne(added)
+  }
+
+  override def addEnemy(added: EnemigoAttributes): Unit = {
+    if(enemies.contains(added)){
+      throw new AlreadyInSchedulerException(("Enemy"))
     }
+    enemies.addOne(added)
   }
 
     /** A method for removing either players or enemies to the the turn calculator

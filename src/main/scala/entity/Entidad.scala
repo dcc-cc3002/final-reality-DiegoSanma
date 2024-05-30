@@ -2,6 +2,7 @@ package entity
 
 import attributes.Attributes
 import enemigo.EnemigoAttributes
+import turnos.ProgramadorDeTurnos
 
 /**A trait that includes the methods that will be included in any Entidad
  */
@@ -23,4 +24,6 @@ trait Entidad{
   protected def checkHealth(damage:Int): Unit
 
   def isAlive(): Int
+
+  def addToTurns(scheduler: ProgramadorDeTurnos): Unit
 }

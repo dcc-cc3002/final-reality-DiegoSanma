@@ -27,7 +27,7 @@ trait Attributes extends AEntidad{
   def getMaxActionBar: Int
   def getActiveWeapon(): Option[TWeapons]
 
-  def updateMaxActionBar(): Unit
+  protected def updateMaxActionBar(): Unit
 
   def receiveWeapon(weapon:TWeapons): Unit
 

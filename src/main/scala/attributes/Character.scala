@@ -5,6 +5,7 @@ import entity.{AEntidad, Entidad}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
 import exceptions.damage.SameClassAttackException
 import exceptions.party.FullPartyException
+import turnos.ProgramadorDeTurnos
 import weapons.{TWeapons, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -76,7 +77,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * If no weapon is held, it just is the character´s weight, if else
    * it adds uo half of the held weapon´s weight
    */
-  override def updateMaxActionBar(): Unit = {
+  override protected def updateMaxActionBar(): Unit = {
     if(getActiveWeapon().isEmpty){
       this.maxActionBar = this.getWeight()
     }
@@ -168,6 +169,14 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
   override def changeWeapon(position: Int): Unit = {
     this.activeWeapon = Some(this.inventory(position))
     updateMaxActionBar()
+  }
+
+  /**Method for adding a character into the turn scheduler
+   *
+   * @param scheduler the turn scheduler the character is being added to
+   */
+  override def addToTurns(scheduler: ProgramadorDeTurnos): Unit = {
+    scheduler.addCharacter(this)
   }
 
   /** Method for healing a character by a certain percentage

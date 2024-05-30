@@ -3,6 +3,7 @@ package enemigo
 import attributes.{Attributes, Mage}
 import entity.{AEntidad, Entidad}
 import exceptions.damage.SameClassAttackException
+import turnos.ProgramadorDeTurnos
 import weapons.MagicWeapon
 
 /**An abstract class that extends from EnemigoAttributes
@@ -62,6 +63,14 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
   override def takeSpellDamage(mage: Mage): Unit = {
     var damage:Int = mage.getActiveWeapon().get.asInstanceOf[MagicWeapon].getMagicpts()
     this.checkHealth(damage)
+  }
+
+  /**Adds the enemy to the turn scheduler
+   *
+   * @param scheduler the turn scheduler the enemy is being added to
+   */
+  override def addToTurns(scheduler: ProgramadorDeTurnos): Unit = {
+    scheduler.addEnemy(this)
   }
 
 }
