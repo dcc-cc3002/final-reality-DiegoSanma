@@ -1,7 +1,7 @@
 package weapons
 
 import attributes.{Attributes, Mage}
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
 
 /** A trait used to define the methods that will be implemented by a weapon
  *

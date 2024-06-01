@@ -29,8 +29,8 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  *
  */
-class Guerrero(name: String,hp: Int,defense:Int,weight: Int,
-               inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None) extends
+class Warrior(name: String, hp: Int, defense:Int, weight: Int,
+              inventory:ArrayBuffer[TWeapons]=ArrayBuffer(), activeWeapon:Option[TWeapons]=None) extends
   Character(name,hp,defense,weight,inventory,activeWeapon){
 
   /**Checks whether the values used to create the guerrero are valid  */

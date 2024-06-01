@@ -1,6 +1,6 @@
 package exceptions
 
-import characters.{MagoBlanco, Paladin}
+import characters.{WhiteMage, Paladin}
 import exceptions.initializing.InvalidOwnerException
 import staff.Staff
 import sword.Sword
@@ -9,7 +9,7 @@ import weapons.{MagicWeapon, Weapon}
 class OwnerTest extends munit.FunSuite {
   var paladin: Paladin = null
   var weaponPal: Sword = null
-  var magoblanco: MagoBlanco = null
+  var magoblanco: WhiteMage = null
   var magicweaponWM: Staff = null
 
   test("Owner Exceptions"){
@@ -25,7 +25,7 @@ class OwnerTest extends munit.FunSuite {
 
     var magicweaponFound: Int = 0
     try{
-      magoblanco = new MagoBlanco("Diego",100,100,100,150)
+      magoblanco = new WhiteMage("Diego",100,100,100,150)
       magicweaponWM = new Staff("",80,70,70,Some(magoblanco))
     }
     catch{

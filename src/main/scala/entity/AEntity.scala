@@ -1,13 +1,10 @@
 package entity
 
 import attributes.Attributes
-import enemigo.Enemigo
+import enemy.Enemy
 
-/**Absract class that extends from Entidad
- *
- *
- */
-abstract class AEntidad(private var name:String,private var hp:Int,private var defense: Int,private var weight: Int) extends Entidad {
+/**Absract class that extends from Entity */
+abstract class AEntity(private var name:String, private var hp:Int, private var defense: Int, private var weight: Int) extends Entity {
  /** Bar starts at 0 for all entities*/
   var actionBar: Int = 0
 

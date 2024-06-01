@@ -1,6 +1,6 @@
 package spells
 import attributes.{Attributes, Mage}
-import entity.Entidad
+import entity.Entity
 import exceptions.damage.FriendlyFireException
 
 /**Class for paralyzing spell
@@ -8,7 +8,7 @@ import exceptions.damage.FriendlyFireException
  * Used to paralyze enemies, has a 100% acuraccy rate
  *
  */
-class Paralisis extends HechizoLuz {
+class ParalisisSpell extends LightSpells {
 
   /** Method for using a the paralyzing spell
    * Also checks whether the mage has enough mana to use the spell
@@ -16,7 +16,7 @@ class Paralisis extends HechizoLuz {
    * @param user the mage using the spell
    * @param victim the enemy being paralyzed
    */
-  override def finalInflict(user: Mage, victim: Entidad): Unit = {
+  override def finalInflict(user: Mage, victim: Entity): Unit = {
     user.checkMana(25)
     user.useMana(25)
   }
@@ -29,7 +29,7 @@ class Paralisis extends HechizoLuz {
    *
    * @throws FriendlyFireException if victim is not an ally
    */
-  override def friendlyFire(user: Mage, victim: Entidad): Unit = {
+  override def friendlyFire(user: Mage, victim: Entity): Unit = {
     if(victim.isInstanceOf[Attributes]){
       throw new FriendlyFireException("Cant paralyze an ally")
     }

@@ -1,51 +1,51 @@
 package exceptions
 
 import bow.Bow
-import characters.{MagoBlanco, MagoNegro}
-import enemigo.Enemigo
+import characters.{WhiteMage, BlackMage}
+import enemy.Enemy
 import exceptions.damage.{FriendlyFireException, NotEnoughManaException, UnaliveDamagedException}
 import exceptions.mage.WrongMageException
 import exceptions.weaponexceptions.NotMagicWeaponException
-import spells.{Curacion, Fuego, Paralisis, Trueno, Veneno}
+import spells.{HealingSpell, FireSpell, ParalisisSpell, ThunderSpell, PoisionSpell}
 import staff.Staff
 import wand.Wand
 
 class SpellExpectionTests extends munit.FunSuite {
-  var magonegro: MagoNegro = null
-  var magoblanco: MagoBlanco = null
-  var mago1: MagoBlanco = null
-  var mago2: MagoBlanco = null
-  var enemy: Enemigo = null
+  var magonegro: BlackMage = null
+  var magoblanco: WhiteMage = null
+  var mago1: WhiteMage = null
+  var mago2: WhiteMage = null
+  var enemy: Enemy = null
   var wand: Wand = null
   var staff: Staff = null
   var bow: Bow = null
-  var veneno: Veneno = null
-  var curacion: Curacion = null
-  var paralisis: Paralisis = null
-  var fuego: Fuego = null
-  var trueno: Trueno = null
+  var veneno: PoisionSpell = null
+  var curacion: HealingSpell = null
+  var paralisis: ParalisisSpell = null
+  var fuego: FireSpell = null
+  var trueno: ThunderSpell = null
 
 
   override def beforeEach(context: BeforeEach): Unit = {
-    magoblanco = new MagoBlanco("Sanma",100,100,100,100)
-    magonegro = new MagoNegro("Yamal",100,60,100,100)
-    mago1 = new MagoBlanco("Steve",10,10,100,5)
-    mago2 = new MagoBlanco("Bob",100,100,100,100)
+    magoblanco = new WhiteMage("Sanma",100,100,100,100)
+    magonegro = new BlackMage("Yamal",100,60,100,100)
+    mago1 = new WhiteMage("Steve",10,10,100,5)
+    mago2 = new WhiteMage("Bob",100,100,100,100)
     wand = new Wand("Stick",50,70,50)
     staff = new Staff("Bigger Stick",70,80,80)
     bow = new Bow("Bow",70,70)
-    veneno = new Veneno()
-    curacion = new Curacion()
-    paralisis = new Paralisis()
-    fuego = new Fuego()
-    trueno = new Trueno()
+    veneno = new PoisionSpell()
+    curacion = new HealingSpell()
+    paralisis = new ParalisisSpell()
+    fuego = new FireSpell()
+    trueno = new ThunderSpell()
     magoblanco.receiveWeapon(wand)
     magoblanco.changeWeapon(0)
     magonegro.receiveWeapon(staff)
     magonegro.changeWeapon(0)
     mago2.receiveWeapon(bow)
     mago2.changeWeapon(0)
-    enemy = new Enemigo("Golem",10,10,150,100)
+    enemy = new Enemy("Golem",10,10,150,100)
   }
 
   test("Wrong entity casting"){

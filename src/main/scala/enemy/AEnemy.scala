@@ -1,18 +1,18 @@
-package enemigo
+package enemy
 
 import attributes.{Attributes, Mage}
-import entity.{AEntidad, Entidad}
+import entity.{AEntity, Entity}
 import exceptions.damage.SameClassAttackException
-import turnos.ProgramadorDeTurnos
+import turnscheduler.TurnScheduler
 import weapons.MagicWeapon
 
-/**An abstract class that extends from EnemigoAttributes
+/**An abstract class that extends from EnemyAttributes
  * Includes the attack parameter for enemies
  *
  */
 
-abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var attack:Int)
-  extends AEntidad(name,hp,defense,weight) with EnemigoAttributes {
+abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var attack:Int)
+  extends AEntity(name,hp,defense,weight) with EnemyAttributes {
 
 
   /**Getter for attack parameter of an enemy
@@ -37,7 +37,7 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
   override def getMaxActionBar(): Int = {
     this.getWeight()
   }
-  override def attack(victim: Entidad): Unit = {
+  override def attack(victim: Entity): Unit = {
     victim.takedamageEnemy(this)
   }
 
@@ -48,7 +48,7 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
    * @throws SameClassAttackException
    */
 
-  override def takedamageEnemy(agresor: EnemigoAttributes): Unit = {
+  override def takedamageEnemy(agresor: EnemyAttributes): Unit = {
     throw new SameClassAttackException("Cant attack an enemy as an enemy")
   }
 
@@ -78,7 +78,7 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
    *
    * @param scheduler the turn scheduler the enemy is being added to
    */
-  override def addToTurns(scheduler: ProgramadorDeTurnos): Unit = {
+  override def addToTurns(scheduler: TurnScheduler): Unit = {
     scheduler.addEnemy(this)
   }
 
@@ -86,7 +86,7 @@ abstract class AEnemigo(name:String,hp:Int,defense:Int,weight:Int,private var at
    *
    * @param scheduler the turn scheduler they are being removed from
    */
-  override def removeFromTurns(scheduler: ProgramadorDeTurnos): Unit = {
+  override def removeFromTurns(scheduler: TurnScheduler): Unit = {
     scheduler.removeEnemy(this)
   }
 

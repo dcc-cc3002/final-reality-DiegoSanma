@@ -6,8 +6,8 @@
  */
 
 import bow.Bow
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import enemigo.Enemigo
+import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
+import enemy.Enemy
 import sword.Sword
 import wand.Wand
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
@@ -17,17 +17,17 @@ import scala.collection.mutable.ArrayBuffer
 
 class PersonajeTest extends munit.FunSuite {
     var paladin: Paladin = null
-    var guerrero: Guerrero = null
+    var guerrero: Warrior = null
     var ninja: Ninja = null
-    var magonegro: MagoNegro = null
-    var magoblanco: MagoBlanco = null
+    var magonegro: BlackMage = null
+    var magoblanco: WhiteMage = null
 
     override def beforeEach(context: BeforeEach): Unit = {
         paladin = new Paladin("Diego", 100, 90, 120)
-        guerrero = new Guerrero("Lucas", 80, 100, 100)
+        guerrero = new Warrior("Lucas", 80, 100, 100)
         ninja = new Ninja("Santiago", 60, 70, 60)
-        magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-        magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
+        magonegro = new BlackMage("Balbontin", 60, 50, 80, 100)
+        magoblanco = new WhiteMage("Duarte", 70, 60, 80, 90)
     }
 
     test("equal character") {

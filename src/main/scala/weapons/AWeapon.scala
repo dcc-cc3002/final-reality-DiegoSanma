@@ -1,8 +1,8 @@
 package weapons
 
 import attributes.Attributes
-import characters.{Guerrero, MagoNegro, Ninja, Paladin}
-import exceptions.weaponexceptions.NotMagicWeaponException
+import characters.{BlackMage, Ninja, Paladin, Warrior}
+import exceptions.weaponexceptions.{AlreadyNamedException, NotMagicWeaponException}
 
 /**A  class for a weapon
  *
@@ -75,21 +75,6 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    *
    * This method should not be called directly, but instead from the character/mage who is going to drop this weapon
    *
-   * @example
-   * val weapon = new Weapon("Sword",70,70)
-   * println(s"Current owner is ${weapon.getOwner()}"= --> should print None
-   * paladin.receiveWeapon(weapon) --> calls this method from Character class
-   * println(s"Current owner is ${weapon.getOwner()}"= --> should print paladin
-   * paladin.dropWeapon(0) ---> calls this method to drop first weapon in their inventory, in this case weapon
-   * println(s"Current owner is ${weapon.getOwner()}"= --> should print None
-   *
-   */
-
-  /**Method for changing the owner of a weapon
-   *
-   * Will only be called upon, when the weapon´s type matches those that the player can hold
-   *
-   * @param receiver the new owner of the weapon
    */
 
   override def leaveOwner(): Unit = {
@@ -107,14 +92,13 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
 
  override def rename(named: String): Unit ={
    if (this.name != ""){
-     println(s"This weapon has already been named ${name}" )
-     return
+     throw new AlreadyNamedException("Weapon already has a name")
    }
    this.name = named
    println(s"This weapon has been named ${name}")
  }
 
-  /**Method for checking whether or not a wepaon is magical or not
+  /**Method for checking whether or not a weapon is magical or not
    * As this class is for weapons, that still dont extend to magical weapons, an exception is thrown
    *
    * @throws NotMagicWeaponException

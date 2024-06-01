@@ -1,30 +1,30 @@
 package exceptions
 
-import characters.{MagoBlanco, Paladin}
-import enemigo.Enemigo
+import characters.{WhiteMage, Paladin}
+import enemy.Enemy
 import exceptions.damage.SameClassAttackException
 import staff.Staff
 import sword.Sword
 
 class SameClassAttackTest extends munit.FunSuite {
   var paladin: Paladin = null
-  var mage: MagoBlanco = null
+  var mage: WhiteMage = null
   var sword: Sword = null
   var staff: Staff = null
-  var enemy1: Enemigo = null
-  var enemy2: Enemigo = null
+  var enemy1: Enemy = null
+  var enemy2: Enemy = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Sanma",80,80,80)
-    mage = new MagoBlanco("Gandalf",100,100,100,100)
+    mage = new WhiteMage("Gandalf",100,100,100,100)
     sword = new Sword("Excalibur",80,80)
     staff = new Staff("Staff",100,70,70)
     paladin.receiveWeapon(sword)
     paladin.changeWeapon(0)
     mage.receiveWeapon(staff)
     mage.changeWeapon(0)
-    enemy1 = new Enemigo("Goblin",30,50,50,50)
-    enemy2 = new Enemigo("Golem",100,70,70,100)
+    enemy1 = new Enemy("Goblin",30,50,50,50)
+    enemy2 = new Enemy("Golem",100,70,70,100)
   }
 
   test("Attacking Same Class"){

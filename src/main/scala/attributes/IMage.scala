@@ -1,16 +1,16 @@
 package attributes
 
-import entity.Entidad
-import spells.{HechizoLuz, HechizoOscuro, IHechizo}
+import entity.Entity
+import spells.{LightSpells, DarkSpells, ISpells}
 
 trait IMage{
   def getMana(): Int
 
-  def throwSpell(spell:IHechizo,victim:Entidad)
+  def throwSpell(spell:ISpells, victim:Entity)
 
-  def throwDarkSpell(spell:HechizoOscuro,victim:Entidad)
+  def throwDarkSpell(spell:DarkSpells, victim:Entity)
 
-  def throwLightSpell(spell:HechizoLuz,victim:Entidad)
+  def throwLightSpell(spell:LightSpells, victim:Entity)
 
   def useMana(use:Int): Unit
 

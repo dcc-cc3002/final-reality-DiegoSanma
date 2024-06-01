@@ -1,14 +1,14 @@
 package spells
 import attributes.Mage
-import enemigo.EnemigoAttributes
-import entity.Entidad
+import enemy.EnemyAttributes
+import entity.Entity
 
 /**Class for a fire spell
  *
  * Inflicted on enemies, does a certain amount of damage and has a chance to burn them
  *
  */
-class Fuego extends HechizoOscuro {
+class FireSpell extends DarkSpells {
 
   /**Method for inflicting finally the spell
    * The enemy takes damage according to the weapon the mage is currently holding
@@ -17,9 +17,9 @@ class Fuego extends HechizoOscuro {
    * @param user the mage using the spell
    * @param victim the enemy being burnt
    */
-  override def finalInflict(user: Mage, victim: Entidad): Unit = {
+  override def finalInflict(user: Mage, victim: Entity): Unit = {
     user.checkMana(15)
-    victim.asInstanceOf[EnemigoAttributes].takeSpellDamage(user)
+    victim.asInstanceOf[EnemyAttributes].takeSpellDamage(user)
     user.useMana(15)
   }
 

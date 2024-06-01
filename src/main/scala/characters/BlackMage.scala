@@ -3,11 +3,11 @@ package characters
 import attributes.{Attributes, Mage}
 import axe.Axe
 import bow.Bow
-import entity.Entidad
+import entity.Entity
 import exceptions.initializing.{InvalidInventoryException, Require}
 import exceptions.mage.WrongMageException
 import exceptions.weaponexceptions.{InvalidWeaponException, InvalidWeaponTypeException}
-import spells.{HechizoLuz, HechizoOscuro}
+import spells.{LightSpells, DarkSpells}
 import staff.Staff
 import sword.Sword
 import wand.Wand
@@ -34,8 +34,8 @@ import scala.collection.mutable.ArrayBuffer
  *
  */
 
-class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int,
-                inventory:ArrayBuffer[TWeapons]=ArrayBuffer(),activeWeapon:Option[TWeapons]=None)
+class BlackMage(name: String, hp: Int, defense:Int, weight: Int, mana:Int,
+                inventory:ArrayBuffer[TWeapons]=ArrayBuffer(), activeWeapon:Option[TWeapons]=None)
   extends Mage(name,hp,defense,weight,mana,inventory, activeWeapon) {
 
   Require.Stat(hp,"Hp not valid") in (0 to 150)
@@ -98,11 +98,11 @@ class MagoNegro(name: String,hp: Int,defense:Int,weight: Int,mana:Int,
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
-  override def throwDarkSpell(spell: HechizoOscuro, victim: Entidad): Unit = {
+  override def throwDarkSpell(spell: DarkSpells, victim: Entity): Unit = {
     spell.finalInflict(this,victim)
   }
 
-  override def throwLightSpell(spell: HechizoLuz, victim: Entidad): Unit = {
+  override def throwLightSpell(spell: LightSpells, victim: Entity): Unit = {
     throw new WrongMageException("Black Mage cant use a light spell")
   }
 

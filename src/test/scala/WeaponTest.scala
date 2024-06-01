@@ -1,4 +1,5 @@
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import characters.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
+import exceptions.weaponexceptions.AlreadyNamedException
 import sword.Sword
 import wand.Wand
 import weapons.{AMagicWeapon, AWeapon, MagicWeapon, TWeapons, Weapon}
@@ -17,17 +18,17 @@ class WeaponTest extends munit.FunSuite {
   var notnamew: Sword = null
   var notnamedw: Wand = null
   var paladin: Paladin = null
-  var guerrero: Guerrero = null
+  var guerrero: Warrior = null
   var ninja: Ninja = null
-  var magonegro: MagoNegro = null
-  var magoblanco: MagoBlanco = null
+  var magonegro: BlackMage = null
+  var magoblanco: WhiteMage = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
-    guerrero = new Guerrero("Lucas", 80, 100, 100)
+    guerrero = new Warrior("Lucas", 80, 100, 100)
     ninja = new Ninja("Santiago", 60, 70, 60)
-    magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
+    magonegro = new BlackMage("Balbontin", 60, 50, 80, 100)
+    magoblanco = new WhiteMage("Duarte", 70, 60, 80, 90)
     weapon = new Sword("Excalibur",60,70)
     magicweapon = new Wand("Palito",20,40,80)
     notnamew = new Sword("",80,90)
@@ -90,9 +91,22 @@ class WeaponTest extends munit.FunSuite {
     notnamedw.rename(newnamedw)
     assertEquals(newnamew,notnamew.getWeaponName(),"The weapon was not renamed correctly")
     assertEquals(newnamedw,notnamedw.getWeaponName(),"The Magic Weapon was not renamed correctly")
-    notnamew.rename(nnw)
-    notnamedw.rename(nndw)
+    var found: Int = 0
+    try{
+      notnamew.rename(nnw)
+    }
+    catch {
+      case e: AlreadyNamedException => found +=1
+    }
+    assertEquals(found,1,"Exception not thrown")
     assertEquals("The Holy",notnamew.getWeaponName(),"The weapon should not be renamed")
+    try{
+      notnamedw.rename(nndw)
+    }
+    catch {
+      case e: AlreadyNamedException => found += 1
+    }
+    assertEquals(found,2,"Exception not thrown")
     assertEquals("The Black Fairy",notnamedw.getWeaponName(),"The Magic Weapon should not be renamed")
   }
 

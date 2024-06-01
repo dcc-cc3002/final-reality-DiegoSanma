@@ -1,7 +1,7 @@
 package exceptions
 
 import bow.Bow
-import characters.{MagoNegro, Ninja}
+import characters.{BlackMage, Ninja}
 import exceptions.weaponexceptions.FullInventoryException
 import staff.Staff
 import sword.Sword
@@ -9,7 +9,7 @@ import wand.Wand
 
 class FullInventoryTest extends munit.FunSuite {
   var ninja: Ninja = null
-  var mage: MagoNegro = null
+  var mage: BlackMage = null
   var weapon: Sword = null
   var magicweapon: Wand = null
   var magicweapon2: Staff = null
@@ -18,7 +18,7 @@ class FullInventoryTest extends munit.FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     ninja = new Ninja("Sanma",70,50,50)
-    mage = new MagoNegro("Gandalf",80,100,90,100)
+    mage = new BlackMage("Gandalf",80,100,90,100)
     weapon = new Sword("Excalibur",60,70)
     magicweapon = new Wand("Palito",20,40,80)
     magicweapon2 = new Staff("Palo",80,90,100)

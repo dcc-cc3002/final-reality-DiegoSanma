@@ -1,14 +1,14 @@
 package spells
 import attributes.{Attributes, Mage}
-import enemigo.EnemigoAttributes
-import entity.Entidad
+import enemy.EnemyAttributes
+import entity.Entity
 
 /**Class for a thunder spell
  *
  * Inflicts a certain amount of damage on an emeny and has a chance ot paralyze him
  *
  */
-class Trueno extends HechizoOscuro {
+class ThunderSpell extends DarkSpells {
 
   /** Method for using thunder spell on an enemy
    * The amount of damage done is defined by the weapon the mage is currently holding
@@ -17,9 +17,9 @@ class Trueno extends HechizoOscuro {
    * @param user the mage using the spell
    * @param victim the victim being attacked
    */
-  override def finalInflict(user: Mage, victim: Entidad): Unit = {
+  override def finalInflict(user: Mage, victim: Entity): Unit = {
     user.checkMana(20)
-    victim.asInstanceOf[EnemigoAttributes].takeSpellDamage(user)
+    victim.asInstanceOf[EnemyAttributes].takeSpellDamage(user)
     user.useMana(20)
   }
 }

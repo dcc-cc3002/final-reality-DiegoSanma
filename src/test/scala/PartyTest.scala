@@ -1,5 +1,5 @@
 import attributes.Attributes
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
 import party.Party
 
 import scala.collection.mutable.ArrayBuffer
@@ -11,22 +11,22 @@ class PartyTest extends munit.FunSuite{
   var party4: Party = null
   var paladin: Paladin = null
   var anotherpaladin: Paladin = null
-  var guerrero: Guerrero = null
+  var guerrero: Warrior = null
   var ninja: Ninja = null
-  var magonegro: MagoNegro = null
-  var magoblanco: MagoBlanco = null
-  var anothermagoblanco: MagoBlanco = null
+  var magonegro: BlackMage = null
+  var magoblanco: WhiteMage = null
+  var anothermagoblanco: WhiteMage = null
   var deadpaladin: Paladin = null
   var deadninja: Ninja = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
     anotherpaladin = new Paladin("Saka",120,80,80)
-    guerrero = new Guerrero("Lucas", 80, 100, 100)
+    guerrero = new Warrior("Lucas", 80, 100, 100)
     ninja = new Ninja("Santiago", 60, 70, 60)
-    magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
-    anothermagoblanco = new MagoBlanco("Leo",60,50,40,100)
+    magonegro = new BlackMage("Balbontin", 60, 50, 80, 100)
+    magoblanco = new WhiteMage("Duarte", 70, 60, 80, 90)
+    anothermagoblanco = new WhiteMage("Leo",60,50,40,100)
     deadpaladin = new Paladin("Duke",0,40,20)
     deadninja = new Ninja("Kai",0,50,70)
 
@@ -43,7 +43,7 @@ class PartyTest extends munit.FunSuite{
 
     var actual_member2 = party1.getMembers()(1)
     assertEquals(actual_member2.isDefined,true,"Member2 is None")
-    assertEquals(actual_member2.get.isInstanceOf[Guerrero],true,"Member 2 is not a Guerrero")
+    assertEquals(actual_member2.get.isInstanceOf[Warrior],true,"Member 2 is not a Guerrero")
     assertEquals(actual_member2.get,guerrero,"Member2 is not the Guerrero we gave it")
 
     assertEquals(party1.getMembers().length,2,"There should only be 2 members in the party")
@@ -53,7 +53,7 @@ class PartyTest extends munit.FunSuite{
 
     var p2_member = party2.getMembers()(0)
     assertEquals(p2_member.isDefined,true,"Member1 is None")
-    assertEquals(p2_member.get.isInstanceOf[MagoBlanco],true,"Member 1 is not a Mago Blanco")
+    assertEquals(p2_member.get.isInstanceOf[WhiteMage],true,"Member 1 is not a Mago Blanco")
     assertEquals(p2_member.get,magoblanco,"Member1 is not the Mago Blanco we gave it")
     var actual_members2 = party2.getMembers()
     assertEquals(actual_members2,ArrayBuffer(p2_member))

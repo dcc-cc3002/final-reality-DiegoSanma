@@ -1,7 +1,7 @@
 package exceptions
 
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja}
-import partyexc.{FullPartyException}
+import characters.{Warrior, WhiteMage, BlackMage, Ninja}
+import partyexc.FullPartyException
 import party.Party
 
 import scala.collection.mutable.ArrayBuffer
@@ -10,10 +10,10 @@ class FullPartyTest extends munit.FunSuite {
   var party1: Party = null
   var party2: Party = null
 
-  var guerrero: Guerrero = null
+  var guerrero: Warrior = null
   var ninja: Ninja = null
-  var magonegro: MagoNegro = null
-  var magoblanco: MagoBlanco = null
+  var magonegro: BlackMage = null
+  var magoblanco: WhiteMage = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     party1 = new Party(ArrayBuffer(Some(ninja),Some(guerrero),Some(magoblanco)))

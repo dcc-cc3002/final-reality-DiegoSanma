@@ -1,12 +1,12 @@
-import enemigo.Enemigo
+import enemy.Enemy
 
 class EnemigoTest extends munit.FunSuite {
-  var enemigo1: Enemigo = null
-  var enemigo2: Enemigo = null
+  var enemigo1: Enemy = null
+  var enemigo2: Enemy = null
 
   override def beforeEach(context: BeforeEach): Unit = {
-    enemigo1 = new Enemigo("Goblin",40,30,20,30)
-    enemigo2 = new Enemigo("Golem",120,60,80,110)
+    enemigo1 = new Enemy("Goblin",40,30,20,30)
+    enemigo2 = new Enemy("Golem",120,60,80,110)
   }
   test("enemigo creation"){
     assertEquals(enemigo1.getName(),"Goblin","The name was not given correctly")

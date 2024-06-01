@@ -1,17 +1,17 @@
 package exceptions
 
-import characters.{MagoNegro, Paladin}
+import characters.{BlackMage, Paladin}
 import exceptions.weaponexceptions.AlreadyOwnedException
 import sword.Sword
 
 class AlreadyOwnedTest extends munit.FunSuite {
   var paladin: Paladin = null
-  var mage: MagoNegro = null
+  var mage: BlackMage = null
   var sword: Sword = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego",90,90,90)
-    mage = new MagoNegro("Gandalf",100,90,70,100)
+    mage = new BlackMage("Gandalf",100,90,70,100)
     sword = new Sword("Excalibur",100,100)
   }
   test("Already Owned Character"){

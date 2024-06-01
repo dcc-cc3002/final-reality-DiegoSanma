@@ -2,7 +2,7 @@ package attributes
 
 import axe.Axe
 import bow.Bow
-import entity.AEntidad
+import entity.AEntity
 import staff.Staff
 import sword.Sword
 import wand.Wand
@@ -12,11 +12,11 @@ import scala.collection.mutable.ArrayBuffer
 
 /** A trait representing the attributes of a character
  *
- * The attributes of a character extends from the abstact class AEntidad
+ * The attributes of a character extends from the abstact class AEntity
  * Declares methods for getting mana and weapon from a Character
  */
 
-trait Attributes extends AEntidad{
+trait Attributes extends AEntity{
 
   def getWeapons(): ArrayBuffer[TWeapons]
 

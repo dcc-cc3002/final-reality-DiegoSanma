@@ -1,5 +1,5 @@
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
-import enemigo.Enemigo
+import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
+import enemy.Enemy
 import staff.Staff
 import sword.Sword
 import weapons.{MagicWeapon, Weapon}
@@ -14,23 +14,23 @@ class AttackingTest extends munit.FunSuite{
   var magicweapon: Staff = null
   var biggerMagicWeapon:Staff = null
   var paladin: Paladin = null
-  var guerrero: Guerrero = null
+  var guerrero: Warrior = null
   var ninja: Ninja = null
-  var magonegro: MagoNegro = null
-  var magoblanco: MagoBlanco = null
-  var enemigo1: Enemigo = null
-  var enemigo2: Enemigo = null
-  var enemigo3: Enemigo = null
+  var magonegro: BlackMage = null
+  var magoblanco: WhiteMage = null
+  var enemigo1: Enemy = null
+  var enemigo2: Enemy = null
+  var enemigo3: Enemy = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     paladin = new Paladin("Diego", 100, 90, 120)
-    guerrero = new Guerrero("Lucas", 80, 100, 100)
+    guerrero = new Warrior("Lucas", 80, 100, 100)
     ninja = new Ninja("Santiago", 60, 20, 60)
-    magonegro = new MagoNegro("Balbontin", 60, 50, 80, 100)
-    magoblanco = new MagoBlanco("Duarte", 70, 60, 80, 90)
-    enemigo1 = new Enemigo("Goblin",40,30,20,30)
-    enemigo2 = new Enemigo("Golem",120,50,80,45)
-    enemigo3 = new Enemigo("Boss",70,100,90,100)
+    magonegro = new BlackMage("Balbontin", 60, 50, 80, 100)
+    magoblanco = new WhiteMage("Duarte", 70, 60, 80, 90)
+    enemigo1 = new Enemy("Goblin",40,30,20,30)
+    enemigo2 = new Enemy("Golem",120,50,80,45)
+    enemigo3 = new Enemy("Boss",70,100,90,100)
     weapon = new Sword("Excalibur",60,70)
     magicweapon = new Staff("Palito",20,40,80)
     biggerWeapon = new Sword("Big Sword",80,120)

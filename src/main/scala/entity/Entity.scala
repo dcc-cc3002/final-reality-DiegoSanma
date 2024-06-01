@@ -1,12 +1,12 @@
 package entity
 
 import attributes.Attributes
-import enemigo.EnemigoAttributes
-import turnos.ProgramadorDeTurnos
+import enemy.EnemyAttributes
+import turnscheduler.TurnScheduler
 
 /**A trait that includes the methods that will be included in any Entidad
  */
-trait Entidad{
+trait Entity{
   def getName(): String
   def getHp(): Int
   def getDefense():Int
@@ -14,20 +14,20 @@ trait Entidad{
 
   def takedamagePlayer(agresor:Attributes): Unit
 
-  def takedamageEnemy(agresor:EnemigoAttributes): Unit
+  def takedamageEnemy(agresor:EnemyAttributes): Unit
 
 
   protected def maxHeal(healing:Int,maxHealth:Int): Unit
 
-  def attack(victim:Entidad): Unit
+  def attack(victim:Entity): Unit
 
   protected def checkHealth(damage:Int): Unit
 
   def isAlive(): Int
 
-  def addToTurns(scheduler: ProgramadorDeTurnos): Unit
+  def addToTurns(scheduler: TurnScheduler): Unit
 
-  def removeFromTurns(scheduler: ProgramadorDeTurnos) : Unit
+  def removeFromTurns(scheduler: TurnScheduler) : Unit
 
   def getActionBar(): Int
 

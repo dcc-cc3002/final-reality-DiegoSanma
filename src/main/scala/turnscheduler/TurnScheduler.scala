@@ -1,8 +1,8 @@
-package turnos
+package turnscheduler
 
 import attributes.{Attributes, Mage}
-import enemigo.{Enemigo, EnemigoAttributes}
-import entity.Entidad
+import enemy.{Enemy, EnemyAttributes}
+import entity.Entity
 import exceptions.turns.{AlreadyInSchedulerException, NotInSchedulerException}
 
 import scala.collection.mutable.ArrayBuffer
@@ -20,8 +20,8 @@ import scala.collection.mutable.ArrayBuffer
  * @author Diego San Martin
  */
 
-class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
-                           private val enemies: ArrayBuffer[EnemigoAttributes]) extends IProgramadorDeTurnos {
+class TurnScheduler(private val players: ArrayBuffer[Attributes],
+                    private val enemies: ArrayBuffer[EnemyAttributes]) extends ITurnScheduler {
 
   /** Getter for player parameter */
   override def getPlayers(): ArrayBuffer[Attributes] = {
@@ -29,7 +29,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
   }
 
   /** Getter for enemies parameter */
-  override def getEnemies(): ArrayBuffer[EnemigoAttributes] = {
+  override def getEnemies(): ArrayBuffer[EnemyAttributes] = {
     this.enemies
   }
 
@@ -39,7 +39,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
    * type of entity it is adding (enemies or characters)
    */
 
-    override def addTo(added: Entidad): Unit = {
+    override def addTo(added: Entity): Unit = {
       added.addToTurns(this)
     }
 
@@ -63,7 +63,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
    * @throws AlreadyInSchedulerException if the enemy is already in the turns scheduler
    */
 
-  override def addEnemy(added: EnemigoAttributes): Unit = {
+  override def addEnemy(added: EnemyAttributes): Unit = {
     if(enemies.contains(added)){
       throw new AlreadyInSchedulerException(("Enemy"))
     }
@@ -74,7 +74,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      * Calls function for entity, where it tells the turn scheduler what type of entity is being removed
      */
 
-    override def removeEntity(removed: Entidad): Unit = {
+    override def removeEntity(removed: Entity): Unit = {
       removed.removeFromTurns(this)
     }
 
@@ -98,7 +98,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
    *
    * @throws NotInSchedulerException if the enemy is not currently in the turn scheduler
    */
-  override def removeEnemy(removed: EnemigoAttributes): Unit = {
+  override def removeEnemy(removed: EnemyAttributes): Unit = {
     if(!(enemies.contains(removed))){
       throw new NotInSchedulerException("Enemy")
     }
@@ -132,13 +132,13 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      }
 
     /** A parameter that holds the turns in which the combat shall be played out */
-    var turns: ArrayBuffer[Entidad] = ArrayBuffer()
+    var turns: ArrayBuffer[Entity] = ArrayBuffer()
 
   /**Getter for turns array, that holds the "waiting line" for each of the entities turn
    *
    * @return this.turns
    */
-  override def getTurnsLine(): ArrayBuffer[Entidad] = {
+  override def getTurnsLine(): ArrayBuffer[Entity] = {
     this.turns
   }
 
@@ -150,7 +150,7 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      */
 
     override def checkTurn():Unit ={
-      var past: ArrayBuffer[(Entidad,Int)] = ArrayBuffer()
+      var past: ArrayBuffer[(Entity,Int)] = ArrayBuffer()
       for(element<-players){
         var dif: Int = element.getActionBar()-element.getMaxActionBar
         if(dif>=0){
@@ -165,8 +165,8 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
           enemy.addToActionBar(-enemy.getActionBar())
         }
       }
-      var desempate: ArrayBuffer[(Entidad,Int)] = past.sortBy(_._2).reverse
-      for((element,dif)<-desempate){
+      var tieBreaker: ArrayBuffer[(Entity,Int)] = past.sortBy(_._2).reverse
+      for((element,dif)<-tieBreaker){
         turns.addOne(element)
       }
     }
@@ -179,12 +179,12 @@ class ProgramadorDeTurnos (private val players: ArrayBuffer[Attributes],
      *
      */
 
-    override def nextTurn():Option[Entidad]={
+    override def nextTurn():Option[Entity]={
       if(this.turns.isEmpty){
         return None
       }
       else{
-        var my_turn: Entidad = turns(0)
+        var my_turn: Entity = turns(0)
         this.turns.remove(0)
         return(Some(my_turn))
       }

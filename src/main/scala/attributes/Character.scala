@@ -1,11 +1,11 @@
 package attributes
 
-import enemigo.{Enemigo, EnemigoAttributes}
-import entity.{AEntidad, Entidad}
+import enemy.{Enemy, EnemyAttributes}
+import entity.{AEntity, Entity}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
 import exceptions.damage.SameClassAttackException
 import exceptions.partyexc.FullPartyException
-import turnos.ProgramadorDeTurnos
+import turnscheduler.TurnScheduler
 import weapons.{TWeapons, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
@@ -20,7 +20,7 @@ import scala.collection.mutable.ArrayBuffer
 
 abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
                          private var inventory:ArrayBuffer[TWeapons],private var activeWeapon: Option[TWeapons])
-  extends AEntidad(name,hp,defense,weight) with Attributes {
+  extends AEntity(name,hp,defense,weight) with Attributes {
   /** Constant parameter that holds the max health of a character */
 
   private val maxHealth: Int = hp
@@ -120,7 +120,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    *
    * @param victim the entity to whom damage will be dealt
    */
-  override def attack(victim: Entidad): Unit = {
+  override def attack(victim: Entity): Unit = {
     if(getActiveWeapon().isEmpty){
       println(s"You currently have no weapon! The attack has failed :(")
     }
@@ -147,7 +147,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    *
    */
 
-  override def takedamageEnemy(agresor: EnemigoAttributes): Unit = {
+  override def takedamageEnemy(agresor: EnemyAttributes): Unit = {
     var damage = agresor.getAttack() - this.getDefense()
     if(damage>0) {
       this.checkHealth(damage)
@@ -168,7 +168,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    *
    * @param scheduler the turn scheduler the character is being added to
    */
-  override def addToTurns(scheduler: ProgramadorDeTurnos): Unit = {
+  override def addToTurns(scheduler: TurnScheduler): Unit = {
     scheduler.addCharacter(this)
   }
 
@@ -182,7 +182,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    *
    * @param scheduler the turn scheduler he is being removed from
    */
-  override def removeFromTurns(scheduler: ProgramadorDeTurnos): Unit = {
+  override def removeFromTurns(scheduler: TurnScheduler): Unit = {
     scheduler.removeCharacter(this)
   }
   override def heal(amountPercentage:Double): Unit = {

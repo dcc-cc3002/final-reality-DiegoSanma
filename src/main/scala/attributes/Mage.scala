@@ -1,10 +1,10 @@
 package attributes
 
-import enemigo.{Enemigo, EnemigoAttributes}
-import entity.{AEntidad, Entidad}
+import enemy.{Enemy, EnemyAttributes}
+import entity.{AEntity, Entity}
 import exceptions.damage.{NotEnoughManaException, SameClassAttackException, UnaliveDamagedException}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
-import spells.IHechizo
+import spells.ISpells
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -36,7 +36,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
    * @param spell the spell the mage is trying to use
    * @param victim the victim of the spell
    */
-  override def throwSpell(spell: IHechizo, victim: Entidad): Unit = {
+  override def throwSpell(spell: ISpells, victim: Entity): Unit = {
     spell.friendlyFire(this,victim)
     if(getActiveWeapon().isEmpty) {
       return

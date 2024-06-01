@@ -1,15 +1,15 @@
 package spells
 import attributes.{Attributes, Mage}
-import entity.Entidad
+import entity.Entity
 import exceptions.damage.FriendlyFireException
 
-abstract class HechizoOscuro extends IHechizo {
+abstract class DarkSpells extends ISpells {
   /**Method for telling a mage ehat type of spell they are trying to use
    *
    * @param user the mage trying to use the spell
    * @param victim the victim of the spell
    */
-  override def inflict(user: Mage, victim: Entidad): Unit = {
+  override def inflict(user: Mage, victim: Entity): Unit = {
     user.throwDarkSpell(this,victim)
   }
 
@@ -21,7 +21,7 @@ abstract class HechizoOscuro extends IHechizo {
    *
    * @throws FriendlyFireException if the entity is not an ally
    */
-  override def friendlyFire(user: Mage, victim: Entidad): Unit = {
+  override def friendlyFire(user: Mage, victim: Entity): Unit = {
     if (victim.isInstanceOf[Attributes]) {
       throw new FriendlyFireException("Cant inflict damage/effect to an ally")
     }

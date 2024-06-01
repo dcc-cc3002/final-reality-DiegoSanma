@@ -1,6 +1,6 @@
 import axe.Axe
 import bow.Bow
-import characters.{Guerrero, MagoBlanco, MagoNegro, Ninja, Paladin}
+import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
 import exceptions.weaponexceptions.InvalidWeaponTypeException
 import staff.Staff
 import sword.Sword
@@ -12,10 +12,10 @@ import wand.Wand
 
 class WeaponHoldingTest extends munit.FunSuite {
   var paladin: Paladin = null
-  var guerrero: Guerrero = null
+  var guerrero: Warrior = null
   var ninja: Ninja = null
-  var magonegro: MagoNegro = null
-  var magoblanco: MagoBlanco = null
+  var magonegro: BlackMage = null
+  var magoblanco: WhiteMage = null
   var sword: Sword = null
   var axe: Axe = null
   var bow: Bow = null
@@ -65,7 +65,7 @@ class WeaponHoldingTest extends munit.FunSuite {
 
   }
   test("Guerrero wielding") {
-    guerrero = new Guerrero("Diego", 70, 70, 70)
+    guerrero = new Warrior("Diego", 70, 70, 70)
     guerrero.receiveWeapon(sword)
     assertEquals(guerrero.getWeapons()(0), sword, "Sword not added to guerrero´s inventory")
     guerrero.receiveWeapon(axe)
@@ -125,7 +125,7 @@ class WeaponHoldingTest extends munit.FunSuite {
 
   }
   test("MagoBlanco wielding") {
-    magoblanco = new MagoBlanco("Diego", 70, 70, 70,70)
+    magoblanco = new WhiteMage("Diego", 70, 70, 70,70)
     magoblanco.receiveWeapon(staff)
     assertEquals(magoblanco.getWeapons()(0), staff, "Staff not added to magoblanco´s inventory")
     magoblanco.receiveWeapon(wand)
@@ -155,7 +155,7 @@ class WeaponHoldingTest extends munit.FunSuite {
 
   }
   test("MagoNegro wielding") {
-    magonegro = new MagoNegro("Diego", 70, 70, 70,70)
+    magonegro = new BlackMage("Diego", 70, 70, 70,70)
     magonegro.receiveWeapon(staff)
     assertEquals(magonegro.getWeapons()(0), staff, "Staff not added to magonegro´s inventory")
     magonegro.receiveWeapon(wand)
