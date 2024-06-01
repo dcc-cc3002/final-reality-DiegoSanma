@@ -41,8 +41,6 @@ class AttackingTest extends munit.FunSuite{
     assertEquals(enemigo1.getHp(),40,"First Enemies does not start with full health")
 
     paladin.receiveWeapon(weapon)
-    paladin.attack(enemigo1)
-    assertEquals(enemigo1.getHp(),40,"As paladin has no weapon, enemigo1 should not take damage")
     paladin.changeWeapon(0)
     paladin.attack(enemigo1)
     var expected_damage_taken: Int = 30
@@ -87,7 +85,7 @@ class AttackingTest extends munit.FunSuite{
     magoblanco.attack(enemigo2)
     magoblanco.attack(enemigo2)
     assertEquals(enemigo2.getHp(),0,"Second enemy should be defeated")
-    magonegro.attack(enemigo2)
+    magoblanco.attack(enemigo2)
     assertEquals(enemigo2.getHp(),0,"Second enemy should already be defeated")
 
     enemigo3.attack(magonegro)

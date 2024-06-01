@@ -3,7 +3,7 @@ package attributes
 import enemy.{Enemy, EnemyAttributes}
 import entity.{AEntity, Entity}
 import exceptions.damage.{NotEnoughManaException, SameClassAttackException, UnaliveDamagedException}
-import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
+import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
 import spells.ISpells
 import weapons.TWeapons
 
@@ -39,7 +39,7 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
   override def throwSpell(spell: ISpells, victim: Entity): Unit = {
     spell.friendlyFire(this,victim)
     if(getActiveWeapon().isEmpty) {
-      return
+      throw new NoWeaponException("Cant throw spell, you have no weapon equipped!")
     }
     getActiveWeapon().get.checkifMagic()
     if(victim.isAlive() == 0){

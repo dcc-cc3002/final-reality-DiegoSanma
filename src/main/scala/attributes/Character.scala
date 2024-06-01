@@ -2,7 +2,7 @@ package attributes
 
 import enemy.{Enemy, EnemyAttributes}
 import entity.{AEntity, Entity}
-import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException}
+import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
 import exceptions.damage.SameClassAttackException
 import exceptions.partyexc.FullPartyException
 import turnscheduler.TurnScheduler
@@ -122,7 +122,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    */
   override def attack(victim: Entity): Unit = {
     if(getActiveWeapon().isEmpty){
-      println(s"You currently have no weapon! The attack has failed :(")
+      throw new NoWeaponException("You can´t attack, you have no weapon!")
     }
     else{
       victim.takedamagePlayer(this)

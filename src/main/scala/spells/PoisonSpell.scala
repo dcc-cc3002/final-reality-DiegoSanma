@@ -8,7 +8,7 @@ import exceptions.damage.FriendlyFireException
  * Used for poisoning an enemy, has 100% accuracy rate
  *
  */
-class PoisionSpell extends LightSpells {
+class PoisonSpell extends LightSpells {
 
   /**Method for poisoning an enemy
    * Also checks whether the mage has enough mana to use the spell

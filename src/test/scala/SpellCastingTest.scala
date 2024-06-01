@@ -1,6 +1,6 @@
 import characters.{WhiteMage, BlackMage}
 import enemy.Enemy
-import spells.{HealingSpell, FireSpell, ParalisisSpell, ThunderSpell, PoisionSpell}
+import spells.{HealingSpell, FireSpell, ParalisisSpell, ThunderSpell, PoisonSpell}
 import staff.Staff
 import wand.Wand
 
@@ -26,7 +26,7 @@ class SpellCastingTest extends munit.FunSuite {
 
   }
   test("Casting Light"){
-    val veneno: PoisionSpell = new PoisionSpell()
+    val veneno: PoisonSpell = new PoisonSpell()
     magoblanco.throwSpell(veneno,enemy)
     assertEquals(magoblanco.getMana(),70,"Not corrent amount of mana used")
 

@@ -6,7 +6,7 @@ import enemy.Enemy
 import exceptions.damage.{FriendlyFireException, NotEnoughManaException, UnaliveDamagedException}
 import exceptions.mage.WrongMageException
 import exceptions.weaponexceptions.NotMagicWeaponException
-import spells.{HealingSpell, FireSpell, ParalisisSpell, ThunderSpell, PoisionSpell}
+import spells.{HealingSpell, FireSpell, ParalisisSpell, ThunderSpell, PoisonSpell}
 import staff.Staff
 import wand.Wand
 
@@ -19,7 +19,7 @@ class SpellExpectionTests extends munit.FunSuite {
   var wand: Wand = null
   var staff: Staff = null
   var bow: Bow = null
-  var veneno: PoisionSpell = null
+  var veneno: PoisonSpell = null
   var curacion: HealingSpell = null
   var paralisis: ParalisisSpell = null
   var fuego: FireSpell = null
@@ -34,7 +34,7 @@ class SpellExpectionTests extends munit.FunSuite {
     wand = new Wand("Stick",50,70,50)
     staff = new Staff("Bigger Stick",70,80,80)
     bow = new Bow("Bow",70,70)
-    veneno = new PoisionSpell()
+    veneno = new PoisonSpell()
     curacion = new HealingSpell()
     paralisis = new ParalisisSpell()
     fuego = new FireSpell()
@@ -145,9 +145,6 @@ class SpellExpectionTests extends munit.FunSuite {
     assertEquals(found,1,"Exception not thrown")
     assertEquals(mago2.getMana(),100,"Mage should not have used his mana")
 
-    mago2.dropWeapon(bow)
-    mago2.throwSpell(veneno,enemy)
-    assertEquals(mago2.getMana(),100,"Mage should not have used his mana")
   }
 
   test("Casting spell on defeated entity"){
