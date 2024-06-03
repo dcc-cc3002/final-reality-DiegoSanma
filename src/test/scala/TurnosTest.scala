@@ -7,7 +7,7 @@ import staff.Staff
 import sword.Sword
 import turnscheduler.TurnScheduler
 import wand.Wand
-import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
+import weapons.{AMagicWeapon, AWeapon}
 
 import scala.collection.mutable.ArrayBuffer
 

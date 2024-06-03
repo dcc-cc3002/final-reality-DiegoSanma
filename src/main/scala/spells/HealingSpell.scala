@@ -23,7 +23,7 @@ class HealingSpell extends LightSpells {
    */
   override def finalInflict(user: Mage, victim: Entity): Unit = {
     user.checkMana(15)
-    victim.asInstanceOf[Attributes].heal(0.3)
+    victim.heal(0.3)
     user.useMana(15)
   }
 
@@ -35,8 +35,6 @@ class HealingSpell extends LightSpells {
    * @throws FriendlyFireException if they are trying to heal an enemy
    */
   override def friendlyFire(user: Mage, victim: Entity): Unit = {
-    if(victim.isInstanceOf[EnemyAttributes]){
-      throw new FriendlyFireException("Cant heal an enemy")
-    }
+    victim.checkifCharacter()
   }
 }

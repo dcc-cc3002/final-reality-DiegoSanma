@@ -5,7 +5,11 @@ import enemy.Enemy
 
 /**Absract class that extends from Entity */
 abstract class AEntity(private var name:String, private var hp:Int, private var defense: Int, private var weight: Int) extends Entity {
- /** Bar starts at 0 for all entities*/
+
+  /** Constant parameter that holds the max health of a character */
+  private val maxHealth: Int = hp
+
+  /** Bar starts at 0 for all entities*/
   var actionBar: Int = 0
 
   /**Getter for name
@@ -46,6 +50,16 @@ abstract class AEntity(private var name:String, private var hp:Int, private var 
    */
   override def getActionBar(): Int = {
     this.actionBar
+  }
+
+  /** Getter for max Health if a Character
+   *
+   * @return this.maxHealth
+   */
+
+
+  override def getMaxHealth(): Int = {
+    this.maxHealth
   }
 
   /**Getter for Max action bar
@@ -101,4 +115,13 @@ abstract class AEntity(private var name:String, private var hp:Int, private var 
     return 1
   }
 
+  /**Method for when an entity is being healed by a certain amount
+   *
+   * @param amountPercentage the percentage of health that is being healed
+   */
+
+  override def heal(amountPercentage:Double): Unit = {
+    val healing: Int = (amountPercentage*this.getMaxHealth()).toInt
+    this.maxHeal(healing,getMaxHealth())
+  }
 }

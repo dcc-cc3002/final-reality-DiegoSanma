@@ -2,25 +2,29 @@ package weapons
 
 import attributes.Attributes
 import characters.{BlackMage, Ninja, Paladin, Warrior}
+import exceptions.initializing.{InvalidOwnerException, Require}
 import exceptions.weaponexceptions.{AlreadyNamedException, NotMagicWeaponException}
 
-/**A  class for a weapon
+/**Abstract  class for a weapon
  *
  *A weapon is defined by its name, atkpoints, weight and owner
  *
- * TO CONSIDER: as the weapon inherits the trait Weapons, it also has mana defined for it,
- * nevertheless, this attribute is defined as None, so it may not be considered for normal
- * weapons
  *
  * @tparam name the name of the weapon
  * @tparam atkpoints the attack points of the weapon
  * @tparam weight the weight of the weapon
  * @tparam owner the owner of the weapon
- * @constructor creates a new weapon with a name(could be ""), attack points, weight and an owner
  * @author Diego San Martin
  */
 
 abstract class AWeapon(private var name:String, private var atkpoints:Int, private var weight:Int, private var owner:Option[Attributes]) extends TWeapons {
+
+  /** Checks whether a magic weapon was initialized with the correct parameters */
+  Require.Stat(atkpoints,"Attack points not valid") in (0 to 350)
+  Require.Stat(weight,"Weight not valid") in (0 to 150)
+  if(owner.isDefined){
+    throw new InvalidOwnerException("Weapon should not be initialized with an owner")
+  }
 
   /**A getter for the weapon´s name
    *

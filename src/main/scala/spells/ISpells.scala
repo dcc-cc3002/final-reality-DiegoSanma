@@ -8,10 +8,10 @@ import entity.Entity
  */
 trait ISpells {
 
-  def inflict(user:Mage,victim:Entity)
+  def inflict(user:Mage,victim:Entity) : Unit
 
-  def friendlyFire(user:Mage,victim:Entity)
+  def friendlyFire(user:Mage,victim:Entity) : Unit
 
-  def finalInflict(user:Mage,victim:Entity)
+  def finalInflict(user:Mage,victim:Entity): Unit
 
 }

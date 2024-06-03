@@ -11,6 +11,7 @@ trait Entity{
   def getHp(): Int
   def getDefense():Int
   def getWeight():Int
+  def getMaxHealth(): Int
 
   def takedamagePlayer(agresor:Attributes): Unit
 
@@ -23,6 +24,10 @@ trait Entity{
 
   protected def checkHealth(damage:Int): Unit
 
+  def checkifCharacter(): Unit
+
+  def checkifEnemy(): Unit
+
   def isAlive(): Int
 
   def addToTurns(scheduler: TurnScheduler): Unit
@@ -32,4 +37,6 @@ trait Entity{
   def getActionBar(): Int
 
   def addToActionBar(k:Int): Unit
+
+  def heal(amountPercentage:Double): Unit
 }

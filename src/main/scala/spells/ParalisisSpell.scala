@@ -30,8 +30,6 @@ class ParalisisSpell extends LightSpells {
    * @throws FriendlyFireException if victim is not an ally
    */
   override def friendlyFire(user: Mage, victim: Entity): Unit = {
-    if(victim.isInstanceOf[Attributes]){
-      throw new FriendlyFireException("Cant paralyze an ally")
-    }
+      victim.checkifEnemy()
   }
 }

@@ -1,7 +1,7 @@
 package bow
 
 import attributes.Attributes
-import weapons.Weapon
+import weapons.AWeapon
 
 /**A class for a bow (weapon)
  * Extends from weapon class, inheriting all methods
@@ -13,7 +13,7 @@ import weapons.Weapon
  *
  */
 
-class Bow(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends Weapon(name,atkpoints,weight, owner)
+class Bow(name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends AWeapon(name,atkpoints,weight, owner)
 {
   /**Method for telling owner what type of weapon they are receiving
    *

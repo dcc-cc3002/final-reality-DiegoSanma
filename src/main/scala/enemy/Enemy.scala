@@ -15,9 +15,6 @@ import entity.AEntity
  * @param weight the weight of the enemy
  * @param attack the attack of the enemy
  *
- * @example
- * var enemy = new Enemy("Fat",20,30,100,150)
- * println(s"The name of the enemy is ${enemy.name}"), should be "Fat"
  *
  * @author Diego San Martin
  */

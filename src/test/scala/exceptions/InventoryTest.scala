@@ -4,7 +4,6 @@ import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
 import exceptions.initializing.InvalidInventoryException
 import sword.Sword
 import wand.Wand
-import weapons.{MagicWeapon, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
 

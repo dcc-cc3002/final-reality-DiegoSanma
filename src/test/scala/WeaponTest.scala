@@ -2,7 +2,7 @@ import characters.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import exceptions.weaponexceptions.AlreadyNamedException
 import sword.Sword
 import wand.Wand
-import weapons.{AMagicWeapon, AWeapon, MagicWeapon, TWeapons, Weapon}
+import weapons.{AMagicWeapon, AWeapon, TWeapons}
 
 
 /**This test is for the weapons the characters hold
@@ -54,8 +54,8 @@ class WeaponTest extends munit.FunSuite {
   }
 
   test("having and leaving owner"){
-    var sword: Weapon = new Sword("Blade of Truth",60,70)
-    var wood: MagicWeapon = new Wand("Pinocchio",70,50,50)
+    var sword: Sword = new Sword("Blade of Truth",60,70)
+    var wood: Wand = new Wand("Pinocchio",70,50,50)
 
     assert(ninja.getActiveWeapon().isEmpty,"Ninja should not have a weapon")
     assert(sword.getOwner().isEmpty,"Sword should have no owner")

@@ -17,18 +17,18 @@ import scala.collection.mutable.ArrayBuffer
 
 /** A class representing a black mage (mago negro)
  *
- * A mago negro is defined by his name, hp, defense, weight and mana
+ * A black mage is defined by his name, hp, defense, weight and mana
  *
  * @constructor creates a new black mage with name, hp, defense, weight and mana
- * @param name the name of the mago negro
- * @param hp the hitpoints of the mago negro
- * @param defense the defense value of the mago negro
- * @param weight the weight of the mago negro
- * @param mana the mana/magic points of the mago negro
- * @param inventory the inventory where the mago negro hold his/her weapons
- * @param activeWeapon the weapon the mago negro is currently holding
+ * @param name the name of the black mage
+ * @param hp the hitpoints of the black mage
+ * @param defense the defense value of the black mage
+ * @param weight the weight of the black mage
+ * @param mana the mana/magic points of the black mage
+ * @param inventory the inventory where the black mage hold his/her weapons
+ * @param activeWeapon the weapon the black mage is currently holding
  *
- * @constructor creates a new mago negro with a name, and values for hp, defense, weight and mana
+ * @constructor creates a new black mage with a name, and values for hp, defense, weight and mana
  *
  * @author Diego San Martin
  *
@@ -98,10 +98,23 @@ class BlackMage(name: String, hp: Int, defense:Int, weight: Int, mana:Int,
     this.inventory.addOne(weapon)
     weapon.changeOwner(this)
   }
+
+  /**Method for checking if a black mage can throw a dark spell
+   *
+   * @param spell the dark spell being casted
+   * @param victim the entity the spell is being casted on
+   */
   override def throwDarkSpell(spell: DarkSpells, victim: Entity): Unit = {
     spell.finalInflict(this,victim)
   }
 
+  /**Method for checking if a black mage can throw a light spell
+   *
+   * @param spell the light spell being casted
+   * @param victim the entity the spell is being casted on
+   *
+   * @throws WrongMageException as a black mage cannot use a light spell
+   */
   override def throwLightSpell(spell: LightSpells, victim: Entity): Unit = {
     throw new WrongMageException("Black Mage cant use a light spell")
   }

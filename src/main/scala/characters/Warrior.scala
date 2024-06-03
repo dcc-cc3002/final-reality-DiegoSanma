@@ -15,16 +15,16 @@ import scala.collection.mutable.ArrayBuffer
 
 /** A class representing a warrior(guerrero)
  *
- * A guerrero is defined by his name, hp, defense and weight
+ * A warrior is defined by his name, hp, defense and weight
  *
- * @param name the name of the guerrero
- * @param hp the hitpoints of the guerrero
- * @param defense the defense value of the guerrero
- * @param weight the weight of the guerrero
- * @param inventory the inventory where the guerrero holds his weapons
- * @param activeWeapon the weapon the guerrero is currently holding
+ * @param name the name of the warrior
+ * @param hp the hitpoints of the warrior
+ * @param defense the defense value of the warrior
+ * @param weight the weight of the warrior
+ * @param inventory the inventory where the warrior holds his weapons
+ * @param activeWeapon the weapon the warrior is currently holding
  *
- * @constructor creates a new guerrero with a name, and values for hp, defense and weight
+ * @constructor creates a new warrior with a name, and values for hp, defense and weight
  *
  * @author Diego San Martin
  *
@@ -33,7 +33,7 @@ class Warrior(name: String, hp: Int, defense:Int, weight: Int,
               inventory:ArrayBuffer[TWeapons]=ArrayBuffer(), activeWeapon:Option[TWeapons]=None) extends
   Character(name,hp,defense,weight,inventory,activeWeapon){
 
-  /**Checks whether the values used to create the guerrero are valid  */
+  /**Checks whether the values used to create the warrior are valid  */
 
   Require.Stat(hp,"Hp not valid") in (0 to 200)
   Require.Stat(defense,"Defense not valid") in (0 to 300)
@@ -76,7 +76,7 @@ class Warrior(name: String, hp: Int, defense:Int, weight: Int,
 
   /**Method for receiving a wand
    *
-   * As a guerrero can´t hold one, this method throws an exception
+   * As a warrior can´t hold one, this method throws an exception
    *
    * @param weapon wand being received
    *
@@ -88,7 +88,7 @@ class Warrior(name: String, hp: Int, defense:Int, weight: Int,
 
   /**Method for receiving a staff
    *
-   * As a guerrero can´t hold one, this method throws an exception
+   * As a warrior can´t hold one, this method throws an exception
    *
    * @param weapon staff being received
    *

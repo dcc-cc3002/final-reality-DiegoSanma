@@ -1,7 +1,7 @@
 package axe
 
 import attributes.Attributes
-import weapons.Weapon
+import weapons.AWeapon
 
 /**A class for an Axe
  *
@@ -14,7 +14,7 @@ import weapons.Weapon
  *
  */
 
-class Axe (name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends Weapon(name,atkpoints,weight, owner){
+class Axe (name:String,atkpoints:Int,weight:Int,owner:Option[Attributes]=None) extends AWeapon(name,atkpoints,weight, owner){
 
   /**Method for telling owner what type of weapon they are receiving
    *

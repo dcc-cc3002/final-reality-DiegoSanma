@@ -105,10 +105,23 @@ class WhiteMage(name: String, hp: Int, defense:Int, weight: Int, mana:Int,
     weapon.changeOwner(this)
   }
 
+  /**Method for checking if a white mage can cast a light spell
+   *
+   * @param spell the dark spell being casted
+   * @param victim the entity the spell is being casted on
+   *
+   * @throws WrongMageException as a white mage cannot cast a dark spell
+   */
+
   override def throwDarkSpell(spell: DarkSpells, victim: Entity): Unit = {
     throw new WrongMageException("White Mage cant use a dark spell")
   }
 
+  /**Method for checking if a white mage can cast a light spell
+   *
+   * @param spell the light spell being casted
+   * @param victim the entity the spell is being casted on
+   */
   override def throwLightSpell(spell: LightSpells, victim: Entity): Unit = {
     spell.finalInflict(this,victim)
   }

@@ -2,12 +2,13 @@ package enemy
 
 import attributes.{Attributes, Mage}
 import entity.{AEntity, Entity}
-import exceptions.damage.SameClassAttackException
+import exceptions.damage.{FriendlyFireException, SameClassAttackException}
 import turnscheduler.TurnScheduler
-import weapons.MagicWeapon
+import weapons.AMagicWeapon
 
 /**An abstract class that extends from EnemyAttributes
- * Includes the attack parameter for enemies
+ *
+ * Includes the attack parameter for enemies, as well as all the parameters defined for an entity
  *
  */
 
@@ -37,6 +38,14 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
   override def getMaxActionBar(): Int = {
     this.getWeight()
   }
+
+  /**Method for when an enemy is attacking an entity
+   *
+   * Calls the function in the character/enemy being attacked, which is in charge of checking
+   * if the enemy is attacking a foe, and not an ally
+   *
+   * @param victim the entity being attacked by the enemy
+   */
   override def attack(victim: Entity): Unit = {
     victim.takedamageEnemy(this)
   }
@@ -70,7 +79,7 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    * @param mage mage using the spell
    */
   override def takeSpellDamage(mage: Mage): Unit = {
-    var damage:Int = mage.getActiveWeapon().get.asInstanceOf[MagicWeapon].getMagicpts()
+    var damage:Int = mage.getActiveWeapon().get.asInstanceOf[AMagicWeapon].getMagicpts()
     this.checkHealth(damage)
   }
 
@@ -88,6 +97,20 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    */
   override def removeFromTurns(scheduler: TurnScheduler): Unit = {
     scheduler.removeEnemy(this)
+  }
+
+  /**Method for checking if enemy is an enemy
+   *
+   */
+  override def checkifEnemy(): Unit = {
+  }
+
+  /**Method for checking if enemy is a character
+   *
+   * @throws FriendlyFireException as enemy is not a character
+   */
+  override def checkifCharacter(): Unit = {
+    throw new FriendlyFireException("Cant inflict damage/effect to an ally")
   }
 
 }

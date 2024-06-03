@@ -2,6 +2,8 @@ package spells
 import attributes.Mage
 import entity.Entity
 
+/**Abstract class for method used by light spells
+ */
 abstract class LightSpells extends ISpells {
 
   /**Method for telling the mage what type of spell they are trying to use

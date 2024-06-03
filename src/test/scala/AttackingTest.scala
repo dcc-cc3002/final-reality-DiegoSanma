@@ -2,7 +2,6 @@ import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
 import enemy.Enemy
 import staff.Staff
 import sword.Sword
-import weapons.{MagicWeapon, Weapon}
 
 /**Testing for when either enemies or characters/mages attack
  *

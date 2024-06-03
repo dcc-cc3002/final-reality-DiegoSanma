@@ -4,7 +4,6 @@ import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
 import exceptions.weaponexceptions.InvalidWeaponException
 import sword.Sword
 import wand.Wand
-import weapons.{MagicWeapon, Weapon}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -17,7 +16,7 @@ class ActiveWeaponTest extends munit.FunSuite {
   var weaponPal: Sword = null
   var magicweaponWM: Wand = null
   var weaponGue : Sword = null
-  var weaponNin : Weapon = null
+  var weaponNin : Sword = null
   var magicWeaponBM: Wand = null
 
   test("Active Weapon Test"){

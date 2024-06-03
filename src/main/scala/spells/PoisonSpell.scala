@@ -26,12 +26,10 @@ class PoisonSpell extends LightSpells {
    * @param user the mage trying to use the spell
    * @param victim the entity the mage want to poison
    *
-   * @throws FriendlyFireException if the victim is not an ally
+   * @throws FriendlyFireException if the victim is an ally
    */
 
   override def friendlyFire(user: Mage, victim: Entity): Unit = {
-    if(victim.isInstanceOf[Attributes]){
-      throw new FriendlyFireException("Cant poison an ally")
-    }
+    victim.checkifEnemy()
   }
 }

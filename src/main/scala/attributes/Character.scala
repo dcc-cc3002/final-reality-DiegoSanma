@@ -3,10 +3,10 @@ package attributes
 import enemy.{Enemy, EnemyAttributes}
 import entity.{AEntity, Entity}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
-import exceptions.damage.SameClassAttackException
+import exceptions.damage.{FriendlyFireException, SameClassAttackException}
 import exceptions.partyexc.FullPartyException
 import turnscheduler.TurnScheduler
-import weapons.{TWeapons, Weapon}
+import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -21,9 +21,6 @@ import scala.collection.mutable.ArrayBuffer
 abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
                          private var inventory:ArrayBuffer[TWeapons],private var activeWeapon: Option[TWeapons])
   extends AEntity(name,hp,defense,weight) with Attributes {
-  /** Constant parameter that holds the max health of a character */
-
-  private val maxHealth: Int = hp
 
   /** Parameters for holding onto the values of current action bar maximum, starts of as just the characters weight*/
     private var maxActionBar = this.weight
@@ -36,15 +33,6 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     this.maxActionBar
   }
 
-  /** Getter for max Health if a Character
-   *
-   * @return this.maxHealth
-   */
-
-
-  override def getMaxHealth(): Int = {
-    this.maxHealth
-  }
   /**Getter for inventory parameter
    * Will return all the weapons currently in the characters inventory
    *
@@ -80,7 +68,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
 
   /** Method for making handing/equipping a weapon as a character
    * If i want to equip a weapon that i already have equipped, the method does nothing
-   * Also calls the giveToOwner, so the wepaon now has the correct owner associated
+   * Also calls the giveToOwner, so the weapon now has the correct owner associated
    *
    * @param weapon the weapon the character wants to receive
    */
@@ -97,8 +85,8 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
   }
 
   /**Method for dropping a weapon, if there is one equipped currently
-   * Also calls the weapon.leaveOwner, so that the weapon doesn´t keep the
-   * character as the owner depsite dropping said weapon
+   * Also calls the weapon.leaveOwner, so that the weapon doe not keep the
+   * character as the owner despite dropping said weapon
    */
   override def dropWeapon(weapon:TWeapons): Unit = {
     var position = this.inventory.indexOf(weapon)
@@ -185,9 +173,19 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
   override def removeFromTurns(scheduler: TurnScheduler): Unit = {
     scheduler.removeCharacter(this)
   }
-  override def heal(amountPercentage:Double): Unit = {
-    val healing: Int = (amountPercentage*this.getMaxHealth()).toInt
-    this.maxHeal(healing,getMaxHealth())
+
+
+  /**Method for checking if character is an enemy
+   *
+   * @throws FriendlyFireException as character is not an enemy
+   */
+  override def checkifEnemy(): Unit = {
+    throw new FriendlyFireException("Cant inflict damage/effect to an ally")
   }
 
+  /**Method for checking if character is a character
+   *
+   */
+  override def checkifCharacter(): Unit = {
+  }
 }

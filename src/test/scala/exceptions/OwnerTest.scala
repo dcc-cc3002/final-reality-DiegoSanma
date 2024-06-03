@@ -4,7 +4,6 @@ import characters.{WhiteMage, Paladin}
 import exceptions.initializing.InvalidOwnerException
 import staff.Staff
 import sword.Sword
-import weapons.{MagicWeapon, Weapon}
 
 class OwnerTest extends munit.FunSuite {
   var paladin: Paladin = null

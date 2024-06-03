@@ -1,7 +1,7 @@
 package wand
 
 import attributes.Attributes
-import weapons.MagicWeapon
+import weapons.AMagicWeapon
 
 /**A class for a wand
  *
@@ -16,7 +16,7 @@ import weapons.MagicWeapon
  */
 
 class Wand (name:String,atkpoints:Int,weight:Int,magicpoints:Int,owner:Option[Attributes]=None)
-  extends MagicWeapon(name,atkpoints,weight,magicpoints,owner) {
+  extends AMagicWeapon(name,atkpoints,weight,magicpoints,owner) {
 
   /**Method for telling owner what type of weapon they are receiving
    *

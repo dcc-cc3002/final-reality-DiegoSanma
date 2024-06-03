@@ -20,8 +20,6 @@ trait Attributes extends AEntity{
 
   def getWeapons(): ArrayBuffer[TWeapons]
 
-  def getMaxHealth(): Int
-
   def getMaxActionBar(): Int
   def getActiveWeapon(): Option[TWeapons]
 
@@ -41,7 +39,5 @@ trait Attributes extends AEntity{
   def dropWeapon(weapon:TWeapons): Unit
 
   def changeWeapon(position:Int): Unit
-
-  def heal(amountPercentage:Double): Unit
 
 }

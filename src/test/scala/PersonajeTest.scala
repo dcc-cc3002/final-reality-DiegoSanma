@@ -6,11 +6,12 @@
  */
 
 import bow.Bow
-import characters.{Warrior, WhiteMage, BlackMage, Ninja, Paladin}
+import characters.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import enemy.Enemy
+import staff.Staff
 import sword.Sword
 import wand.Wand
-import weapons.{AMagicWeapon, AWeapon, MagicWeapon, Weapon}
+import weapons.{AMagicWeapon, AWeapon}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -95,10 +96,10 @@ class PersonajeTest extends munit.FunSuite {
         assertEquals(magonegro.getActiveWeapon(),None, "No weapon should be held")
         assertEquals(magoblanco.getActiveWeapon(),None, "No weapon should be held")
 
-        var bow: Weapon = new Bow("Legolas",50,30)
-        var knife: Weapon = new Sword("Slick",60,70)
-        var wand: MagicWeapon = new Wand("Giggidy",60,70,90)
-        var wand2: MagicWeapon = new Wand("Stick of Truth",45,60,70)
+        var bow: Bow = new Bow("Legolas",50,30)
+        var knife: Sword = new Sword("Slick",60,70)
+        var wand: Wand = new Wand("Giggidy",60,70,90)
+        var wand2: Wand = new Wand("Stick of Truth",45,60,70)
 
         ninja.receiveWeapon(bow)
         assert(ninja.getWeapons().nonEmpty,"Weapon should´ve been added to the inventory")
@@ -126,10 +127,10 @@ class PersonajeTest extends munit.FunSuite {
         assert(!(ninja.getWeapons().contains(knife)),"Knife should no longer be in the inventory")
     }
     test("mage inventory and weapon"){
-        var bow: Weapon = new Bow("Legolas",50,30)
-        var slingshot: Weapon = new Bow("Slick",60,70)
-        var wand: MagicWeapon = new Wand("Giggidy",60,70,90)
-        var staff: MagicWeapon = new Wand("Stick of Truth",45,60,70)
+        var bow: Bow = new Bow("Legolas",50,30)
+        var slingshot: Bow = new Bow("Slick",60,70)
+        var wand: Wand = new Wand("Giggidy",60,70,90)
+        var staff: Staff = new Staff("Stick of Truth",45,60,70)
 
         magoblanco.receiveWeapon(bow)
         assert(magoblanco.getWeapons().nonEmpty,"Weapon should´ve been added to the inventory")

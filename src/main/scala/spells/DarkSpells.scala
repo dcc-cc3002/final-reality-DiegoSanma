@@ -3,8 +3,11 @@ import attributes.{Attributes, Mage}
 import entity.Entity
 import exceptions.damage.FriendlyFireException
 
+/**Abstract class for methods used by a dark spell
+ *
+ */
 abstract class DarkSpells extends ISpells {
-  /**Method for telling a mage ehat type of spell they are trying to use
+  /**Method for telling a mage what type of spell they are trying to use
    *
    * @param user the mage trying to use the spell
    * @param victim the victim of the spell
@@ -19,11 +22,9 @@ abstract class DarkSpells extends ISpells {
    * @param user the mage trying to use the spell
    * @param victim the entity the mage is trying to use the spell on
    *
-   * @throws FriendlyFireException if the entity is not an ally
+   * @throws FriendlyFireException if the entity is an ally
    */
   override def friendlyFire(user: Mage, victim: Entity): Unit = {
-    if (victim.isInstanceOf[Attributes]) {
-      throw new FriendlyFireException("Cant inflict damage/effect to an ally")
-    }
+    victim.checkifEnemy()
   }
 }

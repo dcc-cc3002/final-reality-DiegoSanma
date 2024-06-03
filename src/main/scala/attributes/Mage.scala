@@ -49,13 +49,19 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
   }
 
   /**Method for when a Mage uses a spell and spends a certain amount of mana
-   * If
    *
    * @param use amount of mana the mage is using
    */
   override def useMana(use: Int): Unit = {
     this.mana -= use
   }
+
+  /**Method for checking whether or not a mage has enough mana to cast a spell
+   *
+   * @param amount the amount of mana the spell that is being casted costs
+   *
+   * @throws NotEnoughManaException if the mage does not have enough mana
+   */
 
   override def checkMana(amount: Int): Unit = {
     if(amount>this.mana){
