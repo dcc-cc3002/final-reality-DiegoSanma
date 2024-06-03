@@ -2,6 +2,7 @@ package spells
 
 import attributes.Mage
 import entity.Entity
+import weapons.AMagicWeapon
 
 /**Trait for spells, includes methods that will be used by all types of spells(healing, damaging, or effect spells)
  *

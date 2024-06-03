@@ -1,6 +1,6 @@
 package weapons
 
-import attributes.Attributes
+import attributes.{Attributes, IMage}
 import exceptions.initializing.{InvalidOwnerException, Require}
 
 /**Abstract  class for a magic weapon
@@ -16,7 +16,7 @@ import exceptions.initializing.{InvalidOwnerException, Require}
  * @author Diego San Martin
  */
 abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, private var magicpoints:Int,owner:Option[Attributes])
-  extends AWeapon(name,atkpoints,weight,owner) {
+  extends AWeapon(name,atkpoints,weight,owner) with IMagicWeapon{
 
   /** Checks whether a magic weapon was initialized with the correct parameters */
   Require.Stat(atkpoints,"Attack points not valid") in (0 to 150)

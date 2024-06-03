@@ -2,6 +2,7 @@ package spells
 import attributes.{Attributes, Mage}
 import entity.Entity
 import exceptions.damage.FriendlyFireException
+import weapons.AMagicWeapon
 
 /**Abstract class for methods used by a dark spell
  *

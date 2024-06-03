@@ -4,7 +4,7 @@ import attributes.{Attributes, Mage}
 import entity.{AEntity, Entity}
 import exceptions.damage.{FriendlyFireException, SameClassAttackException}
 import turnscheduler.TurnScheduler
-import weapons.AMagicWeapon
+import weapons.{AMagicWeapon, IMagicWeapon}
 
 /**An abstract class that extends from EnemyAttributes
  *
@@ -79,7 +79,7 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    * @param mage mage using the spell
    */
   override def takeSpellDamage(mage: Mage): Unit = {
-    var damage:Int = mage.getActiveWeapon().get.asInstanceOf[AMagicWeapon].getMagicpts()
+    var damage:Int = mage.getActiveWeapon().get.asInstanceOf[IMagicWeapon].getMagicpts()
     this.checkHealth(damage)
   }
 
