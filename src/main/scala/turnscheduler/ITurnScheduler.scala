@@ -14,6 +14,7 @@ import scala.collection.mutable.ArrayBuffer
 trait ITurnScheduler {
 
   def getTurnsLine(): ArrayBuffer[Entity]
+
   def addTo(added:Entity): Unit
 
   def addCharacter(added:Attributes): Unit
