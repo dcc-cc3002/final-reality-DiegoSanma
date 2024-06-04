@@ -1,8 +1,9 @@
 package enemy
 
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, IMage, Mage}
 import entity.{AEntity, Entity}
 import exceptions.damage.{FriendlyFireException, SameClassAttackException}
+import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
 import weapons.{AMagicWeapon, IMagicWeapon}
 
@@ -78,9 +79,40 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    *
    * @param mage mage using the spell
    */
-  override def takeSpellDamage(mage: Mage): Unit = {
+  override def takeSpellDamage(mage: IMage): Unit = {
     var damage:Int = mage.getActiveWeapon().get.asInstanceOf[IMagicWeapon].getMagicpts()
     this.checkHealth(damage)
+  }
+
+  /**Method for checking whether a dark spell can be inflicted on the enemy
+   * Since it can, it calls the function in spell to effectively inflict the dark spell´s damage
+   *
+   * @param user the mage casting the dark spell
+   * @param spell the dark spell being casted
+   */
+  override def checkDarkInflictSpell(user: IMage, spell: IDarkSpells): Unit = {
+    spell.throwFinalDarkAttack(user,this)
+  }
+
+  /**Method for checking if an enemy can be healed by a mage´s spell
+   *
+   * @param user the mage using the spell
+   * @param spell the healing spell being used
+   *
+   * @throws FriendlyFireException as an enemy cannot be healed by a spell
+   */
+  override def checkLightHealSpell(user: IMage, spell: HealingLightSpells): Unit = {
+    throw new FriendlyFireException("Can´t heal an enemy!")
+  }
+
+  /**Method for checking if an enemy can be inflicted a status condition by a mage´s spell
+   *
+   * @param user the mage using the spell
+   * @param spell the healing spell being used
+   *
+   */
+  override def checkLightStatusSpell(user: IMage, spell: StatusLightSpells): Unit = {
+    spell.finalStatusSpell(user,this)
   }
 
   /**Adds the enemy to the turn scheduler

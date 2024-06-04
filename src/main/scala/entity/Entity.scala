@@ -1,7 +1,8 @@
 package entity
 
-import attributes.Attributes
+import attributes.{Attributes, IMage, Mage}
 import enemy.EnemyAttributes
+import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
 
 /**A trait that includes the methods that will be included in any Entidad
@@ -39,4 +40,10 @@ trait Entity{
   def addToActionBar(k:Int): Unit
 
   def heal(amountPercentage:Double): Unit
+
+  def checkDarkInflictSpell(user:IMage,spell:IDarkSpells)
+
+  def checkLightHealSpell(user:IMage,spell:HealingLightSpells)
+
+  def checkLightStatusSpell(user:IMage,spell:StatusLightSpells)
 }

@@ -1,5 +1,5 @@
 package spells
-import attributes.Mage
+import attributes.{IMage, Mage}
 import enemy.EnemyAttributes
 import entity.Entity
 
@@ -17,10 +17,18 @@ class FireSpell extends DarkSpells {
    * @param user the mage using the spell
    * @param victim the enemy being burnt
    */
-  override def finalInflict(user: Mage, victim: Entity): Unit = {
+  override def finalCheck(user: IMage, victim: Entity): Unit = {
     user.checkMana(15)
-    victim.asInstanceOf[EnemyAttributes].takeSpellDamage(user)
-    user.useMana(15)
+    victim.checkDarkInflictSpell(user,this)
   }
 
+  /**Method for finally attacking an enemy with fire
+   *
+   * @param user the mage using the spell
+   * @param victim the enemy being attacked
+   */
+  override def throwFinalDarkAttack(user:IMage,victim:EnemyAttributes): Unit = {
+    victim.takeSpellDamage(user)
+    user.useMana(15)
+  }
 }

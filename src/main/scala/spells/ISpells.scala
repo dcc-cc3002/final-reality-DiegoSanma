@@ -1,6 +1,7 @@
 package spells
 
-import attributes.Mage
+import attributes.{IMage, Mage}
+import enemy.EnemyAttributes
 import entity.Entity
 import weapons.AMagicWeapon
 
@@ -9,10 +10,9 @@ import weapons.AMagicWeapon
  */
 trait ISpells {
 
-  def inflict(user:Mage,victim:Entity) : Unit
+  def inflict(user:IMage,victim:Entity) : Unit
 
-  def friendlyFire(user:Mage,victim:Entity) : Unit
+  def finalCheck(user:IMage,victim:Entity): Unit
 
-  def finalInflict(user:Mage,victim:Entity): Unit
 
 }

@@ -1,5 +1,5 @@
 package spells
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, IMage, Mage}
 import enemy.EnemyAttributes
 import entity.Entity
 
@@ -17,9 +17,19 @@ class ThunderSpell extends DarkSpells {
    * @param user the mage using the spell
    * @param victim the victim being attacked
    */
-  override def finalInflict(user: Mage, victim: Entity): Unit = {
+  override def finalCheck(user: IMage, victim: Entity): Unit = {
     user.checkMana(20)
-    victim.asInstanceOf[EnemyAttributes].takeSpellDamage(user)
+    victim.checkDarkInflictSpell(user,this)
+  }
+
+  /**Method for finally inflicting thunder on an enemy
+   *
+   * @param user the mage using the spell
+   * @param victim the enemy being thundered
+   */
+
+  override def throwFinalDarkAttack(user: IMage, victim: EnemyAttributes): Unit = {
+    victim.takeSpellDamage(user)
     user.useMana(20)
   }
 }

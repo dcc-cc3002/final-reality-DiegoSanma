@@ -1,5 +1,6 @@
 package spells
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, IMage, Mage}
+import characters.WhiteMage
 import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.damage.FriendlyFireException
@@ -10,7 +11,7 @@ import exceptions.damage.FriendlyFireException
  *
  */
 
-class HealingSpell extends LightSpells {
+class HealingSpell extends LightSpells with HealingLightSpells {
   /**Method for healing an ally
    *
    * The ally will always be healed by 30% of their maximum health
@@ -21,20 +22,13 @@ class HealingSpell extends LightSpells {
    * @param user the mage healing
    * @param victim the caharcter being healed
    */
-  override def finalInflict(user: Mage, victim: Entity): Unit = {
+  override def finalCheck(user: IMage, victim: Entity): Unit = {
     user.checkMana(15)
-    victim.heal(0.3)
-    user.useMana(15)
+    victim.checkLightHealSpell(user,this)
   }
 
-  /**Checks whether or not the mage is trying to heal an enemy or ally
-   *
-   * @param user the mage healing
-   * @param victim entity the mage want to heal
-   *
-   * @throws FriendlyFireException if they are trying to heal an enemy
-   */
-  override def friendlyFire(user: Mage, victim: Entity): Unit = {
-    victim.checkifCharacter()
+  override def finalHealSpell(user: IMage, victim: Attributes): Unit = {
+    victim.heal(0.3)
+    user.useMana(15)
   }
 }

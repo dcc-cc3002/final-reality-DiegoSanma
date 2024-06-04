@@ -5,6 +5,7 @@ import entity.{AEntity, Entity}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
 import exceptions.damage.{FriendlyFireException, SameClassAttackException}
 import exceptions.partyexc.FullPartyException
+import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
 import weapons.TWeapons
 
@@ -172,6 +173,38 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    */
   override def removeFromTurns(scheduler: TurnScheduler): Unit = {
     scheduler.removeCharacter(this)
+  }
+
+  /**Method for checking whether a dark spell can be cast on a character
+   *
+   * @param user the mage casting the dark spell
+   * @param spell the dark spell being casted
+   *
+   * @throws FriendlyFireException as a character can´t be hit by a dark spell
+   */
+  override def checkDarkInflictSpell(user: IMage, spell: IDarkSpells): Unit = {
+    throw new FriendlyFireException("Cant cast a dark spell on an ally!")
+  }
+
+  /**Method for checking if an character can be healed by a mage´s spell
+   *
+   * @param user the mage using the spell
+   * @param spell the healing spell being used
+   *
+   */
+  override def checkLightHealSpell(user: IMage, spell: HealingLightSpells): Unit = {
+    spell.finalHealSpell(user, this)
+  }
+  /**Method for checking if an character can be inflicted a status condition by a mage´s spell
+   *
+   * @param user the mage using the spell
+   * @param spell the healing spell being used
+   *
+   * @throws FriendlyFireException as a status condition cannot be inflicted on a character
+   */
+
+  override def checkLightStatusSpell(user: IMage, spell: StatusLightSpells): Unit = {
+    throw new FriendlyFireException("Cant inflict a status condition on an ally!")
   }
 
 

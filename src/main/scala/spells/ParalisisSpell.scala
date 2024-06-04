@@ -1,5 +1,7 @@
 package spells
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, IMage, Mage}
+import characters.WhiteMage
+import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.damage.FriendlyFireException
 
@@ -8,7 +10,7 @@ import exceptions.damage.FriendlyFireException
  * Used to paralyze enemies, has a 100% acuraccy rate
  *
  */
-class ParalisisSpell extends LightSpells {
+class ParalisisSpell extends LightSpells with StatusLightSpells {
 
   /** Method for using a the paralyzing spell
    * Also checks whether the mage has enough mana to use the spell
@@ -16,20 +18,17 @@ class ParalisisSpell extends LightSpells {
    * @param user the mage using the spell
    * @param victim the enemy being paralyzed
    */
-  override def finalInflict(user: Mage, victim: Entity): Unit = {
+  override def finalCheck(user: IMage, victim: Entity): Unit = {
     user.checkMana(25)
-    user.useMana(25)
+    victim.checkLightStatusSpell(user,this)
   }
 
-  /**Method for checking whether the mae is trying to paralyze an ally or enemy
+  /**Method for finally inflicting the paralisis spell on an enemy (currently, nothing is done to the enemy)
    *
-   *
-   * @param user mage using the spell
-   * @param victim entity that the mage want to paralyze
-   *
-   * @throws FriendlyFireException if victim is not an ally
+   * @param user the WhiteMage using the spell
+   * @param victim the enemy the paralisis ingoing to be inflicted on
    */
-  override def friendlyFire(user: Mage, victim: Entity): Unit = {
-      victim.checkifEnemy()
+  override def finalStatusSpell(user: IMage, victim: EnemyAttributes): Unit = {
+    user.useMana(25)
   }
 }

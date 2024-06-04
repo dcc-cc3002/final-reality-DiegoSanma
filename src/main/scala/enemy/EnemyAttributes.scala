@@ -1,6 +1,6 @@
 package enemy
 
-import attributes.Mage
+import attributes.{IMage, Mage}
 import entity.{AEntity, Entity}
 
 /**A trait that defines the attributes that an enemy has
@@ -16,6 +16,6 @@ trait EnemyAttributes extends AEntity{
 
     def getMaxActionBar(): Int
 
-    def takeSpellDamage(mage:Mage)
+    def takeSpellDamage(mage:IMage)
 
 }

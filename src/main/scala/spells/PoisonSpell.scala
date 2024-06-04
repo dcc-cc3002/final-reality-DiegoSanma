@@ -1,5 +1,7 @@
 package spells
-import attributes.{Attributes, Mage}
+import attributes.{Attributes, IMage, Mage}
+import characters.WhiteMage
+import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.damage.FriendlyFireException
 
@@ -8,7 +10,7 @@ import exceptions.damage.FriendlyFireException
  * Used for poisoning an enemy, has 100% accuracy rate
  *
  */
-class PoisonSpell extends LightSpells {
+class PoisonSpell extends LightSpells with StatusLightSpells {
 
   /**Method for poisoning an enemy
    * Also checks whether the mage has enough mana to use the spell
@@ -16,20 +18,18 @@ class PoisonSpell extends LightSpells {
    * @param user mage using the spell
    * @param victim victim being poisoned
    */
-  override def finalInflict(user: Mage, victim: Entity): Unit = {
+  override def finalCheck(user: IMage, victim: Entity): Unit = {
     user.checkMana(30)
+
     user.useMana(30)
   }
 
-  /**Method for checking whether the mage is trying to poison an ally or enemy
+  /**Method for finally inflicting the poison spell on an enemy (currently, nothing is done to the enemy)
    *
-   * @param user the mage trying to use the spell
-   * @param victim the entity the mage want to poison
-   *
-   * @throws FriendlyFireException if the victim is an ally
+   * @param user the WhiteMage using the spell
+   * @param victim the enemy the poison ingoing to be inflicted on
    */
-
-  override def friendlyFire(user: Mage, victim: Entity): Unit = {
-    victim.checkifEnemy()
+  override def finalStatusSpell(user: IMage, victim: EnemyAttributes): Unit = {
+    user.useMana(30)
   }
 }

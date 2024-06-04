@@ -37,7 +37,6 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
    * @param victim the victim of the spell
    */
   override def throwSpell(spell: ISpells, victim: Entity): Unit = {
-    spell.friendlyFire(this,victim)
     if(getActiveWeapon().isEmpty) {
       throw new NoWeaponException("Cant throw spell, you have no weapon equipped!")
     }
