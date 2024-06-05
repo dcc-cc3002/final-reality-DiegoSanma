@@ -39,8 +39,11 @@ abstract class AMagicWeapon(name:String, atkpoints:Int, weight:Int, private var 
    * As this class is specifically for magic weapons(despite extending from weapons, think of it
    * as an "evolution" of the normal weapons", this function throws no exception, it passes the check
    *
+   * @return this
+   *
    */
-  override def checkifMagic(): Unit = {
+  override def checkifMagic(): IMagicWeapon = {
+    this
   }
 
 }

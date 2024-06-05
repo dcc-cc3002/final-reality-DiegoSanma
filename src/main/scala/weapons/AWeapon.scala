@@ -105,10 +105,10 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
   /**Method for checking whether or not a weapon is magical or not
    * As this class is for weapons, that still dont extend to magical weapons, an exception is thrown
    *
-   * @throws NotMagicWeaponException
+   * @throws NotMagicWeaponException as this weapon are currently not magic weapons (haven´t "evolved to that point")
    */
 
-  override def checkifMagic(): Unit = {
+  override def checkifMagic(): IMagicWeapon = {
     throw new NotMagicWeaponException("Cant cast a spell with a non magic weapon equipped")
   }
 

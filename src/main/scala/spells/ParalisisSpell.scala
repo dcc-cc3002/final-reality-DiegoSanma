@@ -4,6 +4,7 @@ import characters.WhiteMage
 import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.damage.FriendlyFireException
+import weapons.IMagicWeapon
 
 /**Class for paralyzing spell
  *
@@ -17,8 +18,9 @@ class ParalisisSpell extends LightSpells with StatusLightSpells {
    *
    * @param user the mage using the spell
    * @param victim the enemy being paralyzed
+   * @param magicWeapon the magic weapon the mage is holding
    */
-  override def finalCheck(user: IMage, victim: Entity): Unit = {
+  override def finalCheck(user: IMage, victim: Entity,magicWeapon:IMagicWeapon): Unit = {
     user.checkMana(25)
     victim.checkLightStatusSpell(user,this)
   }

@@ -76,11 +76,13 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
     }
 
   /** Method for when taking damage from a spell
+   * The damage is equivalent to the amount of magic points the weapon has
    *
    * @param mage mage using the spell
+   * @param magicWeapon the magic weapon the mage is holding
    */
-  override def takeSpellDamage(mage: IMage): Unit = {
-    var damage:Int = mage.getActiveWeapon().get.asInstanceOf[IMagicWeapon].getMagicpts()
+  override def takeSpellDamage(mage: IMage,magicWeapon: IMagicWeapon): Unit = {
+    var damage: Int = magicWeapon.getMagicpts()
     this.checkHealth(damage)
   }
 
@@ -89,9 +91,10 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    *
    * @param user the mage casting the dark spell
    * @param spell the dark spell being casted
+   * @param magicWeapon the magic weapon the mage is holding
    */
-  override def checkDarkInflictSpell(user: IMage, spell: IDarkSpells): Unit = {
-    spell.throwFinalDarkAttack(user,this)
+  override def checkDarkInflictSpell(user: IMage, spell: IDarkSpells,magicWeapon: IMagicWeapon): Unit = {
+    spell.throwFinalDarkAttack(user,this,magicWeapon)
   }
 
   /**Method for checking if an enemy can be healed by a mage´s spell
@@ -129,20 +132,6 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    */
   override def removeFromTurns(scheduler: TurnScheduler): Unit = {
     scheduler.removeEnemy(this)
-  }
-
-  /**Method for checking if enemy is an enemy
-   *
-   */
-  override def checkifEnemy(): Unit = {
-  }
-
-  /**Method for checking if enemy is a character
-   *
-   * @throws FriendlyFireException as enemy is not a character
-   */
-  override def checkifCharacter(): Unit = {
-    throw new FriendlyFireException("Cant inflict damage/effect to an ally")
   }
 
 }

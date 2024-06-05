@@ -23,5 +23,5 @@ trait TWeapons {
 
   def leaveOwner(): Unit
 
-  def checkifMagic(): Unit
+  def checkifMagic(): IMagicWeapon
 }

@@ -4,6 +4,7 @@ import attributes.{Attributes, IMage, Mage}
 import enemy.EnemyAttributes
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
+import weapons.IMagicWeapon
 
 /**A trait that includes the methods that will be included in any Entidad
  */
@@ -25,10 +26,6 @@ trait Entity{
 
   protected def checkHealth(damage:Int): Unit
 
-  def checkifCharacter(): Unit
-
-  def checkifEnemy(): Unit
-
   def isAlive(): Int
 
   def addToTurns(scheduler: TurnScheduler): Unit
@@ -41,7 +38,7 @@ trait Entity{
 
   def heal(amountPercentage:Double): Unit
 
-  def checkDarkInflictSpell(user:IMage,spell:IDarkSpells)
+  def checkDarkInflictSpell(user:IMage,spell:IDarkSpells,magicWeapon: IMagicWeapon)
 
   def checkLightHealSpell(user:IMage,spell:HealingLightSpells)
 

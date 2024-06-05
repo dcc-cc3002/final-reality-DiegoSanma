@@ -5,7 +5,7 @@ import entity.{AEntity, Entity}
 import exceptions.damage.{NotEnoughManaException, SameClassAttackException, UnaliveDamagedException}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
 import spells.ISpells
-import weapons.TWeapons
+import weapons.{IMagicWeapon, TWeapons}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -40,11 +40,11 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
     if(getActiveWeapon().isEmpty) {
       throw new NoWeaponException("Cant throw spell, you have no weapon equipped!")
     }
-    getActiveWeapon().get.checkifMagic()
+    var magicWeapon: IMagicWeapon = getActiveWeapon().get.checkifMagic()
     if(victim.isAlive() == 0){
       throw new UnaliveDamagedException("Cant cast a spell on a dead entity")
     }
-    spell.inflict(this,victim)
+    spell.inflict(this,victim,magicWeapon)
   }
 
   /**Method for when a Mage uses a spell and spends a certain amount of mana

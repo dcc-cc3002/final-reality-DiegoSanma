@@ -7,7 +7,7 @@ import exceptions.damage.{FriendlyFireException, SameClassAttackException}
 import exceptions.partyexc.FullPartyException
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
-import weapons.TWeapons
+import weapons.{IMagicWeapon, TWeapons}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -182,7 +182,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    *
    * @throws FriendlyFireException as a character can´t be hit by a dark spell
    */
-  override def checkDarkInflictSpell(user: IMage, spell: IDarkSpells): Unit = {
+  override def checkDarkInflictSpell(user: IMage, spell: IDarkSpells,magicWeapon:IMagicWeapon): Unit = {
     throw new FriendlyFireException("Cant cast a dark spell on an ally!")
   }
 
@@ -207,18 +207,4 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     throw new FriendlyFireException("Cant inflict a status condition on an ally!")
   }
 
-
-  /**Method for checking if character is an enemy
-   *
-   * @throws FriendlyFireException as character is not an enemy
-   */
-  override def checkifEnemy(): Unit = {
-    throw new FriendlyFireException("Cant inflict damage/effect to an ally")
-  }
-
-  /**Method for checking if character is a character
-   *
-   */
-  override def checkifCharacter(): Unit = {
-  }
 }

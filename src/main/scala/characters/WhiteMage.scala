@@ -7,11 +7,11 @@ import entity.Entity
 import exceptions.initializing.{InvalidInventoryException, Require}
 import exceptions.mage.WrongMageException
 import exceptions.weaponexceptions.{InvalidWeaponException, InvalidWeaponTypeException}
-import spells.{LightSpells, DarkSpells}
+import spells.{DarkSpells, LightSpells}
 import staff.Staff
 import sword.Sword
 import wand.Wand
-import weapons.TWeapons
+import weapons.{IMagicWeapon, TWeapons}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -109,11 +109,12 @@ class WhiteMage(name: String, hp: Int, defense:Int, weight: Int, mana:Int,
    *
    * @param spell the dark spell being casted
    * @param victim the entity the spell is being casted on
+   * @param magicWeapon the magic weapon the mage is holding
    *
    * @throws WrongMageException as a white mage cannot cast a dark spell
    */
 
-  override def throwDarkSpell(spell: DarkSpells, victim: Entity): Unit = {
+  override def throwDarkSpell(spell: DarkSpells, victim: Entity,magicWeapon: IMagicWeapon): Unit = {
     throw new WrongMageException("White Mage cant use a dark spell")
   }
 
@@ -121,8 +122,9 @@ class WhiteMage(name: String, hp: Int, defense:Int, weight: Int, mana:Int,
    *
    * @param spell the light spell being casted
    * @param victim the entity the spell is being casted on
+   * @param magicWeapon the magic weapon the white mage is holding
    */
-  override def throwLightSpell(spell: LightSpells, victim: Entity): Unit = {
-    spell.finalInflict(this,victim)
+  override def throwLightSpell(spell: LightSpells, victim: Entity,magicWeapon:IMagicWeapon): Unit = {
+    spell.finalCheck(this,victim,magicWeapon)
   }
 }
