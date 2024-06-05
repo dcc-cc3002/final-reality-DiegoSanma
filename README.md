@@ -28,8 +28,8 @@ allowing a player to choose what weapon to use and makes it easier to add and re
 changing a parameter in the player's class, we now simply add it to the array that represents the inventory.
 
 ### I.I.I Characters
-This category of player can be separated will be separated into three classes, **paladins**, **guerreros**(warriors)
-and **ninjas**. In particular, guerreros will be heavy hitters with higher defense, at the cost of weighing more 
+This category of player can be separated will be separated into three classes, **paladins**, **warriors**(warriors)
+and **ninjas**. In particular, warriors will be heavy hitters with higher defense, at the cost of weighing more 
 than the rest, while ninjas will be lighter, but with less attack and defense. Paladins will be considered an
 option for an all round good character.
 
@@ -152,28 +152,32 @@ For spells, they can be divided into two categories, light and dark spells, wher
 black, respectively. For their implementation, both derive from the Spell interface that includes 3 main methods.
 
 First, we have inflict, that will serve as our way to use double dispatch to tell the user if a mage is using a light or
-dark spell.
+dark spell. In the case the mage cannot throw said spell, an exception is thrown.
 
-Secondly, we have friendlyFire, that will tell the user if the spell is being used correctly. In other words if
-the mage is trying to attack an ally or heal an enemy, this function will throw an exception.
+It is important to consider that from here on out, almost all methods (except some of the light spells), include a 
+parameter that is the magic weapon the mage is holding. This is done so later, when having to retrieve the magic points
+of the weapon for certain types of spell, there are no issues with the weapon being considered a non-magic weapon and 
+not having the getter for magic points(as they do not have that parameter)
 
-Finally, we have finalInflict, where this function does 3 main things. First, it makes sure the mage has enough mana to 
-cast said spell (if he does not, an exception is thrown). Then it casts said spell onto the entity, applying the damage,
-healing or effect(at the moment, the effects are not implemented, just the cost of mana). To end of, the mage is taken 
-the amount of mana that the spell costs.
+Later, to check if a spell is being used on the correct type of entity, double dispatch is used again, so damaging 
+spells are only used on enemies and healing spells only on allies.
+
+Having all of this completed, and enough mana to use the spell, a spell is finally cast and the damage/effects of the
+spell are finally inflicted
 
 ### V.I Dark Spells
 The dark spells are divided into 2, fire and thunder. These two differ in two things, firstly the amount of mana used,
 and secondly in possible effect it has on the enemy, either burning or paralyzing it.
 
-It is important to notice that for both spells, they are meant to be used on enemies, so the friendlyFire function is
-defined in the abstract class for dark spells, not in each of the spells.
+It is important to notice that for both spells, they are meant to be used on enemies, so when checking what type of 
+entity the spell is trying to be used on, if it is a character, an exception is thrown.
 
 ### V.II Light Spells
 The light spells are used contrary to dark spells, as they do not inflict damage directly. Two of the spells, poison and
 paralyze spells, are used to induce a status condition onto the enemy, with 100% accuracy. The other spell, healing, is
 used to heal an ally. The healing corresponds to a 30% of their max health, and if the mage wants to heal them more than
 what their max health is, the hp does not rise and further, and remains at that point.
+
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
