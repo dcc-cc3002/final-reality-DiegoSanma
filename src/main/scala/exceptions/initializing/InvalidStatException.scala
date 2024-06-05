@@ -1,4 +1,4 @@
-package exceptions
+package exceptions.initializing
 
 /**
  * Custom exception to signal an invalid game statistic encountered.
