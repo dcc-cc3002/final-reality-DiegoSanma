@@ -6,6 +6,10 @@ serve as an educational tool, teaching foundational programming concepts.
 This version of Final Reality, shall implement various aspects of Final Fantasy, but also add 
 different ways and methods to implement actions and situations
 
+## Flow Diagram
+
+![Flow Diagram](./docs/FlowDiagram.png)
+
 ## I. Entities
 An entity in Final Reality are whom will take part primarily in the game. This class will be used mainly to 
 group the two main counterparts of the game, playable characters and enemies. In this case, all entities are 
