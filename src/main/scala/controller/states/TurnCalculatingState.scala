@@ -12,7 +12,7 @@ class TurnCalculatingState extends AGameState {
 
   override def updateController(controller: GameController): Unit = {
     if(selected.isDefined){
-      controller.changeState(new AttackState)
+      controller.changeState(new AttackState(selected.get))
     }
   }
 }

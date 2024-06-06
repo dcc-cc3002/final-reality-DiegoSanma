@@ -40,4 +40,6 @@ trait Attributes extends AEntity{
 
   def changeWeapon(position:Int): Unit
 
+  def seeIfMage(): IMage
+
 }

@@ -68,5 +68,13 @@ abstract class Mage(name:String,hp:Int,defense: Int, weight: Int,
     }
   }
 
+  /**Method for checking if a character is a mage
+   * As now this entity is not just a character, but a mage, it does not throw an exception like before
+   *
+   * @return this
+   */
+  override def seeIfMage(): IMage = {
+    this
+  }
 
 }

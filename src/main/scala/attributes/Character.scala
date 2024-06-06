@@ -4,6 +4,7 @@ import enemy.{Enemy, EnemyAttributes}
 import entity.{AEntity, Entity}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
 import exceptions.damage.{FriendlyFireException, SameClassAttackException}
+import exceptions.mage.NotMageException
 import exceptions.partyexc.FullPartyException
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
@@ -207,4 +208,12 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
     throw new FriendlyFireException("Cant inflict a status condition on an ally!")
   }
 
+  /**Method for checking if a character is a mage
+   *
+   * @throws NotMageException as a character is not a mage still
+   */
+
+  override def seeIfMage(): IMage = {
+    throw new NotMageException("Cant cast spell if not a mage")
+  }
 }

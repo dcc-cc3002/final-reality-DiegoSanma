@@ -1,5 +1,7 @@
 package controller.states
 
-class EnemyAttackState {
+import enemy.EnemyAttributes
+
+class EnemyAttackState(selected:EnemyAttributes) extends AGameState {
 
 }
