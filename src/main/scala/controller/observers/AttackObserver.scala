@@ -8,7 +8,7 @@ import spells.ISpells
  *
  */
 
-class AttackObserver {
+class AttackObserver extends IObservers {
   /**Method for when our observer is notified that an entity wants to attack another
    *
    * @param attacker the entity attacking
