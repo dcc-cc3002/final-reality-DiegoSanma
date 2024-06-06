@@ -4,6 +4,7 @@ import attributes.Attributes
 import controller.observers.{AttackObserver, IObservers, StatusObserver}
 import controller.states.{IGameState, InitialState}
 import enemy.EnemyAttributes
+import gameStarter.GameStarter
 import turnscheduler.{ITurnScheduler, TurnScheduler}
 
 import scala.collection.mutable.ArrayBuffer
@@ -19,7 +20,9 @@ class GameController {
         observers+= new AttackObserver
         observers+= new StatusObserver
         state = new InitialState()
-        beginGame = new GameStarter(this)
+        val beginGame = new GameStarter(this,model)
+        beginGame.chooseCharacters(model)
+        beginGame.createEnemies(model)
     }
 
     def handleInput(): Unit ={
@@ -38,6 +41,10 @@ class GameController {
 
     def update(): Unit={
         state.updateController(this)
+    }
+
+    def notifyInvalidOption(choice:Int): Unit = {
+
     }
 
 }
