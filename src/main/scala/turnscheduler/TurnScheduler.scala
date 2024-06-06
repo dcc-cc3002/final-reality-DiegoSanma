@@ -49,7 +49,7 @@ class TurnScheduler(private val players: ArrayBuffer[Attributes],
    *
    * @throws AlreadyInSchedulerException if Character is already in the turn scheduler
    */
-  override def addCharacter(added: Attributes): Unit = {
+  override protected def addCharacter(added: Attributes): Unit = {
     if(players.contains(added)){
       throw new AlreadyInSchedulerException("Character")
     }
@@ -63,7 +63,7 @@ class TurnScheduler(private val players: ArrayBuffer[Attributes],
    * @throws AlreadyInSchedulerException if the enemy is already in the turns scheduler
    */
 
-  override def addEnemy(added: EnemyAttributes): Unit = {
+  override protected def addEnemy(added: EnemyAttributes): Unit = {
     if(enemies.contains(added)){
       throw new AlreadyInSchedulerException(("Enemy"))
     }
@@ -74,7 +74,7 @@ class TurnScheduler(private val players: ArrayBuffer[Attributes],
      * Calls function for entity, where it tells the turn scheduler what type of entity is being removed
      */
 
-    override def removeEntity(removed: Entity): Unit = {
+    protected override def removeEntity(removed: Entity): Unit = {
       removed.removeFromTurns(this)
     }
 
@@ -84,7 +84,7 @@ class TurnScheduler(private val players: ArrayBuffer[Attributes],
    *
    * @throws NotInSchedulerException if character is not currently in the turn scheduler
    */
-  override def removeCharacter(removed: Attributes): Unit = {
+  override protected def removeCharacter(removed: Attributes): Unit = {
     if(!(players.contains(removed))){
       throw new NotInSchedulerException("Character")
     }

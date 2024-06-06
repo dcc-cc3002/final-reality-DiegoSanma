@@ -44,7 +44,14 @@ class GameController {
     }
 
     def notifyInvalidOption(choice:Int): Unit = {
+    }
 
+    def changeState(state_ :IGameState): Unit = {
+        this.state = state_
+    }
+
+    def getModel(): ITurnScheduler={
+        this.model
     }
 
 }

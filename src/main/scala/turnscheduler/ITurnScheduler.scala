@@ -17,13 +17,13 @@ trait ITurnScheduler {
 
   def addTo(added:Entity): Unit
 
-  def addCharacter(added:Attributes): Unit
+  protected def addCharacter(added:Attributes): Unit
 
-  def addEnemy(added:EnemyAttributes): Unit
+  protected def addEnemy(added:EnemyAttributes): Unit
 
-  def removeEntity(removed:Entity): Unit
+  protected def removeEntity(removed:Entity): Unit
 
-  def removeCharacter(removed:Attributes)
+  protected def removeCharacter(removed:Attributes)
 
   def removeEnemy(removed:EnemyAttributes)
 
