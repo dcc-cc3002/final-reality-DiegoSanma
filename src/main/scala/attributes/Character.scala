@@ -3,7 +3,7 @@ package attributes
 import enemy.{Enemy, EnemyAttributes}
 import entity.{AEntity, Entity}
 import exceptions.weaponexceptions.{AlreadyOwnedException, FullInventoryException, NoWeaponException}
-import exceptions.damage.{FriendlyFireException, SameClassAttackException}
+import exceptions.damage.{FriendlyFireException, SameClassAttackException, UnaliveDamagedException}
 import exceptions.mage.NotMageException
 import exceptions.partyexc.FullPartyException
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
@@ -109,14 +109,20 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * Bare in mind that one can also attack their own friends, not just enemies
    *
    * @param victim the entity to whom damage will be dealt
+   *
+   * @throws NoWeaponException if the character is not holding an active weapon
+   * @throws UnaliveDamagedException if the entity being attacked has no hp
+   *
    */
   override def attack(victim: Entity): Unit = {
     if(getActiveWeapon().isEmpty){
       throw new NoWeaponException("You can´t attack, you have no weapon!")
     }
-    else{
-      victim.takedamagePlayer(this)
+    if(victim.isAlive()==0) {
+      throw new UnaliveDamagedException("Entity you are attacking is not alive")
     }
+    victim.takedamagePlayer(this)
+
   }
   /** Method for when an player is being attacked by another player
    *

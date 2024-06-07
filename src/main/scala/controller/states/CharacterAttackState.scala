@@ -13,7 +13,6 @@ class CharacterAttackState(selected:Attributes) extends AGameState {
     val choice: Int = controller.getNumericalInput()
     if(choice<1 || choice>enemies.length+1){
       controller.notifyInvalidOption(choice)
-      changedState = Some(this)
     }
     else{
       changedState = Some(new ReceivingDamageState(selected,enemies(choice-1)))
@@ -21,10 +20,8 @@ class CharacterAttackState(selected:Attributes) extends AGameState {
   }
 
   override def updateController(controller: GameController): Unit = {
-    if(selected.getActiveWeapon().isEmpty){
-      controller.notifyNoWeapon()
-      changedState = Some(new ChangeWeaponState(selected))
+    if(changedState.isDefined) {
+      controller.changeState(changedState.get)
     }
-    controller.changeState(changedState.get)
   }
 }
