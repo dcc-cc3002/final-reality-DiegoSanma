@@ -38,7 +38,7 @@ class GameStarter(controller:GameController,model:ITurnScheduler){
 
     def createEnemies(turnScheduler: ITurnScheduler): Unit = {
       for (i <-1 to 3){
-        turnScheduler.addTo(new Enemy("Bad",100,100,100,100))
+        turnScheduler.addTo(new Enemy("Bad",100,100,100,150))
       }
     }
 }

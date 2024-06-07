@@ -38,6 +38,10 @@ class GameController {
         beginGame.createEnemies(model)
     }
 
+    /**Method for when controller has to handle an input, delegates to state to tell what to do
+     *
+     */
+
     def handleInput(): Unit ={
         state.handleInput(this)
     }
@@ -70,6 +74,10 @@ class GameController {
         resp*/
     }
 
+    /**Method for telling the controller to update its status, delegates that to the state, where it checks if
+     * should pass to another state or not
+     */
+
     def update(): Unit={
         state.updateController(this)
     }
@@ -95,8 +103,16 @@ class GameController {
         this.model
     }
 
+    /**Method for getting a random enemies choice(for testing, left it at 1 to know what choice they will make)
+     *
+     * @param range the range in which the enemy can decide
+     *
+     * @return new Random().nextInt(range)
+     */
+
     def getEnemyChoice(range:Int): Int = {
-        new Random().nextInt(range)
+        0
+        /**new Random().nextInt(range)*/
     }
 
     def askUserForWeapon(selected:Attributes): Unit = {
