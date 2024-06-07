@@ -49,14 +49,14 @@ class GameController {
     /**Method for getting a numerical input from the user
      * (Now, as view is not implemented as of yet, it simply uses a specific array with numbers, to check)
      *
-     * @return Random().nextInt
+     * @return number
      */
 
     def getNumericalInput():Int = {
         if(this.next >5){
             this.next = 0
         }
-        val number: Int = numbers(next)
+        val number: Int = this.numbers(next)
         next +=1
         number
         /**val resp = StdIn.readLine()
