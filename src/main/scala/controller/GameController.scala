@@ -8,7 +8,7 @@ import controller.states.IGameState
 import controller.states.initial.InitialState
 import enemy.EnemyAttributes
 import entity.Entity
-import exceptions.weaponexceptions.{FullInventoryException, InvalidWeaponTypeException}
+import exceptions.weaponexceptions.{AlreadyNamedException, FullInventoryException, InvalidWeaponTypeException}
 import gameStarter.GameStarter
 import staff.Staff
 import sword.Sword
@@ -67,7 +67,7 @@ class GameController {
         new Random().nextInt(range)
     }
 
-    def askForUserWeapon(selected:Attributes): Unit = {
+    def askUserForWeapon(selected:Attributes): Unit = {
         try {
             val choice: Int = this.getNumericalInput()
             choice match {
@@ -85,6 +85,20 @@ class GameController {
         }
     }
 
+    def askForName(selected:Attributes): Unit = {
+        if(selected.getActiveWeapon().isEmpty){
+            this.notifyNoWeapon()
+        }
+        else{
+            val choice: String = this.getStringInput()
+            try{
+                selected.getActiveWeapon().get.rename(choice)
+            }
+            catch {
+                case e: AlreadyNamedException => this.notifyAlreadyNamed(selected.getActiveWeapon().get.getWeaponName())
+            }
+        }
+    }
     def notifyInvalidOption(choice:Int): Unit = {
     }
 
@@ -102,5 +116,7 @@ class GameController {
     def notifyWrongTarget(): Unit = {}
 
     def notifyCantAddWeapon(): Unit = {}
+
+    def notifyAlreadyNamed(str: String): Unit = {}
 
 }
