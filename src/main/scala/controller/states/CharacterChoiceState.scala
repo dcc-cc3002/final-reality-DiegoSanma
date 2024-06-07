@@ -3,6 +3,7 @@ package controller.states
 import attributes.{Attributes, IMage}
 import controller.GameController
 import exceptions.mage.NotMageException
+import exceptions.weaponexceptions.{NoWeaponException, NotMagicWeaponException}
 
 class CharacterChoiceState (selected:Attributes) extends AGameState {
   private var stateChoice: Option[IGameState] = None
@@ -25,7 +26,8 @@ class CharacterChoiceState (selected:Attributes) extends AGameState {
   private def checkIfMage(selected: Attributes,controller: GameController): Unit = {
     try{
       val mage: IMage = selected.seeIfMage()
-      stateChoice = Some(new MageSpellState(mage))
+      stateChoice = Some(new MageSpellState(mage,mageAsCharacter))
+
     }
     catch {
       case e: NotMageException => controller.notifyInvalidOption(3)
