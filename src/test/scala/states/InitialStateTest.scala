@@ -11,7 +11,7 @@ class InitialStateTest extends munit.FunSuite {
   }
 
     test("Correct update"){
-      controller.getState().updateController(controller)
+      controller.update()
       assert(controller.getState().isInstanceOf[TurnCalculatingState],"Update Controller should update state to next one")
     }
 

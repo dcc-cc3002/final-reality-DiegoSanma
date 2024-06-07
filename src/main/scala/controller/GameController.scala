@@ -25,6 +25,8 @@ class GameController {
     private val observers: ArrayBuffer[IObservers] = new ArrayBuffer[IObservers].empty
     private val model: ITurnScheduler = new TurnScheduler(new ArrayBuffer[Attributes].empty,new ArrayBuffer[EnemyAttributes].empty)
     private val weaponInGame: ArrayBuffer[TWeapons] = new ArrayBuffer[TWeapons].empty
+    private val numbers: ArrayBuffer[Int] = ArrayBuffer(9,1,3,5,2,4)
+    private var next: Int = 0
     init()
 
     private def init(): Unit = {
@@ -41,13 +43,18 @@ class GameController {
     }
 
     /**Method for getting a numerical input from the user
-     * (Now, as view is not implemented as of yet, it simply uses a random)
+     * (Now, as view is not implemented as of yet, it simply uses a specific array with numbers, to check)
      *
      * @return Random().nextInt
      */
 
     def getNumericalInput():Int = {
-        new Random().nextInt(9)
+        if(this.next >5){
+            this.next = 0
+        }
+        val number: Int = numbers(next)
+        next +=1
+        number
         /**val resp = StdIn.readLine()
         resp.toInt*/
     }
@@ -75,6 +82,10 @@ class GameController {
         this.state
     }
 
+    /**Method for changing the state in the game controller
+     *
+     * @param state_ the state to be changed as
+     */
     def changeState(state_ :IGameState): Unit = {
         this.state = state_
     }
