@@ -1,13 +1,19 @@
 package controller
 
 import attributes.Attributes
+import axe.Axe
+import bow.Bow
 import controller.observers.{AttackObserver, IObservers, StatusObserver}
 import controller.states.IGameState
 import controller.states.initial.InitialState
 import enemy.EnemyAttributes
 import entity.Entity
+import exceptions.weaponexceptions.{FullInventoryException, InvalidWeaponTypeException}
 import gameStarter.GameStarter
+import staff.Staff
+import sword.Sword
 import turnscheduler.{ITurnScheduler, TurnScheduler}
+import wand.Wand
 import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
@@ -61,6 +67,24 @@ class GameController {
         new Random().nextInt(range)
     }
 
+    def askForUserWeapon(selected:Attributes): Unit = {
+        try {
+            val choice: Int = this.getNumericalInput()
+            choice match {
+                case 1 => selected.receiveWeapon(new Sword("", 100, 100))
+                case 2 => selected.receiveWeapon(new Axe("", 80, 80))
+                case 3 => selected.receiveWeapon(new Bow("", 30, 50))
+                case 4 => selected.receiveWeapon(new Wand("", 25, 20, 50))
+                case 5 => selected.receiveWeapon(new Staff("", 50, 85, 70))
+                case _ => this.notifyInvalidOption(choice)
+            }
+        }
+        catch {
+            case e0: FullInventoryException => this.notifyCantAddWeapon()
+            case e: InvalidWeaponTypeException => this.notifyCantAddWeapon()
+        }
+    }
+
     def notifyInvalidOption(choice:Int): Unit = {
     }
 
@@ -76,5 +100,7 @@ class GameController {
     def notifyNotEnoughMana(mana:Int): Unit = {}
 
     def notifyWrongTarget(): Unit = {}
+
+    def notifyCantAddWeapon(): Unit = {}
 
 }

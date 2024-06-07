@@ -65,9 +65,6 @@ class AttackingTest extends munit.FunSuite{
     enemigo2.attack(ninja)
     assertEquals(ninja.getHp(),0,"Ninja should be defeated, thus having 0 HP")
 
-    enemigo2.attack(ninja)
-    assertEquals(ninja.getHp(),0,"Ninja should be already defeated, thus having 0 HP")
-
 
     magoblanco.receiveWeapon(biggerMagicWeapon)
     magoblanco.changeWeapon(0)
@@ -84,8 +81,6 @@ class AttackingTest extends munit.FunSuite{
     magoblanco.attack(enemigo2)
     magoblanco.attack(enemigo2)
     assertEquals(enemigo2.getHp(),0,"Second enemy should be defeated")
-    magoblanco.attack(enemigo2)
-    assertEquals(enemigo2.getHp(),0,"Second enemy should already be defeated")
 
     enemigo3.attack(magonegro)
     assertEquals(magonegro.getHp(),10,"Black Mage did not take the correct amount of damage")

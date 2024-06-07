@@ -10,9 +10,9 @@ class ChangeWeaponState(selected:Attributes) extends AGameState {
   override def handleInput(controller: GameController): Unit = {
     val choice: Int = controller.getNumericalInput()
     choice match{
-      case 1 =>
-      case 2 =>
-      case 3 =>
+      case 1 => controller.askUserForWeapon(selected)
+      case 2 => controller.userDropsWeapon(selected)
+      case 3 => controller.askForName(selected)
       case 4 => selected.changeWeapon(controller.getNumericalInput())
       case 5 => changedState = Some(new CharacterChoiceState(selected))
       case _ => controller.notifyInvalidOption(choice)
