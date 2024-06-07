@@ -1,5 +1,7 @@
 package exceptions
 
+import exceptions.initializing.{InvalidStatException, Require}
+
 class StatTest extends munit.FunSuite {
   private val statName = "testStat"
   private val testRange = 1 to 10
