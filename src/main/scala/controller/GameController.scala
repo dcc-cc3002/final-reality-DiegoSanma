@@ -34,30 +34,51 @@ class GameController {
         val beginGame = new GameStarter(this,model)
         beginGame.chooseCharacters(model)
         beginGame.createEnemies(model)
-        beginGame.createWeapons(this)
     }
 
     def handleInput(): Unit ={
         state.handleInput(this)
     }
 
+    /**Method for getting a numerical input from the user
+     * (Now, as view is not implemented as of yet, it simply uses a random)
+     *
+     * @return Random().nextInt
+     */
+
     def getNumericalInput():Int = {
-        val resp = StdIn.readLine()
-        resp.toInt
+        new Random().nextInt(9)
+        /**val resp = StdIn.readLine()
+        resp.toInt*/
     }
 
+    /**Method for asking for a name from the user
+     * (As view is not implemented as of yet, there is only a set string being returned
+     *
+     * @return
+     */
     def getStringInput(): String = {
-        val resp = StdIn.readLine()
-        resp
+        "Name"
+        /**val resp = StdIn.readLine()
+        resp*/
     }
 
     def update(): Unit={
         state.updateController(this)
     }
 
+    /**Getter for game´s current state
+     *
+     * @return this.state
+     */
+    def getState(): IGameState = {
+        this.state
+    }
+
     def changeState(state_ :IGameState): Unit = {
         this.state = state_
     }
+
 
     def getModel(): ITurnScheduler={
         this.model
