@@ -2,7 +2,7 @@ package enemy
 
 import attributes.{Attributes, IMage, Mage}
 import entity.{AEntity, Entity}
-import exceptions.damage.{FriendlyFireException, SameClassAttackException}
+import exceptions.damage.{FriendlyFireException, SameClassAttackException, UnaliveDamagedException}
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import turnscheduler.TurnScheduler
 import weapons.{AMagicWeapon, IMagicWeapon}
@@ -46,8 +46,13 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    * if the enemy is attacking a foe, and not an ally
    *
    * @param victim the entity being attacked by the enemy
+   *
+   * @throws UnaliveDamagedException if entity being attacked is dead
    */
   override def attack(victim: Entity): Unit = {
+    if(victim.isAlive()==0){
+      throw new UnaliveDamagedException("Enemy is attacking a dead entity!")
+    }
     victim.takedamageEnemy(this)
   }
 
