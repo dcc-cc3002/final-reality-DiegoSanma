@@ -101,7 +101,8 @@ class GameController {
     }
 
     def userDropsWeapon(selected:Attributes): Unit = {
-
+        val choice: Int = this.getNumericalInput()
+        selected.dropWeapon(choice)
     }
     def notifyInvalidOption(choice:Int): Unit = {
     }
