@@ -5,12 +5,12 @@ import controller.GameController
 import exceptions.mage.NotMageException
 
 class CharacterChoiceState (selected:Attributes) extends AGameState {
-  private val stateChoice: Option[IGameState] = None
+  private var stateChoice: Option[IGameState] = None
   override def handleInput(controller: GameController): Unit = {
     val choice: Int = controller.getNumericalInput()
     choice match {
-      case 1 => stateChoice = new Some(ChangeWeaponState(selected))
-      case 2 => stateChoice = new Some(CharacterAttackState(selected))
+      case 1 => stateChoice = Some(new ChangeWeaponState(selected))
+      case 2 => stateChoice = Some(new CharacterAttackState(selected))
       case 3 => this.checkIfMage(selected,controller)
       case _ => controller.notifyInvalidOption(choice)
     }
