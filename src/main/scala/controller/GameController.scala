@@ -5,6 +5,7 @@ import controller.observers.{AttackObserver, IObservers, StatusObserver}
 import controller.states.IGameState
 import controller.states.initial.InitialState
 import enemy.EnemyAttributes
+import entity.Entity
 import gameStarter.GameStarter
 import turnscheduler.{ITurnScheduler, TurnScheduler}
 import weapons.TWeapons
@@ -48,12 +49,6 @@ class GameController {
         state.updateController(this)
     }
 
-    def notifyInvalidOption(choice:Int): Unit = {
-    }
-
-    def notifyNoWeapon(): Unit = {
-    }
-
     def changeState(state_ :IGameState): Unit = {
         this.state = state_
     }
@@ -66,5 +61,20 @@ class GameController {
         new Random().nextInt(range)
     }
 
+    def notifyInvalidOption(choice:Int): Unit = {
+    }
+
+    def notifyNoWeapon(): Unit = {
+    }
+
+    def notifyNotMagicWeapon(): Unit = {}
+
+    def notifyNotAlive(victim:Entity):Unit = {}
+
+    def notifyNotRightMage():Unit = {}
+
+    def notifyNotEnoughMana(mana:Int): Unit = {}
+
+    def notifyWrongTarget(): Unit = {}
 
 }

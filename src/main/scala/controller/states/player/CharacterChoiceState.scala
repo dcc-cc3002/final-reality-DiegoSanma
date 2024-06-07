@@ -26,7 +26,7 @@ class CharacterChoiceState (selected:Attributes) extends AGameState {
   private def checkIfMage(selected: Attributes,controller: GameController): Unit = {
     try{
       val mage: IMage = selected.seeIfMage()
-      stateChoice = Some(new MageSpellState(mage,mageAsCharacter))
+      stateChoice = Some(new MageSpellState(mage,selected))
 
     }
     catch {
