@@ -99,6 +99,10 @@ class GameController {
             }
         }
     }
+
+    def userDropsWeapon(selected:Attributes): Unit = {
+
+    }
     def notifyInvalidOption(choice:Int): Unit = {
     }
 

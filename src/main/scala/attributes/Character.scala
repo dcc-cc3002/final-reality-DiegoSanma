@@ -90,17 +90,17 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * Also calls the weapon.leaveOwner, so that the weapon doe not keep the
    * character as the owner despite dropping said weapon
    */
-  override def dropWeapon(weapon:TWeapons): Unit = {
-    var position = this.inventory.indexOf(weapon)
-    if(position!= -1){
-       this.inventory.remove(position)
-       weapon.leaveOwner()
-       if(this.getActiveWeapon().isDefined) {
-         if (this.getActiveWeapon().get == weapon) {
-           this.activeWeapon = None
-           updateMaxActionBar()
-         }
-       }
+  override def dropWeapon(position:Int): Unit = {
+    if(position<this.inventory.length) {
+      var weapon: TWeapons = this.inventory(position)
+      if (this.getActiveWeapon().isDefined) {
+        if (this.getActiveWeapon().get == weapon) {
+          this.activeWeapon = None
+          updateMaxActionBar()
+        }
+      }
+      weapon.leaveOwner()
+      this.inventory.remove(position)
     }
   }
 

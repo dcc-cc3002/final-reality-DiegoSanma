@@ -65,7 +65,7 @@ class WeaponTest extends munit.FunSuite {
     assert(sword.getOwner().isDefined,"Sword should have an owner")
     assertEquals(sword.getOwner().get,ninja,"Sword does not have ninja as its owner")
 
-    ninja.dropWeapon(sword)
+    ninja.dropWeapon(0)
     assert(ninja.getActiveWeapon().isEmpty,"Ninja should not have a weapon")
     assert(sword.getOwner().isEmpty,"Sword should have no owner")
 
@@ -76,7 +76,7 @@ class WeaponTest extends munit.FunSuite {
     assertEquals(magonegro.getWeapons()(0),wood,"Black Mage not given wood as weapon")
     assert(wood.getOwner().isDefined,"Wood should have an owner")
     assertEquals(wood.getOwner().get,magonegro,"Wood does not have Black Mage as its owner")
-    magonegro.dropWeapon(wood)
+    magonegro.dropWeapon(0)
     assert(magonegro.getActiveWeapon().isEmpty,"Black Mage should not have a weapon")
     assert(wood.getOwner().isEmpty,"Wood should have no owner")
   }

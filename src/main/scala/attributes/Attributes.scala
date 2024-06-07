@@ -36,7 +36,7 @@ trait Attributes extends AEntity{
   def receiveWand(weapon:Wand): Unit
 
   def receiveStaff(weapon:Staff): Unit
-  def dropWeapon(weapon:TWeapons): Unit
+  def dropWeapon(position:Int): Unit
 
   def changeWeapon(position:Int): Unit
 

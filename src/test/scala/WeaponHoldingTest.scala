@@ -70,7 +70,7 @@ class WeaponHoldingTest extends munit.FunSuite {
     assertEquals(guerrero.getWeapons()(0), sword, "Sword not added to guerrero´s inventory")
     guerrero.receiveWeapon(axe)
     assertEquals(guerrero.getWeapons()(1), axe, "Axe not added to guerrero´s inventory")
-    guerrero.dropWeapon(axe)
+    guerrero.dropWeapon(1)
     guerrero.receiveWeapon(bow)
     assertEquals(guerrero.getWeapons()(1), bow, "Bow not added to guerrero´s inventory")
 
@@ -100,7 +100,7 @@ class WeaponHoldingTest extends munit.FunSuite {
     assertEquals(ninja.getWeapons()(0), sword, "Sword not added to ninja´s inventory")
     ninja.receiveWeapon(wand)
     assertEquals(ninja.getWeapons()(1), wand, "Wand not added to ninja´s inventory")
-    ninja.dropWeapon(wand)
+    ninja.dropWeapon(1)
     ninja.receiveWeapon(bow)
     assertEquals(ninja.getWeapons()(1), bow, "Bow not added to ninja´s inventory")
 
@@ -130,7 +130,7 @@ class WeaponHoldingTest extends munit.FunSuite {
     assertEquals(magoblanco.getWeapons()(0), staff, "Staff not added to magoblanco´s inventory")
     magoblanco.receiveWeapon(wand)
     assertEquals(magoblanco.getWeapons()(1), wand, "Wand not added to magoblanco´s inventory")
-    magoblanco.dropWeapon(wand)
+    magoblanco.dropWeapon(1)
     magoblanco.receiveWeapon(bow)
     assertEquals(magoblanco.getWeapons()(1), bow, "Bow not added to magoblanco´s inventory")
 
@@ -160,7 +160,7 @@ class WeaponHoldingTest extends munit.FunSuite {
     assertEquals(magonegro.getWeapons()(0), staff, "Staff not added to magonegro´s inventory")
     magonegro.receiveWeapon(wand)
     assertEquals(magonegro.getWeapons()(1), wand, "Wand not added to magonegro´s inventory")
-    magonegro.dropWeapon(wand)
+    magonegro.dropWeapon(1)
     magonegro.receiveWeapon(sword)
     assertEquals(magonegro.getWeapons()(1), sword, "Sword not added to magonegro´s inventory")
 

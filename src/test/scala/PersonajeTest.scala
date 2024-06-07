@@ -118,10 +118,10 @@ class PersonajeTest extends munit.FunSuite {
         ninja.receiveWeapon(wand)
         assertEquals(ninja.getWeapons()(2),wand,"Wand not added to inventory")
 
-        ninja.dropWeapon(wand2)
+        ninja.dropWeapon(3)
         assertEquals(ninja.getWeapons().length,3,"No weapon should be removed to the inventory")
 
-        ninja.dropWeapon(knife)
+        ninja.dropWeapon(1)
         assertEquals(ninja.getWeapons().length,2,"A weapon should´ve be removed to the inventory")
         assert(ninja.getActiveWeapon().isEmpty,"There should be no active weapon held")
         assert(!(ninja.getWeapons().contains(knife)),"Knife should no longer be in the inventory")
@@ -147,10 +147,10 @@ class PersonajeTest extends munit.FunSuite {
         magoblanco.receiveWeapon(wand)
         assertEquals(magoblanco.getWeapons()(2),wand,"Wand not added to inventory")
 
-        magoblanco.dropWeapon(staff)
+        magoblanco.dropWeapon(3)
         assertEquals(magoblanco.getWeapons().length,3,"No weapon should be removed to the inventory")
 
-        magoblanco.dropWeapon(slingshot)
+        magoblanco.dropWeapon(1)
         assertEquals(magoblanco.getWeapons().length,2,"A weapon should´ve be removed to the inventory")
         assert(magoblanco.getActiveWeapon().isEmpty,"There should be no active weapon held")
         assert(!(magoblanco.getWeapons().contains(slingshot)),"Knife should no longer be in the inventory")

@@ -120,7 +120,7 @@ class SpellExpectionTests extends munit.FunSuite {
   }
 
   test("Not enough mana"){
-    magonegro.dropWeapon(staff)
+    magonegro.dropWeapon(0)
     mago1.receiveWeapon(staff)
     mago1.changeWeapon(0)
     var found: Int = 0
