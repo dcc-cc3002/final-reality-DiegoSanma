@@ -6,6 +6,7 @@ import controller.states.{IGameState, InitialState}
 import enemy.EnemyAttributes
 import gameStarter.GameStarter
 import turnscheduler.{ITurnScheduler, TurnScheduler}
+import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
@@ -14,6 +15,7 @@ class GameController {
     private var state: IGameState = null
     private val observers: ArrayBuffer[IObservers] = new ArrayBuffer[IObservers].empty
     private val model: ITurnScheduler = new TurnScheduler(new ArrayBuffer[Attributes].empty,new ArrayBuffer[EnemyAttributes].empty)
+    private val weaponInGame: ArrayBuffer[TWeapons] = new ArrayBuffer[TWeapons].empty
     init()
 
     private def init(): Unit = {
@@ -23,6 +25,7 @@ class GameController {
         val beginGame = new GameStarter(this,model)
         beginGame.chooseCharacters(model)
         beginGame.createEnemies(model)
+        beginGame.createWeapons(this)
     }
 
     def handleInput(): Unit ={
@@ -46,6 +49,9 @@ class GameController {
     def notifyInvalidOption(choice:Int): Unit = {
     }
 
+    def notifyNoWeapon(): Unit = {
+    }
+
     def changeState(state_ :IGameState): Unit = {
         this.state = state_
     }
@@ -53,5 +59,6 @@ class GameController {
     def getModel(): ITurnScheduler={
         this.model
     }
+
 
 }

@@ -9,8 +9,8 @@ class CharacterChoiceState (selected:Attributes) extends AGameState {
   override def handleInput(controller: GameController): Unit = {
     val choice: Int = controller.getNumericalInput()
     choice match {
-      case 1 => stateChoice = new ChangeWeaponState(selected)
-      case 2 => stateChoice = new CharacterAttackState(selected)
+      case 1 => stateChoice = new Some(ChangeWeaponState(selected))
+      case 2 => stateChoice = new Some(CharacterAttackState(selected))
       case 3 => this.checkIfMage(selected,controller)
       case _ => controller.notifyInvalidOption(choice)
     }
@@ -22,14 +22,14 @@ class CharacterChoiceState (selected:Attributes) extends AGameState {
     }
   }
 
-  private def checkIfMage(selected: Attributes,controller: GameController): IMage = {
+  private def checkIfMage(selected: Attributes,controller: GameController): Unit = {
     try{
       val mage: IMage = selected.seeIfMage()
+      stateChoice = Some(new MageSpellState(mage))
     }
     catch {
       case e: NotMageException => controller.notifyInvalidOption(3)
     }
-    stateChoice = MageSpellState(mage)
   }
 
 }

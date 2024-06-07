@@ -4,7 +4,7 @@ import entity.Entity
 
 class AttackState(private var selected:Entity) extends AGameState {
 
-  override def update(controller: GameController): Unit = {
+  override def updateController(controller: GameController): Unit = {
     val players = controller.getModel().getPlayers()
     if(players.contains(selected)){
       var index:Int = players.indexOf(selected)

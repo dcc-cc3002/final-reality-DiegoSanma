@@ -33,4 +33,8 @@ class GameStarter(controller:GameController,model:ITurnScheduler){
         turnScheduler.addTo(new Enemy("Bad",100,100,100,100))
       }
     }
+
+    def createWeapons(controller:GameController): Unit = {
+
+    }
 }
