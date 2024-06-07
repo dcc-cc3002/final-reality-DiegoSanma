@@ -2,7 +2,8 @@ package controller
 
 import attributes.Attributes
 import controller.observers.{AttackObserver, IObservers, StatusObserver}
-import controller.states.{IGameState, InitialState}
+import controller.states.IGameState
+import controller.states.initial.InitialState
 import enemy.EnemyAttributes
 import gameStarter.GameStarter
 import turnscheduler.{ITurnScheduler, TurnScheduler}
@@ -10,6 +11,7 @@ import weapons.TWeapons
 
 import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
+import scala.util.Random
 
 class GameController {
     private var state: IGameState = null
@@ -58,6 +60,10 @@ class GameController {
 
     def getModel(): ITurnScheduler={
         this.model
+    }
+
+    def getEnemyChoice(range:Int): Int = {
+        new Random().nextInt(range)
     }
 
 

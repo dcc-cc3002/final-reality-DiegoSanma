@@ -1,5 +1,7 @@
-package controller.states
+package controller.states.initial
+
 import controller.GameController
+import controller.states.AGameState
 
 class InitialState extends AGameState {
 

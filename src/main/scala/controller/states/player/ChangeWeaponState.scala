@@ -1,6 +1,8 @@
-package controller.states
+package controller.states.player
+
 import attributes.Attributes
 import controller.GameController
+import controller.states.{AGameState, IGameState}
 
 class ChangeWeaponState(selected:Attributes) extends AGameState {
   private var changedState: Option[IGameState] = None

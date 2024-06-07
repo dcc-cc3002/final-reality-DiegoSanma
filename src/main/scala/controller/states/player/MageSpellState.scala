@@ -1,8 +1,9 @@
-package controller.states
+package controller.states.player
 
 import attributes.{Attributes, IMage}
 import controller.GameController
-import spells.{FireSpell, HealingSpell, ParalisisSpell, PoisonSpell, ThunderSpell}
+import controller.states.{AGameState, IGameState}
+import spells._
 
 class MageSpellState(mage:IMage,mageAsCharacter:Attributes) extends AGameState {
   private var changedState: Option[IGameState] = None

@@ -1,5 +1,7 @@
-package controller.states
+package controller.states.initial
+
 import controller.GameController
+import controller.states.AGameState
 import entity.Entity
 
 class TurnCalculatingState extends AGameState {

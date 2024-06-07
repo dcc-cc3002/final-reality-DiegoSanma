@@ -1,9 +1,9 @@
-package controller.states
+package controller.states.player
 
 import attributes.{Attributes, IMage}
 import controller.GameController
+import controller.states.{AGameState, IGameState}
 import exceptions.mage.NotMageException
-import exceptions.weaponexceptions.{NoWeaponException, NotMagicWeaponException}
 
 class CharacterChoiceState (selected:Attributes) extends AGameState {
   private var stateChoice: Option[IGameState] = None

@@ -1,6 +1,9 @@
-package controller.states
+package controller.states.player
+
 import attributes.Attributes
 import controller.GameController
+import controller.states.initial.TurnCalculatingState
+import controller.states.{AGameState, IGameState}
 import enemy.EnemyAttributes
 import exceptions.damage.UnaliveDamagedException
 import exceptions.weaponexceptions.NoWeaponException

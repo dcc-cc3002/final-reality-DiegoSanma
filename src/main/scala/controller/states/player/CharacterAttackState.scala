@@ -1,6 +1,8 @@
-package controller.states
+package controller.states.player
+
 import attributes.Attributes
 import controller.GameController
+import controller.states.{AGameState, IGameState}
 import enemy.EnemyAttributes
 
 import scala.collection.mutable.ArrayBuffer

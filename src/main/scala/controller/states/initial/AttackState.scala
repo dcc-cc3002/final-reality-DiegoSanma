@@ -1,5 +1,9 @@
-package controller.states
+package controller.states.initial
+
 import controller.GameController
+import controller.states.player.CharacterChoiceState
+import controller.states.AGameState
+import controller.states.enemies.EnemyAttackState
 import entity.Entity
 
 class AttackState(private var selected:Entity) extends AGameState {

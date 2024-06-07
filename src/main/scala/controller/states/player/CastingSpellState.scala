@@ -1,8 +1,8 @@
-package controller.states
+package controller.states.player
 
 import attributes.{Attributes, IMage}
 import controller.GameController
-import enemy.EnemyAttributes
+import controller.states.{AGameState, IGameState}
 import entity.Entity
 import spells.ISpells
 

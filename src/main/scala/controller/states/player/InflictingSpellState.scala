@@ -1,7 +1,9 @@
-package controller.states
+package controller.states.player
 
 import attributes.{Attributes, IMage}
 import controller.GameController
+import controller.states.initial.TurnCalculatingState
+import controller.states.{AGameState, IGameState}
 import entity.Entity
 import exceptions.damage.{FriendlyFireException, NotEnoughManaException, UnaliveDamagedException}
 import exceptions.mage.WrongMageException
