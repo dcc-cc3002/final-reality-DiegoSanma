@@ -2,7 +2,7 @@ package enemy
 
 import attributes.{Attributes, IMage, Mage}
 import entity.{AEntity, Entity}
-import exceptions.damage.{FriendlyFireException, SameClassAttackException, UnaliveDamagedException}
+import exceptions.damage.{AlreadyHasStatusException, FriendlyFireException, SameClassAttackException, UnaliveDamagedException}
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
 import status.IStatusEffect
 import turnscheduler.TurnScheduler
@@ -31,8 +31,13 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
   /**Setter/updater of enemy´s status condition
    *
    * @param status the new status condition for the enemy
+   *
+   * @throws AlreadyHasStatusException if s status condition is trying to be changed to another one
    */
   override def setStatus(status: Option[IStatusEffect]): Unit = {
+    if(status.isDefined && statusCondition.isDefined){
+      throw new AlreadyHasStatusException("Can´t apply status effect on enemy, as he already has one")
+    }
     statusCondition = status
   }
 

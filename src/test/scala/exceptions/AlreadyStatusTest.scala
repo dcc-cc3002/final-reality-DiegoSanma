@@ -2,6 +2,7 @@ package exceptions
 
 import characters.Paladin
 import enemy.Enemy
+import exceptions.damage.AlreadyHasStatusException
 import status.{Burnt, Poisoned}
 import wand.Wand
 
