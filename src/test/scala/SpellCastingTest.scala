@@ -1,7 +1,8 @@
-import characters.{WhiteMage, BlackMage}
+import characters.{BlackMage, WhiteMage}
 import enemy.Enemy
-import spells.{HealingSpell, FireSpell, ParalisisSpell, ThunderSpell, PoisonSpell}
+import spells.{FireSpell, HealingSpell, ParalisisSpell, PoisonSpell, ThunderSpell}
 import staff.Staff
+import status.{Paralyzed, Poisoned}
 import wand.Wand
 
 /** Testing for casting spells */
@@ -29,10 +30,14 @@ class SpellCastingTest extends munit.FunSuite {
     val veneno: PoisonSpell = new PoisonSpell()
     magoblanco.throwSpell(veneno,enemy)
     assertEquals(magoblanco.getMana(),70,"Not corrent amount of mana used")
+    assert(enemy.getStatus().get.isInstanceOf[Poisoned],"Enemy was not poisoned")
+
+    enemy.setStatus(None)
 
     val paralisis: ParalisisSpell = new ParalisisSpell()
     magoblanco.throwSpell(paralisis,enemy)
     assertEquals(magoblanco.getMana(),45,"Not correct amount of mana used")
+    assert(enemy.getStatus().get.isInstanceOf[Paralyzed],"Enemy was not paralyzed")
 
     enemy.attack(magonegro)
     assertEquals(magonegro.getHp(),60,"Magonegro should take 40 damage")
@@ -50,6 +55,8 @@ class SpellCastingTest extends munit.FunSuite {
     magonegro.throwSpell(trueno,enemy)
     assertEquals(magonegro.getMana(),80,"Magonegro should use 20 mana")
     assertEquals(enemy.getHp(),220,"Enemy should take 80 damage")
+
+    enemy.setStatus(None)
 
     val fuego: FireSpell = new FireSpell()
     magonegro.throwSpell(fuego,enemy)
