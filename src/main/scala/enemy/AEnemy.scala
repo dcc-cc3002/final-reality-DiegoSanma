@@ -4,6 +4,7 @@ import attributes.{Attributes, IMage, Mage}
 import entity.{AEntity, Entity}
 import exceptions.damage.{FriendlyFireException, SameClassAttackException, UnaliveDamagedException}
 import spells.{HealingLightSpells, IDarkSpells, ISpells, StatusLightSpells}
+import status.IStatusEffect
 import turnscheduler.TurnScheduler
 import weapons.{AMagicWeapon, IMagicWeapon}
 
@@ -15,6 +16,25 @@ import weapons.{AMagicWeapon, IMagicWeapon}
 
 abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var attack:Int)
   extends AEntity(name,hp,defense,weight) with EnemyAttributes {
+
+  /** Parameter for their current status condition */
+  private var statusCondition: Option[IStatusEffect] = None
+
+  /**Getter for enemy´s status condition
+   *
+   * @return this.statusCondition
+   */
+  override def getStatus(): Option[IStatusEffect] = {
+    this.statusCondition
+  }
+
+  /**Setter/updater of enemy´s status condition
+   *
+   * @param status the new status condition for the enemy
+   */
+  override def setStatus(status: Option[IStatusEffect]): Unit = {
+    statusCondition = status
+  }
 
 
   /**Getter for attack parameter of an enemy
