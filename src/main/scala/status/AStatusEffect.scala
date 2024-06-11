@@ -57,7 +57,7 @@ abstract class AStatusEffect extends IStatusEffect {
   override protected def turnPassed(): Unit = {
     this.turnsLeft -= 1
     if(turnsLeft == 0){
-      this.enemy.get.setStatus(None)
+      this.enemy.get.removeStatus()
       this.enemy = None
     }
   }

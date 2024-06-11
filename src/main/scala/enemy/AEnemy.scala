@@ -35,12 +35,18 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    *
    * @throws AlreadyHasStatusException if s status condition is trying to be changed to another one
    */
-  override def setStatus(status: Option[IStatusEffect]): Unit = {
-    if(status.isDefined && statusCondition.isDefined){
+  override def setStatus(status: IStatusEffect): Unit = {
+    if(statusCondition.isDefined){
       throw new AlreadyHasStatusException("Can´t apply status effect on enemy, as he already has one")
     }
-    statusCondition = status
-    status.get.setEnemy(this)
+    statusCondition = Some(status)
+  }
+
+  /**Method for removing a status condition
+   * Only called by status class
+   */
+  override def removeStatus(): Unit = {
+    this.statusCondition = None
   }
 
 

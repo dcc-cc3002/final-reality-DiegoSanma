@@ -29,6 +29,8 @@ class AlreadyStatusTest extends munit.FunSuite {
       case e: AlreadyHasStatusException => found += 1
     }
     assertEquals(found,1,"Exception not thrown")
-    assert(enemy.getStatus().get.isInstanceOf[Burnt],"Statsu condition should still be burnt")
+    assert(enemy.getStatus().get.isInstanceOf[Burnt],"Status condition should still be burnt")
+    assertEquals(burnt.getEnemy().get.asInstanceOf[Enemy],enemy,"Burnt enemy should still be enemy")
+    assert(poisoned.getEnemy().isEmpty,"Poisoned should not have enemy as poisoned")
   }
 }

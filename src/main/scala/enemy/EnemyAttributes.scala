@@ -20,7 +20,9 @@ trait EnemyAttributes extends AEntity{
 
     def getStatus(): Option[IStatusEffect]
 
-    def setStatus(status:Option[IStatusEffect]): Unit
+    def setStatus(status:IStatusEffect): Unit
+
+    def removeStatus(): Unit
 
     def takeSpellDamage(mage:IMage,magicWeapon: IMagicWeapon)
 
