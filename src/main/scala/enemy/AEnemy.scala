@@ -29,6 +29,7 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
   }
 
   /**Setter/updater of enemy´s status condition
+   * Also sets the enemy for the status condition
    *
    * @param status the new status condition for the enemy
    *
@@ -39,6 +40,7 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
       throw new AlreadyHasStatusException("Can´t apply status effect on enemy, as he already has one")
     }
     statusCondition = status
+    status.get.setEnemy(this)
   }
 
 

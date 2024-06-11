@@ -8,8 +8,11 @@ import weapons.IMagicWeapon
  */
 trait IStatusEffect {
 
-  def doEffect(enemy:EnemyAttributes): Unit
+  def doEffect(): Unit
 
+  def getEnemy(): Option[EnemyAttributes]
+
+  def setEnemy(enemy:EnemyAttributes): Unit
   def getTurnsLeft(): Int
 
   protected def setTurnsLeft(turns:Int): Unit

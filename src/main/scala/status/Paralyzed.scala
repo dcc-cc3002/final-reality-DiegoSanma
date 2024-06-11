@@ -13,10 +13,8 @@ class Paralyzed extends AStatusEffect {
   /**Method for applying effect to enemy
    * In this case, since the effect is skipping a turn, to do said effect, that must be taken care of in the
    * StatusState by the controller
-   *
-   * @param enemy the paralyzed enemy
    */
-  override def doEffect(enemy: EnemyAttributes): Unit ={
+  override def doEffect(): Unit ={
     turnPassed()
   }
 }
