@@ -210,7 +210,7 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * @throws FriendlyFireException as a status condition cannot be inflicted on a character
    */
 
-  override def checkLightStatusSpell(user: IMage, spell: StatusLightSpells): Unit = {
+  override def checkLightStatusSpell(user: IMage, spell: StatusLightSpells,magicWeapon: IMagicWeapon): Unit = {
     throw new FriendlyFireException("Cant inflict a status condition on an ally!")
   }
 

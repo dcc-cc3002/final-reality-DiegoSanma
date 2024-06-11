@@ -2,7 +2,10 @@ package spells
 import attributes.{Attributes, IMage, Mage}
 import enemy.EnemyAttributes
 import entity.Entity
+import status.Paralyzed
 import weapons.IMagicWeapon
+
+import scala.util.Random
 
 /**Class for a thunder spell
  *
@@ -25,6 +28,7 @@ class ThunderSpell extends DarkSpells {
   }
 
   /**Method for finally inflicting thunder on an enemy
+   * Has a 30% chance of paralyzing the enemy
    *
    * @param user the mage using the spell
    * @param victim the enemy being thundered
@@ -34,6 +38,10 @@ class ThunderSpell extends DarkSpells {
 
   override def throwFinalDarkAttack(user: IMage, victim: EnemyAttributes,magicWeapon:IMagicWeapon): Unit = {
     victim.takeSpellDamage(user,magicWeapon)
+    val random: Int =new Random().nextInt(9)
+    if(random<3){
+      victim.setStatus(Some(new Paralyzed))
+    }
     user.useMana(20)
   }
 }

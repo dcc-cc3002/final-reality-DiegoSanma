@@ -42,5 +42,5 @@ trait Entity{
 
   def checkLightHealSpell(user:IMage,spell:HealingLightSpells)
 
-  def checkLightStatusSpell(user:IMage,spell:StatusLightSpells)
+  def checkLightStatusSpell(user:IMage,spell:StatusLightSpells,magicWeapon: IMagicWeapon)
 }

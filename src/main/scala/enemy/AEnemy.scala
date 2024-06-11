@@ -139,8 +139,8 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
    * @param spell the healing spell being used
    *
    */
-  override def checkLightStatusSpell(user: IMage, spell: StatusLightSpells): Unit = {
-    spell.finalStatusSpell(user,this)
+  override def checkLightStatusSpell(user: IMage, spell: StatusLightSpells,magicWeapon: IMagicWeapon): Unit = {
+    spell.finalStatusSpell(user,this,magicWeapon)
   }
 
   /**Adds the enemy to the turn scheduler

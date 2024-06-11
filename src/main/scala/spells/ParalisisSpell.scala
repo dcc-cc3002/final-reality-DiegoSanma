@@ -4,6 +4,7 @@ import characters.WhiteMage
 import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.damage.FriendlyFireException
+import status.Paralyzed
 import weapons.IMagicWeapon
 
 /**Class for paralyzing spell
@@ -22,15 +23,17 @@ class ParalisisSpell extends LightSpells with StatusLightSpells {
    */
   override def finalCheck(user: IMage, victim: Entity,magicWeapon:IMagicWeapon): Unit = {
     user.checkMana(25)
-    victim.checkLightStatusSpell(user,this)
+    victim.checkLightStatusSpell(user,this,magicWeapon)
   }
 
-  /**Method for finally inflicting the paralisis spell on an enemy (currently, nothing is done to the enemy)
+  /**Method for finally inflicting the paralisis spell on an enemy
+   * Sets enemy´s status condition to paralyzed
    *
    * @param user the WhiteMage using the spell
    * @param victim the enemy the paralisis ingoing to be inflicted on
    */
-  override def finalStatusSpell(user: IMage, victim: EnemyAttributes): Unit = {
+  override def finalStatusSpell(user: IMage, victim: EnemyAttributes,magicWeapon: IMagicWeapon): Unit = {
+    victim.setStatus(Some(new Paralyzed))
     user.useMana(25)
   }
 }

@@ -2,7 +2,10 @@ package spells
 import attributes.{IMage, Mage}
 import enemy.EnemyAttributes
 import entity.Entity
+import status.Burnt
 import weapons.IMagicWeapon
+
+import scala.util.Random
 
 /**Class for a fire spell
  *
@@ -24,6 +27,7 @@ class FireSpell extends DarkSpells {
   }
 
   /**Method for finally attacking an enemy with fire
+   * Has a 20% chance of burning the enemy
    *
    * @param user the mage using the spell
    * @param victim the enemy being attacked
@@ -31,6 +35,10 @@ class FireSpell extends DarkSpells {
    */
   override def throwFinalDarkAttack(user:IMage,victim:EnemyAttributes,magicWeapon:IMagicWeapon): Unit = {
     victim.takeSpellDamage(user,magicWeapon)
+    val random = new Random().nextInt(9)
+    if(random<2){
+      victim.setStatus(Some(new Burnt(magicWeapon)))
+    }
     user.useMana(15)
   }
 }

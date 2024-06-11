@@ -4,6 +4,7 @@ import characters.WhiteMage
 import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.damage.FriendlyFireException
+import status.Poisoned
 import weapons.IMagicWeapon
 
 /**Class for a poison spell
@@ -22,15 +23,17 @@ class PoisonSpell extends LightSpells with StatusLightSpells {
    */
   override def finalCheck(user: IMage, victim: Entity,magicWeapon:IMagicWeapon): Unit = {
     user.checkMana(30)
-    victim.checkLightStatusSpell(user,this)
+    victim.checkLightStatusSpell(user,this,magicWeapon)
   }
 
-  /**Method for finally inflicting the poison spell on an enemy (currently, nothing is done to the enemy)
+  /**Method for finally inflicting the poison spell on an enemy
+   * Sets enemy´s current status condition to poisoned
    *
    * @param user the WhiteMage using the spell
    * @param victim the enemy the poison ingoing to be inflicted on
    */
-  override def finalStatusSpell(user: IMage, victim: EnemyAttributes): Unit = {
+  override def finalStatusSpell(user: IMage, victim: EnemyAttributes,magicWeapon: IMagicWeapon): Unit = {
+    victim.setStatus(Some(new Poisoned(magicWeapon)))
     user.useMana(30)
   }
 }
