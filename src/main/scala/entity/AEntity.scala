@@ -83,7 +83,7 @@ abstract class AEntity(private var name:String, private var hp:Int, private var 
    * @param damage the amount of damage being done
    */
 
-  override protected def checkHealth(damage:Int): Unit = {
+  override def checkHealth(damage:Int): Unit = {
     this.hp -= damage
     if(this.hp<0){
       this.hp = 0
