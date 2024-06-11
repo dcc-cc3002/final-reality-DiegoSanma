@@ -15,8 +15,8 @@ class Paralyzed extends AStatusEffect {
    * StatusState by the controller
    *
    * @param enemy the paralyzed enemy
-   * @param magicWeapon the magic weapon used to cast the paralyzing spell
    */
-  override def doEffect(enemy: EnemyAttributes, magicWeapon: IMagicWeapon): Unit = {}
-
+  override def doEffect(enemy: EnemyAttributes): Unit ={
+    turnPassed()
+  }
 }

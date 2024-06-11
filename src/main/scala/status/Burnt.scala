@@ -16,11 +16,11 @@ class Burnt(private val magicWeapon: IMagicWeapon) extends AStatusEffect {
    * The amount of damage is equivalent to magicpts/2
    *
    * @param enemy the burnt enemy
-   * @param magicWeapon the magic weapon used to cast the burnt spell
    */
 
-  override def doEffect(enemy:EnemyAttributes,magicWeapon:IMagicWeapon): Unit = {
+  override def doEffect(enemy:EnemyAttributes): Unit = {
     var damage: Int = (magicWeapon.getMagicpts()/2).toInt
     enemy.checkHealth(damage)
+    turnPassed()
   }
 }

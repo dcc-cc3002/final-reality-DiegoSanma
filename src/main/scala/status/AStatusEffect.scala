@@ -27,7 +27,7 @@ abstract class AStatusEffect extends IStatusEffect {
 
   /** Method for counting that one turn has passed
    */
-  override def turnPassed(): Unit = {
+  override protected def turnPassed(): Unit = {
     this.turnsLeft -= 1
   }
 

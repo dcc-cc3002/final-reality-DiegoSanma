@@ -15,12 +15,12 @@ class Poisoned(private val magicWeapon: IMagicWeapon) extends AStatusEffect {
    * The damage done is equivalent to magicpts/3
    *
    * @param enemy the poisoned enemy
-   * @param magicWeapon the magicWeapon used to cast the poison spell
    */
 
-  override def doEffect(enemy: EnemyAttributes, magicWeapon: IMagicWeapon): Unit = {
+  override def doEffect(enemy: EnemyAttributes): Unit = {
     var damage:Int = (magicWeapon.getMagicpts()/3).toInt
     enemy.checkHealth(damage)
+    turnPassed()
   }
 
 }
