@@ -221,4 +221,8 @@ class GameController {
 
     def notifyAlreadyNamed(str: String): Unit = {}
 
+    def notifyEndGame(): Unit = {
+        println(s"The game has ended!")
+    }
+
 }
