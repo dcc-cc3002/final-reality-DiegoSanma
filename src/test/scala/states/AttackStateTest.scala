@@ -2,7 +2,7 @@ package states
 
 import characters.Paladin
 import controller.GameController
-import controller.states.enemies.EnemyAttackState
+import controller.states.enemies.{EnemyAttackState, EnemyStatusState}
 import controller.states.initial.AttackState
 import controller.states.player.CharacterChoiceState
 
@@ -29,7 +29,7 @@ class AttackStateTest extends munit.FunSuite {
     assertEquals(attack,controller.getState().asInstanceOf[AttackState],"State should be attack state just defined")
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[EnemyAttackState],"Should´ve passed to EnemyAttackState")
+    assert(controller.getState().isInstanceOf[EnemyStatusState],"Should´ve passed to EnemyStatusState")
   }
 
 }

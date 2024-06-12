@@ -3,7 +3,7 @@ package controller.states.initial
 import controller.GameController
 import controller.states.player.CharacterChoiceState
 import controller.states.AGameState
-import controller.states.enemies.EnemyAttackState
+import controller.states.enemies.{EnemyAttackState, EnemyStatusState}
 import entity.Entity
 
 class AttackState(private var selected:Entity) extends AGameState {
@@ -17,7 +17,7 @@ class AttackState(private var selected:Entity) extends AGameState {
     else{
       val enemies= controller.getModel().getEnemies()
       val index: Int = enemies.indexOf(selected)
-      controller.changeState(new EnemyAttackState(enemies(index)))
+      controller.changeState(new EnemyStatusState(enemies(index)))
     }
   }
 
