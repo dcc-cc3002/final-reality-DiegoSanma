@@ -10,6 +10,7 @@ import enemy.EnemyAttributes
 import entity.Entity
 import exceptions.weaponexceptions.{AlreadyNamedException, FullInventoryException, InvalidWeaponTypeException}
 import gameStarter.GameStarter
+import party.Party
 import staff.Staff
 import sword.Sword
 import turnscheduler.{ITurnScheduler, TurnScheduler}
@@ -21,10 +22,13 @@ import scala.io.StdIn
 import scala.util.Random
 
 class GameController {
+    /** All parameters necessary for the game controller to work */
     private var state: IGameState = null
     private val observers: ArrayBuffer[IObservers] = new ArrayBuffer[IObservers].empty
     private val model: ITurnScheduler = new TurnScheduler(new ArrayBuffer[Attributes].empty,new ArrayBuffer[EnemyAttributes].empty)
-    private val weaponInGame: ArrayBuffer[TWeapons] = new ArrayBuffer[TWeapons].empty
+    private val allPlayers: Party = new Party(new ArrayBuffer[Option[Attributes]].empty)
+    private val allEnemies: ArrayBuffer[EnemyAttributes] = new ArrayBuffer[EnemyAttributes].empty
+    /** Parameters necessary for testing when player input is required(Changing State) */
     private val numbers: ArrayBuffer[Int] = ArrayBuffer(9,1,3,5,2,4)
     private var next: Int = 0
     init()
@@ -35,7 +39,13 @@ class GameController {
         state = new InitialState()
         val beginGame = new GameStarter(this,model)
         beginGame.chooseCharacters(model)
+        for(i <- model.getPlayers()){
+            allPlayers.addMember(i)
+        }
         beginGame.createEnemies(model)
+        for(i <- model.getEnemies()){
+            allEnemies.addOne(i)
+        }
     }
 
     /**Method for when controller has to handle an input, delegates to state to tell what to do
@@ -99,10 +109,49 @@ class GameController {
     }
 
 
+    /**Getter for model/turn scheduler used by game controller
+     *
+     * @return this.model
+     */
     def getModel(): ITurnScheduler={
         this.model
     }
 
+    /**Getter for party of characters in game
+     *
+     * @return this.allPlayers
+     */
+    def getAllPlayers(): Party = {
+        this.allPlayers
+    }
+
+    /**Getter for all enemies in game
+     *
+     * @return this.allEnemies
+     */
+    def getAllEnemies(): ArrayBuffer[EnemyAttributes] = {
+        this.allEnemies
+    }
+
+    /**Method for checking if the game has finished, or if one of the teams was defeated completely
+     *
+     * @return true, if players or enemies was defeated
+     *         false, if both are still alive
+     */
+
+    def checkIfFinished(): Boolean = {
+        if(this.allPlayers.defeated() == 0){
+            true
+        }
+        var enemiesAlive: Int = 0
+        for(i<-allEnemies){
+            enemiesAlive += i.isAlive()
+        }
+        if(enemiesAlive == 0){
+            true
+        }
+        false
+    }
     /**Method for getting a random enemies choice(for testing, left it at 1 to know what choice they will make)
      *
      * @param range the range in which the enemy can decide
