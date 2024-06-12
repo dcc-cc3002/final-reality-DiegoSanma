@@ -15,8 +15,11 @@ class EnemyStatusState(selected:EnemyAttributes) extends  AGameState{
   override def handleInput(controller: GameController): Unit = {
     val status: Option[IStatusEffect] = selected.getStatus()
     if(status.isDefined){
-      status.get.doEffect()
+      val skip:Int = status.get.doEffect()
       if(selected.isAlive()==0){
+        changedState = new TurnCalculatingState
+      }
+      if(skip ==1){
         changedState = new TurnCalculatingState
       }
     }

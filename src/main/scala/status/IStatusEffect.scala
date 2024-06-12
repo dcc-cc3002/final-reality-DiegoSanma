@@ -8,7 +8,7 @@ import weapons.IMagicWeapon
  */
 trait IStatusEffect {
 
-  def doEffect(): Unit
+  def doEffect(): Int
 
   def getEnemy(): Option[EnemyAttributes]
 
