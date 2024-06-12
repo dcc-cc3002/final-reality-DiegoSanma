@@ -3,6 +3,7 @@ package states
 import controller.GameController
 import controller.states.enemies.{EnemyAttackState, EnemyStatusState}
 import controller.states.initial.TurnCalculatingState
+import controller.states.last.CheckEndState
 import enemy.Enemy
 import status.{Burnt, Paralyzed, Poisoned}
 import wand.Wand
@@ -73,7 +74,7 @@ class EnemyStatusStateTest extends munit.FunSuite {
     controller.handleInput()
     controller.update()
 
-    assert(controller.getState().isInstanceOf[TurnCalculatingState],"Enemy should´ve died, so passes to turn calculating")
+    assert(controller.getState().isInstanceOf[CheckEndState],"Enemy should´ve died, so passes to turn calculating")
     assertEquals(controller.getModel().getEnemies()(0).isAlive(),0,"Should be dead")
   }
 

@@ -3,6 +3,7 @@ package controller.states.player
 import attributes.Attributes
 import controller.GameController
 import controller.states.initial.TurnCalculatingState
+import controller.states.last.CheckEndState
 import controller.states.{AGameState, IGameState}
 import enemy.EnemyAttributes
 import exceptions.damage.UnaliveDamagedException
@@ -13,7 +14,7 @@ class ReceivingDamageState(selected:Attributes,victim:EnemyAttributes) extends A
   override def handleInput(controller: GameController): Unit = {
     try{
       selected.attack(victim)
-      changedState = Some(new TurnCalculatingState())
+      changedState = Some(new CheckEndState)
     }
     catch {
       case e: NoWeaponException => changedState = Some(new ChangeWeaponState(selected))

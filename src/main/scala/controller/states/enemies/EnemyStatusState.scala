@@ -2,6 +2,7 @@ package controller.states.enemies
 
 import controller.GameController
 import controller.states.initial.TurnCalculatingState
+import controller.states.last.CheckEndState
 import controller.states.{AGameState, IGameState}
 import enemy.EnemyAttributes
 import status.IStatusEffect
@@ -17,7 +18,7 @@ class EnemyStatusState(selected:EnemyAttributes) extends  AGameState{
     if(status.isDefined){
       val skip:Int = status.get.doEffect()
       if(selected.isAlive()==0){
-        changedState = new TurnCalculatingState
+        changedState = new CheckEndState
       }
       if(skip ==1){
         changedState = new TurnCalculatingState

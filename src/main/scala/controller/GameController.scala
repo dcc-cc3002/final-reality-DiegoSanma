@@ -140,17 +140,16 @@ class GameController {
      */
 
     def checkIfFinished(): Boolean = {
-        if(this.allPlayers.defeated() == 0){
-            true
-        }
         var enemiesAlive: Int = 0
         for(i<-allEnemies){
             enemiesAlive += i.isAlive()
         }
-        if(enemiesAlive == 0){
+        if(this.allPlayers.defeated() == 0 || enemiesAlive == 0){
             true
         }
-        false
+        else{
+            false
+        }
     }
     /**Method for getting a random enemies choice(for testing, left it at 1 to know what choice they will make)
      *

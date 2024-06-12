@@ -3,6 +3,7 @@ package states
 import controller.GameController
 import controller.states.enemies.EnemyAttackState
 import controller.states.initial.TurnCalculatingState
+import controller.states.last.CheckEndState
 
 class EnemyAttackStateTest extends munit.FunSuite {
   var controller: GameController = null
@@ -17,13 +18,13 @@ class EnemyAttackStateTest extends munit.FunSuite {
   test("Attacking a character"){
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[TurnCalculatingState],"Enemy should´ve attacked successfully")
+    assert(controller.getState().isInstanceOf[CheckEndState],"Enemy should´ve attacked successfully")
     assertEquals(controller.getModel().getPlayers()(0).getHp(),50,"Paladin´s hp should be 50 now")
 
     controller.changeState(new EnemyAttackState(controller.getModel().getEnemies()(0)))
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[TurnCalculatingState],"Enemy should´ve attacked successfully")
+    assert(controller.getState().isInstanceOf[CheckEndState],"Enemy should´ve attacked successfully")
     assertEquals(controller.getModel().getPlayers()(0).getHp(),0,"Paladin´s hp should be 0 now")
 
     controller.changeState(new EnemyAttackState(controller.getModel().getEnemies()(0)))

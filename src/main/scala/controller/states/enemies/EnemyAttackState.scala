@@ -2,6 +2,7 @@ package controller.states.enemies
 
 import controller.GameController
 import controller.states.initial.TurnCalculatingState
+import controller.states.last.CheckEndState
 import controller.states.{AGameState, IGameState}
 import enemy.EnemyAttributes
 import exceptions.damage.UnaliveDamagedException
@@ -12,7 +13,7 @@ class EnemyAttackState(selected:EnemyAttributes) extends AGameState {
     var choice: Int = controller.getEnemyChoice(controller.getModel().getPlayers().length)
     try{
       selected.attack(controller.getModel().getPlayers()(choice))
-      changedState = Some(new TurnCalculatingState())
+      changedState = Some(new CheckEndState)
     }
     catch {
       case e: UnaliveDamagedException => changedState = None
