@@ -40,7 +40,7 @@ class ThunderSpell extends DarkSpells {
     victim.takeSpellDamage(user,magicWeapon)
     val random: Int =new Random().nextInt(9)
     if(random<3){
-      victim.setStatus(Some(new Paralyzed))
+      victim.setStatus(new Paralyzed)
     }
     user.useMana(20)
   }

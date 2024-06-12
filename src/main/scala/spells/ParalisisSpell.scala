@@ -33,7 +33,7 @@ class ParalisisSpell extends LightSpells with StatusLightSpells {
    * @param victim the enemy the paralisis ingoing to be inflicted on
    */
   override def finalStatusSpell(user: IMage, victim: EnemyAttributes,magicWeapon: IMagicWeapon): Unit = {
-    victim.setStatus(Some(new Paralyzed))
+    victim.setStatus(new Paralyzed)
     user.useMana(25)
   }
 }

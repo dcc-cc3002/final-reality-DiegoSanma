@@ -21,9 +21,9 @@ class AlreadyStatusTest extends munit.FunSuite {
 
   test("Overriding status condition"){
     var found: Int = 0
-    enemy.setStatus(Some(burnt))
+    enemy.setStatus(burnt)
     try{
-      enemy.setStatus(Some(poisoned))
+      enemy.setStatus(poisoned)
     }
     catch {
       case e: AlreadyHasStatusException => found += 1

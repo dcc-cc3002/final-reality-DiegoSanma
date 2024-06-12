@@ -40,6 +40,7 @@ abstract class AEnemy(name:String, hp:Int, defense:Int, weight:Int, private var 
       throw new AlreadyHasStatusException("Can´t apply status effect on enemy, as he already has one")
     }
     statusCondition = Some(status)
+    status.setEnemy(this)
   }
 
   /**Method for removing a status condition

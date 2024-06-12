@@ -33,7 +33,7 @@ class PoisonSpell extends LightSpells with StatusLightSpells {
    * @param victim the enemy the poison ingoing to be inflicted on
    */
   override def finalStatusSpell(user: IMage, victim: EnemyAttributes,magicWeapon: IMagicWeapon): Unit = {
-    victim.setStatus(Some(new Poisoned(magicWeapon)))
+    victim.setStatus(new Poisoned(magicWeapon))
     user.useMana(30)
   }
 }

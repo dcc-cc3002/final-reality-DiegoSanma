@@ -32,7 +32,7 @@ class SpellCastingTest extends munit.FunSuite {
     assertEquals(magoblanco.getMana(),70,"Not corrent amount of mana used")
     assert(enemy.getStatus().get.isInstanceOf[Poisoned],"Enemy was not poisoned")
 
-    enemy.setStatus(None)
+    enemy.removeStatus()
 
     val paralisis: ParalisisSpell = new ParalisisSpell()
     magoblanco.throwSpell(paralisis,enemy)
@@ -56,7 +56,7 @@ class SpellCastingTest extends munit.FunSuite {
     assertEquals(magonegro.getMana(),80,"Magonegro should use 20 mana")
     assertEquals(enemy.getHp(),220,"Enemy should take 80 damage")
 
-    enemy.setStatus(None)
+    enemy.removeStatus()
 
     val fuego: FireSpell = new FireSpell()
     magonegro.throwSpell(fuego,enemy)

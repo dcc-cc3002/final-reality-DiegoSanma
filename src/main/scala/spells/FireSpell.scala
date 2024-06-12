@@ -37,7 +37,7 @@ class FireSpell extends DarkSpells {
     victim.takeSpellDamage(user,magicWeapon)
     val random = new Random().nextInt(9)
     if(random<2){
-      victim.setStatus(Some(new Burnt(magicWeapon)))
+      victim.setStatus(new Burnt(magicWeapon))
     }
     user.useMana(15)
   }
