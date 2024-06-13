@@ -29,8 +29,7 @@ class GameController {
     private val allPlayers: Party = new Party(new ArrayBuffer[Option[Attributes]].empty)
     private val allEnemies: ArrayBuffer[EnemyAttributes] = new ArrayBuffer[EnemyAttributes].empty
     /** Parameters necessary for testing when player input is required(Changing State) */
-    private val numbers: ArrayBuffer[Int] = ArrayBuffer(9,1,3,5,2,4)
-    private var next: Int = 0
+    private var choice: Int = 0
     init()
 
     private def init(): Unit = {
@@ -38,13 +37,20 @@ class GameController {
         observers+= new StatusObserver
         state = new InitialState()
         val beginGame = new GameStarter(this,model)
-        beginGame.chooseCharacters(model)
-        for(i <- model.getPlayers()){
-            allPlayers.addMember(i)
-        }
         beginGame.createEnemies(model)
         for(i <- model.getEnemies()){
             allEnemies.addOne(i)
+        }
+    }
+
+    /**Method for choosing players to add to combat
+     * Will only allow a maximum of 3 players
+     */
+    def choosePlayers(): Unit = {
+        val beginGame = new GameStarter(this,model)
+        if(allPlayers.getMembers().length<3){
+            beginGame.chooseCharacter(model)
+            allPlayers.addMember(model.getPlayers()(model.getPlayers().length-1))
         }
     }
 
@@ -59,18 +65,22 @@ class GameController {
     /**Method for getting a numerical input from the user
      * (Now, as view is not implemented as of yet, it simply uses a specific array with numbers, to check)
      *
-     * @return number
+     * @return choice
      */
 
     def getNumericalInput():Int = {
-        if(this.next >5){
-            this.next = 0
-        }
-        val number: Int = this.numbers(next)
-        next +=1
-        number
+       choice
         /**val resp = StdIn.readLine()
         resp.toInt*/
+    }
+
+    /**Method for updating the player´s choice
+     *
+     * @param k the new choice
+     */
+
+    def updatePlayerChoice(k: Int): Unit = {
+        this.choice = k
     }
 
     /**Method for asking for a name from the user

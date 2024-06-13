@@ -13,8 +13,7 @@ import scala.collection.mutable.ArrayBuffer
 class GameStarter(controller:GameController,model:ITurnScheduler){
   private var selected: Option[Attributes] = None
 
-    def chooseCharacters(turnScheduler: ITurnScheduler): Unit = {
-      while (turnScheduler.getPlayers().length < 3) {
+    def chooseCharacter(turnScheduler: ITurnScheduler): Unit = {
         var choice: Int = controller.getNumericalInput()
         var name: String = controller.getStringInput()
         choice match {
@@ -24,7 +23,6 @@ class GameStarter(controller:GameController,model:ITurnScheduler){
           case 4 => selected = Some(new WhiteMage(name, 100, 100, 75, 100))
           case 5 => selected = Some(new BlackMage(name, 100, 100, 90, 100))
           case _ => controller.notifyInvalidOption(choice)
-        }
         if(selected.isDefined) {
           try {
             turnScheduler.addTo(selected.get)
