@@ -21,6 +21,18 @@ class EnemyStatusStateTest extends munit.FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     controller = new GameController()
+    controller.updatePlayerChoice(1)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(3)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(5)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
     statusState = new EnemyStatusState(controller.getModel().getEnemies()(0))
     controller.changeState(statusState)
     wand = new Wand("Stick",70,70,60)

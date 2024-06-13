@@ -12,10 +12,22 @@ class AttackStateTest extends munit.FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     controller = new GameController()
+    controller.updatePlayerChoice(1)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(3)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(5)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
   }
 
   test("Attack State Character´s Turn"){
-    attack = new AttackState(controller.getModel().getPlayers()(0))
+    attack = new AttackState(controller.getAllPlayers().getMembers()(0).get)
     controller.changeState(attack)
     assertEquals(attack,controller.getState().asInstanceOf[AttackState],"State should be attack state just defined")
     controller.handleInput()

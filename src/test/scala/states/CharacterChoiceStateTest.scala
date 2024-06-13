@@ -10,6 +10,18 @@ class CharacterChoiceStateTest extends munit.FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     controller = new GameController()
+    controller.updatePlayerChoice(1)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(3)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(5)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
     choiceState = new CharacterChoiceState(controller.getModel().getPlayers()(0))
     choiceState2 = new CharacterChoiceState(controller.getModel().getPlayers()(2))
   }
@@ -18,31 +30,32 @@ class CharacterChoiceStateTest extends munit.FunSuite {
     controller.changeState(choiceState)
     controller.handleInput()
     controller.update()
+    assert(controller.getState().isInstanceOf[CharacterChoiceState],"Invalid choice given")
+
+    controller.updatePlayerChoice(2)
+    controller.handleInput()
+    controller.update()
     assert(controller.getState().isInstanceOf[CharacterAttackState],"Chose to attack an enemy")
 
     controller.changeState(new CharacterChoiceState(controller.getModel().getPlayers()(0)))
-    controller.handleInput()
-    controller.update()
-    assert(controller.getState().isInstanceOf[CharacterChoiceState],"Choice was too big, should not change")
 
-    controller.handleInput()
-    controller.update()
+    controller.updatePlayerChoice(1)
     controller.handleInput()
     controller.update()
     assert(controller.getState().isInstanceOf[ChangeWeaponState],"Choice was to change weapon, shoud be that state")
 
     controller.changeState(new CharacterChoiceState(controller.getModel().getPlayers()(0)))
+    controller.updatePlayerChoice(3)
     controller.handleInput()
     controller.update()
     assert(controller.getState().isInstanceOf[CharacterChoiceState],"Character is not a mage, so cant choose to cast spell")
   }
 
   test("Choice made by a mage"){
-    for(i <- 1 to 6) {
       controller.changeState(choiceState2)
+      controller.updatePlayerChoice(3)
       controller.handleInput()
       controller.update()
-    }
     assert(controller.getState().isInstanceOf[MageSpellState],"Mage chose to cast spell, so must be in that state")
   }
 

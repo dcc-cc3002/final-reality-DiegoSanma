@@ -26,6 +26,7 @@ class GameController {
     private var state: IGameState = null
     private val observers: ArrayBuffer[IObservers] = new ArrayBuffer[IObservers].empty
     private val model: ITurnScheduler = new TurnScheduler(new ArrayBuffer[Attributes].empty,new ArrayBuffer[EnemyAttributes].empty)
+    private val beginGame: GameStarter = new GameStarter(this,model)
     private val allPlayers: Party = new Party(new ArrayBuffer[Option[Attributes]].empty)
     private val allEnemies: ArrayBuffer[EnemyAttributes] = new ArrayBuffer[EnemyAttributes].empty
     /** Parameters necessary for testing when player input is required(Changing State) */
@@ -36,8 +37,7 @@ class GameController {
         observers+= new AttackObserver
         observers+= new StatusObserver
         state = new InitialState()
-        val beginGame = new GameStarter(this,model)
-        beginGame.createEnemies(model)
+        beginGame.createEnemies()
         for(i <- model.getEnemies()){
             allEnemies.addOne(i)
         }
@@ -47,9 +47,8 @@ class GameController {
      * Will only allow a maximum of 3 players
      */
     def choosePlayers(): Unit = {
-        val beginGame = new GameStarter(this,model)
         if(allPlayers.getMembers().length<3){
-            beginGame.chooseCharacter(model)
+            beginGame.chooseCharacter()
             allPlayers.addMember(model.getPlayers()(model.getPlayers().length-1))
         }
     }
@@ -69,7 +68,7 @@ class GameController {
      */
 
     def getNumericalInput():Int = {
-       choice
+       this.choice
         /**val resp = StdIn.readLine()
         resp.toInt*/
     }

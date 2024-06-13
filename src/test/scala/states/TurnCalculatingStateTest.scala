@@ -6,15 +6,25 @@ import controller.states.initial.{AttackState, TurnCalculatingState}
 
 class TurnCalculatingStateTest extends munit.FunSuite {
   var controller: GameController = null
-  var turnCalculating: TurnCalculatingState = null
 
   override def beforeEach(context: BeforeEach): Unit = {
     controller = new GameController()
-    turnCalculating = new TurnCalculatingState()
-    controller.changeState(turnCalculating)
+    controller.updatePlayerChoice(1)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(3)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(5)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
   }
 
   test("Correct calculator"){
+    assert(controller.getState().isInstanceOf[TurnCalculatingState],"Should start in Turn Calculating")
     controller.handleInput()
     controller.update()
     assert(controller.getState().isInstanceOf[TurnCalculatingState],"Should not have changed state, as no one passes")

@@ -9,6 +9,18 @@ class FinalStateTest extends munit.FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     controller = new GameController()
+    controller.updatePlayerChoice(1)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(3)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(5)
+    controller.handleInput()
+    controller.update()
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
     finalPart = new FinalState()
     controller.changeState(finalPart)
   }
