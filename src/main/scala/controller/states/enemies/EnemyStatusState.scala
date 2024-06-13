@@ -9,10 +9,18 @@ import status.IStatusEffect
 
 /**Class for state that checks whether or not an enemy has a status condition
  *
+ * @param selected enemy whose turn it is
+ *
  */
 class EnemyStatusState(selected:EnemyAttributes) extends  AGameState{
+  /** Parameter for next state, if enemy lives/is not paralyzed, it passes to attackState */
   private var changedState: IGameState = new EnemyAttackState(selected)
 
+  /**Method for handling any status condition the enemy may have
+   * Makes sure to skip turn if necessary or to identify if the status effect killed the enemy
+   *
+   * @param controller the game controller
+   */
   override def handleInput(controller: GameController): Unit = {
     val status: Option[IStatusEffect] = selected.getStatus()
     if(status.isDefined){
@@ -25,6 +33,11 @@ class EnemyStatusState(selected:EnemyAttributes) extends  AGameState{
       }
     }
   }
+
+  /**Method for updating the controller´s state
+   *
+   * @param controller the game controller
+   */
 
   override def updateController(controller: GameController): Unit = {
     controller.changeState(changedState)

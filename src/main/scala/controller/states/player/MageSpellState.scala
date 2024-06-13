@@ -5,9 +5,19 @@ import controller.GameController
 import controller.states.{AGameState, IGameState}
 import spells._
 
+/**Class for state where mage is choosing what spell to cast
+ *
+ * @param mage the mage casting the spell
+ * @param mageAsCharacter the mage as a Character
+ */
 class MageSpellState(mage:IMage,mageAsCharacter:Attributes) extends AGameState {
+  /** Parameter that hold the next state */
   private var changedState: Option[IGameState] = None
 
+  /**Method for handling user´s choice of what spell to cast
+   *
+   * @param controller the game controller
+   */
   override def handleInput(controller: GameController): Unit = {
     val choice: Int = controller.getNumericalInput()
     choice match {
@@ -20,6 +30,10 @@ class MageSpellState(mage:IMage,mageAsCharacter:Attributes) extends AGameState {
     }
   }
 
+  /**Method for updating the controller´s state, if necessary
+   *
+   * @param controller the game controller
+   */
   override def updateController(controller: GameController): Unit = {
     if(changedState.isDefined){
       controller.changeState(changedState.get)

@@ -21,6 +21,9 @@ import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
 import scala.util.Random
 
+/**Class for game Controller
+ * Will be the main nucleus of all actions taking place during the game
+ */
 class GameController {
     /** All parameters necessary for the game controller to work */
     private var state: IGameState = null
@@ -199,6 +202,11 @@ class GameController {
         /**new Random().nextInt(range)*/
     }
 
+    /**Method for when user is trying to add a weapon to their inventory
+     * The weapon that they want to add wil depend on their weaponChoice
+     *
+     * @param selected the character trying to receive the weapon
+     */
     def askUserForWeapon(selected:Attributes): Unit = {
         try {
             val choice: Int = this.getWeaponChoice()
@@ -217,6 +225,11 @@ class GameController {
         }
     }
 
+    /**Method for when the user is trying to rename a weapon
+     * The new namr will depend on their stringChoice
+     *
+     * @param selected the character whose active weapon is being renamed
+     */
     def askForName(selected:Attributes): Unit = {
         if(selected.getActiveWeapon().isEmpty){
             this.notifyNoWeapon()
@@ -232,6 +245,12 @@ class GameController {
         }
     }
 
+    /**Method for when the user is trying to drop a weapon from their inventory
+     * The weapon they drop will depend on their weaponChoice, that will correspond to the
+     * position of the weapon in the inventory they will drop
+     *
+     * @param selected
+     */
     def userDropsWeapon(selected:Attributes): Unit = {
         val choice: Int = this.getWeaponChoice()
         if(choice>selected.getWeapons().length){
@@ -241,26 +260,39 @@ class GameController {
             selected.dropWeapon(choice)
         }
     }
+    /** Method for notifying the use chose an invalid number as a choice */
     def notifyInvalidOption(choice:Int): Unit = {
     }
 
+    /** Method for notifying user the have no weapon */
     def notifyNoWeapon(): Unit = {
     }
 
+    /** Method for notifying user they dont have a magic weapon equipped */
     def notifyNotMagicWeapon(): Unit = {}
 
+    /** Method for notifying the user they are attacking/casting a spell on a dead entity */
     def notifyNotAlive(victim:Entity):Unit = {}
 
+    /** Method for notifying user they are trying to cast a spell with the wrong type of mage */
     def notifyNotRightMage():Unit = {}
 
+    /** Method for notifying user they dont have enough mana to cast the spell they chose */
     def notifyNotEnoughMana(mana:Int): Unit = {}
 
+    /** Method for notifying the user they are casting a spell on the wonrg type of entity */
     def notifyWrongTarget(): Unit = {}
 
+    /** Method for notifying user their character cant equip a certain type fo weapon */
     def notifyCantAddWeapon(): Unit = {}
 
+    /**Method for notifying user they are trying to rename an already named weapon
+     *
+     * @param str the name of the current weapon
+     */
     def notifyAlreadyNamed(str: String): Unit = {}
 
+    /** Method for notifying user the game has ended, as one of the two sides has been defeated */
     def notifyEndGame(): Unit = {
         println(s"The game has ended!")
     }

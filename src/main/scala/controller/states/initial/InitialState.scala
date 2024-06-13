@@ -3,6 +3,8 @@ package controller.states.initial
 import controller.GameController
 import controller.states.{AGameState, IGameState}
 
+/** Class for initial state of the game
+ */
 class InitialState extends AGameState {
   /** Parameter that holds the state that should come next */
   private var changedState: Option[IGameState] = None
