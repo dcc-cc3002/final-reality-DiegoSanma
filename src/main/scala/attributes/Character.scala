@@ -156,8 +156,10 @@ abstract class Character(name:String,hp:Int,defense: Int, weight: Int,
    * @param position the position of the weapon in the inventory you wish to equip
    */
   override def changeWeapon(position: Int): Unit = {
-    this.activeWeapon = Some(this.inventory(position))
-    updateMaxActionBar()
+    if(position<this.inventory.length){
+      this.activeWeapon = Some(this.inventory(position))
+      updateMaxActionBar()
+    }
   }
 
   /**Method for adding a character into the turn scheduler

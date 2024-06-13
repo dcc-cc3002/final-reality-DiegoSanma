@@ -31,6 +31,8 @@ class GameController {
     private val allEnemies: ArrayBuffer[EnemyAttributes] = new ArrayBuffer[EnemyAttributes].empty
     /** Parameters necessary for testing when player input is required(Changing State) */
     private var choice: Int = 0
+    private var stringChoice: String = ""
+    private var weaponChoice: Int = 0
     init()
 
     private def init(): Unit = {
@@ -73,6 +75,14 @@ class GameController {
         resp.toInt*/
     }
 
+    /**Getter for weapon Choice
+     *
+     * @return this.weaponChoice
+     */
+    def getWeaponChoice(): Int = {
+        this.weaponChoice
+    }
+
     /**Method for updating the player´s choice
      *
      * @param k the new choice
@@ -82,15 +92,32 @@ class GameController {
         this.choice = k
     }
 
+    /**Method for updating player´s weapon choice
+     *
+     * @param k the new choice
+     */
+    def updateWeaponChoice(k:Int): Unit = {
+        this.weaponChoice = k
+    }
+
     /**Method for asking for a name from the user
      * (As view is not implemented as of yet, there is only a set string being returned
      *
      * @return
      */
     def getStringInput(): String = {
-        "Name"
+        this.stringChoice
         /**val resp = StdIn.readLine()
         resp*/
+    }
+
+    /**Method for updating char choice
+     *
+     * @param char new char choice
+     */
+
+    def updateStringChoice(str:String): Unit = {
+        this.stringChoice = str
     }
 
     /**Method for telling the controller to update its status, delegates that to the state, where it checks if
@@ -174,7 +201,7 @@ class GameController {
 
     def askUserForWeapon(selected:Attributes): Unit = {
         try {
-            val choice: Int = this.getNumericalInput()
+            val choice: Int = this.getWeaponChoice()
             choice match {
                 case 1 => selected.receiveWeapon(new Sword("", 100, 100))
                 case 2 => selected.receiveWeapon(new Axe("", 80, 80))
@@ -206,8 +233,13 @@ class GameController {
     }
 
     def userDropsWeapon(selected:Attributes): Unit = {
-        val choice: Int = this.getNumericalInput()
-        selected.dropWeapon(choice)
+        val choice: Int = this.getWeaponChoice()
+        if(choice>selected.getWeapons().length){
+            this.notifyInvalidOption(choice)
+        }
+        else{
+            selected.dropWeapon(choice)
+        }
     }
     def notifyInvalidOption(choice:Int): Unit = {
     }

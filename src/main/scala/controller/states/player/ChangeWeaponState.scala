@@ -13,7 +13,7 @@ class ChangeWeaponState(selected:Attributes) extends AGameState {
       case 1 => controller.askUserForWeapon(selected)
       case 2 => controller.userDropsWeapon(selected)
       case 3 => controller.askForName(selected)
-      case 4 => selected.changeWeapon(controller.getNumericalInput())
+      case 4 => selected.changeWeapon(controller.getWeaponChoice())
       case 5 => changedState = Some(new CharacterChoiceState(selected))
       case _ => controller.notifyInvalidOption(choice)
     }

@@ -31,7 +31,7 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    * @return this.name
    */
 
-  override def getWeaponName(): String = {
+  override def getWeaponName():String = {
     this.name
   }
 
@@ -94,7 +94,7 @@ abstract class AWeapon(private var name:String, private var atkpoints:Int, priva
    * println(s"The current name of the weapon is ${weapon.getName()}")---> should print Excalibur
    */
 
- override def rename(named: String): Unit ={
+ override def rename(named:String): Unit ={
    if (this.name != ""){
      throw new AlreadyNamedException("Weapon already has a name")
    }
