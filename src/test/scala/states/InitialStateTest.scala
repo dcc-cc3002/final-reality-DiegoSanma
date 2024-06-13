@@ -41,6 +41,14 @@ class InitialStateTest extends munit.FunSuite {
     assert(controller.getState().isInstanceOf[TurnCalculatingState],"User chose to begin game")
   }
 
+  test("Trying to start without players"){
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
+
+    assert(controller.getState().isInstanceOf[InitialState],"Invalid choice made")
+  }
+
   test("Trying to add players to full game"){
     controller.updatePlayerChoice(2)
     controller.handleInput()

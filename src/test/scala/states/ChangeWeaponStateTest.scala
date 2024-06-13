@@ -3,7 +3,7 @@ package states
 import axe.Axe
 import bow.Bow
 import controller.GameController
-import controller.states.player.ChangeWeaponState
+import controller.states.player.{ChangeWeaponState, CharacterChoiceState}
 import sword.Sword
 
 class ChangeWeaponStateTest extends munit.FunSuite {
@@ -112,7 +112,17 @@ class ChangeWeaponStateTest extends munit.FunSuite {
 
     assertEquals(controller.getAllPlayers().getMembers()(0).get.getActiveWeapon().get.getWeaponName(),"Sanma","Was renamed")
 
-
   }
 
+  test("Changing State and too big choice") {
+    controller.updatePlayerChoice(6)
+    controller.handleInput()
+    controller.update()
+    assert(controller.getState().isInstanceOf[ChangeWeaponState], "Should still be in same state")
+
+    controller.updatePlayerChoice(5)
+    controller.handleInput()
+    controller.update()
+    assert(controller.getState().isInstanceOf[CharacterChoiceState], "Chose to change state")
+  }
 }

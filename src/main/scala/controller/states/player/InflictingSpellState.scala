@@ -44,4 +44,5 @@ class InflictingSpellState(mage:IMage,mageAsCharacter:Attributes,spell:ISpells,v
     controller.changeState(changedState.get)
   }
 
+
 }
