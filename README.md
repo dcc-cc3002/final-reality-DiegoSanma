@@ -182,6 +182,47 @@ paralyze spells, are used to induce a status condition onto the enemy, with 100%
 used to heal an ally. The healing corresponds to a 30% of their max health, and if the mage wants to heal them more than
 what their max health is, the hp does not rise and further, and remains at that point.
 
+## VI. How the Game is Played
+### VI.I Starting the Game
+Before anything, our final reality replica will be implemented using a game controller and states. Depending on the
+state in which the game is, the user will be able to do (or not do) certain actions. The game controller will be in
+charge of maintaining the flow of the game, using  these two functions:
+>handleInput() and update
+
+The first one, will be in charge of asking the state to do the action it is meant to do at the time. Whether that is
+receiving the user´s input and doing something with it or processing an enemies choice, these actions take place here.
+The second one, has the sole purpose of changing the game´s state, if necessary.
+
+Now, starting a game requires a game controller, that when created, already begins with 3 enemies on the other team.
+Later, the user has to choose what characters to add to their party, and finally choose to start the game. Once that is
+done, the game passes to the fun part :)
+
+### VI.II Choosing whose Turn it Is
+Here, we have passed to the TurnCalculatingState, where the entities action bars are being filled up. Once one of them 
+is, the controller passes on to the state that is next, whether that be an EnemyStatusState or CharacterChoiceState.
+
+### VI.III Enemy´s Turn
+This part is straightforward, as all the controller has to do, is give a random input for the enemy, so they can choose 
+what to do. But before that, if the enemy´s whose turn it is has a status effect, it is applied, passing to the next state
+depending on what happened (for example, if they were paralyzed, they lose their turn and pass to the 
+TurnCalculatingState)
+
+### VI.IV Player´s Turn
+Here, it is a bit more complicated, since a player can do 3 things.
+Firstly, they can change their inventory, by either equipping or dropping weapons. To do this, they pass on to
+a ChangeWeaponState where they decide on their next move.
+Secondly, they can choose to attack, where they are forced to have a weapon equipped and choose an enemy that isn´t
+already dead
+Finally, if they are a mage, they can cast a spell, but depending on the requirements, they can be sent back to a state 
+to change their decision to one they can execute. For example, if the mage does not have enough mana, they are sent back
+to CharacterChoiceState, as they might not have enough mana for any spell.
+
+### VI.V Check If the Game has Finished
+After either the player or character has used up their turn, the game passed to a CheckEndState, where it makes sure 
+that there are still entities on both sides alive. If that´s the case, the game passes back to the TurnCalculatingState.
+If not, then the game passes to a FinalState, where the user is notified of the result, and the game stops running.
+
+
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

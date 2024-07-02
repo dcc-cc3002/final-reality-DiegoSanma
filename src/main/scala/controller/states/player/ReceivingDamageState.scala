@@ -27,6 +27,13 @@ class ReceivingDamageState(selected:Attributes,victim:EnemyAttributes) extends A
   override def handleInput(controller: GameController): Unit = {
     try{
       selected.attack(victim)
+      if(victim.isAlive()==0){
+        controller.getModel().removeEnemy(victim)
+        while(controller.getModel().getTurnsLine().contains(victim)){
+          val index: Int = controller.getModel().getTurnsLine().indexOf(victim)
+          controller.getModel().getTurnsLine().remove(index)
+        }
+      }
       changedState = Some(new CheckEndState)
     }
     catch {

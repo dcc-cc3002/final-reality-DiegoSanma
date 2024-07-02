@@ -22,14 +22,14 @@ class InflictingSpellState(mage:IMage,mageAsCharacter:Attributes,spell:ISpells,v
   /** Parameter that hold the next state */
   private var changedState: Option[IGameState] = None
 
-  /**Method for handling the consecuences fo throwing spell on chosen entity
+  /**Method for handling the consecuences of throwing spell on chosen entity
    * In this method, there are many exceptions that can be thrown, and each one will
    * throw back the user to the state where they need to change their choice
    *
    * For example, if they don´t have enough mana, they have to go back to CharacterChoiceState,as they can
    * either cast a different spell or attack, as they dont have enough mana for any spell
    *
-   * If they are the worng type of mage, they are sent back to MageSpellState, to choose a different
+   * If they are the wrong type of mage, they are sent back to MageSpellState, to choose a different
    * type of spell to cast
    *
    * Etc...
@@ -39,6 +39,13 @@ class InflictingSpellState(mage:IMage,mageAsCharacter:Attributes,spell:ISpells,v
   override def handleInput(controller: GameController): Unit = {
     try{
       mage.throwSpell(spell,victim)
+      if(victim.isAlive()==0) {
+        controller.getModel().removeEntity(victim)
+        while (controller.getModel().getTurnsLine().contains(victim)) {
+          val index: Int = controller.getModel().getTurnsLine().indexOf(victim)
+          controller.getModel().getTurnsLine().remove(index)
+        }
+      }
       changedState = Some(new CheckEndState)
     }
     catch {

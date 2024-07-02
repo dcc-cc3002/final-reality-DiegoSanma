@@ -1,5 +1,6 @@
 package controller.states.enemies
 
+import attributes.Attributes
 import controller.GameController
 import controller.states.initial.TurnCalculatingState
 import controller.states.last.CheckEndState
@@ -23,8 +24,16 @@ class EnemyAttackState(selected:EnemyAttributes) extends AGameState {
    */
   override def handleInput(controller: GameController): Unit = {
     var choice: Int = controller.getEnemyChoice(controller.getModel().getPlayers().length)
-    try{
-      selected.attack(controller.getModel().getPlayers()(choice))
+    val victim: Attributes = controller.getModel().getPlayers()(choice)
+    try {
+      selected.attack(victim)
+      if (victim.isAlive() == 0) {
+        controller.getModel().removeCharacter(victim)
+        while (controller.getModel().getTurnsLine().contains(victim)) {
+          val index: Int = controller.getModel().getTurnsLine().indexOf(victim)
+          controller.getModel().getTurnsLine().remove(index)
+        }
+      }
       changedState = Some(new CheckEndState)
     }
     catch {
