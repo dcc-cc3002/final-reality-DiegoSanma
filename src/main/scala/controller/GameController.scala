@@ -67,15 +67,13 @@ class GameController {
     }
 
     /**Method for getting a numerical input from the user
-     * (Now, as view is not implemented as of yet, it simply uses a specific array with numbers, to check)
+     * (Now, as view is not implemented as of yet, it is updated manually for tests)
      *
      * @return choice
      */
 
     def getNumericalInput():Int = {
        this.choice
-        /**val resp = StdIn.readLine()
-        resp.toInt*/
     }
 
     /**Getter for weapon Choice
@@ -87,6 +85,7 @@ class GameController {
     }
 
     /**Method for updating the player´s choice
+     * Would be updated by a view if it were implemented
      *
      * @param k the new choice
      */
@@ -96,6 +95,7 @@ class GameController {
     }
 
     /**Method for updating player´s weapon choice
+     * Would be updated by a view if it is implemented
      *
      * @param k the new choice
      */
@@ -249,7 +249,7 @@ class GameController {
      * The weapon they drop will depend on their weaponChoice, that will correspond to the
      * position of the weapon in the inventory they will drop
      *
-     * @param selected
+     * @param selected the character that wants to drop their weapon
      */
     def userDropsWeapon(selected:Attributes): Unit = {
         val choice: Int = this.getWeaponChoice()

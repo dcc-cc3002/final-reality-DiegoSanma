@@ -1,7 +1,7 @@
 package states
 
 import controller.GameController
-import controller.states.player.{CharacterChoiceState, InflictingSpellState, MageSpellState}
+import controller.states.player.{CastingSpellState, CharacterChoiceState, InflictingSpellState, MageSpellState}
 import wand.Wand
 
 class MageSpellStateTest extends munit.FunSuite {
@@ -40,34 +40,34 @@ class MageSpellStateTest extends munit.FunSuite {
     controller.updatePlayerChoice(1)
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[InflictingSpellState],"Should´ve passed to inflicting spell state")
+    assert(controller.getState().isInstanceOf[CastingSpellState],"Should´ve passed to inflicting spell state")
   }
 
   test("Fire Spell chosen"){
     controller.updatePlayerChoice(2)
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[InflictingSpellState],"Should´ve passed to inflicting spell state")
+    assert(controller.getState().isInstanceOf[CastingSpellState],"Should´ve passed to inflicting spell state")
   }
 
   test("Poison Spell chosen"){
     controller.updatePlayerChoice(3)
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[InflictingSpellState],"Should´ve passed to inflicting spell state")
+    assert(controller.getState().isInstanceOf[CastingSpellState],"Should´ve passed to inflicting spell state")
   }
   test("Healing Spell chosen"){
     controller.updatePlayerChoice(4)
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[InflictingSpellState],"Should´ve passed to inflicting spell state")
+    assert(controller.getState().isInstanceOf[CastingSpellState],"Should´ve passed to inflicting spell state")
   }
 
   test("Paralisis Spell chosen"){
     controller.updatePlayerChoice(5)
     controller.handleInput()
     controller.update()
-    assert(controller.getState().isInstanceOf[InflictingSpellState],"Should´ve passed to inflicting spell state")
+    assert(controller.getState().isInstanceOf[CastingSpellState],"Should´ve passed to inflicting spell state")
   }
   test("No spell chosen"){
     controller.updatePlayerChoice(6)
