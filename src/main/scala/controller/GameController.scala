@@ -174,20 +174,24 @@ class GameController {
 
     /**Method for checking if the game has finished, or if one of the teams was defeated completely
      *
-     * @return true, if players or enemies was defeated
-     *         false, if both are still alive
+     * @return 0 if we lost
+     *         1 if we won
+     *         2 if the game continues
      */
 
-    def checkIfFinished(): Boolean = {
+    def checkIfFinished(): Int = {
         var enemiesAlive: Int = 0
         for(i<-allEnemies){
             enemiesAlive += i.isAlive()
         }
-        if(this.allPlayers.defeated() == 0 || enemiesAlive == 0){
-            true
+        if(this.allPlayers.defeated() == 0){
+            0
+        }
+        else if (enemiesAlive==0){
+            1
         }
         else{
-            false
+            2
         }
     }
     /**Method for getting a random enemies choice(for testing, left it at 1 to know what choice they will make)
@@ -292,9 +296,18 @@ class GameController {
      */
     def notifyAlreadyNamed(str: String): Unit = {}
 
-    /** Method for notifying user the game has ended, as one of the two sides has been defeated */
-    def notifyEndGame(): Unit = {
-        println(s"The game has ended!")
+    /** Method for notifying user the game has ended, as one of the two sides has been defeated
+     * @param result the result of the game
+     *               0 if we lost
+     *               1 if we won
+     */
+    def notifyEndGame(result:Int): Unit = {
+        if(result==0){
+            println(s"The players were defeated, you lost!")
+        }
+        else{
+            println(s"Congratulations, you won!")
+        }
     }
 
 }

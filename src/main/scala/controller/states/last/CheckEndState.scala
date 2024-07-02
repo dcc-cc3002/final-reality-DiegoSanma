@@ -14,12 +14,16 @@ class CheckEndState extends AGameState{
   /**Method for checking if the game has finished
    * If it has, changes state to FinalState
    *
+   * Also notifies use of how the game ended, bare in mind this is before they update the state to FinalState,
+   * but that causes no issue as both functions are run almost simultaneously in the game
    * @param controller the game controller
    */
 
   override def handleInput(controller: GameController): Unit = {
-    if(controller.checkIfFinished()){
+    val result: Int = controller.checkIfFinished()
+    if(result!=2){
       changedState = new FinalState
+      controller.notifyEndGame(result)
     }
   }
 

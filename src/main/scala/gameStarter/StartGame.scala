@@ -9,7 +9,8 @@ import controller.states.last.FinalState
 class StartGame {
   /**Method for running an active game
    *
-   * While the game has not finished, the controller will continue to handle inputs and update the game state
+   * While the game has not passed ot final State, the controller will continue to
+   * handle inputs and update the game state
    *
    */
   def run(): Unit = {
@@ -18,6 +19,5 @@ class StartGame {
       controller.handleInput()
       controller.update()
     }
-    controller.notifyEndGame()
   }
 }
