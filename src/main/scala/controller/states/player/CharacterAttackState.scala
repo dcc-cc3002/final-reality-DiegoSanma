@@ -20,7 +20,7 @@ class CharacterAttackState(selected:Attributes) extends AGameState {
    * @param controller the game controller
    */
   override def handleInput(controller: GameController): Unit = {
-    val enemies: ArrayBuffer[EnemyAttributes] = controller.getModel().getEnemies()
+    val enemies: ArrayBuffer[EnemyAttributes] = controller.getAllEnemies()
     val choice: Int = controller.getNumericalInput()
     if(choice<1 || choice>enemies.length+1){
       controller.notifyInvalidOption(choice)

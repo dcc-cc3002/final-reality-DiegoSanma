@@ -37,7 +37,7 @@ class EnemyAttackStateTest extends munit.FunSuite {
     controller.handleInput()
     controller.update()
     assert(controller.getState().isInstanceOf[CheckEndState],"Enemy should´ve attacked successfully")
-    assertEquals(controller.getModel().getPlayers()(0).getHp(),0,"Paladin´s hp should be 0 now")
+    assertEquals(controller.getAllPlayers().getMembers()(0).get.getHp(),0,"Paladin´s hp should be 0 now")
 
     controller.changeState(new EnemyAttackState(controller.getModel().getEnemies()(0)))
     controller.handleInput()

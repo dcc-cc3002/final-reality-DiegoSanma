@@ -198,6 +198,8 @@ class GameController {
      *
      * @param range the range in which the enemy can decide
      *
+     * For now, it remains 0, for the purpose of testing
+     *
      * @return new Random().nextInt(range)
      */
 

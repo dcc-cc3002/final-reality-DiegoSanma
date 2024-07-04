@@ -23,18 +23,20 @@ class EnemyAttackState(selected:EnemyAttributes) extends AGameState {
    *
    */
   override def handleInput(controller: GameController): Unit = {
-    var choice: Int = controller.getEnemyChoice(controller.getModel().getPlayers().length)
-    val victim: Attributes = controller.getModel().getPlayers()(choice)
+    val choice: Int = controller.getEnemyChoice(controller.getModel().getPlayers().length)
+    val victim: Option[Attributes] = controller.getAllPlayers().getMembers()(choice)
     try {
-      selected.attack(victim)
-      if (victim.isAlive() == 0) {
-        controller.getModel().removeCharacter(victim)
-        while (controller.getModel().getTurnsLine().contains(victim)) {
-          val index: Int = controller.getModel().getTurnsLine().indexOf(victim)
-          controller.getModel().getTurnsLine().remove(index)
+      if (victim.isDefined) {
+        selected.attack(victim.get)
+        if (victim.get.isAlive() == 0) {
+          controller.getModel().removeCharacter(victim.get)
+          while (controller.getModel().getTurnsLine().contains(victim.get)) {
+            val index: Int = controller.getModel().getTurnsLine().indexOf(victim.get)
+            controller.getModel().getTurnsLine().remove(index)
+          }
         }
+        changedState = Some(new CheckEndState)
       }
-      changedState = Some(new CheckEndState)
     }
     catch {
       case e: UnaliveDamagedException => changedState = None

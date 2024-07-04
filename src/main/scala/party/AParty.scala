@@ -26,7 +26,7 @@ abstract class AParty(private var memberArray:ArrayBuffer[Option[Attributes]]) e
    * @return ArrayBuffer(member1,member2,member3)
    */
   override def getMembers(): ArrayBuffer[Option[Attributes]] = {
-    return this.memberArray
+    this.memberArray
   }
   /**A function that determines whether a party is defeated or not
    *
