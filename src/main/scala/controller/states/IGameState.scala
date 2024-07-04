@@ -7,5 +7,5 @@ trait IGameState {
 
   def handleInput(controller:GameController)
 
-  def updateFlow(controller:GameController)
+  def hasFinished(): Boolean
 }

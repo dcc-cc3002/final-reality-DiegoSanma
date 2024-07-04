@@ -15,7 +15,7 @@ class StartGame {
    */
   def run(): Unit = {
     val controller: GameController = new GameController()
-    while(!controller.isInstanceOf[FinalState]){
+    while(!(controller.getState().hasFinished())){
       controller.handleInput()
       controller.update()
     }
