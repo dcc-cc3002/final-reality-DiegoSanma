@@ -87,7 +87,7 @@ class EnemyStatusStateTest extends munit.FunSuite {
     controller.update()
 
     assert(controller.getState().isInstanceOf[CheckEndState],"Enemy should´ve died, so passes to turn calculating")
-    assertEquals(controller.getModel().getEnemies()(0).isAlive(),0,"Should be dead")
+    assertEquals(controller.getAllEnemies()(0).isAlive(),0,"Should be dead")
   }
 
 

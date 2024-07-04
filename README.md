@@ -218,14 +218,14 @@ to CharacterChoiceState, as they might not have enough mana for any spell.
 
 ### VI.V Check If the Game has Finished
 After either the player or character has used up their turn, the game passed to a CheckEndState, where it makes sure 
-that there are still entities on both sides alive. If that´s the case, the game passes back to the TurnCalculat}ingState.
+that there are still entities on both sides alive. If that´s the case, the game passes back to the TurnCalculatingState.
 If not, then the game passes to a FinalState, where the user is notified of the result, and the game stops running.
 
 
 ### VI.VI Flow Diagram
 Finally, to summarize all the states, a flow diagram was designed. The flow diagram for this game is the following:
 
-![State Diagram](./docs/StateDiagram.png)
+![State Diagram](./docs/StateDiagaram.png)
 
 It is important to notice, that in the case of the player´s choice, it was summarized. As it was mentioned before, the
 states for choosing to use spells, can send you to various different states, depending on what exception was thrown. In 
