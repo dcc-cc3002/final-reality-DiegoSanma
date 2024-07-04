@@ -6,9 +6,6 @@ serve as an educational tool, teaching foundational programming concepts.
 This version of Final Reality, shall implement various aspects of Final Fantasy, but also add 
 different ways and methods to implement actions and situations
 
-## Flow Diagram
-
-![Flow Diagram](./docs/FlowDiagram.png)
 
 ## I. Entities
 An entity in Final Reality are whom will take part primarily in the game. This class will be used mainly to 
@@ -191,7 +188,9 @@ charge of maintaining the flow of the game, using  these two functions:
 
 The first one, will be in charge of asking the state to do the action it is meant to do at the time. Whether that is
 receiving the user´s input and doing something with it or processing an enemies choice, these actions take place here.
-The second one, has the sole purpose of changing the game´s state, if necessary.
+As a view is not currently implemented for this version, the inputs handed to the controller are variables defined 
+inside the controller, and are manually updated for testing. The second one, has the sole purpose of changing the game´s 
+state, if necessary.
 
 Now, starting a game requires a game controller, that when created, already begins with 3 enemies on the other team.
 Later, the user has to choose what characters to add to their party, and finally choose to start the game. Once that is
@@ -203,9 +202,9 @@ is, the controller passes on to the state that is next, whether that be an Enemy
 
 ### VI.III Enemy´s Turn
 This part is straightforward, as all the controller has to do, is give a random input for the enemy, so they can choose 
-what to do. But before that, if the enemy´s whose turn it is has a status effect, it is applied, passing to the next state
+what to do. But before that, if the enemy´s whose turn it is, has a status effect, it is applied, passing to the next state
 depending on what happened (for example, if they were paralyzed, they lose their turn and pass to the 
-TurnCalculatingState)
+TurnCalculatingState or if they die, the game passes to a CheckEndState)
 
 ### VI.IV Player´s Turn
 Here, it is a bit more complicated, since a player can do 3 things.
@@ -223,6 +222,14 @@ that there are still entities on both sides alive. If that´s the case, the game
 If not, then the game passes to a FinalState, where the user is notified of the result, and the game stops running.
 
 
+### VI.VI Flow Diagram
+Finally, to summarize all the states, a flow diagram was designed. The flow diagram for this game is the following:
+
+![State Diagram](./docs/StateDiagram.png)
+
+It is important to notice, that in the case of the player´s choice, it was summarized. As it was mentioned before, the
+states for choosing to use spells, can send you to various different states, depending on what exception was thrown. In 
+the StateDiagram made, those connections are omitted for simplicity.
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

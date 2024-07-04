@@ -26,6 +26,10 @@ class EnemyStatusState(selected:EnemyAttributes) extends  AGameState{
     if(status.isDefined){
       val skip:Int = status.get.doEffect()
       if(selected.isAlive()==0){
+        controller.getModel().removeEnemy(selected)
+        while(controller.getModel().getTurnsLine().contains(selected)){
+          val index: Int = controller.getModel().getTurnsLine().indexOf(selected)
+          controller.getModel().getTurnsLine().remove(index)
         changedState = new CheckEndState
       }
       if(skip ==1){
