@@ -1,4 +1,4 @@
-package exceptions
+package exceptions.initializing
 
 /** The `Require` object provides utilities for validating specific constraints or requirements.
  *
